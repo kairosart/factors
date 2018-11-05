@@ -43,12 +43,13 @@ def hello():
     return render_template(
     # name of template
 	"strategy.html",
+        
     # now we pass in our variables into the template
-    start_val = 100000,
-    symbol = "AMZN",
-    commission = 0.00,
-    impact = 0.0,
-    num_shares = 1000
+    start_val = request.form['start_val'],
+    symbol = request.form['symbol'],
+    commission = request.form['commission'],
+    impact = request.form['impact'],
+    num_shares = request.form['num_shares']    
     )  
 
 @app.route('/form', methods = ['GET', 'POST'])
