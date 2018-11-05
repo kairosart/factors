@@ -36,11 +36,17 @@ digits = datasets.load_digits()
 
 @app.route('/predict', methods=['POST', 'GET'])
 def hello():
-    clf = svm.SVC(gamma=0.001, C=100.)
-    clf.fit(digits.data[:-1], digits.target[:-1])
-    prediction = clf.predict(digits.data[-1:])
-    return jsonify({'prediction': repr(prediction)})
-
+    
+    return render_template(
+    # name of template
+	"strategy.html",
+    # now we pass in our variables into the template
+    start_val = 100000
+    symbol = "AMZN"
+    commission = 0.00
+    impact = 0.0
+    num_shares = 1000
+    )    
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
 
