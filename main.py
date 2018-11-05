@@ -38,7 +38,7 @@ def factors_display(n):
 digits = datasets.load_digits()
 
 @app.route('/predict', methods=['POST', 'GET'])
-def hello():
+def predict():
     
     return render_template(
     # name of template
