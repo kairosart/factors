@@ -2,56 +2,52 @@ from flask import Flask, render_template, session, jsonify, request, flash
 from form import StartValuesForm
 
 import random
+import datetime as dt
 from sklearn import datasets, svm
 
 app = Flask(__name__)
 
 
-    # Add these extra two lines
+# Add these extra two lines
 app.secret_key = 'your secret'
 app.config['SESSION_TYPE'] = 'filesystem'
 
-def factors(num):
-    return [x for x in range(1, num+1) if num%x==0]
 
 @app.route('/')
 def home():
-    n = random.randint(2, 10000)
     return render_template(
     # name of template
-    "index.html",
-    # now we pass in our variables into the template
-    random_num=n, 
+    "index.html"
     )
 
-@app.route('/factors/<int:n>', methods=['POST', 'GET'])
-def factors_display(n):
-	return render_template(
-    # name of template
-	"factors.html",
-    # now we pass in our variables into the template
-	number=n, 
-	factors=factors(n) 
-	)
 
 # Load Dataset from scikit-learn.
 digits = datasets.load_digits()
 
-@app.route('/predict', methods=['POST', 'GET'])
-def predict():
+# Show values
+@app.route('/showvalues', methods=['POST', 'GET'])
+def showvalues():
+    # Specify the start and end dates for this period.
+    start_d = dt.datetime(2008, 1, 1)
+    #end_d = dt.datetime(2018, 10, 30)
+    yesterday = dt.date.today() - dt.timedelta(1)
+    
     
     return render_template(
     # name of template
-	"strategy.html",
+	"showvalues.html",
         
     # now we pass in our variables into the template
     start_val = request.form['start_val'],
     symbol = request.form['symbol'],
     commission = request.form['commission'],
     impact = request.form['impact'],
-    num_shares = request.form['num_shares']    
+    num_shares = request.form['num_shares'],
+    start_date = start_d, 
+    end_date = yesterday    
     )  
 
+# Initial form to get values
 @app.route('/form', methods = ['GET', 'POST'])
 def introStartValues():
     form = StartValuesForm()
