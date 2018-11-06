@@ -1,9 +1,17 @@
 from flask import Flask, render_template, session, jsonify, request, flash
 from form import StartValuesForm
-
+import pandas as pd
+import numpy as np  
 import random
 import datetime as dt
 from sklearn import datasets, svm
+
+# To fetch data
+from pandas_datareader import data as pdr   
+import fix_yahoo_finance as yf  
+yf.pdr_override()  
+
+from util import create_df_benchmark, get_data, fetchOnlineData
 
 app = Flask(__name__)
 
@@ -32,6 +40,9 @@ def showvalues():
     #end_d = dt.datetime(2018, 10, 30)
     yesterday = dt.date.today() - dt.timedelta(1)
     
+    # Get portfolio values from Yahoo
+    symbol = request.form['symbol']
+    portf_value = fetchOnlineData(start_d, yesterday, symbol)
     
     return render_template(
     # name of template
@@ -44,7 +55,9 @@ def showvalues():
     impact = request.form['impact'],
     num_shares = request.form['num_shares'],
     start_date = start_d, 
-    end_date = yesterday    
+    end_date = yesterday,
+    name = symbol,
+    data = portf_value.to_html()   
     )  
 
 # Initial form to get values
