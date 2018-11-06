@@ -56,8 +56,8 @@ def showvalues():
     num_shares = request.form['num_shares'],
     start_date = start_d, 
     end_date = yesterday,
-    name = symbol,
-    data = portf_value.to_html()   
+    tables=[portf_value.to_html(classes=symbol)],
+    titles = ['na', 'Price']    
     )  
 
 # Initial form to get values
