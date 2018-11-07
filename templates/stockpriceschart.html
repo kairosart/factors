@@ -36,14 +36,10 @@
     <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
  
     <script type="text/javascript">
-        var graphDiv = document.getElementById('chart') 
+         
         var graphs = {{graphJSON | safe}};
         
-        var layout = {{graphJSONlayout | safe}};
-
-        Plotly.newPlot(graphDiv, graphs, layout, {editable: false})
-        
-    
+        Plotly.plot('chart',graphs,{});        
  
     </script>
  
