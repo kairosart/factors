@@ -10,6 +10,4 @@ class StartValuesForm(FlaskForm):
     commission = DecimalField('Commision')
     impact = DecimalField('Impact')
     num_shares = IntegerField('Shares number', [validators.Required("Please enter number of shares.")])
-    submit = SubmitField("Send")  
-    
-    
+    submit = SubmitField("Send") 

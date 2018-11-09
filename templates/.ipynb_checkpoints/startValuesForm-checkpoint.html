@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -21,18 +20,23 @@
             <legend>Start Values Form</legend>
             {{ form.hidden_tag() }}
             
-            <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+            <div class="form-group">
                 {{ form.csrf_token }}<br> 
-                {{ form.start_val.label }} {{ form.start_val(size=10, value=100000) }} <br>
-                {{ form.symbol.label }} {{ form.symbol(size=4, value="AMZN") }}<br>
-                {{ form.commission.label }} {{ form.commission(size=4, value=0.00) }}<br>
-                {{ form.impact.label }} {{ form.impact(size=4, value=0.00) }}<br>
-                {{ form.num_shares.label }} {{ form.num_shares(size=10, value=1000) }}<br>
+                {{ form.start_val.label }} {{ form.start_val(class_="form-control", size=10, value=100000) }} <br>
+                
+                {{ form.symbol.label }} {{ form.symbol(class_="form-control", size=4, value="AMZN") }}<br>
+                
+                {{ form.commission.label }} {{ form.commission(class_="form-control", size=4, value=0.00) }}<br>
+                
+                {{ form.impact.label }} {{ form.impact(class_="form-control", size=4, value=0.00) }}<br>
+                
+                {{ form.num_shares.label }} {{ form.num_shares(class_="form-control", size=10, value=1000) }}<br>
                 
                <br>
-               {{ form.submit }}
+                {{ form.submit(class_="btn btn-primary") }}
             </div>
             
          </fieldset>
       </form>
+
 {% endblock %}

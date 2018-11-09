@@ -23,12 +23,7 @@ from indicators import get_momentum, get_sma, get_sma_indicator, compute_bolling
 
 
 app = Flask(__name__)
-
-
-# Add these extra two lines
-app.secret_key = 'your secret'
-app.config['SESSION_TYPE'] = 'filesystem'
-
+app.config.from_object('config')
 
 @app.route('/')
 def home():
