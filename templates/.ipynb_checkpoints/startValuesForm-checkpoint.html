@@ -1,8 +1,8 @@
-<!doctype html>
-<html>
-   <body>
-   
-      <h2 style = "text-align: center;">Start Values Form</h2>
+
+{% extends "base.html" %}
+
+{% block content %}
+
 		
       {% for message in form.start_val.errors %}
          <div>{{ message }}</div>
@@ -22,8 +22,8 @@
             {{ form.hidden_tag() }}
             
             <div style = font-size:20px; font-weight:bold; margin-left:150px;>
-                {{ form.csrf_token }}{{ form.start_val.label }}<br> 
-                {{ form.start_val(size=10, value=100000) }} <br>
+                {{ form.csrf_token }}<br> 
+                {{ form.start_val.label }} {{ form.start_val(size=10, value=100000) }} <br>
                 {{ form.symbol.label }} {{ form.symbol(size=4, value="AMZN") }}<br>
                 {{ form.commission.label }} {{ form.commission(size=4, value=0.00) }}<br>
                 {{ form.impact.label }} {{ form.impact(size=4, value=0.00) }}<br>
@@ -35,6 +35,4 @@
             
          </fieldset>
       </form>
-      
-   </body>
-</html>
+{% endblock %}
