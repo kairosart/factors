@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+    <br>
+    <div class="card border-primary mb-3" >
+      <div class="card-header">Start values</div>
+      <div class="card-body">
+        <h4 class="card-title"></h4>
+        <p class="card-text">Introduce your porfolio initial values.</p>
+      </div>
+    </div>
+    
 		
       {% for message in form.start_val.errors %}
          <div>{{ message }}</div>
@@ -33,7 +41,7 @@
                 {{ form.num_shares.label }} {{ form.num_shares(class_="form-control", size=10, value=1000) }}<br>
                 
                <br>
-                {{ form.submit(class_="btn btn-primary") }}
+                {{ form.submit(class_="btn btn-primary btn-lg btn-block") }}
             </div>
             
          </fieldset>

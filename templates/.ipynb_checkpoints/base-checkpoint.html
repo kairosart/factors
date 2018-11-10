@@ -13,7 +13,7 @@
         <title>Bootstrap 101 Template</title>
 
         <!-- Bootstrap -->
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/bootstrap.min.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/boostrap.min.darkly.css') }}">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,11 +22,30 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <ul class="nav nav-tabs navbar-fixed-top navbar-inverse">
-          <li role="presentation" class="active"><a href="#">Home</a></li>
-          <li role="presentation"><a href="form">My portfolio</a></li>
-          <li role="presentation"><a href="#">Messages</a></li>
-        </ul> 
+        
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <a class="navbar-brand" href="#">ML Trading</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="overview">Overview</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="form">Portfolio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
     </head>
     <body>
         <div class="container">

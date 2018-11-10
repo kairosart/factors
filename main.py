@@ -53,7 +53,7 @@ def showvalues():
     
     return render_template(
     # name of template
-	"base.html",
+	"stockpriceschart.html",
         
     # now we pass in our variables into the template
     start_val = request.form['start_val'],
@@ -65,7 +65,7 @@ def showvalues():
     end_date = yesterday,
     tables=[portf_value.to_html(classes=symbol)],
     titles = ['na', 'Stock Prices '],
-    div_placeholder=Markup(my_plot_div)  
+    div_placeholder = Markup(my_plot_div)  
     )  
 
 
