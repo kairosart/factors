@@ -130,6 +130,9 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
     layout = dict(
         title = title,
         showlegend=True,
+        legend=dict(
+                orientation="h"),
+                
         xaxis = dict(
                 title=xlabel,
                 linecolor='#000', linewidth=1,
