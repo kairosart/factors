@@ -53,7 +53,7 @@ def showvalues():
     # Get portfolio values from Yahoo
     symbol = request.form['symbol']
     portf_value = fetchOnlineData(start_d, yesterday, symbol)
-    
+        
     # Create Stock prices chart
     plot_prices = plot_stock_prices(portf_value.index, portf_value['Adj Close'], symbol)
    
