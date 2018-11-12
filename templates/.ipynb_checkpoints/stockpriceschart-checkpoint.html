@@ -2,19 +2,37 @@
 {% block content %}
     <h1>Indicators</h1>
     <div class="btn-group" role="group" aria-label="Choose indicator">
-      <button type="button" class="btn btn-primary">Primary</button>
+      <button type="button" class="btn btn-primary">Choose an indicator</button>
       <div class="btn-group" role="group">
         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 45px, 0px);">
           <a class="dropdown-item" href="#StockPrices">Stock Prices</a>
-          <a class="dropdown-item" href="#">Dropdown link</a>
+          <a class="dropdown-item" href="#Momentum">Momentum</a>
         </div>
       </div>
     </div>
 
     
     <h2 id="StockPrices"></h2>
+    {{ div_placeholder_stock_prices }}
+    <div class="card border-info mb-3" >
+      <div class="card-header">Info</div>
+      <div class="card-body">
+        <h4 class="card-title">Stock Prices</h4>
+        <p class="card-text">Stock Adjust Value price, from 2008 to yesterday. Hover over the chart to see all the options.</p>
+      </div>
+    </div>        
 
-    {{ div_placeholder }}
+
+    <h2 id="Momentum"></h2>
+    {{ div_placeholder_momentum }}
+    <div class="card border-info mb-3" >
+      <div class="card-header">Info</div>
+      <div class="card-body">
+        <h4 class="card-title">Momentum</h4>
+        <p class="card-text">Momentum is perhaps the simplest and easiest oscillator to understand and use; it is the measurement of the speed or velocity of price changes. We're using a window=10</p>
+          <a href="https://www.investopedia.com/articles/technical/081501.asp" target="_blank" class="alert-link">More info.</a> 
+      </div>
+    </div>  
  
 {% endblock %}

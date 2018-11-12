@@ -14,7 +14,7 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 from plotly import tools
 
-def get_momentum(price, window=5):
+def get_momentum(price, window=10):
     """Calculate momentum indicator: 
     momentum[t] = (price[t]/price[t-window]) - 1
     Parameters:
