@@ -32,6 +32,12 @@ def home():
     "index.html"
     )
 
+@app.route('/overview')
+def overview():
+    return render_template(
+    # name of template
+    "overview.html"
+    )
 
 # Load Dataset from scikit-learn.
 digits = datasets.load_digits()
@@ -49,7 +55,19 @@ def showvalues():
     portf_value = fetchOnlineData(start_d, yesterday, symbol)
     
     # Create Stock prices chart
-    my_plot_div = plot_stock_prices(portf_value.index, portf_value['Adj Close'], symbol)
+    plot_prices = plot_stock_prices(portf_value.index, portf_value['Adj Close'], symbol)
+   
+    # Momentum chart
+    # Normalize the prices Dataframe
+    normed = pd.DataFrame()
+    normed['Adj Close'] = portf_value['Adj Close'].values / portf_value['Adj Close'].iloc[0];
+
+    # Compute momentum
+    sym_mom = get_momentum(normed['Adj Close'], window=10)
+   
+    # Create momentum chart
+    plot_mom = plot_momentum(portf_value.index, normed['Adj Close'], sym_mom, "Momentum Indicator", (12, 8))
+   
     
     return render_template(
     # name of template
@@ -65,7 +83,8 @@ def showvalues():
     end_date = yesterday,
     tables=[portf_value.to_html(classes=symbol)],
     titles = ['na', 'Stock Prices '],
-    div_placeholder = Markup(my_plot_div)  
+    div_placeholder_stock_prices = Markup(plot_prices),
+    div_placeholder_momentum = Markup(plot_mom)     
     )  
 
 

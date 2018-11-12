@@ -291,8 +291,9 @@ def plot_momentum(df_index, sym_price, sym_mom, title="Momentum Indicator",
         
 
     fig = dict(data=data, layout=layout)
-    iplot(fig)
-
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart
+    
 def plot_sma_indicator(dates, df_index, sym_price, sma_indicator, sma_quality, 
                        title="SMA Indicator", fig_size=(12, 6)):
     """Plot SMA indicator, price and SMA quality for a symbol.
