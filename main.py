@@ -19,7 +19,7 @@ yf.pdr_override()
 from util import create_df_benchmark, get_data, fetchOnlineData
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
-from indicators import get_momentum, get_sma, get_sma_indicator, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices
+from indicators import get_momentum, get_sma, get_sma_indicator,  get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger
 
 
 app = Flask(__name__)
@@ -54,10 +54,10 @@ def showvalues():
     symbol = request.form['symbol']
     portf_value = fetchOnlineData(start_d, yesterday, symbol)
         
-    # Create Stock prices chart
+    # ****Stock prices chart****
     plot_prices = plot_stock_prices(portf_value.index, portf_value['Adj Close'], symbol)
    
-    # Momentum chart
+    # ****Momentum chart****
     # Normalize the prices Dataframe
     normed = pd.DataFrame()
     normed['Adj Close'] = portf_value['Adj Close'].values / portf_value['Adj Close'].iloc[0];
@@ -67,7 +67,29 @@ def showvalues():
    
     # Create momentum chart
     plot_mom = plot_momentum(portf_value.index, normed['Adj Close'], sym_mom, "Momentum Indicator", (12, 8))
-   
+    
+    # ****Bollinger Bands****
+    # Compute rolling mean
+    rm_JPM = get_rolling_mean(portf_value['Adj Close'], window=10)
+
+    # Compute rolling standard deviation
+    rstd_JPM = get_rolling_std(portf_value['Adj Close'], window=10)
+
+    # Compute upper and lower bands
+    upper_band, lower_band = get_bollinger_bands(rm_JPM, rstd_JPM)
+    
+    # Plot raw symbol values, rolling mean and Bollinger Bands
+    dates = pd.date_range(start_d, yesterday)
+    plot_boll = plot_bollinger(dates, portf_value.index, portf_value['Adj Close'], symbol, upper_band, lower_band, rm_JPM, 
+                   num_std=1, title="Bollinger Indicator", fig_size=(12, 6))
+    
+    
+    # ****Simple moving average (SMA)****
+    # Compute SMA
+    sma_JPM, q = get_sma(normed['Adj Close'], window=10)
+
+    # Plot symbol values, SMA and SMA quality
+    plot_sma = plot_sma_indicator(dates, portf_value.index, normed['Adj Close'], symbol, sma_JPM, q, "Simple Moving Average (SMA)")
     
     return render_template(
     # name of template
@@ -84,7 +106,10 @@ def showvalues():
     tables=[portf_value.to_html(classes=symbol)],
     titles = ['na', 'Stock Prices '],
     div_placeholder_stock_prices = Markup(plot_prices),
-    div_placeholder_momentum = Markup(plot_mom)     
+    div_placeholder_momentum = Markup(plot_mom),
+    div_placeholder_bollinger = Markup(plot_boll),
+    div_placeholder_sma = Markup(plot_sma),
+       
     )  
 
 

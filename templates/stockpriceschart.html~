@@ -32,7 +32,19 @@
       <div class="card-header">Info</div>
       <div class="card-body">
         <h4 class="card-title">Momentum</h4>
-        <p class="card-text">Momentum is perhaps the simplest and easiest oscillator to understand and use; it is the measurement of the speed or velocity of price changes. We're using a window=10</p>
+        <p class="card-text">
+			<strong>Type:</strong> It's a trend indicator.<br><br>
+
+			<strong>Description:</strong> <br>
+			
+
+    		<ul>It refers to the rate of change on price movements for a particular asset – that is, the speed at which the price is changing.</ul>
+    		<ul>If a trader wants to use a momentum-based strategy, he takes a long position in a stock or asset that has been trending up. If the stock is trending down, he takes a short position. Instead of the traditional philosophy of trading – buy low, sell high – momentum investing seeks to sell low and buy lower, or buy high and sell higher.</ul>
+			<br><br>
+			<strong>Buy signal:</strong> If the trend line is up, the momentum investor should buy the stock.<br><br>
+
+			<strong>Sell signal:</strong> If the trend line is down, the momentum investor should sell the stock.<br><br>	        
+        </p>
           <a href="https://www.investopedia.com/articles/technical/081501.asp" target="_blank" class="alert-link">More info.</a> 
       </div>
     </div> 
@@ -43,19 +55,18 @@
       <div class="card-header">Info</div>
       <div class="card-body">
         <h4 class="card-title">Bollinger Bands</h4>
-        <p class="card-text">John Bollinger, in the 1980s, came up with something he calls Bollinger bands.
+                <p class="card-text">
+			<strong>Type:</strong> It's a volatility indicator.<br><br>
 
-What Bollinger observed was that we ought to take a look at the recent volatility of the stock. And if it's very volatile, we might discard movements above and below the mean.
+			<strong>Description:</strong> <br>
+			
 
-Whereas if it's not very volatile, a similarly sized movement maybe we should pay attention to.<br><br>
-            His idea then was to add a band 2 standard deviations above and 2 standard deviations below. And in particular, if we drop below that and then up back through it, that is potentially right there a buy signal, because the hypothesis there is that we've gone quite far from the simple moving average. And we're now moving back towards it.<br><br>
+    		Bollinger Bands® are two "bands" (2 standard deviation) that sandwich the market price. Many traders use them primarily to determine overbought and oversold levels. 
+			<br><br>
+			<strong>Buy signal:</strong> When the price touches the lower Bollinger Band®.<br><br>
 
-So if you buy there, you should anticipate positive returns as it climbs back through the average.<br><br>
-            Similarly, if it punched through the top and then go back down through, that's potentially a sell signal.
-
-
-
-</p>
+			<strong>Sell signal:</strong> when the price touches the upper Bollinger Band®.<br><br>	        
+        </p>
           <a href="https://www.investopedia.com/walkthrough/forex/intermediate/level4/bollinger-bands.aspx" target="_blank" class="alert-link">More info.</a> 
       </div>
     </div> 

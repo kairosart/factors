@@ -304,7 +304,7 @@ def plot_momentum(df_index, sym_price, sym_mom, title="Momentum Indicator",
     chart = plot(fig, show_link=False, output_type='div')
     return chart
     
-def plot_sma_indicator(dates, df_index, sym_price, sma_indicator, sma_quality, 
+def plot_sma_indicator(dates, df_index, sym_price, symbol, sma_indicator, sma_quality, 
                        title="SMA Indicator", fig_size=(12, 6)):
     """Plot SMA indicator, price and SMA quality for a symbol.
 
@@ -312,6 +312,7 @@ def plot_sma_indicator(dates, df_index, sym_price, sma_indicator, sma_quality,
     dates: Range of dates
     df_index: Date index
     sym_price: Price, typically adjusted close price, series of symbol
+    symbol: Stock symbol
     sma_indicator: The simple moving average indicator
     sma_quality: SMA quality
     title: The chart title
@@ -323,7 +324,7 @@ def plot_sma_indicator(dates, df_index, sym_price, sma_indicator, sma_quality,
     trace_symbol = go.Scatter(
                 x=df_index,
                 y=sym_price,
-                name = "JPM",
+                name = symbol,
                 line = dict(color = '#17BECF'),
                 opacity = 0.8)
 
@@ -370,7 +371,8 @@ def plot_sma_indicator(dates, df_index, sym_price, sma_indicator, sma_quality,
         
 
     fig = dict(data=data, layout=layout)
-    iplot(fig)
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart
 
 def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momentum, 
                        title="MOMENTUM/ SMA Indicator", fig_size=(12, 6)):
@@ -433,9 +435,10 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
         
 
     fig = dict(data=data, layout=layout)
-    iplot(fig)    
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart  
     
-def plot_bollinger(dates, df_index, sym_price, upper_band, lower_band, bollinger_val, 
+def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, bollinger_val, 
                    num_std=1, title="Bollinger Indicator", fig_size=(12, 6)):
     """Plot Bollinger bands and value for a symbol.
 
@@ -443,6 +446,7 @@ def plot_bollinger(dates, df_index, sym_price, upper_band, lower_band, bollinger
     dates: Range of dates
     df_index: Date index
     sym_price: Price, typically adjusted close price, series of symbol
+    symbol: Stock symbol    
     upper_band: Bollinger upper band
     lower_band: Bollinger lower band
     bollinger_val: The number of standard deviations a price is from the mean
@@ -455,7 +459,7 @@ def plot_bollinger(dates, df_index, sym_price, upper_band, lower_band, bollinger
     trace_symbol = go.Scatter(
                 x=df_index,
                 y=sym_price,
-                name = "JPM",
+                name = symbol,
                 line = dict(color = '#17BECF'),
                 opacity = 0.8)
 
@@ -509,7 +513,8 @@ def plot_bollinger(dates, df_index, sym_price, upper_band, lower_band, bollinger
         
 
     fig = dict(data=data, layout=layout)
-    iplot(fig)    
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart
 
 def plot_rsi_indicator(dates, df_index, sym_price, rsi_indicator, window=14, 
                        title="RSI Indicator", fig_size=(12, 6)):
