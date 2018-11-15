@@ -85,19 +85,32 @@ def compute_bollinger_value(price, rolling_mean, rolling_std):
     return bollinger_val
 
 
-def get_RSI(price, n=14):
-    """Return Relative Strength Index (RSI) of given values, using specified window size."""
-    gain = (price-price.shift(1)).fillna(0) # calculate price gain with previous day, first row nan is filled with 0
+def get_RSI(prices, n=14):
+    deltas = np.diff(prices)
+    seed = deltas[:n+1]
+    up = seed[seed>=0].sum()/n
+    down = -seed[seed<0].sum()/n
+    rs = up/down
+    rsi = np.zeros_like(prices)
+    rsi[:n] = 100. - 100./(1.+rs)
 
-    def rsiCalc(p):
-        # subfunction for calculating rsi for one lookback period
-        avgGain = p[p>0].sum()/n
-        avgLoss = -p[p<0].sum()/n 
-        rs = avgGain/avgLoss
-        return 100 - 100/(1+rs)
+    for i in range(n, len(prices)):
+        delta = deltas[i-1] # cause the diff is 1 shorter
 
-    # run for all periods with rolling_apply
-    return pd.rolling_apply(gain,n,rsiCalc)  
+        if delta>0:
+            upval = delta
+            downval = 0.
+        else:
+            upval = 0.
+            downval = -delta
+
+        up = (up*(n-1) + upval)/n
+        down = (down*(n-1) + downval)/n
+
+        rs = up/down
+        rsi[i] = 100. - 100./(1.+rs)
+
+    return rsi
 
 
 def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel="Date", ylabel="Price", fig_size=(12, 6)):
@@ -346,6 +359,17 @@ def plot_sma_indicator(dates, df_index, sym_price, symbol, sma_indicator, sma_qu
 
     layout = dict(
         title = title,
+        showlegend=True,
+
+        margin=go.layout.Margin(
+            l=50,
+            r=50,
+            b=100,
+            t=100,
+            pad=4
+        ),
+        legend=dict(
+                orientation="h"),
         xaxis = dict(
                 title='Dates',
                 rangeselector=dict(
@@ -488,6 +512,17 @@ def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, b
 
     layout = dict(
         title = title,
+        showlegend=True,
+
+        margin=go.layout.Margin(
+            l=50,
+            r=50,
+            b=100,
+            t=100,
+            pad=4
+        ),
+        legend=dict(
+                orientation="h"),
         xaxis = dict(
                     title='Dates',
                     rangeselector=dict(
@@ -516,7 +551,7 @@ def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, b
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_rsi_indicator(dates, df_index, sym_price, rsi_indicator, window=14, 
+def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window=14, 
                        title="RSI Indicator", fig_size=(12, 6)):
     """Plot Relative Strength Index (RSI) of given values, using specified window size."""  
     '''
@@ -524,6 +559,7 @@ def plot_rsi_indicator(dates, df_index, sym_price, rsi_indicator, window=14,
     dates: Range of dates
     df_index: Date index
     sym_price: Price series of symbol
+    symbol: Stock symbol
     rsi_indicator: RSI indicator
     window: Window size
     title: The chart title
@@ -537,7 +573,7 @@ def plot_rsi_indicator(dates, df_index, sym_price, rsi_indicator, window=14,
     trace_symbol = go.Scatter(
                 x=df_index,
                 y=sym_price,
-                name = "JPM",
+                name = symbol,
                 line = dict(color = '#17BECF'),
                 opacity = 0.8)
 
@@ -577,13 +613,15 @@ def plot_rsi_indicator(dates, df_index, sym_price, rsi_indicator, window=14,
 
     # Subplots
     fig = tools.make_subplots(rows=2, cols=1, print_grid=False,
-                              subplot_titles=('JPM Prices', 'Relative Strength Index (RSI)'))
+                              subplot_titles=('Price', 'Relative Strength Index (RSI)'))
     fig.append_trace(trace_symbol, 1, 1)
     fig.append_trace(trace_ob, 2, 1)
     fig.append_trace(trace_os, 2, 1)
     fig.append_trace(trace_rsi, 2, 1)
     fig.append_trace(trace_signal, 2, 1)
     layout = dict(
+        title = title,
+        
         xaxis = dict(
                     title='Dates',
                     range = [dates.values[0], dates.values[1]]),
@@ -595,8 +633,19 @@ def plot_rsi_indicator(dates, df_index, sym_price, rsi_indicator, window=14,
 
 
 
-    fig['layout'].update(height=600, title='Overbought-Oversold')
-    iplot(fig)
+    fig['layout'].update(height=600, title='Overbought-Oversold',
+                        showlegend=True,
+
+                        margin=go.layout.Margin(
+                            l=50,
+                            r=50,
+                            b=100,
+                            t=100,
+                            pad=4
+                            ),
+                        legend=dict(orientation="h"))
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart
 
     
 def plot_performance(perform_df, title="In-sample vs Out of sample performance",

@@ -91,6 +91,14 @@ def showvalues():
     # Plot symbol values, SMA and SMA quality
     plot_sma = plot_sma_indicator(dates, portf_value.index, normed['Adj Close'], symbol, sma_JPM, q, "Simple Moving Average (SMA)")
     
+    
+    # ****Relative Strength Index (RSI)****
+    # Compute RSI
+    rsi_JPM = get_RSI(portf_value['Adj Close'])
+    
+    # 2. Plot RSI
+    plot_rsi =  plot_rsi_indicator(dates, portf_value.index, normed['Adj Close'], symbol, rsi_JPM, window=14, 
+                       title="RSI Indicator", fig_size=(12, 6))
     return render_template(
     # name of template
 	"stockpriceschart.html",
@@ -109,6 +117,7 @@ def showvalues():
     div_placeholder_momentum = Markup(plot_mom),
     div_placeholder_bollinger = Markup(plot_boll),
     div_placeholder_sma = Markup(plot_sma),
+    div_placeholder_rsi = Markup(plot_rsi)
        
     )  
 
