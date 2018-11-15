@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+<h1>Hello, {{ start_date }}!</h1>
     <h1>Indicators</h1>
     <div class="btn-group" role="group" aria-label="Choose indicator">
       <button type="button" class="btn btn-primary">Choose an indicator</button>
@@ -120,7 +120,7 @@
     </div>     
 
 <h2 id="Relative Strength Index (RSI)"></h2>
-    {{ div_placeholder_rsi }}
+	{{ div_placeholder_rsi }}
     <div class="card border-info mb-3" >
       <div class="card-header">Info</div>
       <div class="card-body">
@@ -148,6 +148,8 @@
           
       </div>
     </div>   
-
  
+ 	<div align="right">
+  	<a href="benchmark" class="btn btn-success">Next ></a><br><br>
+	</div>
 {% endblock %}

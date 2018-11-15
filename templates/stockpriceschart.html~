@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+<h1>Hello, {{ start_d }}!</h1>
     <h1>Indicators</h1>
     <div class="btn-group" role="group" aria-label="Choose indicator">
       <button type="button" class="btn btn-primary">Choose an indicator</button>
@@ -24,6 +24,10 @@
       <div class="card-body">
         <h4 class="card-title">Stock Prices</h4>
         <p class="card-text">Stock Adjust Value price, from 2008 to yesterday. Hover over the chart to see all the options.</p>
+                  <a href="https://www.investopedia.com/terms/r/rsi.asp" target="_blank" class="alert-link">More info.</a> 
+         <div align="right">
+  				<a href="#">Go to top</a>
+			</div> 
       </div>
     </div>        
 
@@ -48,6 +52,10 @@
 			<strong>Sell signal:</strong> If the trend line is down, the momentum investor should sell the stock.<br><br>	        
         </p>
           <a href="https://www.investopedia.com/articles/technical/081501.asp" target="_blank" class="alert-link">More info.</a> 
+                    <a href="https://www.investopedia.com/terms/r/rsi.asp" target="_blank" class="alert-link">More info.</a> 
+         <div align="right">
+  				<a href="#">Go to top</a>
+			</div> 
       </div>
     </div> 
 
@@ -69,7 +77,11 @@
 
 			<strong>Sell signal:</strong> when the price touches the upper Bollinger Band®.<br><br>	        
         </p>
-          <a href="https://www.investopedia.com/walkthrough/forex/intermediate/level4/bollinger-bands.aspx" target="_blank" class="alert-link">More info.</a> 
+          <a href="https://www.investopedia.com/walkthrough/forex/intermediate/level4/bollinger-bands.aspx" target="_blank" class="alert-link">More info.</a>
+                    <a href="https://www.investopedia.com/terms/r/rsi.asp" target="_blank" class="alert-link">More info.</a> 
+         <div align="right">
+  				<a href="#">Go to top</a>
+			</div>  
       </div>
     </div> 
     
@@ -100,11 +112,15 @@
 			If it were 10% below, we'd get a negative 0.1.<br>	        
         </p>
           <a href="https://www.investopedia.com/terms/s/sma.asp" target="_blank" class="alert-link">More info.</a> 
+                  <a href="https://www.investopedia.com/terms/r/rsi.asp" target="_blank" class="alert-link">More info.</a> 
+         <div align="right">
+  				<a href="#">Go to top</a>
+			</div>   
       </div>
     </div>     
 
 <h2 id="Relative Strength Index (RSI)"></h2>
-    {{ div_placeholder_rsi }}
+	{{ div_placeholder_rsi }}
     <div class="card border-info mb-3" >
       <div class="card-header">Info</div>
       <div class="card-body">
@@ -126,12 +142,14 @@
 			<ul>RSI reading of 30 or below is commonly interpreted as indicating an oversold or undervalued condition that may signal a trend change or corrective price reversal to the upside.<br></ul>	        
         </p>
           <a href="https://www.investopedia.com/terms/r/rsi.asp" target="_blank" class="alert-link">More info.</a> 
-         <div align="center">
+         <div align="right">
   				<a href="#">Go to top</a>
 			</div> 
           
       </div>
     </div>   
-
  
+ 	<div align="right">
+  	<a href="benchmark" class="btn btn-success">Next ></a><br><br>
+	</div>
 {% endblock %}

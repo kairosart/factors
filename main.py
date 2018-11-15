@@ -96,9 +96,15 @@ def showvalues():
     # Compute RSI
     rsi_JPM = get_RSI(portf_value['Adj Close'])
     
-    # 2. Plot RSI
+    # Plot RSI
     plot_rsi =  plot_rsi_indicator(dates, portf_value.index, normed['Adj Close'], symbol, rsi_JPM, window=14, 
                        title="RSI Indicator", fig_size=(12, 6))
+    
+    # Session variables
+    session['symbol'] = request.form['symbol']
+    session['start_d'] = start_d
+    session['num_shares'] = request.form['num_shares']
+    
     return render_template(
     # name of template
 	"stockpriceschart.html",
@@ -121,7 +127,38 @@ def showvalues():
        
     )  
 
+# Benchmark
+@app.route('/benchmark', methods=['POST', 'GET'])
+def benchmark():
+    # Getting session variables
+    symbol = session.get('symbol', None)
+    start_d = session.get('start_d', None)
+    num_shares = session.get('num_shares', None)
+    
+    # Specify the start and end dates for this period. For traininig we'll get 66% of dates.
+    n_days_training = ((dt.date.today()-start_d).days) / 3 * 2
+    end_training_d = dt.date.today() - dt.timedelta(n_days_training)
+                                                    
+    # Get benchmark data
+    benchmark_prices = get_data([symbol], pd.date_range(start_d, end_training_d), addSPY=False).dropna()
 
+    # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
+    df_benchmark_trades = create_df_benchmark(symbol, start_d, end_training_d, num_shares)
+
+    # Train a StrategyLearner
+    # Set verbose to True will print out and plot the cumulative return for each training epoch
+    stl = strategyLearner(num_shares=num_shares, impact=impact, 
+                          commission=commission, verbose=True,
+                          num_states=3000, num_actions=3)
+    stl.add_evidence(symbol=symbol, start_val=start_val, 
+                     start_date=start_d, end_date=end_training_d)
+    df_trades = stl.test_policy(symbol=symbol, start_date=start_d,
+                                end_date=end_training_d)
+    
+    return render_template(
+    # name of template
+    "benchmark.html"
+    )
 
 # Initial form to get values
 @app.route('/form', methods = ['GET', 'POST'])
