@@ -225,12 +225,12 @@ class strategyLearner(object):
             if self.verbose: 
                 print (epoch, cum_return)
             # Check for convergence after running for at least 20 epochs
-            if epoch > 20:
+            if epoch > 10:
                 # Stop if the cum_return doesn't improve for 10 epochs
                 if self.has_converged(cum_returns):
                     break
         if self.verbose:
-            plot_cum_return(epochs, cum_returns)
+            return plot_cum_return(epochs, cum_returns)
 
     def test_policy(self, symbol="IBM", start_date=dt.datetime(2010,1,1),
         end_date=dt.datetime(2011,12,31), start_val=10000):

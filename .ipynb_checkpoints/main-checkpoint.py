@@ -16,7 +16,7 @@ from pandas_datareader import data as pdr
 import fix_yahoo_finance as yf  
 yf.pdr_override()  
 
-from util import create_df_benchmark, get_data, fetchOnlineData
+from util import create_df_benchmark, get_data, fetchOnlineData, get_learner_data_file
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
 from indicators import get_momentum, get_sma, get_sma_indicator,  get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger
@@ -46,14 +46,15 @@ digits = datasets.load_digits()
 @app.route('/showvalues', methods=['POST', 'GET'])
 def showvalues():
     # Specify the start and end dates for this period.
-    start_d = dt.datetime(2008, 1, 1)
+    start_d = dt.date(2008, 1, 1)
     #end_d = dt.datetime(2018, 10, 30)
     yesterday = dt.date.today() - dt.timedelta(1)
     
     # Get portfolio values from Yahoo
     symbol = request.form['symbol']
     portf_value = fetchOnlineData(start_d, yesterday, symbol)
-        
+    
+    
     # ****Stock prices chart****
     plot_prices = plot_stock_prices(portf_value.index, portf_value['Adj Close'], symbol)
    
@@ -101,9 +102,13 @@ def showvalues():
                        title="RSI Indicator", fig_size=(12, 6))
     
     # Session variables
+    session['start_val'] = request.form['start_val']
     session['symbol'] = request.form['symbol']
-    session['start_d'] = start_d
+    session['start_d'] = start_d.strftime('%Y/%m/%d')
     session['num_shares'] = request.form['num_shares']
+    session['commission'] = request.form['commission']
+    session['impact'] = request.form['impact']
+
     
     return render_template(
     # name of template
@@ -131,20 +136,26 @@ def showvalues():
 @app.route('/benchmark', methods=['POST', 'GET'])
 def benchmark():
     # Getting session variables
+    start_val = session.get('start_val', None)
     symbol = session.get('symbol', None)
     start_d = session.get('start_d', None)
+    start_d = dt.datetime.strptime(start_d, '%Y/%m/%d').date()
+    #start_d = start_d.strftime("%Y/%m/%d")
     num_shares = session.get('num_shares', None)
-    
-    # Specify the start and end dates for this period. For traininig we'll get 66% of dates.
-    n_days_training = ((dt.date.today()- dt.date(start_d)).days) / 3 * 2
-    end_training_d = dt.date.today() - dt.timedelta(n_days_training)
-                                                    
-    # Get benchmark data
-    benchmark_prices = get_data([symbol], pd.date_range(start_d, end_training_d), addSPY=False).dropna()
+    commission = session.get('commission', None)
+    impact = session.get('impact', None)
 
+    # Specify the start and end dates for this period. For traininig we'll get 66% of dates.
+    n_days_training = ((dt.date.today()-start_d).days) / 3 * 2
+    end_training_d = dt.date.today() - dt.timedelta(n_days_training)
+    
+
+    # Get benchmark data
+    benchmark_prices = fetchOnlineData(start_d, end_training_d, symbol)
+    
     # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
     df_benchmark_trades = create_df_benchmark(symbol, start_d, end_training_d, num_shares)
-
+    
     # Train a StrategyLearner
     # Set verbose to True will print out and plot the cumulative return for each training epoch
     stl = strategyLearner(num_shares=num_shares, impact=impact, 
@@ -156,8 +167,14 @@ def benchmark():
                                 end_date=end_training_d)
     
     return render_template(
-    # name of template
-    "benchmark.html"
+        # name of template
+        "benchmark.html",
+        start_date = start_d,
+        end_training_d = end_training_d,
+        symbol = symbol,
+        div_placeholder_cum_return = Markup(df_trades)
+        
+        
     )
 
 # Initial form to get values

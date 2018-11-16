@@ -195,13 +195,15 @@ def create_df_benchmark(symbol, start_date, end_date, num_shares):
     num_shares of the symbol in use and holding them until end_date.
     """
     # Get adjusted close price data
-    benchmark_prices = get_data([symbol], pd.date_range(start_date, end_date), 
-                                addSPY=False).dropna()
+    benchmark_prices = fetchOnlineData(start_date, end_date, symbol)
+
+    #benchmark_prices = get_data([symbol], pd.date_range(start_date, end_date), addSPY=False).dropna()
+    
     # Create benchmark df: buy num_shares and hold them till the last date
     df_benchmark_trades = pd.DataFrame(
         data=[(benchmark_prices.index.min(), num_shares), 
-        (benchmark_prices.index.max(), -num_shares)], 
-        columns=["Date", "Shares"])
+        (benchmark_prices.index.max(), -int(num_shares))], 
+        columns=["Date", "Adj Close"])
     df_benchmark_trades.set_index("Date", inplace=True)
     return df_benchmark_trades
 

@@ -230,7 +230,7 @@ class strategyLearner(object):
                 if self.has_converged(cum_returns):
                     break
         if self.verbose:
-            plot_cum_return(epochs, cum_returns)
+            return plot_cum_return(epochs, cum_returns)
 
     def test_policy(self, symbol="IBM", start_date=dt.datetime(2010,1,1),
         end_date=dt.datetime(2011,12,31), start_val=10000):
