@@ -95,10 +95,10 @@ def showvalues():
     
     # ****Relative Strength Index (RSI)****
     # Compute RSI
-    rsi_JPM = get_RSI(portf_value['Adj Close'])
-    
+    rsi_value = get_RSI(portf_value['Adj Close'])
+   
     # Plot RSI
-    plot_rsi =  plot_rsi_indicator(dates, portf_value.index, normed['Adj Close'], symbol, rsi_JPM, window=14, 
+    plot_rsi =  plot_rsi_indicator(dates, portf_value.index, portf_value['Adj Close'], symbol, rsi_value, window=14, 
                        title="RSI Indicator", fig_size=(12, 6))
     
     # Session variables
@@ -147,30 +147,28 @@ def benchmark():
 
     # Specify the start and end dates for this period. For traininig we'll get 66% of dates.
     n_days_training = ((dt.date.today()-start_d).days) / 3 * 2
-    end_training_d = dt.date.today() - dt.timedelta(n_days_training)
+    end_d = dt.date.today() - dt.timedelta(n_days_training)
     
 
     # Get benchmark data
-    benchmark_prices = fetchOnlineData(start_d, end_training_d, symbol)
+    benchmark_prices = fetchOnlineData(start_d, end_d, symbol)
     
     # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
-    df_benchmark_trades = create_df_benchmark(symbol, start_d, end_training_d, num_shares)
+    df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d, num_shares)
     
     # Train a StrategyLearner
     # Set verbose to True will print out and plot the cumulative return for each training epoch
     stl = strategyLearner(num_shares=num_shares, impact=impact, 
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
-    stl.add_evidence(symbol=symbol, start_val=start_val, 
-                     start_date=start_d, end_date=end_training_d)
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_d,
-                                end_date=end_training_d)
+    stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
+    df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
     
     return render_template(
         # name of template
         "benchmark.html",
         start_date = start_d,
-        end_training_d = end_training_d,
+        end_training_d = end_d,
         symbol = symbol,
         div_placeholder_cum_return = Markup(df_trades)
         

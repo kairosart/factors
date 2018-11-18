@@ -35,7 +35,7 @@ def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
 
     # Sort the orders dataframe by date
     df_orders.sort_index(ascending=True, inplace=True)
-    
+
     # Get the start and end dates
     start_date = df_orders.index.min()
     end_date = df_orders.index.max()
@@ -44,6 +44,7 @@ def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
     df_prices = get_data([symbol], pd.date_range(start_date, end_date))
     del df_prices["SPY"]
     df_prices["cash"] = 1.0
+
 
     # Fill NAN values if any
     df_prices.fillna(method="ffill", inplace=True)

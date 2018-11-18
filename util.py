@@ -16,15 +16,15 @@ def symbol_to_path(symbol, base_dir=None):
         base_dir = os.environ.get("MARKET_DATA_DIR", '../data/')
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
 
-def get_data(symbols, dates, addSPY=True, colname = 'Adj Close'):
-    """Read stock data (adjusted close) for given symbols from CSV files."""
+def get_data(symbols, dates, addSPY=False):
+    """Read stock data (adjusted close) for given symbols from Yahoo."""
     df = pd.DataFrame(index=dates)
     if addSPY and 'SPY' not in symbols:  # add SPY for reference, if absent
         symbols = ['SPY'] + symbols
-
+    print(symbols)
     for symbol in symbols:
-        df_temp = pd.read_csv(symbol_to_path(symbol), index_col='Date',
-                parse_dates=True, usecols=['Date', colname], na_values=['nan'])
+        #df_temp = pd.read_csv(symbol_to_path(symbol), index_col='Date', parse_dates=True, usecols=['Date', colname], na_values=['nan'])
+        df_temp = fetchOnlineData(dates[0], dates[1], symbols)
         df_temp = df_temp.rename(columns={colname: symbol})
         df = df.join(df_temp)
         if symbol == 'SPY':  # drop dates SPY did not trade
@@ -35,35 +35,12 @@ def get_data(symbols, dates, addSPY=True, colname = 'Adj Close'):
 
 def fetchOnlineData(dt_start, dt_end, ls_symbols):
 
-    # Add a day to dt_end for Yahoo purpose
-    dt_end = pd.to_datetime(dt_end) + pd.DateOffset(days=1)
-    
-    # Get data of trading days between the start and the end.
-    df = pdr.get_data_yahoo(
-            # tickers list (single tickers accepts a string as well)
-            tickers = ls_symbols,
-
-            # start date (YYYY-MM-DD / datetime.datetime object)
-            # (optional, defaults is 1950-01-01)
-            start = dt_start,
-
-            # end date (YYYY-MM-DD / datetime.datetime object)
-            # (optional, defaults is Today)
-            end = dt_end,
-
-            # return a multi-index dataframe
-            # (optional, default is Panel, which is deprecated)
-            as_panel = False,
-
-            # group by ticker (to access via data['SPY'])
-            # (optional, default is 'column')
-            group_by = 'ticker',
-
-            # adjust all OHLC automatically
-            # (optional, default is False)
-            auto_adjust = False
-    )
-        
+    df = yf.download(ls_symbols, start=dt_start, end=dt_end)
+    del df['Open']
+    del df['High']
+    del df['Low']
+    del df['Close']
+    del df['Volume']
 
     # Convert string to number
     df['Adj Close'] = pd.to_numeric(df['Adj Close'], errors='coerce')

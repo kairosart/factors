@@ -7,6 +7,7 @@ import copy
 import datetime as dt
 from util import get_exchange_days, get_data, normalize_data
 
+
 # Add plotly for interactive charts
 from plotly.offline import init_notebook_mode, iplot, plot
 #init_notebook_mode(connected=True)
@@ -109,7 +110,8 @@ def get_RSI(prices, n=14):
 
         rs = up/down
         rsi[i] = 100. - 100./(1.+rs)
-
+    
+    
     return rsi
 
 

@@ -67,7 +67,13 @@ class strategyLearner(object):
         bollinger_val = compute_bollinger_value(prices, rolling_mean, rolling_std)
         # Create a dataframe with three features
         df_features = pd.concat([momentum, sma_indicator], axis=1)
-        df_features = pd.concat([df_features, rsi_indicator], axis=1)
+        
+        # Convert RSI array to dataframe
+        rsi_df = pd.DataFrame(prices)
+        rsi_df['rsi'] = pd.Series(rsi_indicator, index=rsi_df.index)
+        rsi_df.drop('Adj Close', axis=1, inplace=True)
+        
+        df_features = pd.concat([df_features, rsi_df], axis=1)
         df_features.columns = ["ind{}".format(i) 
                                 for i in range(len(df_features.columns))]
         df_features.dropna(inplace=True)
@@ -165,21 +171,17 @@ class strategyLearner(object):
         # If none of recent returns is greater than max_return, it has converged
         return True
 
-    def add_evidence(self, symbol="IBM", start_date=dt.datetime(2008,1,1),
-        end_date=dt.datetime(2009,12,31), start_val = 10000):
+    def add_evidence(self, df_prices, symbol="IBM", start_val=100000):
         """Create a QLearner, and train it for trading.
 
         Parameters:
+        df_prices: Data price dataframe
         symbol: The stock symbol to act on
-        start_date: A datetime object that represents the start date
-        end_date: A datetime object that represents the end date
         start_val: Start value of the portfolio which contains only the symbol
         """
-        dates = pd.date_range(start_date, end_date)
-        # Get adjusted close prices for symbol
-        df_prices = get_data([symbol], dates)
+        
         # Get features and thresholds
-        df_features = self.get_features(df_prices[symbol])
+        df_features = self.get_features(df_prices['Adj Close'])
         thresholds = self.get_thresholds(df_features, self.num_steps)
         cum_returns = []
         epochs = []
@@ -198,8 +200,8 @@ class strategyLearner(object):
                     action = self.q_learner.query_set_state(state)
                 # On other days, calculate the reward and update the Q-table
                 else:
-                    prev_price = df_prices[symbol].iloc[day-1]
-                    curr_price = df_prices[symbol].loc[date]
+                    prev_price = df_prices['Adj Close'].iloc[day-1]
+                    curr_price = df_prices['Adj Close'].loc[date]
                     reward = self.get_daily_reward(prev_price, 
                                                    curr_price, position)
                     action = self.q_learner.query(state, reward)
@@ -214,6 +216,8 @@ class strategyLearner(object):
                 position += new_pos
             
             df_trades = create_df_trades(orders, symbol, self.num_shares)
+            
+            
             portvals = compute_portvals_single_symbol(df_orders=df_trades, 
                                                       symbol=symbol, 
                                                       start_val=start_val, 
@@ -231,7 +235,7 @@ class strategyLearner(object):
                     break
         if self.verbose:
             return plot_cum_return(epochs, cum_returns)
-
+        
     def test_policy(self, symbol="IBM", start_date=dt.datetime(2010,1,1),
         end_date=dt.datetime(2011,12,31), start_val=10000):
         """Use the existing policy and test it against new data.
