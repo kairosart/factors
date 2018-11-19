@@ -162,7 +162,6 @@ def benchmark():
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
     epochs, cum_returns = stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
-    print(epochs, cum_returns)
     plot_cum = plot_cum_return(epochs, cum_returns)
     #df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
     

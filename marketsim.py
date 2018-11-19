@@ -66,8 +66,12 @@ def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
     
     # Create a dataframe that represents on each particular day how much of
     # each asset in the portfolio
-    df_holdings = df_trades.copy()
-    
+    df_holdings = pd.DataFrame(np.zeros((df_prices.shape)), df_prices.index, 
+        df_prices.columns)
+    # Delete Adj Close column
+    del df_holdings['Adj Close']
+    # Rename column symbol
+    df_holdings.rename(columns={'Symbol':symbol}, inplace=True)
 
     
     for index, row in df_orders.iterrows():
@@ -83,20 +87,19 @@ def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
         # Note: The same asset may be traded more than once on a particular day
         # If the shares were bought
         if row["Shares"] > 0:
-            df_trades.loc[index, "Adj Close"] = price + shares
+            df_trades.loc[index, symbol] = price + shares
             df_trades.loc[index, "cash"] = df_trades.loc[index, "cash"] \
                                             - traded_share_value \
                                             - transaction_cost
         # If the shares were sold
         elif row["Shares"] < 0:
-            df_trades.loc[index, "Adj Close"] = price + shares
+            df_trades.loc[index, symbol] = price + shares
             df_trades.loc[index, "cash"] = df_trades.loc[index, "cash"] \
                                             - traded_share_value \
                                             - transaction_cost
     
     
     
-
     for row_count in range(len(df_holdings)):
         # In the first row, the number shares are the same as in df_trades, 
         # but start_val must be added to cash
@@ -109,6 +112,7 @@ def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
                                             + df_trades.iloc[row_count]
         row_count += 1
 
+       
     # Create a dataframe that represents the monetary value of each asset 
     df_value = df_prices * df_holdings
     
