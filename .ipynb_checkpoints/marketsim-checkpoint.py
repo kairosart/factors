@@ -5,7 +5,7 @@ import numpy as np
 import datetime as dt
 #import matplotlib.pyplot as plt
 from analysis import get_portfolio_value, get_portfolio_stats, plot_normalized_data
-from util import get_data, normalize_data, fetchOnlineData
+from util import normalize_data, fetchOnlineData
 
 
 # Add plotly for interactive charts
@@ -35,58 +35,74 @@ def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
 
     # Sort the orders dataframe by date
     df_orders.sort_index(ascending=True, inplace=True)
+    
+    # Convert Shares column to float
+    df_orders['Shares'] = df_orders['Shares'].astype(float)
 
     # Get the start and end dates
     start_date = df_orders.index.min()
     end_date = df_orders.index.max()
 
     # Create a dataframe with adjusted close prices for the symbol and for cash
-    df_prices = get_data([symbol], pd.date_range(start_date, end_date))
-    del df_prices["SPY"]
+    df_prices = fetchOnlineData(start_date, end_date, symbol)
+    
+    # Convert Adj Close column to float
+    df_prices['Adj Close'] = df_prices['Adj Close'].astype(float)
     df_prices["cash"] = 1.0
-
-
+    
     # Fill NAN values if any
     df_prices.fillna(method="ffill", inplace=True)
     df_prices.fillna(method="bfill", inplace=True)
     df_prices.fillna(1.0, inplace=True)
-
+    
     # Create a dataframe that represents changes in the number of shares by day
-    df_trades = pd.DataFrame(np.zeros((df_prices.shape)), df_prices.index, 
-        df_prices.columns)
+    df_trades = df_prices.copy()
+    # Delete Adj Close column
+    del df_trades['Adj Close']
+    # Rename column symbol
+    df_trades.rename(columns={'Symbol':symbol}, inplace=True)
+    # Set to 0 all values of symbol column
+    df_trades[symbol] = 0.0
+    
+    # Create a dataframe that represents on each particular day how much of
+    # each asset in the portfolio
+    df_holdings = df_trades.copy()
+    
+
+    
     for index, row in df_orders.iterrows():
         # Total value of shares purchased or sold
-        traded_share_value = df_prices.loc[index, symbol] * row["Shares"]
+        price = df_prices.loc[index, "Adj Close"]
+        shares =  row["Shares"]
+        traded_share_value = price * shares
+        
         # Transaction cost 
-        transaction_cost = commission + impact * df_prices.loc[index, symbol] \
-                            * abs(row["Shares"])
+        transaction_cost = float(commission) + float(impact) * traded_share_value
 
         # Update the number of shares and cash based on the type of transaction
         # Note: The same asset may be traded more than once on a particular day
         # If the shares were bought
         if row["Shares"] > 0:
-            df_trades.loc[index, symbol] = df_trades.loc[index, symbol] \
-                                            + row["Shares"]
+            df_trades.loc[index, "Adj Close"] = price + shares
             df_trades.loc[index, "cash"] = df_trades.loc[index, "cash"] \
                                             - traded_share_value \
                                             - transaction_cost
         # If the shares were sold
         elif row["Shares"] < 0:
-            df_trades.loc[index, symbol] = df_trades.loc[index, symbol] \
-                                            + row["Shares"]
+            df_trades.loc[index, "Adj Close"] = price + shares
             df_trades.loc[index, "cash"] = df_trades.loc[index, "cash"] \
                                             - traded_share_value \
                                             - transaction_cost
-    # Create a dataframe that represents on each particular day how much of
-    # each asset in the portfolio
-    df_holdings = pd.DataFrame(np.zeros((df_prices.shape)), df_prices.index, 
-        df_prices.columns)
+    
+    
+    
+
     for row_count in range(len(df_holdings)):
         # In the first row, the number shares are the same as in df_trades, 
         # but start_val must be added to cash
         if row_count == 0:
             df_holdings.iloc[0, :-1] = df_trades.iloc[0, :-1].copy()
-            df_holdings.iloc[0, -1] = df_trades.iloc[0, -1] + start_val
+            df_holdings.iloc[0, -1] = df_trades.iloc[0, -1] + float(start_val)
         # The rest of the rows show cumulative values
         else:
             df_holdings.iloc[row_count] = df_holdings.iloc[row_count-1] \

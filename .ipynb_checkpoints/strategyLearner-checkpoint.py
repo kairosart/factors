@@ -5,7 +5,7 @@ import datetime as dt
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from util import get_data, create_df_benchmark, create_df_trades
+from util import create_df_benchmark, create_df_trades
 import QLearner as ql
 from indicators import get_momentum, get_sma_indicator, compute_bollinger_value, plot_cum_return, get_RSI
 from marketsim import compute_portvals_single_symbol, market_simulator

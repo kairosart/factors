@@ -16,7 +16,7 @@ from pandas_datareader import data as pdr
 import fix_yahoo_finance as yf  
 yf.pdr_override()  
 
-from util import create_df_benchmark, get_data, fetchOnlineData, get_learner_data_file
+from util import create_df_benchmark, fetchOnlineData, get_learner_data_file
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
 from indicators import get_momentum, get_sma, get_sma_indicator,  get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger
