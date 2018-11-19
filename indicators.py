@@ -236,7 +236,8 @@ def plot_cum_return(epoch, cum_return, title="Cumulative Return",
         
 
     fig = dict(data=data, layout=layout)
-    iplot(fig)
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart
 
 
 def plot_momentum(df_index, sym_price, sym_mom, title="Momentum Indicator",

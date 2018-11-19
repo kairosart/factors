@@ -19,7 +19,7 @@ yf.pdr_override()
 from util import create_df_benchmark, fetchOnlineData, get_learner_data_file
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
-from indicators import get_momentum, get_sma, get_sma_indicator,  get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger
+from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger
 
 
 app = Flask(__name__)
@@ -161,8 +161,10 @@ def benchmark():
     stl = strategyLearner(num_shares=num_shares, impact=impact, 
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
-    stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
+    epochs, cum_returns = stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
+    print(epochs, cum_returns)
+    plot_cum = plot_cum_return(epochs, cum_returns)
+    #df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
     
     return render_template(
         # name of template
@@ -170,7 +172,8 @@ def benchmark():
         start_date = start_d,
         end_training_d = end_d,
         symbol = symbol,
-        div_placeholder_cum_return = Markup(df_trades)
+        div_placeholder_plot_cum = Markup(plot_cum),
+        #div_placeholder_cum_return = Markup(df_trades)
         
         
     )
