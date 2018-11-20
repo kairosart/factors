@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
+
+
 {% block content %}
+
     <br>
     <div class="card border-primary mb-3" >
       <div class="card-header">Start values</div>
@@ -22,8 +25,10 @@
       {% for message in form.num_shares.errors %}
          <div>{{ message }}</div>
       {% endfor %}
-       
-      <form action = "/showvalues" method = post>
+      
+
+      
+      <form id="form" class="form" action = "/showvalues" method = post>
          <fieldset>
             <legend>Start Values Form</legend>
             {{ form.hidden_tag() }}
@@ -41,10 +46,10 @@
                 {{ form.num_shares.label }} {{ form.num_shares(class_="form-control", size=10, value=1000) }}<br>
                 
                <br>
-                {{ form.submit(class_="btn btn-primary btn-lg btn-block") }}
+                {{ form.submit(class_="btn btn-primary btn-lg btn-block", id="submitButton") }}
+
             </div>
 
          </fieldset>
       </form>
-
 {% endblock %}

@@ -227,9 +227,9 @@ class strategyLearner(object):
             cum_returns.append(cum_return)
             epochs.append(epoch)
             if self.verbose: 
-                print (epoch, cum_return)
+                print ("Epoch:", epoch, "Cum. Return: ", cum_return)
             # Check for convergence after running for at least 20 epochs
-            if epoch > 10:
+            if epoch > 20:
                 # Stop if the cum_return doesn't improve for 10 epochs
                 if self.has_converged(cum_returns):
                     break
