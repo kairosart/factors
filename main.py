@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, jsonify, request, flash
 from form import StartValuesForm
 import pandas as pd
-import numpy as np  
+import numpy as np
 import random
 import datetime as dt
 from sklearn import datasets, svm
@@ -12,9 +12,9 @@ import json
 from markupsafe import Markup
 
 # To fetch data
-from pandas_datareader import data as pdr   
-import fix_yahoo_finance as yf  
-yf.pdr_override()  
+from pandas_datareader import data as pdr
+import fix_yahoo_finance as yf
+yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_learner_data_file
 from strategyLearner import strategyLearner
@@ -51,15 +51,15 @@ def showvalues():
     start_d = dt.date(2008, 1, 1)
     #end_d = dt.datetime(2018, 10, 30)
     yesterday = dt.date.today() - dt.timedelta(1)
-    
+
     # Get portfolio values from Yahoo
     symbol = request.form['symbol']
     portf_value = fetchOnlineData(start_d, yesterday, symbol)
-    
-    
+
+
     # ****Stock prices chart****
     plot_prices = plot_stock_prices(portf_value.index, portf_value['Adj Close'], symbol)
-   
+
     # ****Momentum chart****
     # Normalize the prices Dataframe
     normed = pd.DataFrame()
@@ -67,10 +67,10 @@ def showvalues():
 
     # Compute momentum
     sym_mom = get_momentum(normed['Adj Close'], window=10)
-   
+
     # Create momentum chart
     plot_mom = plot_momentum(portf_value.index, normed['Adj Close'], sym_mom, "Momentum Indicator", (12, 8))
-    
+
     # ****Bollinger Bands****
     # Compute rolling mean
     rm_JPM = get_rolling_mean(portf_value['Adj Close'], window=10)
@@ -80,29 +80,29 @@ def showvalues():
 
     # Compute upper and lower bands
     upper_band, lower_band = get_bollinger_bands(rm_JPM, rstd_JPM)
-    
+
     # Plot raw symbol values, rolling mean and Bollinger Bands
     dates = pd.date_range(start_d, yesterday)
-    plot_boll = plot_bollinger(dates, portf_value.index, portf_value['Adj Close'], symbol, upper_band, lower_band, rm_JPM, 
+    plot_boll = plot_bollinger(dates, portf_value.index, portf_value['Adj Close'], symbol, upper_band, lower_band, rm_JPM,
                    num_std=1, title="Bollinger Indicator", fig_size=(12, 6))
-    
-    
+
+
     # ****Simple moving average (SMA)****
     # Compute SMA
     sma_JPM, q = get_sma(normed['Adj Close'], window=10)
 
     # Plot symbol values, SMA and SMA quality
     plot_sma = plot_sma_indicator(dates, portf_value.index, normed['Adj Close'], symbol, sma_JPM, q, "Simple Moving Average (SMA)")
-    
-    
+
+
     # ****Relative Strength Index (RSI)****
     # Compute RSI
     rsi_value = get_RSI(portf_value['Adj Close'])
-   
+
     # Plot RSI
-    plot_rsi =  plot_rsi_indicator(dates, portf_value.index, portf_value['Adj Close'], symbol, rsi_value, window=14, 
+    plot_rsi =  plot_rsi_indicator(dates, portf_value.index, portf_value['Adj Close'], symbol, rsi_value, window=14,
                        title="RSI Indicator", fig_size=(12, 6))
-    
+
     # Session variables
     session['start_val'] = request.form['start_val']
     session['symbol'] = request.form['symbol']
@@ -111,18 +111,18 @@ def showvalues():
     session['commission'] = request.form['commission']
     session['impact'] = request.form['impact']
 
-    
+
     return render_template(
     # name of template
 	"stockpriceschart.html",
-        
+
     # now we pass in our variables into the template
     start_val = request.form['start_val'],
     symbol = request.form['symbol'],
     commission = request.form['commission'],
     impact = request.form['impact'],
     num_shares = request.form['num_shares'],
-    start_date = start_d, 
+    start_date = start_d,
     end_date = yesterday,
     tables=[portf_value.to_html(classes=symbol)],
     titles = ['na', 'Stock Prices '],
@@ -131,8 +131,8 @@ def showvalues():
     div_placeholder_bollinger = Markup(plot_boll),
     div_placeholder_sma = Markup(plot_sma),
     div_placeholder_rsi = Markup(plot_rsi)
-       
-    )  
+
+    )
 
 # Benchmark
 @app.route('/benchmark', methods=['POST', 'GET'])
@@ -150,23 +150,23 @@ def benchmark():
     # Specify the start and end dates for this period. For traininig we'll get 66% of dates.
     n_days_training = ((dt.date.today()-start_d).days) / 3 * 2
     end_d = dt.date.today() - dt.timedelta(n_days_training)
-    
+
 
     # Get benchmark data
     benchmark_prices = fetchOnlineData(start_d, end_d, symbol)
-    
+
     # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
     df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d, num_shares)
-    
+
     # Train a StrategyLearner
     # Set verbose to True will print out and plot the cumulative return for each training epoch
-    stl = strategyLearner(num_shares=num_shares, impact=impact, 
+    stl = strategyLearner(num_shares=num_shares, impact=impact,
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
     epochs, cum_returns = stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
     plot_cum = plot_cum_return(epochs, cum_returns)
     #df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
-    
+
     return render_template(
         # name of template
         "benchmark.html",
@@ -175,15 +175,15 @@ def benchmark():
         symbol = symbol,
         div_placeholder_plot_cum = Markup(plot_cum),
         #div_placeholder_cum_return = Markup(df_trades)
-        
-        
+
+
     )
 
 # Initial form to get values
 @app.route('/form', methods = ['GET', 'POST'])
 def introStartValues():
     form = StartValuesForm()
-   
+
     if request.method == 'POST':
         if form.validate() == False:
             flash('All fields are required.')
@@ -197,4 +197,3 @@ def introStartValues():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
-
