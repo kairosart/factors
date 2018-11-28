@@ -10,6 +10,7 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 import json
 from markupsafe import Markup
+import pickle
 
 # To fetch data
 from pandas_datareader import data as pdr
@@ -163,7 +164,19 @@ def benchmark():
     stl = strategyLearner(num_shares=num_shares, impact=impact,
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
+    #model =  stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
+
+
+
     epochs, cum_returns = stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
+
+    # Save de model
+    model = {'Q':cum_returns,
+            'epoch': epochs}
+
+    filename = 'finalized_model.sav'
+    pickle.dump(model, open(filename, 'wb'))
+
     plot_cum = plot_cum_return(epochs, cum_returns)
     #df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
 
@@ -174,10 +187,13 @@ def benchmark():
         end_training_d = end_d,
         symbol = symbol,
         div_placeholder_plot_cum = Markup(plot_cum),
+        div_placeholder_model = Markup(model)
         #div_placeholder_cum_return = Markup(df_trades)
 
 
     )
+
+
 
 # Initial form to get values
 @app.route('/form', methods = ['GET', 'POST'])

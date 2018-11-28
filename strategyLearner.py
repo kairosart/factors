@@ -18,7 +18,7 @@ class strategyLearner(object):
     CASH = 0
     SHORT = -1
 
-    def __init__(self, num_shares=1000, epochs=100, num_steps=10, 
+    def __init__(self, num_shares=1000, epochs=100, num_steps=10,
                  impact=0.0, commission=0.00, verbose=False, **kwargs):
         """Instantiate a StrategLearner that can learn a trading policy.
 
@@ -45,10 +45,10 @@ class strategyLearner(object):
     def get_features(self, prices):
         """Compute technical indicators and use them as features to be fed
         into a Q-learner.
-        
+
         Parameters:
         prices: Adjusted close prices of the given symbol
-        
+
         Returns:
         df_features: A pandas dataframe of the technical indicators
         """
@@ -61,28 +61,28 @@ class strategyLearner(object):
         momentum = get_momentum(prices, window)
         # Compute SMA indicator
         sma_indicator = get_sma_indicator(prices, rolling_mean)
-        # Get RSI indicator 
+        # Get RSI indicator
         rsi_indicator = get_RSI(prices, window)
         # Compute Bollinger value
         bollinger_val = compute_bollinger_value(prices, rolling_mean, rolling_std)
         # Create a dataframe with three features
         df_features = pd.concat([momentum, sma_indicator], axis=1)
-        
+
         # Convert RSI array to dataframe
         rsi_df = pd.DataFrame(prices)
         rsi_df['rsi'] = pd.Series(rsi_indicator, index=rsi_df.index)
         rsi_df.drop('Adj Close', axis=1, inplace=True)
-        
+
         df_features = pd.concat([df_features, rsi_df], axis=1)
-        df_features.columns = ["ind{}".format(i) 
+        df_features.columns = ["ind{}".format(i)
                                 for i in range(len(df_features.columns))]
         df_features.dropna(inplace=True)
         return df_features
 
     def get_thresholds(self, df_features, num_steps):
         """Compute the thresholds to be used in the discretization of features.
-        thresholds is a 2-d numpy array where the first dimesion indicates the 
-        indices of features in df_features and the second dimension refers to 
+        thresholds is a 2-d numpy array where the first dimesion indicates the
+        indices of features in df_features and the second dimension refers to
         the value of a feature at a particular threshold.
         """
         step_size = round(df_features.shape[0] / num_steps)
@@ -102,7 +102,7 @@ class strategyLearner(object):
         """Discretize features and return a state.
 
         Parameters:
-        df_features: The technical indicators to be discretized. They were  
+        df_features: The technical indicators to be discretized. They were
         computed in get_features()
         non_neg_position: The position at the beginning of a particular day,
         before taking any action on that day. It is >= 0 so that state >= 0
@@ -135,7 +135,7 @@ class strategyLearner(object):
         return new_pos
 
     def get_daily_reward(self, prev_price, curr_price, position):
-        """Calculate the daily reward as a percentage change in prices: 
+        """Calculate the daily reward as a percentage change in prices:
         - Position is long: if the price goes up (curr_price > prev_price),
           we get a positive reward; otherwise, we get a negative reward
         - Position is short: if the price goes down, we get a positive reward;
@@ -179,7 +179,7 @@ class strategyLearner(object):
         symbol: The stock symbol to act on
         start_val: Start value of the portfolio which contains only the symbol
         """
-        
+
         # Get features and thresholds
         df_features = self.get_features(df_prices['Adj Close'])
         thresholds = self.get_thresholds(df_features, self.num_steps)
@@ -193,7 +193,7 @@ class strategyLearner(object):
             # Iterate over the data by date
             for day, date in enumerate(df_features.index):
                 # Get a state; add 1 to position so that states >= 0
-                state = self.discretize(df_features.loc[date], 
+                state = self.discretize(df_features.loc[date],
                                         position + 1, thresholds)
                 # On the first day, get an action without updating the Q-table
                 if date == df_features.index[0]:
@@ -202,7 +202,7 @@ class strategyLearner(object):
                 else:
                     prev_price = df_prices['Adj Close'].iloc[day-1]
                     curr_price = df_prices['Adj Close'].loc[date]
-                    reward = self.get_daily_reward(prev_price, 
+                    reward = self.get_daily_reward(prev_price,
                                                    curr_price, position)
                     action = self.q_learner.query(state, reward)
                 # On the last day, close any open positions
@@ -214,19 +214,19 @@ class strategyLearner(object):
                 orders.loc[date] = new_pos
                 # Update current position
                 position += new_pos
-            
+
             df_trades = create_df_trades(orders, symbol, self.num_shares)
-            
-            
-            portvals = compute_portvals_single_symbol(df_orders=df_trades, 
-                                                      symbol=symbol, 
-                                                      start_val=start_val, 
+
+
+            portvals = compute_portvals_single_symbol(df_orders=df_trades,
+                                                      symbol=symbol,
+                                                      start_val=start_val,
                                                       commission=self.commission,
                                                       impact=self.impact)
             cum_return = get_portfolio_stats(portvals)[0]
             cum_returns.append(cum_return)
             epochs.append(epoch)
-            if self.verbose: 
+            if self.verbose:
                 print ("Epoch:", epoch, "Cum. Return: ", cum_return)
             # Check for convergence after running for at least 20 epochs
             if epoch > 20:
@@ -235,7 +235,11 @@ class strategyLearner(object):
                     break
         if self.verbose:
             return epochs, cum_returns
+
+
+
         
+
     def test_policy(self, symbol="IBM", start_date=dt.datetime(2010,1,1),
         end_date=dt.datetime(2011,12,31), start_val=10000):
         """Use the existing policy and test it against new data.
@@ -245,10 +249,10 @@ class strategyLearner(object):
         start_date: A datetime object that represents the start date
         end_date: A datetime object that represents the end date
         start_val: Start value of the portfolio which contains only the symbol
-        
+
         Returns:
-        df_trades: A dataframe whose values represent trades for each day: 
-        +1000 indicating a BUY of 1000 shares, and -1000 indicating a SELL of 
+        df_trades: A dataframe whose values represent trades for each day:
+        +1000 indicating a BUY of 1000 shares, and -1000 indicating a SELL of
         1000 shares
         """
 
@@ -265,7 +269,7 @@ class strategyLearner(object):
         # Iterate over the data by date
         for date in df_features.index:
             # Get a state; add 1 to position so that states >= 0
-            state = self.discretize(df_features.loc[date], 
+            state = self.discretize(df_features.loc[date],
                                     position + 1, thresholds)
             action = self.q_learner.query_set_state(state)
             # On the last day, close any open positions
@@ -281,7 +285,7 @@ class strategyLearner(object):
         df_trades = create_df_trades(orders, symbol, self.num_shares)
 
         return df_trades
-        
+
 
 if __name__=="__main__":
     start_val = 100000
@@ -293,17 +297,17 @@ if __name__=="__main__":
     # In-sample or training period
     start_date = dt.datetime(2008, 1, 1)
     end_date = dt.datetime(2009, 12, 31)
-    
+
     # Get a dataframe of benchmark data. Benchmark is a portfolio starting with
     # $100,000, investing in 1000 shares of symbol and holding that position
-    df_benchmark_trades = create_df_benchmark(symbol, start_date, end_date, 
+    df_benchmark_trades = create_df_benchmark(symbol, start_date, end_date,
                                               num_shares)
 
     # Train and test a StrategyLearner
-    stl = strategyLearner(num_shares=num_shares, impact=impact, 
+    stl = strategyLearner(num_shares=num_shares, impact=impact,
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
-    stl.add_evidence(symbol=symbol, start_val=start_val, 
+    stl.add_evidence(symbol=symbol, start_val=start_val,
                      start_date=start_date, end_date=end_date)
     df_trades = stl.test_policy(symbol=symbol, start_date=start_date,
                                 end_date=end_date)
@@ -311,18 +315,18 @@ if __name__=="__main__":
     # Retrieve performance stats via a market simulator
     print ("Performances during training period for {}".format(symbol))
     print ("Date Range: {} to {}".format(start_date, end_date))
-    market_simulator(df_trades, df_benchmark_trades, symbol=symbol, 
+    market_simulator(df_trades, df_benchmark_trades, symbol=symbol,
                      start_val=start_val, commission=commission, impact=impact)
 
     # Out-of-sample or testing period: Perform similiar steps as above,
     # except that we don't train the data (i.e. run add_evidence again)
     start_date = dt.datetime(2010, 1, 1)
     end_date = dt.datetime(2011, 12, 31)
-    df_benchmark_trades = create_df_benchmark(symbol, start_date, end_date, 
+    df_benchmark_trades = create_df_benchmark(symbol, start_date, end_date,
                                               num_shares)
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_date, 
+    df_trades = stl.test_policy(symbol=symbol, start_date=start_date,
                                 end_date=end_date)
     print ("\nPerformances during testing period for {}".format(symbol))
     print ("Date Range: {} to {}".format(start_date, end_date))
-    market_simulator(df_trades, df_benchmark_trades, symbol=symbol, 
+    market_simulator(df_trades, df_benchmark_trades, symbol=symbol,
                      start_val=start_val, commission=commission, impact=impact)
