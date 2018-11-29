@@ -16,14 +16,14 @@ import plotly.graph_objs as go
 from plotly import tools
 
 def get_momentum(price, window=10):
-    """Calculate momentum indicator: 
+    """Calculate momentum indicator:
     momentum[t] = (price[t]/price[t-window]) - 1
     Parameters:
     price: Price, typically adjusted close price, series of a symbol
     window: Number of days to look back
-    
+
     Returns: Momentum, series of the same size as input data
-    """    
+    """
     momentum = pd.Series(np.nan, index=price.index)
     momentum.iloc[window:] = price.iloc[window:] / price.values[:-window] - 1
     return momentum
@@ -39,8 +39,8 @@ def get_sma_indicator(price, rolling_mean):
 
 def get_sma(values, window):
     """Return Simple moving average of given values, using specified window size."""
-    sma = pd.Series(values.rolling(window,center=False).mean()) 
-    q = (sma / values) - 1 
+    sma = pd.Series(values.rolling(window,center=False).mean())
+    q = (sma / values) - 1
     return sma, q
 
 def get_rolling_mean(values, window):
@@ -70,7 +70,7 @@ def get_bollinger_bands(rolling_mean, rolling_std, num_std=2):
     return upper_band, lower_band
 
 def compute_bollinger_value(price, rolling_mean, rolling_std):
-    """Output a value indicating how many standard deviations 
+    """Output a value indicating how many standard deviations
     a price is from the mean.
 
     Parameters:
@@ -110,8 +110,8 @@ def get_RSI(prices, n=14):
 
         rs = up/down
         rsi[i] = 100. - 100./(1.+rs)
-    
-    
+
+
     return rsi
 
 
@@ -125,7 +125,7 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
     xlabel: X axis title
     ylable: Y axis title
     fig_size: Width and height of the chart in inches
-    
+
     Returns:
     Plot cumulative return
     """
@@ -137,8 +137,8 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
                 fill='tonexty',
                 opacity = 0.8)
 
-    
-        
+
+
 
     data = [trace_prices]
 
@@ -153,7 +153,7 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
             b=100,
             t=100,
             pad=4
-        ),        
+        ),
         xaxis = dict(
                 title=xlabel,
                 linecolor='#000', linewidth=1,
@@ -171,18 +171,18 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
                         ])
                 ),
                 range = [df_index.values[0], df_index.values[1]]),
-            
+
         yaxis = dict(
                 title=ylabel,
                 linecolor='#000', linewidth=1
                 ),
     )
-        
+
 
     fig = dict(data=data, layout=layout)
     chart = plot(fig, show_link=False, output_type='div')
     return chart
-    
+
 def plot_cum_return(epoch, cum_return, title="Cumulative Return",
                   fig_size=(12, 6)):
     """Plot cumulative return.
@@ -191,7 +191,7 @@ def plot_cum_return(epoch, cum_return, title="Cumulative Return",
     epoch: one forward pass and one backward pass of all the training examples
     cum_retirm: cumulative return
     fig_size: Width and height of the chart in inches
-    
+
     Returns:
     Plot cumulative return
     """
@@ -202,14 +202,14 @@ def plot_cum_return(epoch, cum_return, title="Cumulative Return",
                 line = dict(color = '#17BECF'),
                 opacity = 0.8)
 
-    
-        
+
+
 
     data = [trace_cum_r]
 
     layout = dict(
         title = title,
-        
+
         xaxis = dict(
                 title='Epoch',
                 rangeselector=dict(
@@ -226,14 +226,14 @@ def plot_cum_return(epoch, cum_return, title="Cumulative Return",
                         ])
                 ),
                 range = [epoch[0], epoch[-1]]),
-            
+
         yaxis = dict(
                 title='Cumulative return (%)'
                 ),
     )
-        
-        
-        
+
+
+
 
     fig = dict(data=data, layout=layout)
     chart = plot(fig, show_link=False, output_type='div')
@@ -249,7 +249,7 @@ def plot_momentum(df_index, sym_price, sym_mom, title="Momentum Indicator",
     sym_price: Price, typically adjusted close price, series of symbol
     sym_mom: Momentum of symbol
     fig_size: Width and height of the chart in inches
-    
+
     Returns:
     Plot momentum and prices on the sample plot with two scales
     """
@@ -268,7 +268,7 @@ def plot_momentum(df_index, sym_price, sym_mom, title="Momentum Indicator",
                 line = dict(color = '#FF8000'),
                 fill='tonexty',
                 opacity = 0.8)
-        
+
 
     data = [trace_symbol, trace_momentum]
 
@@ -301,26 +301,26 @@ def plot_momentum(df_index, sym_price, sym_mom, title="Momentum Indicator",
                         ])
                 ),
                 range = [df_index.values[0], df_index.values[1]]),
-            
+
         yaxis = dict(
                 title='Adjusted Closed Price'
                 ),
-                    
+
         yaxis2=dict(
                 title='M. Quantitative',
                 overlaying='y',
                 side='right'
                 )
     )
-        
-        
-        
+
+
+
 
     fig = dict(data=data, layout=layout)
     chart = plot(fig, show_link=False, output_type='div')
     return chart
-    
-def plot_sma_indicator(dates, df_index, sym_price, symbol, sma_indicator, sma_quality, 
+
+def plot_sma_indicator(dates, df_index, sym_price, symbol, sma_indicator, sma_quality,
                        title="SMA Indicator", fig_size=(12, 6)):
     """Plot SMA indicator, price and SMA quality for a symbol.
 
@@ -350,14 +350,14 @@ def plot_sma_indicator(dates, df_index, sym_price, symbol, sma_indicator, sma_qu
                 name = "SMA",
                 line = dict(color = '#FF8000'),
                 opacity = 0.8)
-        
+
     trace_q = go.Scatter(
                 x=df_index,
                 y=sma_quality,
                 name = "SMA Quantity",
                 line = dict(color = '#04B404'),
                 opacity = 0.8)
-        
+
     data = [trace_symbol, trace_sma, trace_q]
 
     layout = dict(
@@ -389,19 +389,19 @@ def plot_sma_indicator(dates, df_index, sym_price, symbol, sma_indicator, sma_qu
                         ])
                 ),
                 range = [dates.values[0], dates.values[1]]),
-            
+
         yaxis = dict(
                 title='Price')
-                    
+
         )
-        
-        
+
+
 
     fig = dict(data=data, layout=layout)
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momentum, 
+def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momentum,
                        title="MOMENTUM/ SMA Indicator", fig_size=(12, 6)):
     """Plot Momentum/SMA cross indicator for a symbol.
 
@@ -417,7 +417,7 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
     Returns:
     Plot Momentum/SMA cross points
     """
-    
+
 
     trace_sma = go.Scatter(
                 x=df_index,
@@ -425,14 +425,14 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
                 name = "SMA",
                 line = dict(color = '#FF8000'),
                 opacity = 0.8)
-        
+
     trace_momentum = go.Scatter(
                 x=df_index,
                 y=momentum,
                 name = "Momentum",
                 line = dict(color = '#04B404'),
                 opacity = 0.8)
-        
+
     data = [trace_sma, trace_momentum]
 
     layout = dict(
@@ -453,19 +453,19 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
                         ])
                 ),
                 range = [dates.values[0], dates.values[1]]),
-            
+
         yaxis = dict(
                 title='Price')
-                    
+
         )
-        
-        
+
+
 
     fig = dict(data=data, layout=layout)
     chart = plot(fig, show_link=False, output_type='div')
-    return chart  
-    
-def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, bollinger_val, 
+    return chart
+
+def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, bollinger_val,
                    num_std=1, title="Bollinger Indicator", fig_size=(12, 6)):
     """Plot Bollinger bands and value for a symbol.
 
@@ -473,7 +473,7 @@ def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, b
     dates: Range of dates
     df_index: Date index
     sym_price: Price, typically adjusted close price, series of symbol
-    symbol: Stock symbol    
+    symbol: Stock symbol
     upper_band: Bollinger upper band
     lower_band: Bollinger lower band
     bollinger_val: The number of standard deviations a price is from the mean
@@ -496,21 +496,21 @@ def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, b
                 name = "Upper band",
                 line = dict(color = '#04B404'),
                 opacity = 0.8)
-        
+
     trace_lower = go.Scatter(
                 x=df_index,
                 y=lower_band,
                 name = "Lower band",
                 line = dict(color = '#FF0000'),
                 opacity = 0.8)
-        
+
     trace_Rolling = go.Scatter(
                 x=df_index,
                 y=bollinger_val,
                 name = "Rolling Mean",
                 line = dict(color = '#FF8000'),
                 opacity = 0.8)
-        
+
     data = [trace_symbol, trace_upper, trace_lower, trace_Rolling]
 
     layout = dict(
@@ -542,21 +542,21 @@ def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, b
                         ])
                     ),
                     range = [dates.values[0], dates.values[1]]),
-            
+
         yaxis = dict(
                     title='Price')
-                    
+
         )
-        
-        
+
+
 
     fig = dict(data=data, layout=layout)
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window=14, 
+def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window=14,
                        title="RSI Indicator", fig_size=(12, 6)):
-    """Plot Relative Strength Index (RSI) of given values, using specified window size."""  
+    """Plot Relative Strength Index (RSI) of given values, using specified window size."""
     '''
     Parameters:
     dates: Range of dates
@@ -571,7 +571,7 @@ def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window
     Returns:
     Plot price, RSI, Overbought line and Oversold line
     '''
-    
+
     # Price line
     trace_symbol = go.Scatter(
                 x=df_index,
@@ -624,7 +624,7 @@ def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window
     fig.append_trace(trace_signal, 2, 1)
     layout = dict(
         title = title,
-        
+
         xaxis = dict(
                     title='Dates',
                     range = [dates.values[0], dates.values[1]]),
@@ -650,7 +650,7 @@ def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-    
+
 def plot_performance(perform_df, title="In-sample vs Out of sample performance",
                   fig_size=(12, 6)):
     """Plot In-sample and Out of sample performances.
@@ -659,7 +659,7 @@ def plot_performance(perform_df, title="In-sample vs Out of sample performance",
     perform_df: Performance dataframe
     title: Chart title
     fig_size: Width and height of the chart in inches
-    
+
     Returns:
     Plot In-sample and Out of sample performances.
     """
@@ -668,89 +668,224 @@ def plot_performance(perform_df, title="In-sample vs Out of sample performance",
         y=perform_df.loc['Sharpe Ratio', ['In-sample']],
         name='In-sample'
     )
-   
+
     trace2 = go.Bar(
         x=['Sharpe Ratio'],
         y=perform_df.loc['Sharpe Ratio', ['Out of sample']],
         name='Out of sample'
     )
-    
+
     trace3 = go.Bar(
         x=['Cum. Return'],
         y=perform_df.loc['Cumulative Return', ['In-sample']],
         name='In-sample'
     )
-   
+
     trace4 = go.Bar(
         x=['Cum. Return'],
         y=perform_df.loc['Cumulative Return', ['Out of sample']],
         name='Out of sample'
     )
-    
+
     trace5 = go.Bar(
         x=['Standard Deviation'],
         y=perform_df.loc['Standard Deviation', ['In-sample']],
         name='In-sample'
     )
-   
+
     trace6 = go.Bar(
         x=['Standard Deviation'],
         y=perform_df.loc['Standard Deviation', ['Out of sample']],
         name='Out of sample'
     )
-    
+
     trace7 = go.Bar(
         x=['Average Daily Return'],
         y=perform_df.loc['Average Daily Return', ['In-sample']],
         name='In-sample'
     )
-   
+
     trace8 = go.Bar(
         x=['Average Daily Return'],
         y=perform_df.loc['Average Daily Return', ['Out of sample']],
         name='Out of sample'
     )
-    
+
     trace9 = go.Bar(
         x=['Final Portfolio Value'],
         y=perform_df.loc['Final Portfolio Value', ['In-sample']],
         name='In-sample'
     )
-   
+
     trace10 = go.Bar(
         x=['Final Portfolio Value'],
         y=perform_df.loc['Final Portfolio Value', ['Out of sample']],
         name='Out of sample'
     )
-    
+
     # Subplots
-    fig = tools.make_subplots(rows=3, cols=2, print_grid=False, 
+    fig = tools.make_subplots(rows=3, cols=2, print_grid=False,
                         specs=[[{}, {}], [{}, {}], [{'colspan': 2}, None]])
     # Sharpe ratio
     fig.append_trace(trace1, 1, 1)
     fig.append_trace(trace2, 1, 1)
-    
+
     # Cumulative return
     fig.append_trace(trace3, 1, 2)
     fig.append_trace(trace4, 1, 2)
-    
+
     # Standard Deviation
     fig.append_trace(trace5, 2, 1)
     fig.append_trace(trace6, 2, 1)
-    
+
     # Average Daily Return
     fig.append_trace(trace7, 2, 2)
-    fig.append_trace(trace8, 2, 2)    
+    fig.append_trace(trace8, 2, 2)
 
     # Final Portfolio Value
     fig.append_trace(trace9, 3, 1)
-    fig.append_trace(trace10, 3, 1) 
-    
+    fig.append_trace(trace10, 3, 1)
+
     layout = go.Layout(
         barmode='group'
     )
-        
-    fig['layout'].update(height=600, width=600, title=title)    
 
-    iplot(fig)    
-    
+    fig['layout'].update(height=600, width=600, title=title)
+
+    iplot(fig)
+
+def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=False, title="Title", xtitle="X title", ytitle="Y title"):
+    """Plots portvals and portvals_bm, showing vertical lines for buy and sell orders
+
+    Parameters:
+    df_orders: A dataframe that contains portfolio orders
+    portvals: A dataframe with one column containing daily portfolio value
+    portvals_bm: A dataframe with one column containing daily benchmark value
+    vert_lines: Show buy and sell signals in chart
+    title: Chart title
+    xtitle: Chart X axe title
+    ytitle: Chart Y axe title
+    Returns: Plot a chart of the portfolio and benchmark performances
+    """
+    # Normalize data
+    #portvals = normalize_data(portvals)
+    #portvals_bm = normalize_data(portvals_bm)
+    df = portvals_bm.join(portvals)
+
+    # Min range
+    if (df.loc[:, "Benchmark"].min() < df.loc[:, "Portfolio"].min()):
+        min_range = df.loc[:, "Benchmark"].min()
+    else:
+        min_range = df.loc[:, "Portfolio"].min()
+
+    # Max range
+    if (df.loc[:, "Benchmark"].max() > df.loc[:, "Portfolio"].max()):
+        max_range = df.loc[:, "Benchmark"].max()
+    else:
+        max_range = df.loc[:, "Portfolio"].max()
+
+    # Plot the normalized benchmark and portfolio
+    trace_bench = go.Scatter(
+                x=df.index,
+                y=df.loc[:, "Benchmark"],
+                name = "Benchmark",
+                line = dict(color = '#17BECF'),
+                opacity = 0.8)
+
+    trace_porfolio = go.Scatter(
+                x=df.index,
+                y=df.loc[:, "Portfolio"],
+                name = "Portfolio",
+                line = dict(color = '#000000'),
+                opacity = 0.8)
+
+    data = [trace_bench, trace_porfolio]
+
+
+
+
+    # Plot the vertical lines for buy and sell signals
+    shapes = list()
+    if vert_lines:
+        buy_line = []
+        sell_line = []
+        for date in df_orders.index:
+            if df_orders.loc[date, "Order"] == "BUY":
+                buy_line.append(date)
+            else:
+                sell_line.append(date)
+        # Vertical lines
+        line_size = max_range + (max_range * 10 / 100)
+
+        # Buy line
+        for i in buy_line:
+            shapes.append({'type': 'line',
+                           'xref': 'x',
+                           'yref': 'y',
+                           'x0': i,
+                           'y0': 0,
+                           'x1': i,
+                           'y1': line_size,
+                           'line': {
+                                'color': 'rgb(0, 102, 34)',
+                                'width': 1,
+                                'dash': 'dash',
+                            },
+                          })
+        # Sell line
+        for i in sell_line:
+            shapes.append({'type': 'line',
+                           'xref': 'x',
+                           'yref': 'y',
+                           'x0': i,
+                           'y0': 0,
+                           'x1': i,
+                           'y1': line_size,
+                           'line': {
+                                'color': 'rgb(255, 0, 0)',
+                                'width': 1,
+                                'dash': 'dash',
+                            },
+                          })
+
+    layout = dict(
+        autosize=True,
+        shapes=shapes,
+        margin=go.Margin(
+            l=50,
+            r=50,
+            b=100,
+            t=100,
+            pad=4
+        ),
+        title = title,
+        xaxis = dict(
+                title=xtitle,
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=1,
+                            label='1m',
+                            step='month',
+                            stepmode='backward'),
+                        dict(count=6,
+                            label='6m',
+                            step='month',
+                            stepmode='backward'),
+                        dict(step='all')
+                    ])
+                ),
+                range = [portvals.index[0], portvals.index[-1]]),
+
+        yaxis = dict(
+                title=ytitle,
+                range = [min_range - (min_range * 10 / 100) ,max_range + (max_range * 10 / 100)]),
+
+        )
+
+
+
+
+
+    fig = dict(data=data, layout=layout)
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart

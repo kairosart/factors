@@ -29,7 +29,7 @@
 
 	<br><br>
   <h4>Performance</h4>
-	<table class="table-primary">
+	<table class=" table table-hover">
   <thead>
     <tr>
 			<th scope="col"></th>
@@ -42,7 +42,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="table-active">
+    <tr class="table-secondary">
       <th scope="row">Portfolio</th>
       <td>{{ sharpe_ratio_p }}</td>
       <td>{{ cum_ret_p }}</td>
@@ -51,7 +51,7 @@
 			<td>{{ final_value_p }}</td>
 			<td>{{ orders_count_p }}</td>
     </tr>
-		<tr class="table-active">
+		<tr class="table-secondary">
       <th scope="row">Benchmark</th>
       <td>{{ sharpe_ratio_b }}</td>
       <td>{{ cum_ret_b }}</td>
@@ -62,4 +62,7 @@
     </tr>
   </tbody>
 </table>
+<br><br>
+
+{{ div_placeholder_plot_norm_data }}
 {% endblock %}

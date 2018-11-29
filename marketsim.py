@@ -9,7 +9,7 @@ from util import normalize_data, fetchOnlineData
 
 
 # Add plotly for interactive charts
-from plotly.offline import init_notebook_mode, iplot
+from plotly.offline import init_notebook_mode, plot
 #init_notebook_mode(connected=True)
 import plotly.plotly as py
 import plotly.graph_objs as go
@@ -166,165 +166,11 @@ def market_simulator(df_orders, df_orders_benchmark, symbol, start_val=1000000, 
     # Get orders number
     orders_count = len(portvals.index)
 
-    # Compare portfolio against Benchmark
-    print ("Sharpe Ratio of Portfolio: {}".format(sharpe_ratio))
-    print ("Sharpe Ratio of Benchmark : {}".format(sharpe_ratio_bm))
-    print ()
-    print ("Cumulative Return of Portfolio: {}".format(cum_ret))
-    print ("Cumulative Return of Benchmark : {}".format(cum_ret_bm))
-    print ()
-    print ("Standard Deviation of Portfolio: {}".format(std_daily_ret))
-    print ("Standard Deviation of Benchmark : {}".format(std_daily_ret_bm))
-    print ()
-    print ("Average Daily Return of Portfolio: {}".format(avg_daily_ret))
-    print ("Average Daily Return of Benchmark : {}".format(avg_daily_ret_bm))
-    print ()
-    print ("Final Portfolio Value: {}".format(portvals.iloc[-1, -1]))
-    print ("Final Benchmark Value: {}".format(portvals_bm.iloc[-1, -1]))
-    print ()
-    print ("Portfolio Orders count: {}".format(len(portvals.index)))
-
 
     # Rename columns and normalize data to the first date of the date range
     portvals.rename(columns={"port_val": "Portfolio"}, inplace=True)
     portvals_bm.rename(columns={"port_val": "Benchmark"}, inplace=True)
 
-    #plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vertical_lines, title, xtitle, ytitle)
-
-    return orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm
-
-def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=False, title="Title", xtitle="X title", ytitle="Y title"):
-    """Plots portvals and portvals_bm, showing vertical lines for buy and sell orders
-
-    Parameters:
-    df_orders: A dataframe that contains portfolio orders
-    portvals: A dataframe with one column containing daily portfolio value
-    portvals_bm: A dataframe with one column containing daily benchmark value
-    vert_lines: Show buy and sell signals in chart
-    title: Chart title
-    xtitle: Chart X axe title
-    ytitle: Chart Y axe title
-    Returns: Plot a chart of the portfolio and benchmark performances
-    """
-    # Normalize data
-    #portvals = normalize_data(portvals)
-    #portvals_bm = normalize_data(portvals_bm)
-    df = portvals_bm.join(portvals)
-
-    # Min range
-    if (df.loc[:, "Benchmark"].min() < df.loc[:, "Portfolio"].min()):
-        min_range = df.loc[:, "Benchmark"].min()
-    else:
-        min_range = df.loc[:, "Portfolio"].min()
-
-    # Max range
-    if (df.loc[:, "Benchmark"].max() > df.loc[:, "Portfolio"].max()):
-        max_range = df.loc[:, "Benchmark"].max()
-    else:
-        max_range = df.loc[:, "Portfolio"].max()
-
-    # Plot the normalized benchmark and portfolio
-    trace_bench = go.Scatter(
-                x=df.index,
-                y=df.loc[:, "Benchmark"],
-                name = "Benchmark",
-                line = dict(color = '#17BECF'),
-                opacity = 0.8)
-
-    trace_porfolio = go.Scatter(
-                x=df.index,
-                y=df.loc[:, "Portfolio"],
-                name = "Portfolio",
-                line = dict(color = '#000000'),
-                opacity = 0.8)
-
-    data = [trace_bench, trace_porfolio]
 
 
-
-
-    # Plot the vertical lines for buy and sell signals
-    shapes = list()
-    if vert_lines:
-        buy_line = []
-        sell_line = []
-        for date in df_orders.index:
-            if df_orders.loc[date, "Order"] == "BUY":
-                buy_line.append(date)
-            else:
-                sell_line.append(date)
-        # Vertical lines
-        line_size = max_range + (max_range * 10 / 100)
-
-        # Buy line
-        for i in buy_line:
-            shapes.append({'type': 'line',
-                           'xref': 'x',
-                           'yref': 'y',
-                           'x0': i,
-                           'y0': 0,
-                           'x1': i,
-                           'y1': line_size,
-                           'line': {
-                                'color': 'rgb(0, 102, 34)',
-                                'width': 1,
-                                'dash': 'dash',
-                            },
-                          })
-        # Sell line
-        for i in sell_line:
-            shapes.append({'type': 'line',
-                           'xref': 'x',
-                           'yref': 'y',
-                           'x0': i,
-                           'y0': 0,
-                           'x1': i,
-                           'y1': line_size,
-                           'line': {
-                                'color': 'rgb(255, 0, 0)',
-                                'width': 1,
-                                'dash': 'dash',
-                            },
-                          })
-
-    layout = dict(
-        autosize=True,
-        shapes=shapes,
-        margin=go.Margin(
-            l=50,
-            r=50,
-            b=100,
-            t=100,
-            pad=4
-        ),
-        title = title,
-        xaxis = dict(
-                title=xtitle,
-                rangeselector=dict(
-                    buttons=list([
-                        dict(count=1,
-                            label='1m',
-                            step='month',
-                            stepmode='backward'),
-                        dict(count=6,
-                            label='6m',
-                            step='month',
-                            stepmode='backward'),
-                        dict(step='all')
-                    ])
-                ),
-                range = [portvals.index[0], portvals.index[-1]]),
-
-        yaxis = dict(
-                title=ytitle,
-                range = [min_range - (min_range * 10 / 100) ,max_range + (max_range * 10 / 100)]),
-
-        )
-
-
-
-
-
-    fig = dict(data=data, layout=layout)
-    chart = plot(fig, show_link=False, output_type='div')
-    return chart
+    return orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm, portvals, portvals_bm, df_orders

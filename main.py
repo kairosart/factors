@@ -20,7 +20,7 @@ yf.pdr_override()
 from util import create_df_benchmark, fetchOnlineData, get_learner_data_file
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
-from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger
+from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
 
 
 
@@ -182,7 +182,9 @@ def benchmark():
 
     # Retrieve performance stats via a market simulator
 
-    orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm = market_simulator(df_trades, df_benchmark_trades, symbol=symbol, start_val=start_val, commission=commission, impact=impact)
+    orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm, portvals, portvals_bm, df_orders  = market_simulator(df_trades, df_benchmark_trades, symbol=symbol, start_val=start_val, commission=commission, impact=impact)
+
+    plot_norm_data = plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=False, title="Portfolio Value", xtitle="Dates", ytitle="Value ($)")
 
     return render_template(
         # name of template
@@ -191,17 +193,18 @@ def benchmark():
         end_training_d = end_d,
         symbol = symbol,
         div_placeholder_plot_cum = Markup(plot_cum),
+        div_placeholder_plot_norm_data = Markup(plot_norm_data),
         orders_count_p = orders_count,
-        sharpe_ratio_p = sharpe_ratio,
-        cum_ret_p = cum_ret,
-        std_daily_ret_p = std_daily_ret,
-        avg_daily_ret_p = avg_daily_ret,
-        final_value_p = final_value,
-        sharpe_ratio_b = sharpe_ratio_bm,
-        cum_ret_b = cum_ret_bm,
-        std_daily_ret_b = std_daily_ret_bm,
-        avg_daily_ret_b = avg_daily_ret_bm,
-        final_value_b = final_value_bm
+        sharpe_ratio_p = round(sharpe_ratio, 3),
+        cum_ret_p = round(cum_ret, 3),
+        std_daily_ret_p = round(std_daily_ret, 3),
+        avg_daily_ret_p = round(avg_daily_ret, 3),
+        final_value_p = round(final_value, 3),
+        sharpe_ratio_b = round(sharpe_ratio_bm, 3),
+        cum_ret_b = round(cum_ret_bm, 3),
+        std_daily_ret_b = round(std_daily_ret_bm, 3),
+        avg_daily_ret_b = round(avg_daily_ret_bm, 3),
+        final_value_b = round(final_value_bm, 3)
 
     )
 
