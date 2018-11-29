@@ -5,7 +5,7 @@ import datetime as dt
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from util import create_df_benchmark, create_df_trades
+from util import create_df_benchmark, create_df_trades, fetchOnlineData
 import QLearner as ql
 from indicators import get_momentum, get_sma_indicator, compute_bollinger_value, plot_cum_return, get_RSI
 from marketsim import compute_portvals_single_symbol, market_simulator
@@ -238,7 +238,7 @@ class strategyLearner(object):
 
 
 
-        
+
 
     def test_policy(self, symbol="IBM", start_date=dt.datetime(2010,1,1),
         end_date=dt.datetime(2011,12,31), start_val=10000):
@@ -258,9 +258,10 @@ class strategyLearner(object):
 
         dates = pd.date_range(start_date, end_date)
         # Get adjusted close prices for symbol
-        df_prices = get_data([symbol], dates)
+        #df_prices = get_data([symbol], dates)
+        df_prices = fetchOnlineData(start_date, end_date, symbol)
         # Get features and thresholds
-        df_features = self.get_features(df_prices[symbol])
+        df_features = self.get_features(df_prices['Adj Close'])
         thresholds = self.get_thresholds(df_features, self.num_steps)
         # Initial position is holding nothing
         position = self.CASH

@@ -26,6 +26,32 @@
 	<h4>{{ symbol }} with data from {{ start_date }} to {{ end_training_d }}</h4>
 
 	{{ div_placeholder_plot_cum }}
-	{{ div_placeholder_model }}
 
+	<br><br>
+  <h4>Performance</h4>
+	<table class="table table-hover">
+  <thead>
+    <tr>
+			<th scope="col"></th>
+      <th scope="col">Sharpe Ratio</th>
+      <th scope="col">Cumulative Return</th>
+      <th scope="col">Std. Deviation</th>
+      <th scope="col">Aver. Daily R.</th>
+			<th scope="col">Final Value</th>
+			<th scope="col">Orders count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-active">
+      <th scope="row">Portfolio</th>
+      <td>{{ sharpe_ratio_p }}</td>
+      <td>{{ cum_ret_p }}</td>
+      <td>{{ std_daily_ret_p }}</td>
+			<td>{{ avg_daily_ret_p }}</td>
+			<td>{{ final_value_p }}</td>
+			<td>{{ orders_count_p }}</td>
+    </tr>
+
+  </tbody>
+</table>
 {% endblock %}

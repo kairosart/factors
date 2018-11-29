@@ -178,7 +178,12 @@ def benchmark():
     pickle.dump(model, open(filename, 'wb'))
 
     plot_cum = plot_cum_return(epochs, cum_returns)
-    #df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
+    df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
+
+    # Retrieve performance stats via a market simulator
+
+    orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value = market_simulator(df_trades, df_benchmark_trades, symbol=symbol,
+                     start_val=start_val, commission=commission, impact=impact)
 
     return render_template(
         # name of template
@@ -187,8 +192,12 @@ def benchmark():
         end_training_d = end_d,
         symbol = symbol,
         div_placeholder_plot_cum = Markup(plot_cum),
-        div_placeholder_model = Markup(model)
-        #div_placeholder_cum_return = Markup(df_trades)
+        orders_count_p = orders_count,
+        sharpe_ratio_p = sharpe_ratio,
+        cum_ret_p = cum_ret,
+        std_daily_ret_p = std_daily_ret,
+        avg_daily_ret_p = avg_daily_ret,
+        final_value_p = final_value
 
 
     )

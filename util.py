@@ -4,11 +4,12 @@ import datetime as dt
 import os
 import pandas as pd
 import numpy as np
+import pickle
 
 # To fetch data
-from pandas_datareader import data as pdr   
-import fix_yahoo_finance as yf  
-yf.pdr_override()   
+from pandas_datareader import data as pdr
+import fix_yahoo_finance as yf
+yf.pdr_override()
 
 def symbol_to_path(symbol, base_dir=None):
     """Return CSV file path given ticker symbol."""
@@ -22,7 +23,7 @@ def symbol_to_path(symbol, base_dir=None):
 def fetchOnlineData(dt_start, dt_end, ls_symbols):
     # Add a day to dt_end for Yahoo purpose
     dt_end = pd.to_datetime(dt_end) + pd.DateOffset(days=1)
-    
+
     # Get data of trading days between the start and the end.
     df = pdr.get_data_yahoo(
             # tickers list (single tickers accepts a string as well)
@@ -53,7 +54,7 @@ def fetchOnlineData(dt_start, dt_end, ls_symbols):
     df['Adj Close'] = pd.to_numeric(df['Adj Close'], errors='coerce')
     #adj_close_price = pd.Series(df['Adj Close'])
 
-    # returning the Adj Closed prices for all the days    
+    # returning the Adj Closed prices for all the days
     return df
 
 def get_orders_data_file(basefilename):
@@ -86,11 +87,11 @@ def compute_sharpe_ratio(k, avg_return, risk_free_rate, std_return):
     avg_return: daily, weekly or monthly return
     risk_free_rate: daily, weekly or monthly risk free rate
     std_return: daily, weekly or monthly standard deviation
-    Returns: 
+    Returns:
     sharpe_ratio: k * (avg_return - risk_free_rate) / std_return
     """
     return k * (avg_return - risk_free_rate) / std_return
-    
+
 
 def plot_data(df, symbol, title="Stock prices", xlabel="Date", ylabel="Price", save_fig=False, fig_name="plot.png"):
     """Plot stock prices with a custom title and meaningful axis labels."""
@@ -109,7 +110,7 @@ def load_txt_data(dirpath, filename):
     Parameters:
     dirpath: The path to the directory where the file is stored
     filename: The name of the file in the dirpath
-    
+
     Returns:
     np_data: A numpy array of the data
     """
@@ -126,7 +127,7 @@ def load_txt_data(dirpath, filename):
 
 def get_exchange_days(start_date = dt.datetime(1964,7,5), end_date = dt.datetime(2020,12,31),
     dirpath = "../data/dates_lists", filename="NYSE_dates.txt"):
-    """ Create a list of dates between start_date and end_date (inclusive) that correspond 
+    """ Create a list of dates between start_date and end_date (inclusive) that correspond
     to the dates there was trading at an exchange. Default values are given based on NYSE.
 
     Parameters:
@@ -134,7 +135,7 @@ def get_exchange_days(start_date = dt.datetime(1964,7,5), end_date = dt.datetime
     end_date: Last day to consider (inclusive)
     dirpath: The path to the directory where the file is stored
     filename: The name of the file in the dirpath
-    
+
     Returns:
     dates: A list of dates between start_date and end_date on which an exchange traded
     """
@@ -150,16 +151,16 @@ def get_exchange_days(start_date = dt.datetime(1964,7,5), end_date = dt.datetime
 
 
 def get_data_as_dict(dates, symbols, keys):
-    """ Create a dictionary with types of data (Adj Close, Volume, etc.) as keys. Each value is 
+    """ Create a dictionary with types of data (Adj Close, Volume, etc.) as keys. Each value is
     a dataframe with symbols as columns and dates as rows
 
     Parameters:
     dates: A list of dates of interest
     symbols: A list of symbols of interest
     keys: A list of types of data of interest, e.g. Adj Close, Volume, etc.
-    
+
     Returns:
-    data_dict: A dictionary whose keys are types of data, e.g. Adj Close, Volume, etc. and 
+    data_dict: A dictionary whose keys are types of data, e.g. Adj Close, Volume, etc. and
     values are dataframes with dates as indices and symbols as columns
     """
 
@@ -170,7 +171,7 @@ def get_data_as_dict(dates, symbols, keys):
             df_temp = pd.read_csv(symbol_to_path(symbol), index_col="Date",
                     parse_dates=True, usecols=["Date", key], na_values=["nan"])
             df_temp = df_temp.rename(columns={key: symbol})
-            df = df.join(df_temp) 
+            df = df.join(df_temp)
         data_dict[key] = df
     return data_dict
 
@@ -182,17 +183,17 @@ def create_df_benchmark(symbol, start_date, end_date, num_shares):
     benchmark_prices = fetchOnlineData(start_date, end_date, symbol)
 
     #benchmark_prices = get_data([symbol], pd.date_range(start_date, end_date), addSPY=False).dropna()
-    
+
     # Create benchmark df: buy num_shares and hold them till the last date
     df_benchmark_trades = pd.DataFrame(
-        data=[(benchmark_prices.index.min(), num_shares), 
-        (benchmark_prices.index.max(), -int(num_shares))], 
-        columns=["Date", "Adj Close"])
+        data=[(benchmark_prices.index.min(), num_shares),
+        (benchmark_prices.index.max(), -int(num_shares))],
+        columns=["Date", "Shares"])
     df_benchmark_trades.set_index("Date", inplace=True)
     return df_benchmark_trades
 
 def create_df_trades(orders, symbol, num_shares, cash_pos=0, long_pos=1, short_pos=-1):
-    """Create a dataframe of trades based on the orders executed. +1000 
+    """Create a dataframe of trades based on the orders executed. +1000
     indicates a BUY of 1000 shares, and -1000 indicates a SELL of 1000 shares.
     """
     # Remove cash positions to make the "for" loop below run faster
@@ -206,3 +207,20 @@ def create_df_trades(orders, symbol, num_shares, cash_pos=0, long_pos=1, short_p
     df_trades = pd.DataFrame(trades, columns=["Date", "Shares"])
     df_trades.set_index("Date", inplace=True)
     return df_trades
+
+# Save and load models with pickle
+def save(self, path):
+        """Serialize an agent."""
+        data = {'Q': self.Q,
+                'epoch': self.epoch}
+        with open(path, 'wb') as handle:
+            pickle.dump(data, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        return self
+
+def load(self, path):
+    """Load an agent."""
+    with open(path, 'rb') as handle:
+        data = pickle.load(handle)
+        self.Q = data['Q']
+        self.epoch = data['epoch']
+    return self
