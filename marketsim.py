@@ -191,7 +191,7 @@ def market_simulator(df_orders, df_orders_benchmark, symbol, start_val=1000000, 
 
     #plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vertical_lines, title, xtitle, ytitle)
 
-    return orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value
+    return orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm
 
 def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=False, title="Title", xtitle="X title", ytitle="Y title"):
     """Plots portvals and portvals_bm, showing vertical lines for buy and sell orders

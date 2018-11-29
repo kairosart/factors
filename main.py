@@ -182,8 +182,7 @@ def benchmark():
 
     # Retrieve performance stats via a market simulator
 
-    orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value = market_simulator(df_trades, df_benchmark_trades, symbol=symbol,
-                     start_val=start_val, commission=commission, impact=impact)
+    orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm = market_simulator(df_trades, df_benchmark_trades, symbol=symbol, start_val=start_val, commission=commission, impact=impact)
 
     return render_template(
         # name of template
@@ -197,8 +196,12 @@ def benchmark():
         cum_ret_p = cum_ret,
         std_daily_ret_p = std_daily_ret,
         avg_daily_ret_p = avg_daily_ret,
-        final_value_p = final_value
-
+        final_value_p = final_value,
+        sharpe_ratio_b = sharpe_ratio_bm,
+        cum_ret_b = cum_ret_bm,
+        std_daily_ret_b = std_daily_ret_bm,
+        avg_daily_ret_b = avg_daily_ret_bm,
+        final_value_b = final_value_bm
 
     )
 
