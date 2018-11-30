@@ -15,7 +15,96 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 from plotly import tools
 
-def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
+def compute_portvals_single_symbol(df_orders, symbol, start_val=100000,
+    commission=9.95, impact=0.005):
+    """Compute portfolio values for a single symbol.
+
+    Parameters:
+    df_orders: A dataframe with orders for buying or selling stocks. There is
+    no value for cash (i.e. 0).
+    symbol: The stock symbol whose portfolio values need to be computed
+    start_val: The starting value of the portfolio (initial cash available)
+    commission: The fixed amount in dollars charged for each transaction
+    impact: The amount the price moves against the trader compared to the
+    historical data at each transaction
+
+    Returns:
+    portvals: A dataframe with one column containing the value of the portfolio
+    for each trading day
+    """
+
+    # Sort the orders dataframe by date
+    df_orders['Shares']  = df_orders['Shares'].apply(pd.to_numeric, downcast='float', errors='coerce')
+
+    df_orders.sort_index(ascending=True, inplace=True)
+    print(df_orders.info())
+
+    # Get the start and end dates
+    start_date = df_orders.index.min()
+    end_date = df_orders.index.max()
+
+    # Create a dataframe with adjusted close prices for the symbol and for cash
+    df_prices = fetchOnlineData(start_date, end_date, symbol)
+    df_prices.rename(columns={'Adj Close':symbol}, inplace=True)
+    df_prices["cash"] = 1.0
+    del df_prices["Symbol"]
+    print("df_prices", df_prices.info())
+
+    # Fill NAN values if any
+    df_prices.fillna(method="ffill", inplace=True)
+    df_prices.fillna(method="bfill", inplace=True)
+    df_prices.fillna(1.0, inplace=True)
+
+    # Create a dataframe that represents changes in the number of shares by day
+    df_trades = pd.DataFrame(np.zeros((df_prices.shape)), df_prices.index,
+        df_prices.columns)
+    print('df_trades', df_trades.info())
+    for index, row in df_orders.iterrows():
+        # Total value of shares purchased or sold
+        traded_share_value = df_prices.loc[index, symbol] * row["Shares"]
+        # Transaction cost
+        transaction_cost = float(commission) + float(impact) * df_prices.loc[index, symbol] \
+                            * row["Shares"]
+
+        # Update the number of shares and cash based on the type of transaction
+        # Note: The same asset may be traded more than once on a particular day
+        # If the shares were bought
+        if row["Shares"] > 0:
+            df_trades.loc[index, symbol] = df_trades.loc[index, symbol] \
+                                            + row["Shares"]
+            df_trades.loc[index, "cash"] = df_trades.loc[index, "cash"] \
+                                            - traded_share_value \
+                                            - transaction_cost
+        # If the shares were sold
+        elif row["Shares"] < 0:
+            df_trades.loc[index, symbol] = df_trades.loc[index, symbol] \
+                                            + row["Shares"]
+            df_trades.loc[index, "cash"] = df_trades.loc[index, "cash"] \
+                                            - traded_share_value \
+                                            - transaction_cost
+    # Create a dataframe that represents on each particular day how much of
+    # each asset in the portfolio
+    df_holdings = pd.DataFrame(np.zeros((df_prices.shape)), df_prices.index,
+        df_prices.columns)
+    for row_count in range(len(df_holdings)):
+        # In the first row, the number shares are the same as in df_trades,
+        # but start_val must be added to cash
+        if row_count == 0:
+            df_holdings.iloc[0, :-1] = df_trades.iloc[0, :-1].copy()
+            df_holdings.iloc[0, -1] = df_trades.iloc[0, -1] + float(start_val)
+        # The rest of the rows show cumulative values
+        else:
+            df_holdings.iloc[row_count] = df_holdings.iloc[row_count-1] \
+                                            + df_trades.iloc[row_count]
+        row_count += 1
+
+    # Create a dataframe that represents the monetary value of each asset
+    df_value = df_prices * df_holdings
+
+    # Create portvals dataframe
+    portvals = pd.DataFrame(df_value.sum(axis=1), df_value.index, ["port_val"])
+    return portvals
+def compute_portvals_single_symbol1(df_orders, symbol, start_val=100000,
     commission=9.95, impact=0.005):
     """Compute portfolio values for a single symbol.
 
@@ -120,8 +209,8 @@ def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
     portvals = pd.DataFrame(df_value.sum(axis=1), df_value.index, ["port_val"])
     return portvals
 
-def market_simulator(df_orders, df_orders_benchmark, symbol, start_val=1000000, commission=9.95,
-    impact=0.005, daily_rf=0.0, samples_per_year=252.0, vertical_lines=False, title="Title", xtitle="X title", ytitle="Y title"):
+def market_simulator(df_orders, df_orders_benchmark, symbol, start_val=100000, commission=9.95,
+    impact=0.005, daily_rf=0.0, samples_per_year=252.0):
     """
     This function takes in and executes trades from orders dataframes
     Parameters:
@@ -132,10 +221,7 @@ def market_simulator(df_orders, df_orders_benchmark, symbol, start_val=1000000, 
     impact: The amount the price moves against the trader compared to the historical data at each transaction
     daily_rf: Daily risk-free rate, assuming it does not change
     samples_per_year: Sampling frequency per year
-    vertical_lines: Showing vertical lines for buy and sell orders
-    title: Chart title
-    xtitle: Chart X axe title
-    ytitle: Chart Y axe title
+
 
     Returns:
     Print out final portfolio value of the portfolio, as well as Sharpe ratio,
@@ -151,10 +237,11 @@ def market_simulator(df_orders, df_orders_benchmark, symbol, start_val=1000000, 
     cum_ret, avg_daily_ret, std_daily_ret, sharpe_ratio = get_portfolio_stats(portvals,
      daily_rf=daily_rf, samples_per_year=samples_per_year)
 
+
     # Process benchmark orders
     portvals_bm = compute_portvals_single_symbol(df_orders=df_orders_benchmark,
         symbol=symbol, start_val=start_val, commission=commission, impact=impact)
-
+    print('portvals_bm', portvals_bm)
     # Get benchmark stats
     cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm = get_portfolio_stats(portvals_bm,
      daily_rf=daily_rf, samples_per_year=samples_per_year)
