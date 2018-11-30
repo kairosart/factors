@@ -209,7 +209,7 @@ def create_df_trades(orders, symbol, num_shares, cash_pos=0, long_pos=1, short_p
     return df_trades
 
 # Save and load models with pickle
-def save(self, path):
+def pickle_save(self, path):
         """Serialize an agent."""
         data = {'Q': self.Q,
                 'epoch': self.epoch}
@@ -217,7 +217,7 @@ def save(self, path):
             pickle.dump(data, handle, protocol=pickle.HIGHEST_PROTOCOL)
         return self
 
-def load(self, path):
+def pickle_load(self, path):
     """Load an agent."""
     with open(path, 'rb') as handle:
         data = pickle.load(handle)

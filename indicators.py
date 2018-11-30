@@ -810,7 +810,7 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
         buy_line = []
         sell_line = []
         for date in df_orders.index:
-            if df_orders.loc[date, "Order"] == "BUY":
+            if df_orders.loc[date, "Shares"] >= 0:
                 buy_line.append(date)
             else:
                 sell_line.append(date)
