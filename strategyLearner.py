@@ -4,6 +4,7 @@ import numpy as np
 import datetime as dt
 import pandas as pd
 import matplotlib.pyplot as plt
+import pickle
 
 from util import create_df_benchmark, create_df_trades, fetchOnlineData
 import QLearner as ql
@@ -233,15 +234,15 @@ class strategyLearner(object):
                 # Stop if the cum_return doesn't improve for 10 epochs
                 if self.has_converged(cum_returns):
                     break
-        if self.verbose:
-            return epochs, cum_returns
+
+        return epochs, cum_returns
 
 
 
 
 
     def test_policy(self, symbol="IBM", start_date=dt.datetime(2010,1,1),
-        end_date=dt.datetime(2011,12,31), start_val=10000):
+        end_date=dt.datetime(2011,12,31), start_val=100000):
         """Use the existing policy and test it against new data.
 
         Parameters:

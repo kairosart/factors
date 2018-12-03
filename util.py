@@ -207,20 +207,3 @@ def create_df_trades(orders, symbol, num_shares, cash_pos=0, long_pos=1, short_p
     df_trades = pd.DataFrame(trades, columns=["Date", "Shares"])
     df_trades.set_index("Date", inplace=True)
     return df_trades
-
-# Save and load models with pickle
-def pickle_save(self, path):
-        """Serialize an agent."""
-        data = {'Q': self.Q,
-                'epoch': self.epoch}
-        with open(path, 'wb') as handle:
-            pickle.dump(data, handle, protocol=pickle.HIGHEST_PROTOCOL)
-        return self
-
-def pickle_load(self, path):
-    """Load an agent."""
-    with open(path, 'rb') as handle:
-        data = pickle.load(handle)
-        self.Q = data['Q']
-        self.epoch = data['epoch']
-    return self

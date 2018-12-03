@@ -17,7 +17,7 @@ from pandas_datareader import data as pdr
 import fix_yahoo_finance as yf
 yf.pdr_override()
 
-from util import create_df_benchmark, fetchOnlineData, get_learner_data_file, pickle_load, pickle_save
+from util import create_df_benchmark, fetchOnlineData, get_learner_data_file
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
 from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
@@ -168,15 +168,6 @@ def benchmark():
 
     epochs, cum_returns = stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
 
-    # Save de model
-    model = {'Q':cum_returns,
-            'epoch': epochs}
-
-    filename = 'finalized_model.sav'
-    pickle.dump(model, open(filename, 'wb'))
-
-
-
     plot_cum = plot_cum_return(epochs, cum_returns)
     df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
 
@@ -187,14 +178,8 @@ def benchmark():
 
 
     # **** Testing ****
-    start_val = session.get('start_val', None)
-    symbol = session.get('symbol', None)
     start_d_test = end_d
     end_d_test =  dt.date.today() - dt.timedelta(1)
-    num_shares = session.get('num_shares', None)
-    commission = session.get('commission', None)
-    impact = session.get('impact', None)
-
     # Get benchmark data
     benchmark_prices = fetchOnlineData(start_d, end_d, symbol)
 
@@ -219,7 +204,7 @@ def benchmark():
 
     return render_template(
         # name of template
-        "benchmark.html",
+        "training.html",
 
         # Training data
         start_date = start_d,
@@ -240,8 +225,8 @@ def benchmark():
         final_value_b = round(final_value_bm, 3),
 
         # Testing datasets
-        start_testing_date = start_d_test,
-        end_testing_date = end_d_test,
+        start_date_testing = start_d_test,
+        end_date_testing = end_d_test,
         div_placeholder_plot_norm_data_testing = Markup(plot_norm_data_test),
         orders_count_p_testing = test_orders_count,
         sharpe_ratio_p_testing = round(test_sharpe_ratio, 3),
@@ -255,8 +240,7 @@ def benchmark():
         avg_daily_ret_b_testing = round(test_avg_daily_ret_bm, 3),
         final_value_b_testing = round(test_final_value_bm, 3)
 
-    )
-
+        )
 
 
 # Initial form to get values

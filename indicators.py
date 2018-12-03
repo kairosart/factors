@@ -554,8 +554,7 @@ def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, b
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window=14,
-                       title="RSI Indicator", fig_size=(12, 6)):
+def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window=14, title="RSI Indicator", fig_size=(12, 6)):
     """Plot Relative Strength Index (RSI) of given values, using specified window size."""
     '''
     Parameters:
@@ -849,15 +848,7 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
                           })
 
     layout = dict(
-        autosize=True,
         shapes=shapes,
-        margin=go.Margin(
-            l=50,
-            r=50,
-            b=100,
-            t=100,
-            pad=4
-        ),
         title = title,
         xaxis = dict(
                 title=xtitle,
@@ -881,10 +872,6 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
                 range = [min_range - (min_range * 10 / 100) ,max_range + (max_range * 10 / 100)]),
 
         )
-
-
-
-
 
     fig = dict(data=data, layout=layout)
     chart = plot(fig, show_link=False, output_type='div')
