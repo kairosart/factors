@@ -217,12 +217,12 @@ def benchmark():
         cum_ret_p = round(cum_ret, 3),
         std_daily_ret_p = round(std_daily_ret, 3),
         avg_daily_ret_p = round(avg_daily_ret, 3),
-        final_value_p = round(final_value, 3),
+        final_value_p = round(final_value, 0),
         sharpe_ratio_b = round(sharpe_ratio_bm, 3),
         cum_ret_b = round(cum_ret_bm, 3),
         std_daily_ret_b = round(std_daily_ret_bm, 3),
         avg_daily_ret_b = round(avg_daily_ret_bm, 3),
-        final_value_b = round(final_value_bm, 3),
+        final_value_b = round(final_value_bm, 0),
 
         # Testing datasets
         start_date_testing = start_d_test,
@@ -233,12 +233,12 @@ def benchmark():
         cum_ret_p_testing = round(test_cum_ret, 3),
         std_daily_ret_p_testing = round(test_std_daily_ret, 3),
         avg_daily_ret_p_testing = round(test_avg_daily_ret, 3),
-        final_value_p_testing = round(test_final_value, 3),
+        final_value_p_testing = round(test_final_value, 0),
         sharpe_ratio_b_testing = round(test_sharpe_ratio_bm, 3),
         cum_ret_b_testing = round(test_cum_ret_bm, 3),
         std_daily_ret_b_testing = round(test_std_daily_ret_bm, 3),
         avg_daily_ret_b_testing = round(test_avg_daily_ret_bm, 3),
-        final_value_b_testing = round(test_final_value_bm, 3)
+        final_value_b_testing = round(test_final_value_bm, 0)
 
         )
 

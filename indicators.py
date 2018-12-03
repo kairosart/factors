@@ -850,6 +850,17 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
     layout = dict(
         shapes=shapes,
         title = title,
+        showlegend=True,
+
+        margin=go.layout.Margin(
+            l=50,
+            r=10,
+            b=100,
+            t=100,
+            pad=4
+        ),
+        legend=dict(
+                orientation="h"),
         xaxis = dict(
                 title=xtitle,
                 rangeselector=dict(
