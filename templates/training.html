@@ -4,9 +4,9 @@
 	<h1>Strategy Learner Training</h1>
 	<h4>Training Performance</h4>
 	<h5>
-		<p class="text-info">
-			{{ symbol }} with data from {{ start_date_testing }} to {{ end_date_testing }}
-			</<p>
+
+			{{ symbol }} data from {{ start_date }} to {{ end_date }}
+
 	</h5>
 
 	{{ div_placeholder_plot_cum }}
@@ -14,6 +14,7 @@
 	<div>
 	  <div id="Training">
 			<br><br>
+			{{ div_placeholder_plot_norm_data }}
 			<div class="table-responsive">
 				<table class= "table table-sm">
 					<thead>
@@ -63,16 +64,15 @@
 
 		<br><br>
 
-		{{ div_placeholder_plot_norm_data }}
 	  </div>
-	</<div>
+	</div>
 	<br><br>
 
 	<h4>Testing Performance</h4>
 	<h5>
-		<p class="text-info">
-			{{ symbol }} with data from {{ start_date_testing }} to {{ end_date_testing }}
-			</<p>
+
+		{{ symbol }} data from {{ start_date_testing }} to {{ end_date_testing }}
+
 	</h5>
   {{ div_placeholder_plot_norm_data_testing }}
 

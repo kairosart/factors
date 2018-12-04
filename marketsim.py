@@ -146,7 +146,24 @@ def market_simulator(df_orders, df_orders_benchmark, symbol, start_val=100000, c
     # Get orders number
     orders_count = len(portvals.index)
 
-
+     # Compare portfolio against Benchmark
+    print ("Sharpe Ratio of Portfolio: {}".format(sharpe_ratio))
+    print ("Sharpe Ratio of Benchmark : {}".format(sharpe_ratio_bm))
+    print ()
+    print ("Cumulative Return of Portfolio: {}".format(cum_ret))
+    print ("Cumulative Return of Benchmark : {}".format(cum_ret_bm))
+    print ()
+    print ("Standard Deviation of Portfolio: {}".format(std_daily_ret))
+    print ("Standard Deviation of Benchmark : {}".format(std_daily_ret_bm))
+    print ()
+    print ("Average Daily Return of Portfolio: {}".format(avg_daily_ret))
+    print ("Average Daily Return of Benchmark : {}".format(avg_daily_ret_bm))
+    print ()
+    print ("Final Portfolio Value: {}".format(portvals.iloc[-1, -1]))
+    print ("Final Benchmark Value: {}".format(portvals_bm.iloc[-1, -1]))
+    print ()
+    print ("Portfolio Orders count: {}".format(len(portvals.index)))
+    
     # Rename columns and normalize data to the first date of the date range
     portvals.rename(columns={"port_val": "Portfolio"}, inplace=True)
     portvals_bm.rename(columns={"port_val": "Benchmark"}, inplace=True)

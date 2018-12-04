@@ -230,7 +230,7 @@ class strategyLearner(object):
             if self.verbose:
                 print ("Epoch:", epoch, "Cum. Return: ", cum_return)
             # Check for convergence after running for at least 20 epochs
-            if epoch > 20:
+            if epoch > 10:
                 # Stop if the cum_return doesn't improve for 10 epochs
                 if self.has_converged(cum_returns):
                     break
@@ -291,44 +291,47 @@ class strategyLearner(object):
 
 if __name__=="__main__":
     start_val = 100000
-    symbol = "JPM"
+    symbol = "AMZN"
     commission = 0.00
     impact = 0.0
     num_shares = 1000
 
-    # In-sample or training period
-    start_date = dt.datetime(2008, 1, 1)
-    end_date = dt.datetime(2009, 12, 31)
+
+    start_d = dt.datetime(2008, 1, 1)
+    end_d = dt.datetime(2015, 4, 14)
 
     # Get a dataframe of benchmark data. Benchmark is a portfolio starting with
-    # $100,000, investing in 1000 shares of symbol and holding that position
-    df_benchmark_trades = create_df_benchmark(symbol, start_date, end_date,
-                                              num_shares)
+    # Get benchmark data
+    benchmark_prices = fetchOnlineData(start_d, end_d, symbol)
 
-    # Train and test a StrategyLearner
+    # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
+    df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d, num_shares)
+
+    # Train a StrategyLearner
+    # Set verbose to True will print out and plot the cumulative return for each training epoch
     stl = strategyLearner(num_shares=num_shares, impact=impact,
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
-    stl.add_evidence(symbol=symbol, start_val=start_val,
-                     start_date=start_date, end_date=end_date)
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_date,
-                                end_date=end_date)
+
+    epochs, cum_returns = stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
+
+    df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
 
     # Retrieve performance stats via a market simulator
     print ("Performances during training period for {}".format(symbol))
-    print ("Date Range: {} to {}".format(start_date, end_date))
+    print ("Date Range: {} to {}".format(start_d, end_d))
     market_simulator(df_trades, df_benchmark_trades, symbol=symbol,
                      start_val=start_val, commission=commission, impact=impact)
 
     # Out-of-sample or testing period: Perform similiar steps as above,
     # except that we don't train the data (i.e. run add_evidence again)
-    start_date = dt.datetime(2010, 1, 1)
-    end_date = dt.datetime(2011, 12, 31)
-    df_benchmark_trades = create_df_benchmark(symbol, start_date, end_date,
+    start_date = dt.datetime(2015, 4, 14)
+    end_date = dt.datetime(2018, 12, 3)
+    df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d,
                                               num_shares)
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_date,
-                                end_date=end_date)
+    df_trades = stl.test_policy(symbol=symbol, start_date=start_d,
+                                end_date=end_d)
     print ("\nPerformances during testing period for {}".format(symbol))
-    print ("Date Range: {} to {}".format(start_date, end_date))
+    print ("Date Range: {} to {}".format(start_d, end_d))
     market_simulator(df_trades, df_benchmark_trades, symbol=symbol,
                      start_val=start_val, commission=commission, impact=impact)

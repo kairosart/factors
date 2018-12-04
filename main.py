@@ -135,9 +135,9 @@ def showvalues():
 
     )
 
-# Benchmark
+# Training
 @app.route('/benchmark', methods=['POST', 'GET'])
-def benchmark():
+def training():
     # **** Training ***
     # Getting session variables
     start_val = session.get('start_val', None)
@@ -149,8 +149,8 @@ def benchmark():
     commission = session.get('commission', None)
     impact = session.get('impact', None)
 
-    # Specify the start and end dates for this period. For traininig we'll get 66% of dates.
-    n_days_training = ((dt.date.today()-start_d).days) / 3 * 2
+    # Specify the start and end dates for this period. For traininig we'll get 80% of dates.
+    n_days_training = ((dt.date.today()-start_d).days) / 3
     end_d = dt.date.today() - dt.timedelta(n_days_training)
 
 
@@ -159,7 +159,8 @@ def benchmark():
 
     # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
     df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d, num_shares)
-
+    print(df_benchmark_trades)
+    
     # Train a StrategyLearner
     # Set verbose to True will print out and plot the cumulative return for each training epoch
     stl = strategyLearner(num_shares=num_shares, impact=impact,
@@ -168,28 +169,38 @@ def benchmark():
 
     epochs, cum_returns = stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
 
+
     plot_cum = plot_cum_return(epochs, cum_returns)
     df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
-
+    print(df_trades)
     # Retrieve performance stats via a market simulator
     orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm, portvals, portvals_bm, df_orders  = market_simulator(df_trades, df_benchmark_trades, symbol=symbol, start_val=start_val, commission=commission, impact=impact)
 
-    plot_norm_data = plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=False, title="Training Portfolio Value", xtitle="Dates", ytitle="Value ($)")
+    plot_norm_data = plot_norm_data_vertical_lines(
+                            df_orders,
+                            portvals,
+                            portvals_bm,
+                            vert_lines=False,
+                            title="Training Portfolio Value",
+                            xtitle="Dates",
+                            ytitle="Value ($)")
 
 
     # **** Testing ****
     start_d_test = end_d
     end_d_test =  dt.date.today() - dt.timedelta(1)
+
+
     # Get benchmark data
-    benchmark_prices = fetchOnlineData(start_d, end_d, symbol)
+    benchmark_prices = fetchOnlineData(start_d_test, end_d_test, symbol)
 
     # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
-    df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d, num_shares)
+    df_benchmark_trades_testing = create_df_benchmark(symbol, start_d_test, end_d_test, num_shares)
 
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
+    df_trades_testing = stl.test_policy(symbol=symbol, start_date=start_d_test, end_date=end_d_test)
 
     # Retrieve performance stats via a market simulator
-    test_orders_count, test_sharpe_ratio, test_cum_ret, test_std_daily_ret, test_avg_daily_ret, test_final_value, test_cum_ret_bm, test_avg_daily_ret_bm, test_std_daily_ret_bm, test_sharpe_ratio_bm, test_final_value_bm, test_portvals, test_portvals_bm, test_df_orders  = market_simulator(df_trades, df_benchmark_trades, symbol=symbol, start_val=start_val, commission=commission, impact=impact)
+    test_orders_count, test_sharpe_ratio, test_cum_ret, test_std_daily_ret, test_avg_daily_ret, test_final_value, test_cum_ret_bm, test_avg_daily_ret_bm, test_std_daily_ret_bm, test_sharpe_ratio_bm, test_final_value_bm, test_portvals, test_portvals_bm, test_df_orders  = market_simulator(df_trades_testing, df_benchmark_trades_testing, symbol=symbol, start_val=start_val, commission=commission, impact=impact)
 
     plot_norm_data_test = plot_norm_data_vertical_lines(
                             test_df_orders,
@@ -208,7 +219,7 @@ def benchmark():
 
         # Training data
         start_date = start_d,
-        end_training_d = end_d,
+        end_date = end_d,
         symbol = symbol,
         div_placeholder_plot_cum = Markup(plot_cum),
         div_placeholder_plot_norm_data = Markup(plot_norm_data),
@@ -217,12 +228,12 @@ def benchmark():
         cum_ret_p = round(cum_ret, 3),
         std_daily_ret_p = round(std_daily_ret, 3),
         avg_daily_ret_p = round(avg_daily_ret, 3),
-        final_value_p = round(final_value, 0),
+        final_value_p = round(final_value, 3),
         sharpe_ratio_b = round(sharpe_ratio_bm, 3),
         cum_ret_b = round(cum_ret_bm, 3),
         std_daily_ret_b = round(std_daily_ret_bm, 3),
         avg_daily_ret_b = round(avg_daily_ret_bm, 3),
-        final_value_b = round(final_value_bm, 0),
+        final_value_b = round(final_value_bm, 3),
 
         # Testing datasets
         start_date_testing = start_d_test,
@@ -233,14 +244,15 @@ def benchmark():
         cum_ret_p_testing = round(test_cum_ret, 3),
         std_daily_ret_p_testing = round(test_std_daily_ret, 3),
         avg_daily_ret_p_testing = round(test_avg_daily_ret, 3),
-        final_value_p_testing = round(test_final_value, 0),
+        final_value_p_testing = round(test_final_value, 3),
         sharpe_ratio_b_testing = round(test_sharpe_ratio_bm, 3),
         cum_ret_b_testing = round(test_cum_ret_bm, 3),
         std_daily_ret_b_testing = round(test_std_daily_ret_bm, 3),
         avg_daily_ret_b_testing = round(test_avg_daily_ret_bm, 3),
-        final_value_b_testing = round(test_final_value_bm, 0)
+        final_value_b_testing = round(test_final_value_bm, 3)
 
-        )
+    )
+
 
 
 # Initial form to get values
