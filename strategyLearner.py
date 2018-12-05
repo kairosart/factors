@@ -62,22 +62,15 @@ class strategyLearner(object):
         momentum = get_momentum(prices, window)
         # Compute SMA indicator
         sma_indicator = get_sma_indicator(prices, rolling_mean)
-        # Get RSI indicator
-        rsi_indicator = get_RSI(prices, window)
         # Compute Bollinger value
         bollinger_val = compute_bollinger_value(prices, rolling_mean, rolling_std)
         # Create a dataframe with three features
         df_features = pd.concat([momentum, sma_indicator], axis=1)
-
-        # Convert RSI array to dataframe
-        rsi_df = pd.DataFrame(prices)
-        rsi_df['rsi'] = pd.Series(rsi_indicator, index=rsi_df.index)
-        rsi_df.drop('Adj Close', axis=1, inplace=True)
-
-        df_features = pd.concat([df_features, rsi_df], axis=1)
+        df_features = pd.concat([df_features, bollinger_val], axis=1)
         df_features.columns = ["ind{}".format(i)
-                                for i in range(len(df_features.columns))]
+                               for i in range(len(df_features.columns))]
         df_features.dropna(inplace=True)
+
         return df_features
 
     def get_thresholds(self, df_features, num_steps):
@@ -230,8 +223,8 @@ class strategyLearner(object):
             if self.verbose:
                 print ("Epoch:", epoch, "Cum. Return: ", cum_return)
             # Check for convergence after running for at least 20 epochs
-            if epoch > 10:
-                # Stop if the cum_return doesn't improve for 10 epochs
+            if epoch > 20:
+                # Stop if the cum_return doesn't improve for 20 epochs
                 if self.has_converged(cum_returns):
                     break
 
@@ -291,15 +284,18 @@ class strategyLearner(object):
 
 if __name__=="__main__":
     start_val = 100000
-    symbol = "AMZN"
+    symbol = "JPM"
     commission = 0.00
     impact = 0.0
     num_shares = 1000
 
-
+    # In-sample or training period
     start_d = dt.datetime(2008, 1, 1)
-    end_d = dt.datetime(2015, 4, 14)
+    end_d = dt.datetime(2009, 12, 31)
 
+    # Get date from Yahoo
+    fetchOnlineData(start_d, end_d, "JPM")
+    TODO
     # Get a dataframe of benchmark data. Benchmark is a portfolio starting with
     # Get benchmark data
     benchmark_prices = fetchOnlineData(start_d, end_d, symbol)
@@ -325,8 +321,8 @@ if __name__=="__main__":
 
     # Out-of-sample or testing period: Perform similiar steps as above,
     # except that we don't train the data (i.e. run add_evidence again)
-    start_date = dt.datetime(2015, 4, 14)
-    end_date = dt.datetime(2018, 12, 3)
+    start_d = dt.datetime(2010, 1, 1)
+    end_d = dt.datetime(2011, 12, 31)
     df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d,
                                               num_shares)
     df_trades = stl.test_policy(symbol=symbol, start_date=start_d,

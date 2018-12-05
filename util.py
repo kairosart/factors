@@ -4,7 +4,7 @@ import datetime as dt
 import os
 import pandas as pd
 import numpy as np
-import pickle
+import csv
 
 # To fetch data
 from pandas_datareader import data as pdr
@@ -18,16 +18,25 @@ def symbol_to_path(symbol, base_dir=None):
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
 
 
+def df_to_cvs(df, symbol):
+    outname = symbol + '.csv'
 
+    outdir = './data'
+    if not os.path.exists(outdir):
+        os.mkdir(outdir)
 
-def fetchOnlineData(dt_start, dt_end, ls_symbols):
+    fullname = os.path.join(outdir, outname)
+
+    df.to_csv(fullname)
+
+def fetchOnlineData(dt_start, dt_end, symbol):
     # Add a day to dt_end for Yahoo purpose
     dt_end = pd.to_datetime(dt_end) + pd.DateOffset(days=1)
 
     # Get data of trading days between the start and the end.
     df = pdr.get_data_yahoo(
             # tickers list (single tickers accepts a string as well)
-            tickers = ls_symbols,
+            tickers = symbol,
             # start date (YYYY-MM-DD / datetime.datetime object)
             # (optional, defaults is 1950-01-01)
             start = dt_start,
@@ -44,18 +53,10 @@ def fetchOnlineData(dt_start, dt_end, ls_symbols):
             # (optional, default is False)
             auto_adjust = False
     )
-    del df['Open']
-    del df['High']
-    del df['Low']
-    del df['Close']
-    del df['Volume']
-    df['Symbol'] = ls_symbols
-    # Convert string to number
-    df['Adj Close'] = pd.to_numeric(df['Adj Close'], errors='coerce')
-    #adj_close_price = pd.Series(df['Adj Close'])
 
-    # returning the Adj Closed prices for all the days
-    return df
+    # Save to csv
+    df_to_cvs(df, symbol)
+
 
 def get_orders_data_file(basefilename):
     return open(os.path.join(os.environ.get("ORDERS_DATA_DIR",'orders/'),basefilename))
@@ -207,3 +208,5 @@ def create_df_trades(orders, symbol, num_shares, cash_pos=0, long_pos=1, short_p
     df_trades = pd.DataFrame(trades, columns=["Date", "Shares"])
     df_trades.set_index("Date", inplace=True)
     return df_trades
+
+

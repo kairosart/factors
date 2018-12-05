@@ -160,19 +160,22 @@ def training():
     # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
     df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d, num_shares)
     print(df_benchmark_trades)
-    
+
     # Train a StrategyLearner
-    # Set verbose to True will print out and plot the cumulative return for each training epoch
+    # Constructor
     stl = strategyLearner(num_shares=num_shares, impact=impact,
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
 
+    # Training
     epochs, cum_returns = stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
-
-
     plot_cum = plot_cum_return(epochs, cum_returns)
+
+    # Testing phase
     df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
     print(df_trades)
+
+
     # Retrieve performance stats via a market simulator
     orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm, portvals, portvals_bm, df_orders  = market_simulator(df_trades, df_benchmark_trades, symbol=symbol, start_val=start_val, commission=commission, impact=impact)
 
