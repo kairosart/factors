@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pickle
 
-from util import create_df_benchmark, create_df_trades, fetchOnlineData
+from util import create_df_benchmark, create_df_trades, fetchOnlineData, get_data
 import QLearner as ql
 from indicators import get_momentum, get_sma_indicator, compute_bollinger_value, plot_cum_return, get_RSI
 from marketsim import compute_portvals_single_symbol, market_simulator
@@ -53,6 +53,11 @@ class strategyLearner(object):
         Returns:
         df_features: A pandas dataframe of the technical indicators
         """
+        # Fill NAN values if any
+        prices.fillna(method="ffill", inplace=True)
+        prices.fillna(method="bfill", inplace=True)
+        prices.fillna(1.0, inplace=True)
+
         window = 10
         # Compute rolling mean
         rolling_mean = prices.rolling(window=window).mean()
@@ -62,11 +67,17 @@ class strategyLearner(object):
         momentum = get_momentum(prices, window)
         # Compute SMA indicator
         sma_indicator = get_sma_indicator(prices, rolling_mean)
+        # Get RSI indicator
+        rsi_indicator = get_RSI(prices, window)
         # Compute Bollinger value
         bollinger_val = compute_bollinger_value(prices, rolling_mean, rolling_std)
         # Create a dataframe with three features
         df_features = pd.concat([momentum, sma_indicator], axis=1)
-        df_features = pd.concat([df_features, bollinger_val], axis=1)
+        # Convert RSI array to dataframe
+        rsi_df = pd.DataFrame(prices)
+        rsi_df.drop(rsi_df.columns[[0]], axis=1, inplace=True)
+        rsi_df['rsi'] = pd.Series(rsi_indicator, index=rsi_df.index)
+        df_features = pd.concat([df_features, rsi_df], axis=1)
         df_features.columns = ["ind{}".format(i)
                                for i in range(len(df_features.columns))]
         df_features.dropna(inplace=True)
@@ -165,17 +176,26 @@ class strategyLearner(object):
         # If none of recent returns is greater than max_return, it has converged
         return True
 
-    def add_evidence(self, df_prices, symbol="IBM", start_val=100000):
+    def add_evidence(self, symbol="IBM", start_date=dt.datetime(2008, 1, 1),
+                     end_date=dt.datetime(2009, 12, 31), start_val=10000):
         """Create a QLearner, and train it for trading.
 
         Parameters:
-        df_prices: Data price dataframe
         symbol: The stock symbol to act on
+        start_date: A datetime object that represents the start date
+        end_date: A datetime object that represents the end date
         start_val: Start value of the portfolio which contains only the symbol
         """
+        dates = pd.date_range(start_date, end_date)
+        # Get adjusted close prices for symbol
+        df_prices = get_data([symbol], dates)
+        # Fill NAN values if any
+        df_prices.fillna(method="ffill", inplace=True)
+        df_prices.fillna(method="bfill", inplace=True)
+        df_prices.fillna(1.0, inplace=True)
 
         # Get features and thresholds
-        df_features = self.get_features(df_prices['Adj Close'])
+        df_features = self.get_features(df_prices[symbol])
         thresholds = self.get_thresholds(df_features, self.num_steps)
         cum_returns = []
         epochs = []
@@ -194,8 +214,8 @@ class strategyLearner(object):
                     action = self.q_learner.query_set_state(state)
                 # On other days, calculate the reward and update the Q-table
                 else:
-                    prev_price = df_prices['Adj Close'].iloc[day-1]
-                    curr_price = df_prices['Adj Close'].loc[date]
+                    prev_price = df_prices[symbol].iloc[day - 1]
+                    curr_price = df_prices[symbol].loc[date]
                     reward = self.get_daily_reward(prev_price,
                                                    curr_price, position)
                     action = self.q_learner.query(state, reward)
@@ -210,8 +230,6 @@ class strategyLearner(object):
                 position += new_pos
 
             df_trades = create_df_trades(orders, symbol, self.num_shares)
-
-
             portvals = compute_portvals_single_symbol(df_orders=df_trades,
                                                       symbol=symbol,
                                                       start_val=start_val,
@@ -221,21 +239,17 @@ class strategyLearner(object):
             cum_returns.append(cum_return)
             epochs.append(epoch)
             if self.verbose:
-                print ("Epoch:", epoch, "Cum. Return: ", cum_return)
-            # Check for convergence after running for at least 20 epochs
-            if epoch > 20:
-                # Stop if the cum_return doesn't improve for 20 epochs
+                print(epoch, cum_return)
+            # Check for convergence after running for at least 10 epochs
+            if epoch > 10:
+                # Stop if the cum_return doesn't improve for 10 epochs
                 if self.has_converged(cum_returns):
                     break
+        if self.verbose:
+            plot_cum_return(epochs, cum_returns)
 
-        return epochs, cum_returns
-
-
-
-
-
-    def test_policy(self, symbol="IBM", start_date=dt.datetime(2010,1,1),
-        end_date=dt.datetime(2011,12,31), start_val=100000):
+    def test_policy(self, symbol="IBM", start_date=dt.datetime(2010, 1, 1),
+                    end_date=dt.datetime(2011, 12, 31), start_val=10000):
         """Use the existing policy and test it against new data.
 
         Parameters:
@@ -252,10 +266,9 @@ class strategyLearner(object):
 
         dates = pd.date_range(start_date, end_date)
         # Get adjusted close prices for symbol
-        #df_prices = get_data([symbol], dates)
-        df_prices = fetchOnlineData(start_date, end_date, symbol)
+        df_prices = get_data([symbol], dates)
         # Get features and thresholds
-        df_features = self.get_features(df_prices['Adj Close'])
+        df_features = self.get_features(df_prices[symbol])
         thresholds = self.get_thresholds(df_features, self.num_steps)
         # Initial position is holding nothing
         position = self.CASH
@@ -290,44 +303,43 @@ if __name__=="__main__":
     num_shares = 1000
 
     # In-sample or training period
-    start_d = dt.datetime(2008, 1, 1)
-    end_d = dt.datetime(2009, 12, 31)
+    start_date = dt.datetime(2008, 1, 1)
+    end_date = dt.datetime(2009, 12, 31)
 
     # Get date from Yahoo
-    fetchOnlineData(start_d, end_d, "JPM")
-    TODO
+    fetchOnlineData(start_date, end_date, "JPM")
+
+
     # Get a dataframe of benchmark data. Benchmark is a portfolio starting with
-    # Get benchmark data
-    benchmark_prices = fetchOnlineData(start_d, end_d, symbol)
+    # $100,000, investing in 1000 shares of symbol and holding that position
+    df_benchmark_trades = create_df_benchmark(symbol, start_date, end_date,
+                                              num_shares)
 
-    # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
-    df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d, num_shares)
-
-    # Train a StrategyLearner
-    # Set verbose to True will print out and plot the cumulative return for each training epoch
+    # Train and test a StrategyLearner
     stl = strategyLearner(num_shares=num_shares, impact=impact,
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
-
-    epochs, cum_returns = stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
-
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
+    stl.add_evidence(symbol=symbol, start_val=start_val,
+                     start_date=start_date, end_date=end_date)
+    df_trades = stl.test_policy(symbol=symbol, start_date=start_date,
+                                end_date=end_date)
+    #TODO csv file is empty at this point
 
     # Retrieve performance stats via a market simulator
-    print ("Performances during training period for {}".format(symbol))
-    print ("Date Range: {} to {}".format(start_d, end_d))
+    print("Performances during training period for {}".format(symbol))
+    print("Date Range: {} to {}".format(start_date, end_date))
     market_simulator(df_trades, df_benchmark_trades, symbol=symbol,
                      start_val=start_val, commission=commission, impact=impact)
 
     # Out-of-sample or testing period: Perform similiar steps as above,
     # except that we don't train the data (i.e. run add_evidence again)
-    start_d = dt.datetime(2010, 1, 1)
-    end_d = dt.datetime(2011, 12, 31)
-    df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d,
+    start_date = dt.datetime(2010, 1, 1)
+    end_date = dt.datetime(2011, 12, 31)
+    df_benchmark_trades = create_df_benchmark(symbol, start_date, end_date,
                                               num_shares)
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_d,
-                                end_date=end_d)
-    print ("\nPerformances during testing period for {}".format(symbol))
-    print ("Date Range: {} to {}".format(start_d, end_d))
+    df_trades = stl.test_policy(symbol=symbol, start_date=start_date,
+                                end_date=end_date)
+    print("\nPerformances during testing period for {}".format(symbol))
+    print("Date Range: {} to {}".format(start_date, end_date))
     market_simulator(df_trades, df_benchmark_trades, symbol=symbol,
                      start_val=start_val, commission=commission, impact=impact)

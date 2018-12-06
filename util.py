@@ -17,16 +17,28 @@ def symbol_to_path(symbol, base_dir=None):
         base_dir = os.environ.get("MARKET_DATA_DIR", '../data/')
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
 
+def get_data(symbols, dates, addSPY=False, colname = 'Adj Close'):
+    """Read stock data (adjusted close) for given symbols from CSV files."""
+    df = pd.DataFrame(index=dates)
+    if addSPY and 'SPY' not in symbols:  # add SPY for reference, if absent
+        symbols = ['SPY'] + symbols
+
+    for symbol in symbols:
+        df_temp = pd.read_csv(symbol_to_path(symbol), index_col='Date',
+               parse_dates=True, usecols=['Date', colname], na_values=['nan'])
+        df_temp = df_temp.rename(columns={colname: symbol})
+        df = df.join(df_temp)
+        if symbol == 'SPY':  # drop dates SPY did not trade
+            df = df.dropna(subset=["SPY"])
+
+    return df
 
 def df_to_cvs(df, symbol):
     outname = symbol + '.csv'
-
     outdir = './data'
     if not os.path.exists(outdir):
         os.mkdir(outdir)
-
     fullname = os.path.join(outdir, outname)
-
     df.to_csv(fullname)
 
 def fetchOnlineData(dt_start, dt_end, symbol):
@@ -181,14 +193,12 @@ def create_df_benchmark(symbol, start_date, end_date, num_shares):
     num_shares of the symbol in use and holding them until end_date.
     """
     # Get adjusted close price data
-    benchmark_prices = fetchOnlineData(start_date, end_date, symbol)
-
-    #benchmark_prices = get_data([symbol], pd.date_range(start_date, end_date), addSPY=False).dropna()
-
+    benchmark_prices = get_data([symbol], pd.date_range(start_date, end_date),
+                                addSPY=False).dropna()
     # Create benchmark df: buy num_shares and hold them till the last date
     df_benchmark_trades = pd.DataFrame(
         data=[(benchmark_prices.index.min(), num_shares),
-        (benchmark_prices.index.max(), -int(num_shares))],
+        (benchmark_prices.index.max(), -num_shares)],
         columns=["Date", "Shares"])
     df_benchmark_trades.set_index("Date", inplace=True)
     return df_benchmark_trades
