@@ -23,15 +23,23 @@ def get_data(symbols, dates, addSPY=False, colname = 'Adj Close'):
     if addSPY and 'SPY' not in symbols:  # add SPY for reference, if absent
         symbols = ['SPY'] + symbols
 
+    # TODO when testing can't get data for df in the given dates
+
     for symbol in symbols:
         df_temp = pd.read_csv(symbol_to_path(symbol), index_col='Date',
                parse_dates=True, usecols=['Date', colname], na_values=['nan'])
         df_temp = df_temp.rename(columns={colname: symbol})
-        df = df.join(df_temp)
+        df = df.join(df_temp, how='outer')
+
         if symbol == 'SPY':  # drop dates SPY did not trade
             df = df.dropna(subset=["SPY"])
-
+    # Fill NAN values if any
+    df.fillna(method="ffill", inplace=True)
+    df.fillna(method="bfill", inplace=True)
+    df.fillna(1.0, inplace=True)
     return df
+
+
 
 def df_to_cvs(df, symbol):
     outname = symbol + '.csv'
@@ -41,9 +49,9 @@ def df_to_cvs(df, symbol):
     fullname = os.path.join(outdir, outname)
     df.to_csv(fullname)
 
-def fetchOnlineData(dt_start, dt_end, symbol):
+def fetchOnlineData(dt_start, symbol):
     # Add a day to dt_end for Yahoo purpose
-    dt_end = pd.to_datetime(dt_end) + pd.DateOffset(days=1)
+    dt_end = dt.date.today() - dt.timedelta(1)
 
     # Get data of trading days between the start and the end.
     df = pdr.get_data_yahoo(

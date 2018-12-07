@@ -240,8 +240,11 @@ class strategyLearner(object):
             epochs.append(epoch)
             if self.verbose:
                 print(epoch, cum_return)
+
+            #TODO change epoch to 10 or 20
+
             # Check for convergence after running for at least 10 epochs
-            if epoch > 10:
+            if epoch > 5:
                 # Stop if the cum_return doesn't improve for 10 epochs
                 if self.has_converged(cum_returns):
                     break
@@ -264,9 +267,10 @@ class strategyLearner(object):
         1000 shares
         """
 
-        dates = pd.date_range(start_date, end_date)
+
         # Get adjusted close prices for symbol
-        df_prices = get_data([symbol], dates)
+        df_prices = get_data([symbol], pd.date_range(start_date, end_date),
+                                addSPY=False).dropna()
         # Get features and thresholds
         df_features = self.get_features(df_prices[symbol])
         thresholds = self.get_thresholds(df_features, self.num_steps)
@@ -306,8 +310,8 @@ if __name__=="__main__":
     start_date = dt.datetime(2008, 1, 1)
     end_date = dt.datetime(2009, 12, 31)
 
-    # Get date from Yahoo
-    fetchOnlineData(start_date, end_date, "JPM")
+    # Get dates from initial date to yesterday from Yahoo
+    fetchOnlineData(start_date, "JPM")
 
 
     # Get a dataframe of benchmark data. Benchmark is a portfolio starting with
@@ -323,7 +327,7 @@ if __name__=="__main__":
                      start_date=start_date, end_date=end_date)
     df_trades = stl.test_policy(symbol=symbol, start_date=start_date,
                                 end_date=end_date)
-    #TODO csv file is empty at this point
+
 
     # Retrieve performance stats via a market simulator
     print("Performances during training period for {}".format(symbol))
