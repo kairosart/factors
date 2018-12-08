@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pickle
 
-from util import create_df_benchmark, create_df_trades, fetchOnlineData, get_data
+from util import create_df_benchmark, create_df_trades, fetchOnlineData, get_data, slice_df
 import QLearner as ql
 from indicators import get_momentum, get_sma_indicator, compute_bollinger_value, plot_cum_return, get_RSI
 from marketsim import compute_portvals_single_symbol, market_simulator
@@ -176,7 +176,7 @@ class strategyLearner(object):
         # If none of recent returns is greater than max_return, it has converged
         return True
 
-    def add_evidence(self, symbol="IBM", start_date=dt.datetime(2008, 1, 1),
+    def add_evidence(self, df, start_date=dt.datetime(2008, 1, 1),
                      end_date=dt.datetime(2009, 12, 31), start_val=10000):
         """Create a QLearner, and train it for trading.
 
@@ -188,7 +188,7 @@ class strategyLearner(object):
         """
         dates = pd.date_range(start_date, end_date)
         # Get adjusted close prices for symbol
-        df_prices = get_data([symbol], dates)
+        df_prices = slice_df(df, dates)
         # Fill NAN values if any
         df_prices.fillna(method="ffill", inplace=True)
         df_prices.fillna(method="bfill", inplace=True)
@@ -231,6 +231,7 @@ class strategyLearner(object):
 
             df_trades = create_df_trades(orders, symbol, self.num_shares)
             portvals = compute_portvals_single_symbol(df_orders=df_trades,
+                                                      df=df,
                                                       symbol=symbol,
                                                       start_val=start_val,
                                                       commission=self.commission,
@@ -251,7 +252,7 @@ class strategyLearner(object):
         if self.verbose:
             plot_cum_return(epochs, cum_returns)
 
-    def test_policy(self, symbol="IBM", start_date=dt.datetime(2010, 1, 1),
+    def test_policy(self, df, start_date=dt.datetime(2010, 1, 1),
                     end_date=dt.datetime(2011, 12, 31), start_val=10000):
         """Use the existing policy and test it against new data.
 
@@ -267,10 +268,9 @@ class strategyLearner(object):
         1000 shares
         """
 
-
+        dates = pd.date_range(start_date, end_date)
         # Get adjusted close prices for symbol
-        df_prices = get_data([symbol], pd.date_range(start_date, end_date),
-                                addSPY=False).dropna()
+        df_prices = df
         # Get features and thresholds
         df_features = self.get_features(df_prices[symbol])
         thresholds = self.get_thresholds(df_features, self.num_steps)
@@ -305,45 +305,59 @@ if __name__=="__main__":
     commission = 0.00
     impact = 0.0
     num_shares = 1000
-
-    # In-sample or training period
-    start_date = dt.datetime(2008, 1, 1)
-    end_date = dt.datetime(2009, 12, 31)
+    first_date = dt.datetime(2008, 1, 1)
 
     # Get dates from initial date to yesterday from Yahoo
-    fetchOnlineData(start_date, "JPM")
+    fetchOnlineData(first_date, "JPM")
+
+    # Create a dataframe from csv file
+    df = get_data([symbol])
+
+    # Training period
+    start_date_training = dt.datetime(2008, 1, 1)
+    end_date_training = dt.datetime(2009, 12, 31)
+    dates_training = pd.date_range(start_date_training, end_date_training)
+
+    df_training = slice_df(df, dates_training)
+
+    # Testing period
+    start_date_testing = dt.datetime(2010, 1, 1)
+    end_date_testing = dt.datetime(2011, 12, 31)
+    dates_testing = pd.date_range(start_date_testing, end_date_testing)
+
+    df_testing = slice_df(df, dates_testing)
 
 
     # Get a dataframe of benchmark data. Benchmark is a portfolio starting with
     # $100,000, investing in 1000 shares of symbol and holding that position
-    df_benchmark_trades = create_df_benchmark(symbol, start_date, end_date,
-                                              num_shares)
+    df_benchmark_trades = create_df_benchmark(df_training, num_shares)
 
     # Train and test a StrategyLearner
     stl = strategyLearner(num_shares=num_shares, impact=impact,
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
-    stl.add_evidence(symbol=symbol, start_val=start_val,
-                     start_date=start_date, end_date=end_date)
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_date,
-                                end_date=end_date)
+    stl.add_evidence(df, start_val=start_val,
+                     start_date=start_date_training, end_date=end_date_training)
+    df_trades = stl.test_policy(df_training, start_date=start_date_training,
+                                end_date=end_date_training)
 
 
     # Retrieve performance stats via a market simulator
     print("Performances during training period for {}".format(symbol))
-    print("Date Range: {} to {}".format(start_date, end_date))
-    market_simulator(df_trades, df_benchmark_trades, symbol=symbol,
+    print("Date Range: {} to {}".format(start_date_training, end_date_training))
+    market_simulator(df_training, df_trades, df_benchmark_trades, symbol=symbol,
                      start_val=start_val, commission=commission, impact=impact)
 
     # Out-of-sample or testing period: Perform similiar steps as above,
     # except that we don't train the data (i.e. run add_evidence again)
-    start_date = dt.datetime(2010, 1, 1)
-    end_date = dt.datetime(2011, 12, 31)
-    df_benchmark_trades = create_df_benchmark(symbol, start_date, end_date,
-                                              num_shares)
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_date,
-                                end_date=end_date)
+
+
+
+
+    df_benchmark_trades = create_df_benchmark(df_testing, num_shares)
+    df_trades = stl.test_policy(df_testing, start_date=start_date_testing,
+                                end_date=end_date_testing)
     print("\nPerformances during testing period for {}".format(symbol))
-    print("Date Range: {} to {}".format(start_date, end_date))
-    market_simulator(df_trades, df_benchmark_trades, symbol=symbol,
+    print("Date Range: {} to {}".format(start_date_testing, end_date_testing))
+    market_simulator(df_testing, df_trades, df_benchmark_trades, symbol=symbol,
                      start_val=start_val, commission=commission, impact=impact)

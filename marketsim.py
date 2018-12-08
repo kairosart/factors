@@ -5,8 +5,7 @@ import numpy as np
 import datetime as dt
 #import matplotlib.pyplot as plt
 from analysis import get_portfolio_value, get_portfolio_stats, plot_normalized_data
-from util import normalize_data, fetchOnlineData, get_data
-
+from util import normalize_data, fetchOnlineData, get_data, slice_df
 
 # Add plotly for interactive charts
 from plotly.offline import init_notebook_mode, plot
@@ -16,7 +15,7 @@ import plotly.graph_objs as go
 from plotly import tools
 
 
-def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
+def compute_portvals_single_symbol(df_orders, df, symbol, start_val=1000000,
                                    commission=9.95, impact=0.005):
     """Compute portfolio values for a single symbol.
 
@@ -40,9 +39,10 @@ def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
     # Get the start and end dates
     start_date = df_orders.index.min()
     end_date = df_orders.index.max()
+    dates = pd.date_range(start_date, end_date)
 
     # Create a dataframe with adjusted close prices for the symbol and for cash
-    df_prices = get_data([symbol], pd.date_range(start_date, end_date))
+    df_prices = slice_df(df, dates)
     #del df_prices["SPY"]
     df_prices["cash"] = 1.0
 
@@ -103,11 +103,12 @@ def compute_portvals_single_symbol(df_orders, symbol, start_val=1000000,
     portvals = pd.DataFrame(df_value.sum(axis=1), df_value.index, ["port_val"])
     return portvals
 
-def market_simulator(df_orders, df_orders_benchmark, symbol, start_val=100000, commission=9.95,
+def market_simulator(df, df_orders, df_orders_benchmark, symbol, start_val=100000, commission=9.95,
     impact=0.005, daily_rf=0.0, samples_per_year=252.0):
     """
     This function takes in and executes trades from orders dataframes
     Parameters:
+    df: A dataframe from csv file
     df_orders: A dataframe that contains portfolio orders
     df_orders_benchmark: A dataframe that contains benchmark orders
     start_val: The starting cash in dollars
@@ -124,7 +125,7 @@ def market_simulator(df_orders, df_orders_benchmark, symbol, start_val=100000, c
     """
 
     # Process portfolio orders
-    portvals = compute_portvals_single_symbol(df_orders=df_orders, symbol=symbol,
+    portvals = compute_portvals_single_symbol(df_orders=df_orders, df=df, symbol=symbol,
         start_val=start_val, commission=commission, impact=impact)
 
     # Get portfolio stats
@@ -133,7 +134,7 @@ def market_simulator(df_orders, df_orders_benchmark, symbol, start_val=100000, c
 
 
     # Process benchmark orders
-    portvals_bm = compute_portvals_single_symbol(df_orders=df_orders_benchmark,
+    portvals_bm = compute_portvals_single_symbol( df_orders=df_orders_benchmark, df=df,
         symbol=symbol, start_val=start_val, commission=commission, impact=impact)
 
     # Get benchmark stats

@@ -17,27 +17,30 @@ def symbol_to_path(symbol, base_dir=None):
         base_dir = os.environ.get("MARKET_DATA_DIR", '../data/')
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
 
-def get_data(symbols, dates, addSPY=False, colname = 'Adj Close'):
-    """Read stock data (adjusted close) for given symbols from CSV files."""
-    df = pd.DataFrame(index=dates)
-    if addSPY and 'SPY' not in symbols:  # add SPY for reference, if absent
-        symbols = ['SPY'] + symbols
-
     # TODO when testing can't get data for df in the given dates
 
-    for symbol in symbols:
-        df_temp = pd.read_csv(symbol_to_path(symbol), index_col='Date',
-               parse_dates=True, usecols=['Date', colname], na_values=['nan'])
-        df_temp = df_temp.rename(columns={colname: symbol})
-        df = df.join(df_temp, how='outer')
+def get_data(symbols, colname = 'Adj Close'):
+    """Read stock data (adjusted close) for given symbols from CSV files."""
 
-        if symbol == 'SPY':  # drop dates SPY did not trade
-            df = df.dropna(subset=["SPY"])
+    for symbol in symbols:
+        df = pd.read_csv(symbol_to_path(symbol), index_col='Date',
+                         parse_dates=True, usecols=['Date', colname], na_values=['nan'])
+        df = df.rename(columns={colname: symbol})
+
     # Fill NAN values if any
     df.fillna(method="ffill", inplace=True)
     df.fillna(method="bfill", inplace=True)
     df.fillna(1.0, inplace=True)
     return df
+
+
+
+def slice_df(df_to_slice, dates):
+    # Slice the Data
+    from_date = pd.to_datetime(dates.values[0])
+    to_date = pd.to_datetime(dates.values[-1])
+    df_slice = df_to_slice.loc[from_date:to_date, :]
+    return df_slice
 
 
 
@@ -196,13 +199,12 @@ def get_data_as_dict(dates, symbols, keys):
         data_dict[key] = df
     return data_dict
 
-def create_df_benchmark(symbol, start_date, end_date, num_shares):
+def create_df_benchmark(df, num_shares):
     """Create a dataframe of benchmark data. Benchmark is a portfolio consisting of
     num_shares of the symbol in use and holding them until end_date.
     """
     # Get adjusted close price data
-    benchmark_prices = get_data([symbol], pd.date_range(start_date, end_date),
-                                addSPY=False).dropna()
+    benchmark_prices = df
     # Create benchmark df: buy num_shares and hold them till the last date
     df_benchmark_trades = pd.DataFrame(
         data=[(benchmark_prices.index.min(), num_shares),
