@@ -311,7 +311,10 @@ if __name__=="__main__":
     fetchOnlineData(first_date, "JPM")
 
     # Create a dataframe from csv file
-    df = get_data([symbol])
+    df = get_data(symbol)
+
+    #split_percentage = 0.8
+    #split = int(split_percentage * len(df))
 
     # Training period
     start_date_training = dt.datetime(2008, 1, 1)
@@ -336,11 +339,12 @@ if __name__=="__main__":
     stl = strategyLearner(num_shares=num_shares, impact=impact,
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
+
     stl.add_evidence(df, start_val=start_val,
                      start_date=start_date_training, end_date=end_date_training)
     df_trades = stl.test_policy(df_training, start_date=start_date_training,
                                 end_date=end_date_training)
-
+    
 
     # Retrieve performance stats via a market simulator
     print("Performances during training period for {}".format(symbol))
@@ -350,9 +354,6 @@ if __name__=="__main__":
 
     # Out-of-sample or testing period: Perform similiar steps as above,
     # except that we don't train the data (i.e. run add_evidence again)
-
-
-
 
     df_benchmark_trades = create_df_benchmark(df_testing, num_shares)
     df_trades = stl.test_policy(df_testing, start_date=start_date_testing,

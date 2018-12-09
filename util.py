@@ -14,18 +14,16 @@ yf.pdr_override()
 def symbol_to_path(symbol, base_dir=None):
     """Return CSV file path given ticker symbol."""
     if base_dir is None:
-        base_dir = os.environ.get("MARKET_DATA_DIR", '../data/')
+        base_dir = os.environ.get("MARKET_DATA_DIR", './data/')
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
 
-    # TODO when testing can't get data for df in the given dates
 
-def get_data(symbols, colname = 'Adj Close'):
+def get_data(symbol, colname = 'Adj Close'):
     """Read stock data (adjusted close) for given symbols from CSV files."""
 
-    for symbol in symbols:
-        df = pd.read_csv(symbol_to_path(symbol), index_col='Date',
-                         parse_dates=True, usecols=['Date', colname], na_values=['nan'])
-        df = df.rename(columns={colname: symbol})
+    df = pd.read_csv(symbol_to_path(symbol), index_col='Date',
+                     parse_dates=True, usecols=['Date', colname], na_values=['nan'])
+    df = df.rename(columns={colname: symbol})
 
     # Fill NAN values if any
     df.fillna(method="ffill", inplace=True)
