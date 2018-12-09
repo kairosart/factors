@@ -305,7 +305,10 @@ if __name__=="__main__":
     commission = 0.00
     impact = 0.0
     num_shares = 1000
-    first_date = dt.datetime(2008, 1, 1)
+    #first_date = dt.date(2008, 1, 1)
+
+    # Get 1 year of data to train and test
+    first_date = dt.date.today() - dt.timedelta(365)
 
     # Get dates from initial date to yesterday from Yahoo
     fetchOnlineData(first_date, "JPM")
@@ -313,23 +316,23 @@ if __name__=="__main__":
     # Create a dataframe from csv file
     df = get_data(symbol)
 
-    #split_percentage = 0.8
-    #split = int(split_percentage * len(df))
+    # We'll get 80% data to train
+    split_percentage = 0.8
+    split = int(split_percentage * len(df))
 
-    # Training period
-    start_date_training = dt.datetime(2008, 1, 1)
-    end_date_training = dt.datetime(2009, 12, 31)
-    dates_training = pd.date_range(start_date_training, end_date_training)
+    # Train data set
+    df_training = df[:split]
 
-    df_training = slice_df(df, dates_training)
+    # Test data set
+    df_testing = df[split:]
 
-    # Testing period
-    start_date_testing = dt.datetime(2010, 1, 1)
-    end_date_testing = dt.datetime(2011, 12, 31)
-    dates_testing = pd.date_range(start_date_testing, end_date_testing)
+    # Training dates
+    start_date_training = df_training.index[0]
+    end_date_training = df_training.index[-1]
 
-    df_testing = slice_df(df, dates_testing)
-
+    # Testing dates
+    start_date_testing = df_testing.index[0]
+    end_date_testing = df_testing.index[-1]
 
     # Get a dataframe of benchmark data. Benchmark is a portfolio starting with
     # $100,000, investing in 1000 shares of symbol and holding that position
