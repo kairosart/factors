@@ -17,7 +17,7 @@ from pandas_datareader import data as pdr
 import fix_yahoo_finance as yf
 yf.pdr_override()
 
-from util import create_df_benchmark, fetchOnlineData, get_learner_data_file
+from util import create_df_benchmark, fetchOnlineData, get_learner_data_file, get_data
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
 from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
@@ -50,58 +50,57 @@ digits = datasets.load_digits()
 def showvalues():
     # Specify the start and end dates for this period.
     start_d = dt.date(2008, 1, 1)
-    #end_d = dt.datetime(2018, 10, 30)
     yesterday = dt.date.today() - dt.timedelta(1)
 
     # Get portfolio values from Yahoo
     symbol = request.form['symbol']
-    portf_value = fetchOnlineData(start_d, yesterday, symbol)
+    portf_value =  get_data(symbol)
 
 
     # ****Stock prices chart****
-    plot_prices = plot_stock_prices(portf_value.index, portf_value['Adj Close'], symbol)
+    plot_prices = plot_stock_prices(portf_value.index, portf_value[symbol], symbol)
 
     # ****Momentum chart****
     # Normalize the prices Dataframe
     normed = pd.DataFrame()
-    normed['Adj Close'] = portf_value['Adj Close'].values / portf_value['Adj Close'].iloc[0];
+    normed[symbol] = portf_value[symbol].values / portf_value[symbol].iloc[0];
 
     # Compute momentum
-    sym_mom = get_momentum(normed['Adj Close'], window=10)
+    sym_mom = get_momentum(normed[symbol], window=10)
 
     # Create momentum chart
-    plot_mom = plot_momentum(portf_value.index, normed['Adj Close'], sym_mom, "Momentum Indicator", (12, 8))
+    plot_mom = plot_momentum(portf_value.index, normed[symbol], sym_mom, "Momentum Indicator", (12, 8))
 
     # ****Bollinger Bands****
     # Compute rolling mean
-    rm_JPM = get_rolling_mean(portf_value['Adj Close'], window=10)
+    rm_JPM = get_rolling_mean(portf_value[symbol], window=10)
 
     # Compute rolling standard deviation
-    rstd_JPM = get_rolling_std(portf_value['Adj Close'], window=10)
+    rstd_JPM = get_rolling_std(portf_value[symbol], window=10)
 
     # Compute upper and lower bands
     upper_band, lower_band = get_bollinger_bands(rm_JPM, rstd_JPM)
 
     # Plot raw symbol values, rolling mean and Bollinger Bands
     dates = pd.date_range(start_d, yesterday)
-    plot_boll = plot_bollinger(dates, portf_value.index, portf_value['Adj Close'], symbol, upper_band, lower_band, rm_JPM,
+    plot_boll = plot_bollinger(dates, portf_value.index, portf_value[symbol], symbol, upper_band, lower_band, rm_JPM,
                    num_std=1, title="Bollinger Indicator", fig_size=(12, 6))
 
 
     # ****Simple moving average (SMA)****
     # Compute SMA
-    sma_JPM, q = get_sma(normed['Adj Close'], window=10)
+    sma_JPM, q = get_sma(normed[symbol], window=10)
 
     # Plot symbol values, SMA and SMA quality
-    plot_sma = plot_sma_indicator(dates, portf_value.index, normed['Adj Close'], symbol, sma_JPM, q, "Simple Moving Average (SMA)")
+    plot_sma = plot_sma_indicator(dates, portf_value.index, normed[symbol], symbol, sma_JPM, q, "Simple Moving Average (SMA)")
 
 
     # ****Relative Strength Index (RSI)****
     # Compute RSI
-    rsi_value = get_RSI(portf_value['Adj Close'])
+    rsi_value = get_RSI(portf_value[symbol])
 
     # Plot RSI
-    plot_rsi =  plot_rsi_indicator(dates, portf_value.index, portf_value['Adj Close'], symbol, rsi_value, window=14,
+    plot_rsi =  plot_rsi_indicator(dates, portf_value.index, portf_value[symbol], symbol, rsi_value, window=14,
                        title="RSI Indicator", fig_size=(12, 6))
 
     # Session variables
@@ -140,44 +139,66 @@ def showvalues():
 def training():
     # **** Training ***
     # Getting session variables
-    start_val = session.get('start_val', None)
+    start_val = int(session.get('start_val', None))
     symbol = session.get('symbol', None)
     start_d = session.get('start_d', None)
     start_d = dt.datetime.strptime(start_d, '%Y/%m/%d').date()
     #start_d = start_d.strftime("%Y/%m/%d")
-    num_shares = session.get('num_shares', None)
-    commission = session.get('commission', None)
-    impact = session.get('impact', None)
+    num_shares = int(session.get('num_shares', None))
+    commission = float(session.get('commission', None))
+    impact = float(session.get('impact', None))
 
-    # Specify the start and end dates for this period. For traininig we'll get 80% of dates.
-    n_days_training = ((dt.date.today()-start_d).days) / 3
-    end_d = dt.date.today() - dt.timedelta(n_days_training)
+    # Get 1 year of data to train and test
+    first_date = dt.date.today() - dt.timedelta(365)
 
+    # Get dates from initial date to yesterday from Yahoo
+    fetchOnlineData(first_date, "JPM")
 
-    # Get benchmark data
-    benchmark_prices = fetchOnlineData(start_d, end_d, symbol)
+    # Create a dataframe from csv file
+    df = get_data(symbol)
 
-    # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
-    df_benchmark_trades = create_df_benchmark(symbol, start_d, end_d, num_shares)
-    print(df_benchmark_trades)
+    # We'll get 80% data to train
+    split_percentage = 0.8
+    split = int(split_percentage * len(df))
 
+    # Train data set
+    df_training = df[:split]
+
+    # Test data set
+    df_testing = df[split:]
+
+    # Training dates
+    start_date_training = df_training.index[0]
+    end_date_training = df_training.index[-1]
+
+    # Testing dates
+    start_date_testing = df_testing.index[0]
+    end_date_testing = df_testing.index[-1]
+
+    # Get a dataframe of benchmark data. Benchmark is a portfolio starting with
+    # $100,000, investing in 1000 shares of symbol and holding that position
+    df_benchmark_trades = create_df_benchmark(df_training, num_shares)
+
+    # **** Training ****
     # Train a StrategyLearner
-    # Constructor
     stl = strategyLearner(num_shares=num_shares, impact=impact,
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
 
-    # Training
-    epochs, cum_returns = stl.add_evidence(df_prices=benchmark_prices, symbol=symbol, start_val=start_val)
+    epochs, cum_returns = stl.add_evidence(df_training, symbol, start_val=start_val, start_date=start_date_training, end_date=end_date_training)
+    df_trades = stl.test_policy(df_training, symbol, start_date=start_date_training,
+                                end_date=end_date_training)
+
     plot_cum = plot_cum_return(epochs, cum_returns)
 
-    # Testing phase
-    df_trades = stl.test_policy(symbol=symbol, start_date=start_d, end_date=end_d)
-    print(df_trades)
-
-
     # Retrieve performance stats via a market simulator
-    orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm, portvals, portvals_bm, df_orders  = market_simulator(df_trades, df_benchmark_trades, symbol=symbol, start_val=start_val, commission=commission, impact=impact)
+    print("Performances during training period for {}".format(symbol))
+    print("Date Range: {} to {}".format(start_date_training, end_date_training))
+    orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm, portvals, portvals_bm, df_orders = \
+        market_simulator(df_training, df_trades, df_benchmark_trades, symbol=symbol,
+                     start_val=start_val, commission=commission, impact=impact)
+
+
 
     plot_norm_data = plot_norm_data_vertical_lines(
                             df_orders,
@@ -190,20 +211,20 @@ def training():
 
 
     # **** Testing ****
-    start_d_test = end_d
-    end_d_test =  dt.date.today() - dt.timedelta(1)
+    # Out-of-sample or testing period: Perform similiar steps as above,
+    # except that we don't train the data (i.e. run add_evidence again)
 
+    df_benchmark_trades = create_df_benchmark(df_testing, num_shares)
+    df_trades = stl.test_policy(df_testing, symbol,  start_date=start_date_testing,
+                                end_date=end_date_testing)
+    print("\nPerformances during testing period for {}".format(symbol))
+    print("Date Range: {} to {}".format(start_date_testing, end_date_testing))
 
-    # Get benchmark data
-    benchmark_prices = fetchOnlineData(start_d_test, end_d_test, symbol)
-
-    # Create benchmark data: Benchmark is a portfolio starting with $100,000, investing in 1000 shares of symbol and holding that position
-    df_benchmark_trades_testing = create_df_benchmark(symbol, start_d_test, end_d_test, num_shares)
-
-    df_trades_testing = stl.test_policy(symbol=symbol, start_date=start_d_test, end_date=end_d_test)
 
     # Retrieve performance stats via a market simulator
-    test_orders_count, test_sharpe_ratio, test_cum_ret, test_std_daily_ret, test_avg_daily_ret, test_final_value, test_cum_ret_bm, test_avg_daily_ret_bm, test_std_daily_ret_bm, test_sharpe_ratio_bm, test_final_value_bm, test_portvals, test_portvals_bm, test_df_orders  = market_simulator(df_trades_testing, df_benchmark_trades_testing, symbol=symbol, start_val=start_val, commission=commission, impact=impact)
+    test_orders_count, test_sharpe_ratio, test_cum_ret, test_std_daily_ret, test_avg_daily_ret, test_final_value, test_cum_ret_bm, test_avg_daily_ret_bm, test_std_daily_ret_bm, test_sharpe_ratio_bm, test_final_value_bm, test_portvals, test_portvals_bm, test_df_orders = \
+        market_simulator(df_testing, df_trades, df_benchmark_trades, symbol=symbol,
+                     start_val=start_val, commission=commission, impact=impact)
 
     plot_norm_data_test = plot_norm_data_vertical_lines(
                             test_df_orders,
@@ -221,8 +242,8 @@ def training():
         "training.html",
 
         # Training data
-        start_date = start_d,
-        end_date = end_d,
+        start_date = start_date_training,
+        end_date = end_date_training,
         symbol = symbol,
         div_placeholder_plot_cum = Markup(plot_cum),
         div_placeholder_plot_norm_data = Markup(plot_norm_data),
@@ -239,8 +260,8 @@ def training():
         final_value_b = round(final_value_bm, 3),
 
         # Testing datasets
-        start_date_testing = start_d_test,
-        end_date_testing = end_d_test,
+        start_date_testing = start_date_testing,
+        end_date_testing = end_date_testing,
         div_placeholder_plot_norm_data_testing = Markup(plot_norm_data_test),
         orders_count_p_testing = test_orders_count,
         sharpe_ratio_p_testing = round(test_sharpe_ratio, 3),
