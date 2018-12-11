@@ -75,8 +75,13 @@ def fetchOnlineData(dt_start, symbol):
             auto_adjust = False
     )
 
-    # Save to csv
-    df_to_cvs(df, symbol)
+    if df.empty:
+        return False
+    else:
+        # Save to csv
+        df_to_cvs(df, symbol)
+        return True
+
 
 
 def get_orders_data_file(basefilename):

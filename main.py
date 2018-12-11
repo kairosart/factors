@@ -17,7 +17,7 @@ from pandas_datareader import data as pdr
 import fix_yahoo_finance as yf
 yf.pdr_override()
 
-from util import create_df_benchmark, fetchOnlineData, get_learner_data_file, get_data
+from util import create_df_benchmark, fetchOnlineData, get_learner_data_file, get_data, slice_df
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
 from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
@@ -54,7 +54,7 @@ def showvalues():
 
     # Get portfolio values from Yahoo
     symbol = request.form['symbol']
-    portf_value =  get_data(symbol)
+    portf_value = get_data(symbol)
 
 
     # ****Stock prices chart****
@@ -141,9 +141,6 @@ def training():
     # Getting session variables
     start_val = int(session.get('start_val', None))
     symbol = session.get('symbol', None)
-    start_d = session.get('start_d', None)
-    start_d = dt.datetime.strptime(start_d, '%Y/%m/%d').date()
-    #start_d = start_d.strftime("%Y/%m/%d")
     num_shares = int(session.get('num_shares', None))
     commission = float(session.get('commission', None))
     impact = float(session.get('impact', None))
@@ -152,10 +149,11 @@ def training():
     first_date = dt.date.today() - dt.timedelta(365)
 
     # Get dates from initial date to yesterday from Yahoo
-    fetchOnlineData(first_date, "JPM")
+    fetchOnlineData(first_date, symbol)
 
     # Create a dataframe from csv file
     df = get_data(symbol)
+
 
     # We'll get 80% data to train
     split_percentage = 0.8

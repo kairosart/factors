@@ -176,8 +176,8 @@ class strategyLearner(object):
         # If none of recent returns is greater than max_return, it has converged
         return True
 
-    def add_evidence(self, df, start_date=dt.datetime(2008, 1, 1),
-                     end_date=dt.datetime(2009, 12, 31), start_val=10000):
+    def add_evidence(self, df, symbol, start_date=dt.datetime(2008, 1, 1),
+                     end_date=dt.datetime(2009, 12, 31), start_val=100000):
         """Create a QLearner, and train it for trading.
 
         Parameters:
@@ -198,6 +198,7 @@ class strategyLearner(object):
         df_features = self.get_features(df_prices[symbol])
         thresholds = self.get_thresholds(df_features, self.num_steps)
         cum_returns = []
+        diary_returns = []
         epochs = []
         for epoch in range(1, self.epochs + 1):
             # Initial position is holding nothing
@@ -236,6 +237,8 @@ class strategyLearner(object):
                                                       start_val=start_val,
                                                       commission=self.commission,
                                                       impact=self.impact)
+            #TODO Change reward from cumulative return to daily return
+
             cum_return = get_portfolio_stats(portvals)[0]
             cum_returns.append(cum_return)
             epochs.append(epoch)
@@ -249,10 +252,9 @@ class strategyLearner(object):
                 # Stop if the cum_return doesn't improve for 10 epochs
                 if self.has_converged(cum_returns):
                     break
-        if self.verbose:
-            plot_cum_return(epochs, cum_returns)
+        return epochs, cum_returns
 
-    def test_policy(self, df, start_date=dt.datetime(2010, 1, 1),
+    def test_policy(self, df, symbol, start_date=dt.datetime(2010, 1, 1),
                     end_date=dt.datetime(2011, 12, 31), start_val=10000):
         """Use the existing policy and test it against new data.
 
@@ -311,7 +313,8 @@ if __name__=="__main__":
     first_date = dt.date.today() - dt.timedelta(365)
 
     # Get dates from initial date to yesterday from Yahoo
-    fetchOnlineData(first_date, "JPM")
+    if fetchOnlineData(first_date, symbol) == False:
+        raise Exception("Error downloading data")
 
     # Create a dataframe from csv file
     df = get_data(symbol)
@@ -343,9 +346,9 @@ if __name__=="__main__":
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
 
-    stl.add_evidence(df, start_val=start_val,
+    stl.add_evidence(df_training, symbol, start_val=start_val,
                      start_date=start_date_training, end_date=end_date_training)
-    df_trades = stl.test_policy(df_training, start_date=start_date_training,
+    df_trades = stl.test_policy(df_training, symbol, start_date=start_date_training,
                                 end_date=end_date_training)
     
 
@@ -359,7 +362,7 @@ if __name__=="__main__":
     # except that we don't train the data (i.e. run add_evidence again)
 
     df_benchmark_trades = create_df_benchmark(df_testing, num_shares)
-    df_trades = stl.test_policy(df_testing, start_date=start_date_testing,
+    df_trades = stl.test_policy(df_testing, symbol, start_date=start_date_testing,
                                 end_date=end_date_testing)
     print("\nPerformances during testing period for {}".format(symbol))
     print("Date Range: {} to {}".format(start_date_testing, end_date_testing))
