@@ -97,7 +97,7 @@ class strategyLearner(object):
             df_copy.sort_values(by=[feat], inplace=True)
             for step in range(num_steps):
                 if step < num_steps - 1:
-                    thres[i, step] = df_copy[feat].iloc[(step + 1) * step_size]
+                    thres[i, step] = df_copy[feat].iloc[(step + 1) * int(step_size)]
                 # The last threshold must be = the largest value in df_copy
                 else:
                     thres[i, step] = df_copy[feat].iloc[-1]
@@ -198,7 +198,6 @@ class strategyLearner(object):
         df_features = self.get_features(df_prices[symbol])
         thresholds = self.get_thresholds(df_features, self.num_steps)
         cum_returns = []
-        diary_returns = []
         epochs = []
         for epoch in range(1, self.epochs + 1):
             # Initial position is holding nothing

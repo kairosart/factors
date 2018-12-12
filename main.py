@@ -124,7 +124,7 @@ def showvalues():
     num_shares = request.form['num_shares'],
     start_date = start_d,
     end_date = yesterday,
-    tables=[portf_value.to_html(classes=symbol)],
+    tables=[portf_value.to_html()],
     titles = ['na', 'Stock Prices '],
     div_placeholder_stock_prices = Markup(plot_prices),
     div_placeholder_momentum = Markup(plot_mom),

@@ -1,3 +1,4 @@
+# coding=utf-8
 """Implement QLearner, a Reinforcement Learning class"""
 
 import numpy as np
@@ -71,7 +72,8 @@ class QLearner(object):
         return action
 
     def query(self, s_prime, r):
-        """Find the next action to take in state s_prime. Update the latest state 
+        '''
+        Find the next action to take in state s_prime. Update the latest state
         and action and the Q table. Update rule:
         Q'[s, a] = (1 - α) · Q[s, a] + α · (r + γ · Q[s', argmax a'(Q[s', a'])]).
 
@@ -80,7 +82,7 @@ class QLearner(object):
         r: float, a real valued immediate reward for taking the previous action
         
         Returns: The selected action to take in s_prime
-        """
+        '''
         # Update the Q value of the latest state and action based on s_prime and r
         self.Q[self.s, self.a] = (1 - self.alpha) * self.Q[self.s, self.a] \
                                     + self.alpha * (r + self.gamma 
