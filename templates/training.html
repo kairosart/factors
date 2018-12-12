@@ -1,125 +1,135 @@
 {% extends "base.html" %}
 {% block content %}
-
-	<h1>Strategy Learner Training</h1>
-	<h4>Training Performance</h4>
-	<h5>
-
-			{{ symbol }} data from {{ start_date }} to {{ end_date }}
-
-	</h5>
-
-	{{ div_placeholder_plot_cum }}
-
-	<div>
-	  <div id="Training">
-			<br><br>
-			{{ div_placeholder_plot_norm_data }}
-			<div class="table-responsive">
-				<table class= "table table-sm">
-					<thead>
-					 <tr>
-						 <th scope="col"></th>
-						 <th scope="col">Portfolio</th>
-						 <th scope="col">Benchmark</th>
-					 </tr>
-				 </thead>
-					<tbody>
-						<tr>
-							<td>Sharpe Ratio</td>
-							<td>{{ sharpe_ratio_p }}</td>
-							<td>{{ sharpe_ratio_b }}</td>
-						</tr>
-						<tr>
-							<td>Cumulative Return</td>
-							<td>{{cum_ret_p }}</td>
-							<td>{{cum_ret_b }}</td>
-						</tr>
-						<tr>
-							<td>Std. Daily Deviation</td>
-							<td>{{ std_daily_ret_p }}</td>
-							<td>{{ std_daily_ret_b }}</td>
-						</tr>
-						<tr>
-							<td>Avg. Daily Deviation</td>
-							<td>{{ avg_daily_ret_p }}</td>
-							<td>{{ avg_daily_ret_b }}</td>
-						</tr>
-						<tr>
-							<td>Final Value</td>
-							<td>{{ final_value_p }}</td>
-							<td>{{ final_value_b }}</td>
-						</tr>
-						<tr>
-							<td>Orders count</td>
-							<td>{{ orders_count_p }}</td>
-							<td>{{ orders_count_b }}</td>
-						</tr>
-
-					</tbody>
-				</table>
-			</<div>
-
-		</div>
-
+	{% if error %}
 		<br><br>
 
-	  </div>
-	</div>
-	<br><br>
+		<div class="card text-white  bg-danger mb-3" style="">
+		  <div class="card-header">ERROR</div>
+		  <div class="card-body">
+			<h4 class="card-title">Downloading data.</h4>
+			<a href="benchmark" class="card-link">Try again.</a>
+		  </div>
+		</div>
+    {% else %}
+		<h1>Strategy Learner Training</h1>
+		<h4>Training Performance</h4>
+		<h5>
 
-	<h4>Testing Performance</h4>
-	<h5>
+				{{ symbol }} data from {{ start_date }} to {{ end_date }}
 
-		{{ symbol }} data from {{ start_date_testing }} to {{ end_date_testing }}
+		</h5>
 
-	</h5>
-  {{ div_placeholder_plot_norm_data_testing }}
+		{{ div_placeholder_plot_cum }}
 
-	<div class="table-responsive">
-		<table class= "table table-sm">
-			<thead>
-			 <tr>
-				 <th scope="col"></th>
-				 <th scope="col">Portfolio</th>
-				 <th scope="col">Benchm.</th>
-			 </tr>
-		 </thead>
-			<tbody>
-				<tr>
-					<td>Sharpe Ratio</td>
-					<td>{{ sharpe_ratio_p_testing }}</td>
-					<td>{{ sharpe_ratio_b_testing }}</td>
-				</tr>
-				<tr>
-					<td>Cumulative Return</td>
-					<td>{{cum_ret_p_testing }}</td>
-					<td>{{cum_ret_b_testing }}</td>
-				</tr>
-				<tr>
-					<td>Std. Daily Deviation</td>
-					<td>{{ std_daily_ret_p_testing }}</td>
-					<td>{{ std_daily_ret_b_testing }}</td>
-				</tr>
-				<tr>
-					<td>Avg. Daily Deviation</td>
-					<td>{{ avg_daily_ret_p_testing }}</td>
-					<td>{{ avg_daily_ret_b_testing }}</td>
-				</tr>
-				<tr>
-					<td>Final Value</td>
-					<td>{{ final_value_p_testing }}</td>
-					<td>{{ final_value_b_testing }}</td>
-				</tr>
-				<tr>
-					<td>Orders count</td>
-					<td>{{ orders_count_p_testing }}</td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-	</<div>
-<br><br>
+		<div>
+		  <div id="Training">
+				<br><br>
+				{{ div_placeholder_plot_norm_data }}
+				<div class="table-responsive">
+					<table class= "table table-sm">
+						<thead>
+						 <tr>
+							 <th scope="col"></th>
+							 <th scope="col">Portfolio</th>
+							 <th scope="col">Benchmark</th>
+						 </tr>
+					 </thead>
+						<tbody>
+							<tr>
+								<td>Sharpe Ratio</td>
+								<td>{{ sharpe_ratio_p }}</td>
+								<td>{{ sharpe_ratio_b }}</td>
+							</tr>
+							<tr>
+								<td>Cumulative Return</td>
+								<td>{{cum_ret_p }}</td>
+								<td>{{cum_ret_b }}</td>
+							</tr>
+							<tr>
+								<td>Std. Daily Deviation</td>
+								<td>{{ std_daily_ret_p }}</td>
+								<td>{{ std_daily_ret_b }}</td>
+							</tr>
+							<tr>
+								<td>Avg. Daily Deviation</td>
+								<td>{{ avg_daily_ret_p }}</td>
+								<td>{{ avg_daily_ret_b }}</td>
+							</tr>
+							<tr>
+								<td>Final Value</td>
+								<td>{{ final_value_p }}</td>
+								<td>{{ final_value_b }}</td>
+							</tr>
+							<tr>
+								<td>Orders count</td>
+								<td>{{ orders_count_p }}</td>
+								<td>{{ orders_count_b }}</td>
+							</tr>
 
+						</tbody>
+					</table>
+				</<div>
+
+			</div>
+
+			<br><br>
+
+		  </div>
+		</div>
+		<br><br>
+
+		<h4>Testing Performance</h4>
+		<h5>
+
+			{{ symbol }} data from {{ start_date_testing }} to {{ end_date_testing }}
+
+		</h5>
+	  {{ div_placeholder_plot_norm_data_testing }}
+
+		<div class="table-responsive">
+			<table class= "table table-sm">
+				<thead>
+				 <tr>
+					 <th scope="col"></th>
+					 <th scope="col">Portfolio</th>
+					 <th scope="col">Benchm.</th>
+				 </tr>
+			 </thead>
+				<tbody>
+					<tr>
+						<td>Sharpe Ratio</td>
+						<td>{{ sharpe_ratio_p_testing }}</td>
+						<td>{{ sharpe_ratio_b_testing }}</td>
+					</tr>
+					<tr>
+						<td>Cumulative Return</td>
+						<td>{{cum_ret_p_testing }}</td>
+						<td>{{cum_ret_b_testing }}</td>
+					</tr>
+					<tr>
+						<td>Std. Daily Deviation</td>
+						<td>{{ std_daily_ret_p_testing }}</td>
+						<td>{{ std_daily_ret_b_testing }}</td>
+					</tr>
+					<tr>
+						<td>Avg. Daily Deviation</td>
+						<td>{{ avg_daily_ret_p_testing }}</td>
+						<td>{{ avg_daily_ret_b_testing }}</td>
+					</tr>
+					<tr>
+						<td>Final Value</td>
+						<td>{{ final_value_p_testing }}</td>
+						<td>{{ final_value_b_testing }}</td>
+					</tr>
+					<tr>
+						<td>Orders count</td>
+						<td>{{ orders_count_p_testing }}</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</<div>
+		<br><br>
+	{% endif %}
 
 {% endblock %}

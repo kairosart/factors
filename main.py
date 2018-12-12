@@ -149,7 +149,13 @@ def training():
     first_date = dt.date.today() - dt.timedelta(365)
 
     # Get dates from initial date to yesterday from Yahoo
-    fetchOnlineData(first_date, symbol)
+    try:
+        fetchOnlineData(first_date, symbol)
+    except:
+        return render_template(
+            # name of template
+            "training.html",
+            error = True)
 
     # Create a dataframe from csv file
     df = get_data(symbol)
