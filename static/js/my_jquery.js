@@ -11,5 +11,10 @@ $(document).ready(function(e){
 		$(this).html('Calculating...');
         $(this).css('color','white');
         $(this).css('background-color', 'red');
-    });    
+    });
+    $("#submitButton2").on('click',function(){
+		$(this).html('Downloading...');
+        $(this).css('color','white');
+        $(this).css('background-color', 'red');
+    });
 });
