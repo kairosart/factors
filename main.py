@@ -48,12 +48,22 @@ digits = datasets.load_digits()
 # Show values
 @app.route('/showvalues', methods=['POST', 'GET'])
 def showvalues():
-    # Specify the start and end dates for this period.
-    start_d = dt.date(2008, 1, 1)
-    yesterday = dt.date.today() - dt.timedelta(1)
 
     # Get portfolio values from Yahoo
     symbol = request.form['symbol']
+
+    # Get 1 year of data to train and test
+    start_d = dt.date.today() - dt.timedelta(365)
+    yesterday = dt.date.today() - dt.timedelta(1)
+    # Get dates from initial date to yesterday from Yahoo
+    try:
+        fetchOnlineData(start_d, symbol)
+    except:
+        return render_template(
+            # name of template
+            "form.html",
+            error=True)
+
     portf_value = get_data(symbol)
 
 
@@ -145,17 +155,6 @@ def training():
     commission = float(session.get('commission', None))
     impact = float(session.get('impact', None))
 
-    # Get 1 year of data to train and test
-    first_date = dt.date.today() - dt.timedelta(365)
-
-    # Get dates from initial date to yesterday from Yahoo
-    try:
-        fetchOnlineData(first_date, symbol)
-    except:
-        return render_template(
-            # name of template
-            "training.html",
-            error = True)
 
     # Create a dataframe from csv file
     df = get_data(symbol)
