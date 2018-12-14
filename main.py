@@ -74,7 +74,7 @@ def showvalues():
     sym_mom = get_momentum(normed[symbol], window=10)
 
     # Create momentum chart
-    plot_mom = plot_momentum(portf_value.index, normed[symbol], sym_mom, "Momentum Indicator", (12, 8))
+    plot_mom = plot_momentum(portf_value.index, normed[symbol], symbol, sym_mom, "Momentum Indicator", (12, 8))
 
     # ****Bollinger Bands****
     # Compute rolling mean

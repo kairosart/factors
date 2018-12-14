@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="Creating dropdown select for tickers.">
+    <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/form.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,8 +31,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3120">
-              <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+            <state relative-caret-position="384">
+              <caret line="76" selection-start-line="76" selection-end-line="76" />
+              <folding>
+                <element signature="e#0#74#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,12 +50,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/util.py">
+        <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="243" lean-forward="true" selection-start-line="243" selection-end-line="243" />
+            <state relative-caret-position="932">
+              <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
               <folding>
-                <element signature="e#43#64#0" expanded="true" />
+                <element signature="n#div#1;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#!!top" />
               </folding>
             </state>
           </provider>
@@ -94,7 +96,6 @@
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/QLearner.py" />
         <option value="$PROJECT_DIR$/strategyLearner.py" />
-        <option value="$PROJECT_DIR$/templates/stockpriceschart.html" />
         <option value="$PROJECT_DIR$/templates/tickers_list.html" />
         <option value="$PROJECT_DIR$/nasdaq.csv" />
         <option value="$PROJECT_DIR$/templates/.ipynb_checkpoints/tickers_list.html" />
@@ -102,9 +103,10 @@
         <option value="$PROJECT_DIR$/data/nasdaq_tickers_name.csv" />
         <option value="$PROJECT_DIR$/templates/startValuesForm.html" />
         <option value="$PROJECT_DIR$/templates/training.html" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/form.py" />
         <option value="$PROJECT_DIR$/util.py" />
+        <option value="$PROJECT_DIR$/templates/stockpriceschart.html" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -125,6 +127,16 @@
             <path>
               <item name="factors" type="b2602c69:ProjectViewProjectNode" />
               <item name="factors" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="factors" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="factors" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -158,7 +170,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.util">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python">
       <module name="factors" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -359,7 +371,21 @@
       <option name="project" value="LOCAL" />
       <updated>1544817596271</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Creating dropdown select for tickers.">
+      <created>1544821247209</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1544821247209</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Making indicators info collapsible.">
+      <created>1544823176393</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1544823176393</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -373,19 +399,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-5" y="-4" width="1930" height="1089" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49726775" visible="true" weight="0.24403183" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49726775" visible="true" weight="0.24403183" />
       <window_info id="Structure" order="1" sideWeight="0.5027322" side_tool="true" weight="0.24417731" />
       <window_info id="Favorites" order="2" sideWeight="0.5008264" side_tool="true" weight="0.1724138" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32963374" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32852387" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" visible="true" weight="0.37402886" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" weight="0.37402886" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32963374" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.32852387" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.32852387" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32963374" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50132626" side_tool="true" weight="0.37402886" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32963374" />
@@ -470,7 +495,8 @@
     <MESSAGE value="Show error message when it can be download data from Yahoo." />
     <MESSAGE value="Downolading data from Yahoo when the form has been sent." />
     <MESSAGE value="Creating dropdown select for tickers." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating dropdown select for tickers." />
+    <MESSAGE value="Making indicators info collapsible." />
+    <option name="LAST_COMMIT_MESSAGE" value="Making indicators info collapsible." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -479,26 +505,6 @@
           <url>file://$PROJECT_DIR$/strategyLearner.py</url>
           <line>347</line>
           <option name="timeStamp" value="247" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/util.py</url>
-          <line>235</line>
-          <option name="timeStamp" value="280" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/util.py</url>
-          <line>238</line>
-          <option name="timeStamp" value="281" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/util.py</url>
-          <line>240</line>
-          <option name="timeStamp" value="282" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/util.py</url>
-          <line>241</line>
-          <option name="timeStamp" value="283" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -689,13 +695,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/tickers_name.json.csv">
       <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
@@ -746,13 +745,6 @@
         <state showInfoPanel="true" rowLines="3" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/nasdaq_tickers_name.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
@@ -776,18 +768,21 @@
     <entry file="file://$PROJECT_DIR$/sessions.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3120">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/nasdaq.lst2">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/data/nasdaq.lst">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/nasdaq.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="240">
+          <caret line="31" column="92" lean-forward="true" selection-start-line="31" selection-start-column="92" selection-end-line="31" selection-end-column="100" />
+        </state>
+      </provider>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" rowLines="3" />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/strategyLearner.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -799,12 +794,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="e#0#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="243" lean-forward="true" selection-start-line="243" selection-end-line="243" />
+        <state relative-caret-position="805">
+          <caret line="241" selection-start-line="241" selection-end-line="242" />
           <folding>
             <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="932">
+          <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
+          <folding>
+            <element signature="n#div#1;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#!!top" />
           </folding>
         </state>
       </provider>

@@ -240,7 +240,7 @@ def plot_cum_return(epoch, cum_return, title="Cumulative Return",
     return chart
 
 
-def plot_momentum(df_index, sym_price, sym_mom, title="Momentum Indicator",
+def plot_momentum(df_index, sym_price, symbol, sym_mom, title="Momentum Indicator",
                   fig_size=(12, 6)):
     """Plot momentum and prices for a symbol.
 
@@ -256,7 +256,7 @@ def plot_momentum(df_index, sym_price, sym_mom, title="Momentum Indicator",
     trace_symbol = go.Scatter(
                 x=df_index,
                 y=sym_price,
-                name = "AMZN",
+                name = symbol,
                 line = dict(color = '#17BECF'),
                 opacity = 0.8)
 
