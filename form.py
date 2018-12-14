@@ -17,5 +17,4 @@ class StartValuesForm(FlaskForm):
 
     def get_tickers(setf, filename):
         df = pd.read_csv(symbol_to_path(filename), usecols=['Symbol'])
-        df.info()
         return df

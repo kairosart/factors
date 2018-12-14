@@ -1,19 +1,9 @@
 from flask import Flask, render_template, session, jsonify, request, flash
 from form import StartValuesForm
 import pandas as pd
-import numpy as np
-import random
 import datetime as dt
 from sklearn import datasets, svm
-import plotly
-import plotly.plotly as py
-import plotly.graph_objs as go
-import json
 from markupsafe import Markup
-import pickle
-
-# To fetch data
-from pandas_datareader import data as pdr
 import fix_yahoo_finance as yf
 yf.pdr_override()
 

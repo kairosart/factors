@@ -232,3 +232,15 @@ def create_df_trades(orders, symbol, num_shares, cash_pos=0, long_pos=1, short_p
     return df_trades
 
 
+def get_nasdaq_tickers():
+    os.system("curl --ftp-ssl anonymous:jupi@jupi.com "
+              "ftp://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt "
+              "> nasdaq.lst")
+    os.system("tail -n +9 nasdaq.lst | cat | sed '$d' | sed 's/|/ /g' > "
+          "nasdaq.lst2")
+    os.system("awk '{print $1}' nasdaq.lst2 > nasdaq.csv")
+    os.system("echo; head nasdaq.csv; echo '...'; tail nasdaq.csv")
+    os.system("cp nasdaq.csv ./data/nasdaq.csv")
+
+if __name__=="__main__":
+    get_nasdaq_tickers()
