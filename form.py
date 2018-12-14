@@ -1,13 +1,21 @@
+import pandas as pd
+from util import symbol_to_path
 from flask_wtf import FlaskForm
-from wtforms import TextField, IntegerField, DecimalField, SubmitField
-from wtforms import validators, ValidationError
+from wtforms import IntegerField, DecimalField, SubmitField, StringField, SelectField
+from wtforms import validators
 
 
 # Form class
 class StartValuesForm(FlaskForm):
-    start_val = IntegerField('Initial Capital', [validators.Required("Please enter a value.")])
-    symbol = TextField('Stock Symbol', [validators.Required("Please enter stock symbol as AMZN.")])
+    start_val = IntegerField('Initial Capital', [validators.DataRequired("Please enter a value.")])
+    symbol = SelectField('Stock Symbol')
     commission = DecimalField('Commision')
     impact = DecimalField('Impact')
-    num_shares = IntegerField('Shares number', [validators.Required("Please enter number of shares.")])
-    submit = SubmitField("Send") 
+    num_shares = IntegerField('Shares number', [validators.DataRequired("Please enter number of shares.")])
+    submit = SubmitField("Send")
+
+
+    def get_tickers(setf, filename):
+        df = pd.read_csv(symbol_to_path(filename), usecols=['Symbol'])
+        df.info()
+        return df

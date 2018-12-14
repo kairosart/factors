@@ -50,18 +50,23 @@ digits = datasets.load_digits()
 def showvalues():
 
     # Get portfolio values from Yahoo
-    symbol = request.form['symbol']
+    symbol = request.form.get('ticker_select', type=str)
 
     # Get 1 year of data to train and test
     start_d = dt.date.today() - dt.timedelta(365)
     yesterday = dt.date.today() - dt.timedelta(1)
     # Get dates from initial date to yesterday from Yahoo
     try:
-        fetchOnlineData(start_d, symbol)
+        download = fetchOnlineData(start_d, symbol)
+        if download == False:
+            return render_template(
+                # name of template
+                "startValuesForm.html",
+                error=True)
     except:
         return render_template(
             # name of template
-            "form.html",
+            "startValuesForm.html",
             error=True)
 
     portf_value = get_data(symbol)
@@ -115,7 +120,7 @@ def showvalues():
 
     # Session variables
     session['start_val'] = request.form['start_val']
-    session['symbol'] = request.form['symbol']
+    session['symbol'] = symbol
     session['start_d'] = start_d.strftime('%Y/%m/%d')
     session['num_shares'] = request.form['num_shares']
     session['commission'] = request.form['commission']
@@ -128,7 +133,7 @@ def showvalues():
 
     # now we pass in our variables into the template
     start_val = request.form['start_val'],
-    symbol = request.form['symbol'],
+    symbol = symbol,
     commission = request.form['commission'],
     impact = request.form['impact'],
     num_shares = request.form['num_shares'],
@@ -287,6 +292,9 @@ def training():
 def introStartValues():
     form = StartValuesForm()
 
+    # Get ticker name list
+    tickers = form.get_tickers('nasdaq_tickers_name')
+
     if request.method == 'POST':
         if form.validate() == False:
             flash('All fields are required.')
@@ -294,7 +302,10 @@ def introStartValues():
         else:
             return render_template('success.html')
     elif request.method == 'GET':
-        return render_template('startValuesForm.html', form = form)
+
+        return render_template('startValuesForm.html',
+                               form = form,
+                               data=tickers)
 
 
 

@@ -17,4 +17,5 @@ $(document).ready(function(e){
         $(this).css('color','white');
         $(this).css('background-color', 'red');
     });
+
 });

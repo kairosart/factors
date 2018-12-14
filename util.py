@@ -74,8 +74,11 @@ def fetchOnlineData(dt_start, symbol):
             # (optional, default is False)
             auto_adjust = False
     )
-
-    df_to_cvs(df, symbol)
+    if len(df.index):
+        df_to_cvs(df, symbol)
+        return True
+    else:
+        return False
 
 
 
