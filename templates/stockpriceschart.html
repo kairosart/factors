@@ -19,47 +19,59 @@
 
     <h2 id="StockPrices"></h2>
     {{ div_placeholder_stock_prices }}
-    <div class="card border-info mb-3" >
-      <div class="card-header">Info</div>
-      <div class="card-body">
-        <h4 class="card-title">Stock Prices</h4>
-        <p class="card-text">Stock Adjust Value price, from 2008 to yesterday. Hover over the chart to see all the options.</p>
-          <a href="https://www.investopedia.com/terms/r/rsi.asp" target="_blank" class="alert-link">More info.</a>
-         <div align="right">
-  				<a href="#">Go to top</a>
-			</div>
-      </div>
-    </div>
+    <button class="btn btn-info" data-toggle="collapse" data-target="#prices">About Pices</button>
 
+    <div id="prices" class="collapse">
+        <div class="card border-info mb-3" >
+          <div class="card-header">Info</div>
+          <div class="card-body">
+            <h4 class="card-title">Stock Prices</h4>
+            <p class="card-text">Stock Adjust Value price, from 2008 to yesterday. Hover over the chart to see all the options.</p>
+              <a href="https://www.investopedia.com/terms/r/rsi.asp" target="_blank" class="alert-link">More info.</a>
+             <div align="right">
+                 <a href="#">Go to top</a>
+             </div>
+          </div>
+        </div>
+    </div>
 
     <h2 id="Momentum"></h2>
     {{ div_placeholder_momentum }}
-    <div class="card border-info mb-3" >
-      <div class="card-header">Info</div>
-      <div class="card-body">
-        <h4 class="card-title">Momentum</h4>
-        <p class="card-text">
-			<strong>Type:</strong> It's a trend indicator.<br><br>
+    <button class="btn btn-info" data-toggle="collapse" data-target="#moment">About Momentum</button>
 
-			<strong>Description:</strong> <br>
+    <div id="moment" class="collapse">
+        <div class="card border-info mb-3" >
+            <div class="card-header">Info</div>
+                <div class="card-body">
+                    <h4 class="card-title">Momentum</h4>
+                    <p class="card-text">
+                    <strong>Type:</strong> It's a trend indicator.<br><br>
+
+                    <strong>Description:</strong> <br>
 
 
-    		<ul>It refers to the rate of change on price movements for a particular asset – that is, the speed at which the price is changing.</ul>
-    		<ul>If a trader wants to use a momentum-based strategy, he takes a long position in a stock or asset that has been trending up. If the stock is trending down, he takes a short position. Instead of the traditional philosophy of trading – buy low, sell high – momentum investing seeks to sell low and buy lower, or buy high and sell higher.</ul>
-			<br><br>
-			<strong>Buy signal:</strong> If the trend line is up, the momentum investor should buy the stock.<br><br>
+                    <ul>It refers to the rate of change on price movements for a particular asset – that is, the speed at which the price is changing.</ul>
+                    <ul>If a trader wants to use a momentum-based strategy, he takes a long position in a stock or asset that has been trending up. If the stock is trending down, he takes a short position. Instead of the traditional philosophy of trading – buy low, sell high – momentum investing seeks to sell low and buy lower, or buy high and sell higher.</ul>
+                    <br><br>
+                    <strong>Buy signal:</strong> If the trend line is up, the momentum investor should buy the stock.<br><br>
 
-			<strong>Sell signal:</strong> If the trend line is down, the momentum investor should sell the stock.<br><br>
-        </p>
-          <a href="https://www.investopedia.com/articles/technical/081501.asp" target="_blank" class="alert-link">More info.</a>
-         <div align="right">
-  				<a href="#">Go to top</a>
-			</div>
-      </div>
+                    <strong>Sell signal:</strong> If the trend line is down, the momentum investor should sell the stock.<br><br>
+                </p>
+                <a href="https://www.investopedia.com/articles/technical/081501.asp" target="_blank" class="alert-link">More info.</a>
+                <div align="right">
+                    <a href="#">Go to top</a>
+                </div>
+            </div>
+        </div>
     </div>
 
+
     <h2 id="Bollinger Bands"></h2>
-        {{ div_placeholder_bollinger }}
+    {{ div_placeholder_bollinger }}
+    <button class="btn btn-info" data-toggle="collapse" data-target="#bollinger">About Bollinger</button>
+
+    <div id="bollinger" class="collapse">
+
         <div class="card border-info mb-3" >
           <div class="card-header">Info</div>
           <div class="card-body">
@@ -82,9 +94,13 @@
                 </div>
           </div>
         </div>
+    </div>
 
     <h2 id="Simple Moving Average (SMA)"></h2>
         {{ div_placeholder_sma }}
+    <button class="btn btn-info" data-toggle="collapse" data-target="#sma">About SMA</button>
+
+    <div id="sma" class="collapse">
         <div class="card border-info mb-3" >
           <div class="card-header">Info</div>
           <div class="card-body">
@@ -115,9 +131,14 @@
                 </div>
           </div>
         </div>
+    </div>
 
     <h2 id="Relative Strength Index (RSI)"></h2>
-        {{ div_placeholder_rsi }}
+    {{ div_placeholder_rsi }}
+    <button class="btn btn-info" data-toggle="collapse" data-target="#rsi">About RSI</button>
+
+    <div id="rsi" class="collapse">
+
         <div class="card border-info mb-3" >
           <div class="card-header">Info</div>
           <div class="card-body">
@@ -145,9 +166,12 @@
 
           </div>
         </div>
+    </div>
+    <br><br>
 
-        <div align="right">
+    <div align="right">
         <button id="submitButton1" class="btn btn-primary btn-lg btn-block" onclick="location.href = 'benchmark';">Next > </button>
-        <br><br>
+    </div>
+<br><br>
 
 {% endblock %}
