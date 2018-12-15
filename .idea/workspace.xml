@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="76" selection-start-line="76" selection-end-line="76" />
+            <state relative-caret-position="-4992">
+              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
               <folding>
                 <element signature="e#0#74#0" expanded="true" />
               </folding>
@@ -49,15 +48,27 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="932">
-              <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
+            <state relative-caret-position="436">
+              <caret line="168" selection-start-line="168" selection-end-line="169" />
               <folding>
                 <element signature="n#div#1;n#div#1;n#!!top" />
                 <element signature="n#div#2;n#!!top" />
+                <element signature="n#div#3;n#!!top" />
+                <element signature="n#div#4;n#!!top" />
+                <element signature="n#div#5;n#!!top" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/indicators.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="312">
+              <caret line="257" column="28" lean-forward="true" selection-start-line="257" selection-start-column="28" selection-end-line="257" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -105,8 +116,9 @@
         <option value="$PROJECT_DIR$/templates/training.html" />
         <option value="$PROJECT_DIR$/form.py" />
         <option value="$PROJECT_DIR$/util.py" />
-        <option value="$PROJECT_DIR$/templates/stockpriceschart.html" />
+        <option value="$PROJECT_DIR$/indicators.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/templates/stockpriceschart.html" />
       </list>
     </option>
   </component>
@@ -385,7 +397,21 @@
       <option name="project" value="LOCAL" />
       <updated>1544823176393</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Making indicators info collapsible.">
+      <created>1544823605303</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1544823605303</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Making indicators info collapsible.">
+      <created>1544866352966</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1544866352967</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TodoView">
@@ -399,8 +425,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-5" y="-4" width="1930" height="1089" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49726775" visible="true" weight="0.24403183" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49726775" visible="true" weight="0.24403183" />
       <window_info id="Structure" order="1" sideWeight="0.5027322" side_tool="true" weight="0.24417731" />
       <window_info id="Favorites" order="2" sideWeight="0.5008264" side_tool="true" weight="0.1724138" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -410,7 +437,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32963374" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.32852387" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.32852387" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32963374" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50132626" side_tool="true" weight="0.37402886" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32963374" />
@@ -567,13 +594,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python3.6/site-packages/requests/adapters.py" />
-    <entry file="file://$PROJECT_DIR$/indicators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="93" selection-start-line="93" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="332">
@@ -801,16 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
-          <folding>
-            <element signature="e#0#74#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="805">
@@ -821,13 +831,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/indicators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="257" column="28" lean-forward="true" selection-start-line="257" selection-start-column="28" selection-end-line="257" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="932">
-          <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
+        <state relative-caret-position="436">
+          <caret line="168" selection-start-line="168" selection-end-line="169" />
           <folding>
             <element signature="n#div#1;n#div#1;n#!!top" />
             <element signature="n#div#2;n#!!top" />
+            <element signature="n#div#3;n#!!top" />
+            <element signature="n#div#4;n#!!top" />
+            <element signature="n#div#5;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4992">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+          <folding>
+            <element signature="e#0#74#0" expanded="true" />
           </folding>
         </state>
       </provider>
