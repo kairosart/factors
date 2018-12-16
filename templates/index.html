@@ -2,76 +2,68 @@
 {% block content %}
 
 
-<section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Machine Learning for Trading</h1>
-          <p class="lead text-muted">In this project I've designed a learning trading agent. It's a learning trading agent that uses a Q-learning-based strategy and technical indicators.</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p>
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Machine Learning for Trading</h1>
+      <p class="lead text-muted">In this project I've designed a learning trading agent. It's a learning trading agent that uses a Q-learning-based strategy and technical indicators.</p>
+      <p>
+        <a href="#" class="btn btn-primary my-2">Main call to action</a>
+        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <h4 class="card-header">Details</h4>
+
+            <img class="card-img-top" src="{{ url_for('static',filename='images/time_series.jpeg') }}" >
+            <div class="card-body">
+              <p class="card-text">Choose your initial options to make different tests. That way youll be able to compare easily. </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Modal1">More...</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-
-      <div class="album py-5 bg-light">
-        <div class="container">
-
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <h4 class="card-header">Details</h4>
-
-                <img class="card-img-top" src="{{ url_for('static',filename='images/time_series.jpeg') }}" >
-                <div class="card-body">
-                  <p class="card-text">Choose your initial options to make different tests. That way youll be able to compare easily. </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Modal1">More...</button>
-                    </div>
-                  </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <h4 class="card-header">Train and test</h4>
+            <img class="card-img-top" src="{{ url_for('static',filename='images/trading.jpeg') }}" >
+            <div class="card-body">
+                <p class="card-text">See what indicators and training/testing rules we're using in the process.</p>
+            </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Modal2">More...</button>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <h4 class="card-header">Train and test</h4>
-                <img class="card-img-top" src="{{ url_for('static',filename='images/trading.jpeg') }}" >
-                <div class="card-body">
-                    <p class="card-text">See what indicators and training/testing rules we're using in the process.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Modal2">More...</button>
-                    </div>
-                  </div>
+          </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <h4 class="card-header">Process</h4>
+            <img class="card-img-top" src="{{ url_for('static',filename='images/q-learning.jpeg') }}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">Learn what tools are used and statistics are involved in the process</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                   <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Modal3">More...</button>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <h4 class="card-header">Process</h4>
-                <img class="card-img-top" src="{{ url_for('static',filename='images/q-learning.jpeg') }}" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text">Learn what tools are used and statistics are involved in the process</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                       <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Modal3">More...</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-    </main>
-
-    <footer class="text-muted">
-      <div class="container">
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
-        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+          </div>
+        </div>
       </div>
-    </footer>
+    </div>
+  </div>
+
 
 
 <!-- Modal1-->
@@ -146,11 +138,19 @@
           <li>Reinforcement learning tecnique.</li>
           <li>Technical indicators to be used as features by a StrategyLearner. They were first developed and used in a rule-based trading strategy.</li>
           <li>Market simulator that computes and visualizes statistics from trades generated by a StrategyLearner..</li>
-
+         </ul>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
+
+<div>
+
+  {% include "footer.html" %}
+</div>
+
 {% endblock %}
+
