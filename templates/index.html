@@ -2,46 +2,155 @@
 {% block content %}
 
 
-  <div class="row">
-    <div class="card mb-3" style="max-width: 20rem;">
+<section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Machine Learning for Trading</h1>
+          <p class="lead text-muted">In this project I've designed a learning trading agent. It's a learning trading agent that uses a Q-learning-based strategy and technical indicators.</p>
+          <p>
+            <a href="#" class="btn btn-primary my-2">Main call to action</a>
+            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+          </p>
+        </div>
+      </section>
 
-      <img style="height: 100%; width: 100%; display: block;" src="{{ url_for('static',filename='images/time_series.jpeg') }}">
-      <h3 class="card-header">Time series</h3>
-      <div class="card-body">
-        <p class="card-text">We're going to take a look at the various kinds of statistics that we can take on time series data.</p>
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <h4 class="card-header">Details</h4>
+
+                <img class="card-img-top" src="{{ url_for('static',filename='images/time_series.jpeg') }}" >
+                <div class="card-body">
+                  <p class="card-text">Choose your initial options to make different tests. That way youll be able to compare easily. </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Modal1">More...</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <h4 class="card-header">Train and test</h4>
+                <img class="card-img-top" src="{{ url_for('static',filename='images/trading.jpeg') }}" >
+                <div class="card-body">
+                    <p class="card-text">See what indicators and training/testing rules we're using in the process.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Modal2">More...</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <h4 class="card-header">Process</h4>
+                <img class="card-img-top" src="{{ url_for('static',filename='images/q-learning.jpeg') }}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Learn what tools are used and statistics are involved in the process</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                       <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Modal3">More...</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
       </div>
+    </footer>
 
-      <div class="card-body">
-        <a href="#" class="card-link">More info</a>
+
+<!-- Modal1-->
+<div class="modal" id="Modal1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Details and rules</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-
-    </div>
-    <div class="card mb-3" style="max-width: 20rem;">
-
-      <img style="height: 100%; width: 100%; display: block;" src="{{ url_for('static',filename='images/trading.jpeg') }}">
-      <h3 class="card-header">Trading</h3>
-      <div class="card-body">
-        <p class="card-text">We're going to take a look at the various kinds of statistics that we can take on time series data.</p>
+      <div class="modal-body">
+         <ul>
+          <li>Choose your ticker or symbol.</li>
+          <li>Choose your starting cash.</li>
+          <li>Choose the naumber of shares to trade.</li>
+          <li>Introduce transaction costs: Commmision and impact.</li>
+        </ul>
       </div>
-
-      <div class="card-body">
-        <a href="#" class="card-link">More info</a>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
-
-    </div>
-    <div class="card mb-3" style="max-width: 20rem;">
-
-      <img style="height: 100%; width: 100%; display: block;" src="{{ url_for('static',filename='images/q-learning.jpeg') }}">
-      <h3 class="card-header">Q-Learning</h3>
-      <div class="card-body">
-        <p class="card-text">We're going to take a look at the various kinds of statistics that we can take on time series data.</p>
-      </div>
-
-      <div class="card-body">
-        <a href="#" class="card-link">More info</a>
-      </div>
-
     </div>
   </div>
+</div>
 
+<!-- Modal2-->
+<div class="modal" id="Modal2">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Train and test</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <ul>
+          <li>Data are automatically downloaded form Yahoo.</li>
+          <li>Period of data is from a year ago to yesterday.</li>
+          <li>We'll split the data in 80% for training and 20% for testing.</li>
+          <li>Introduce transaction costs: Commmision and impact.</li>
+        </ul>
+        <h5>Indicators</h5>
+          <ul>
+          <li>Momemtum.</li>
+          <li>Simple Moving Averqe (SMA).</li>
+          <li>Relative Strengh Index (RSI).</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal3-->
+<div class="modal" id="Modal3">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Process</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <ul>
+          <li>StrategyLearner that uses Q-learning-based strategy and technical indicators.</li>
+          <li>Reinforcement learning tecnique.</li>
+          <li>Technical indicators to be used as features by a StrategyLearner. They were first developed and used in a rule-based trading strategy.</li>
+          <li>Market simulator that computes and visualizes statistics from trades generated by a StrategyLearner..</li>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
