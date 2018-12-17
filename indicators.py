@@ -183,8 +183,7 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_cum_return(epoch, cum_return, title="Cumulative Return",
-                  fig_size=(12, 6)):
+def plot_cum_return(epoch, cum_return, title="Cumulative Return"):
     """Plot cumulative return.
 
     Parameters:
@@ -751,7 +750,8 @@ def plot_performance(perform_df, title="In-sample vs Out of sample performance",
 
     fig['layout'].update(height=600, width=600, title=title)
 
-    iplot(fig)
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart
 
 def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=False, title="Title", xtitle="X title", ytitle="Y title"):
     """Plots portvals and portvals_bm, showing vertical lines for buy and sell orders
@@ -802,6 +802,7 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
 
 
 
+    #TODO Add buttons or dropdown to see or hide vertical lines
 
     # Plot the vertical lines for buy and sell signals
     shapes = list()
@@ -816,7 +817,7 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
         # Vertical lines
         line_size = max_range + (max_range * 10 / 100)
 
-        # Buy line
+        # Buy line (Green)
         for i in buy_line:
             shapes.append({'type': 'line',
                            'xref': 'x',
@@ -831,7 +832,7 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
                                 'dash': 'dash',
                             },
                           })
-        # Sell line
+        # Sell line (Red)
         for i in sell_line:
             shapes.append({'type': 'line',
                            'xref': 'x',
@@ -884,6 +885,8 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
 
         )
 
+
     fig = dict(data=data, layout=layout)
+
     chart = plot(fig, show_link=False, output_type='div')
     return chart

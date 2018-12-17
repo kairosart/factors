@@ -236,7 +236,6 @@ class strategyLearner(object):
                                                       start_val=start_val,
                                                       commission=self.commission,
                                                       impact=self.impact)
-            #TODO Change reward from cumulative return to daily return
 
             cum_return = get_portfolio_stats(portvals)[0]
             cum_returns.append(cum_return)
@@ -269,7 +268,6 @@ class strategyLearner(object):
         1000 shares
         """
 
-        dates = pd.date_range(start_date, end_date)
         # Get adjusted close prices for symbol
         df_prices = df
         # Get features and thresholds

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
+    <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="Adding logo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/time_series.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/AABA.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/AABA.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/indicators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategyLearner.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategyLearner.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/overview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/startValuesForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/startValuesForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/training.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/training.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +26,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/strategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-124">
-              <caret line="238" column="13" selection-start-line="238" selection-start-column="13" selection-end-line="238" selection-end-column="13" />
+            <state relative-caret-position="1166">
+              <caret line="269" lean-forward="true" selection-start-line="269" selection-end-line="269" />
               <folding>
                 <element signature="e#80#98#0" expanded="true" />
               </folding>
@@ -34,10 +38,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1759">
-              <caret line="74" selection-start-line="74" selection-end-line="74" />
+            <state relative-caret-position="311">
+              <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
               <folding>
                 <element signature="e#0#74#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/training.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="317">
+              <caret line="72" column="46" selection-start-line="72" selection-start-column="46" selection-end-line="72" selection-end-column="46" />
+              <folding>
+                <element signature="n#table#0;n#div#0;n#div#0;n#div#0;n#!!top" />
               </folding>
             </state>
           </provider>
@@ -46,54 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="179" selection-start-line="179" selection-end-line="179" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="27" column="78" selection-start-line="27" selection-start-column="78" selection-end-line="27" selection-end-column="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/footer.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="3" column="78" selection-start-line="3" selection-start-column="78" selection-end-line="3" selection-end-column="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="23" column="101" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="101" />
-              <folding>
-                <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
-                <element signature="e#3986#3993#1" expanded="true" />
-                <element signature="e#4808#4815#1" expanded="true" />
-                <element signature="n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" />
-                <element signature="n#div#0;n#div#0;n#div#0;n#div#5;n#div#0;n#div#0;n#div#0;n#!!top" />
-                <element signature="e#5770#5777#1" expanded="true" />
-                <element signature="n#div#1;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" />
-                <element signature="n#div#2;n#div#0;n#div#0;n#div#5;n#div#0;n#div#0;n#div#0;n#!!top" />
-              </folding>
+            <state relative-caret-position="1296">
+              <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -101,8 +71,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="53" column="57" lean-forward="true" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
+            <state relative-caret-position="503">
+              <caret line="832" column="30" lean-forward="true" selection-start-line="832" selection-start-column="30" selection-end-line="832" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="16" column="63" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="63" />
+              <folding>
+                <element signature="e#43#64#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -140,7 +122,6 @@
         <option value="$PROJECT_DIR$/analysis.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/QLearner.py" />
-        <option value="$PROJECT_DIR$/strategyLearner.py" />
         <option value="$PROJECT_DIR$/templates/tickers_list.html" />
         <option value="$PROJECT_DIR$/nasdaq.csv" />
         <option value="$PROJECT_DIR$/templates/.ipynb_checkpoints/tickers_list.html" />
@@ -148,15 +129,16 @@
         <option value="$PROJECT_DIR$/data/nasdaq_tickers_name.csv" />
         <option value="$PROJECT_DIR$/form.py" />
         <option value="$PROJECT_DIR$/util.py" />
-        <option value="$PROJECT_DIR$/indicators.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/templates/startValuesForm.html" />
         <option value="$PROJECT_DIR$/templates/stockpriceschart.html" />
-        <option value="$PROJECT_DIR$/templates/training.html" />
         <option value="$PROJECT_DIR$/templates/overview.html" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/templates/footer.html" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/templates/startValuesForm.html" />
+        <option value="$PROJECT_DIR$/strategyLearner.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/indicators.py" />
+        <option value="$PROJECT_DIR$/templates/training.html" />
       </list>
     </option>
   </component>
@@ -501,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544992410722</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Creating footer.html">
+      <created>1544996485725</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1544996485725</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView">
@@ -521,9 +510,9 @@
       <window_info id="Structure" order="1" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
       <window_info id="Favorites" order="2" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32963374" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3437863" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" weight="0.37402886" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32868758" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3437863" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" visible="true" weight="0.37398374" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
@@ -538,17 +527,17 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49726775" visible="true" weight="0.24403183" />
-      <window_info id="Structure" order="1" sideWeight="0.5027322" side_tool="true" weight="0.24417731" />
-      <window_info id="Favorites" order="2" sideWeight="0.5008264" side_tool="true" weight="0.1724138" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.24403183" />
+      <window_info id="Structure" order="1" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
+      <window_info id="Favorites" order="2" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32963374" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32852387" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" visible="true" weight="0.37402886" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3437863" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" weight="0.37402886" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32963374" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.32852387" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.32752612" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32963374" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50132626" side_tool="true" weight="0.37402886" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32963374" />
@@ -623,13 +612,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategyLearner.py</url>
-          <line>347</line>
+          <line>345</line>
           <option name="timeStamp" value="247" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>154</line>
-          <option name="timeStamp" value="284" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -812,47 +796,10 @@
     <entry file="file://$PROJECT_DIR$/data/nasdaq.lst2" />
     <entry file="file://$PROJECT_DIR$/data/nasdaq.lst" />
     <entry file="file://$PROJECT_DIR$/data/nasdaq.csv" />
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="805">
-          <caret line="241" selection-start-line="241" selection-end-line="242" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/.ipynb_checkpoints/index-checkpoint.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="15" column="99" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1759">
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
-          <folding>
-            <element signature="e#0#74#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/indicators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="53" column="57" lean-forward="true" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/strategyLearner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-124">
-          <caret line="238" column="13" selection-start-line="238" selection-start-column="13" selection-end-line="238" selection-end-column="13" />
-          <folding>
-            <element signature="e#80#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -863,24 +810,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="672">
           <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/training.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="124" column="6" selection-start-line="124" selection-start-column="6" selection-end-line="124" selection-end-column="6" />
-          <folding>
-            <element signature="n#table#0;n#div#0;n#div#0;n#div#0;n#!!top" />
-            <element signature="n#div#1;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -918,17 +847,71 @@
     <entry file="file://$PROJECT_DIR$/static/images/logo.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
+    <entry file="file://$PROJECT_DIR$/templates/footer.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="27" column="78" selection-start-line="27" selection-start-column="78" selection-end-line="27" selection-end-column="78" />
+        <state relative-caret-position="264">
+          <caret line="11" column="76" selection-start-line="11" selection-start-column="76" selection-end-line="11" selection-end-column="76" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/footer.html">
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="78" selection-start-line="3" selection-start-column="78" selection-end-line="3" selection-end-column="78" />
+        <state relative-caret-position="960">
+          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1296">
+          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="16" column="63" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="63" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strategyLearner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1166">
+          <caret line="269" lean-forward="true" selection-start-line="269" selection-end-line="269" />
+          <folding>
+            <element signature="e#80#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
+          <folding>
+            <element signature="e#0#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="503">
+          <caret line="832" column="30" lean-forward="true" selection-start-line="832" selection-start-column="30" selection-end-line="832" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/training.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="72" column="46" selection-start-line="72" selection-start-column="46" selection-end-line="72" selection-end-column="46" />
+          <folding>
+            <element signature="n#table#0;n#div#0;n#div#0;n#div#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -187,6 +187,7 @@ def training():
     df_trades = stl.test_policy(df_training, symbol, start_date=start_date_training,
                                 end_date=end_date_training)
 
+    cum_returns = map(lambda cum_returns: cum_returns * 100, cum_returns)
     plot_cum = plot_cum_return(epochs, cum_returns)
 
     # Retrieve performance stats via a market simulator
@@ -228,12 +229,10 @@ def training():
                             test_df_orders,
                             test_portvals,
                             test_portvals_bm,
-                            vert_lines=False,
+                            vert_lines=True,
                             title="Testing Portfolio Value",
                             xtitle="Dates",
                             ytitle="Value ($)")
-
-
 
     return render_template(
         # name of template

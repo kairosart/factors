@@ -3,9 +3,8 @@
 
 
 {% block content %}
+    <legend>Start Values Form</legend>
     {% if error %}
-		<br><br>
-
 		<div class="card text-white  bg-danger mb-3" style="">
 		  <div class="card-header">ERROR</div>
 		  <div class="card-body">
@@ -40,7 +39,7 @@
 
           <form id="form" class="form" action = "/showvalues" method = post>
              <fieldset>
-                <legend>Start Values Form</legend>
+
                 {{ form.hidden_tag() }}
 
                 <div class="form-group">
@@ -53,7 +52,7 @@
                               <option value="{{ value['Symbol'] }}">{{ value['Symbol'] }}</option>
                         {% endfor %}
                     </select>
-
+                    <br><br>
 
                     {{ form.commission.label }} {{ form.commission(class_="form-control", size=4, value=0.00) }}<br>
 

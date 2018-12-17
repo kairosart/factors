@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
-	<h1>Strategy Learner Training</h1>
-	<h4>Training Performance</h4>
-	<h5>
-
-			{{ symbol }} data from {{ start_date }} to {{ end_date }}
-
-	</h5>
+	<legend>Strategy Learner Training</legend>
+	<h5>Training Performance</h5>
+	<p class="text-success">
+		{{ symbol }} data from {{ start_date }} to {{ end_date }}
+	</p>
 
 	{{ div_placeholder_plot_cum }}
 
@@ -66,12 +64,13 @@
 	</div>
 	<br><br>
 
-	<h4>Testing Performance</h4>
-	<h5>
-
+	<h5>Testing Performance</h5>
+	<p class="text-success">
 		{{ symbol }} data from {{ start_date_testing }} to {{ end_date_testing }}
 
-	</h5>
+	</p>
+	<span class="badge badge-success">Buy line</span>
+	<span class="badge badge-danger">Sell line</span>
   {{ div_placeholder_plot_norm_data_testing }}
 
 	<div class="table-responsive">
