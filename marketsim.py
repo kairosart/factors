@@ -44,8 +44,8 @@ def compute_portvals_single_symbol(df_orders, df, symbol, start_val=1000000,
     # Create a dataframe with adjusted close prices for the symbol and for cash
     df_prices = slice_df(df, dates)
     #del df_prices["SPY"]
-    df_prices["cash"] = 1.0
-
+    #df_prices["cash"] = 1.0
+    df_prices.loc[:, ("cash")] = 1.0
     # Fill NAN values if any
     df_prices.fillna(method="ffill", inplace=True)
     df_prices.fillna(method="bfill", inplace=True)
