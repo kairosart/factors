@@ -307,7 +307,7 @@ def forecastPrices():
 
     # ****Momentum chart****
     # Normalize the prices Dataframe
-    normed = pd.DataFrame()
+    normed = portf_value.copy()
     normed[symbol] = portf_value[symbol].values / portf_value[symbol].iloc[0];
 
     # Compute momentum
