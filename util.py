@@ -119,16 +119,6 @@ def compute_sharpe_ratio(k, avg_return, risk_free_rate, std_return):
     return k * (avg_return - risk_free_rate) / std_return
 
 
-def plot_data(df, symbol, title="Stock prices", xlabel="Date", ylabel="Price", save_fig=False, fig_name="plot.png"):
-    """Plot stock prices with a custom title and meaningful axis labels."""
-    ax = df.plot(title=title, fontsize=12)
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
-    if save_fig == True:
-        plt.savefig(fig_name)
-    else:
-        plt.show()
-
 
 def load_txt_data(dirpath, filename):
     """ Load the data from a txt file and store them as a numpy array

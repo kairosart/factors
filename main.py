@@ -274,6 +274,90 @@ def training():
 
     )
 
+# Forecasting prices
+@app.route('/forecastprices', methods=['POST', 'GET'])
+def forecastPrices():
+
+    # Get portfolio values from Yahoo
+    symbol = request.form.get('ticker_select', type=str)
+
+    # Get 1 year of data to train and test
+    start_d = dt.date.today() - dt.timedelta(365)
+    yesterday = dt.date.today() - dt.timedelta(1)
+    # Get dates from initial date to yesterday from Yahoo
+    try:
+        download = fetchOnlineData(start_d, symbol)
+        if download == False:
+            return render_template(
+                # name of template
+                "startValuesForm.html",
+                error=True)
+    except:
+        return render_template(
+            # name of template
+            "startValuesForm.html",
+            error=True)
+
+    portf_value = get_data(symbol)
+
+
+
+    # ****Stock prices chart****
+    plot_prices = plot_stock_prices(portf_value.index, portf_value[symbol], symbol)
+
+    # ****Momentum chart****
+    # Normalize the prices Dataframe
+    normed = pd.DataFrame()
+    normed[symbol] = portf_value[symbol].values / portf_value[symbol].iloc[0];
+
+    # Compute momentum
+    sym_mom = get_momentum(normed[symbol], window=10)
+
+    # Create momentum column
+    normed['Momentum'] = sym_mom
+
+
+
+    # ****Simple moving average (SMA)****
+    # Compute SMA
+    sma, q = get_sma(normed[symbol], window=10)
+
+    # Create SMA column
+    normed['SMA'] = sma
+
+
+    # ****Relative Strength Index (RSI)****
+    # Compute RSI
+    rsi_value = get_RSI(portf_value[symbol])
+
+    # Create SMA column
+    normed['RSI'] = rsi_value
+
+    # Session variables
+    session['start_val'] = request.form['start_val']
+    session['symbol'] = symbol
+    session['start_d'] = start_d.strftime('%Y/%m/%d')
+    session['num_shares'] = request.form['num_shares']
+    session['commission'] = request.form['commission']
+    session['impact'] = request.form['impact']
+
+
+    return render_template(
+    # name of template
+	"forecastPrices.html",
+
+    # now we pass in our variables into the template
+    start_val = request.form['start_val'],
+    symbol = symbol,
+    commission = request.form['commission'],
+    impact = request.form['impact'],
+    num_shares = request.form['num_shares'],
+    start_date = start_d,
+    end_date = yesterday,
+    tables=[portf_value.to_html()],
+    titles = ['na', 'Stock Prices '],
+
+    )
 
 
 # Initial form to get values
