@@ -12,7 +12,10 @@ yf.pdr_override()
 from util import create_df_benchmark, fetchOnlineData, get_learner_data_file, get_data, slice_df
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
-from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
+from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
+    compute_bollinger_value, get_RSI, plot_cum_return, plot_momentum, plot_sma_indicator, plot_rsi_indicator, \
+    plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines, \
+    plot_stock_prices_prediction
 from linRegLearner import LinRegLearner
 # prep
 from sklearn.model_selection import train_test_split
@@ -180,6 +183,8 @@ def showvalues():
         # Saving predictions
         results = pd.DataFrame({'Price': y_test, 'Price prediction': predY})
 
+        # Plot prediction
+        plot_prices_pred = plot_stock_prices_prediction(results, symbol)
         return render_template(
             # name of template
             "forecastPrices.html",
@@ -191,7 +196,7 @@ def showvalues():
             num_shares=request.form['num_shares'],
             start_date=start_d,
             end_date=yesterday,
-            table=normed,
+            div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
             titles=['na', 'Stock Prices '],
         )
 

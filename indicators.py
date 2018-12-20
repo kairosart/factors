@@ -127,7 +127,7 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
     fig_size: Width and height of the chart in inches
 
     Returns:
-    Plot cumulative return
+    Plot prices
     """
     trace_prices = go.Scatter(
                 x=df_index,
@@ -888,5 +888,77 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
 
     fig = dict(data=data, layout=layout)
 
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart
+
+def plot_stock_prices_prediction(df_prices, symbol, title="Stock prices prediction", xlabel="Date", ylabel="Price"):
+    """Plot Stock Prices.
+
+    Parameters:
+    df_prices: Prices dataframe
+    title: Chart title
+    xlabel: X axis title
+    ylable: Y axis title
+
+    Returns:
+    Plot prices prediction
+    """
+    trace_prices = go.Scatter(
+                x=df_prices.index,
+                y=df_prices['Price'],
+                name = symbol,
+                line = dict(color = '#17BECF'),
+                fill='tonexty',
+                opacity = 0.8)
+
+    trace_prices_pred = go.Scatter(
+                x=df_prices.index,
+                y=df_prices['Price prediction'],
+                name=symbol,
+                line=dict(color='#FF8000'),
+                fill='tonexty',
+                opacity=0.8)
+
+
+    data = [trace_prices, trace_prices_pred]
+
+    layout = dict(
+        title = title,
+        showlegend=True,
+        legend=dict(
+                orientation="h"),
+        margin=go.layout.Margin(
+            l=50,
+            r=10,
+            b=100,
+            t=100,
+            pad=4
+        ),
+        xaxis = dict(
+                title=xlabel,
+                linecolor='#000', linewidth=1,
+                rangeselector=dict(
+                        buttons=list([
+                            dict(count=1,
+                                 label='1m',
+                                 step='month',
+                                 stepmode='backward'),
+                            dict(count=6,
+                                 label='6m',
+                                 step='month',
+                                 stepmode='backward'),
+                            dict(step='all')
+                        ])
+                ),
+                range = [df_prices.values[0], df_prices.values[1]]),
+
+        yaxis = dict(
+                title=ylabel,
+                linecolor='#000', linewidth=1
+                ),
+    )
+
+
+    fig = dict(data=data, layout=layout)
     chart = plot(fig, show_link=False, output_type='div')
     return chart
