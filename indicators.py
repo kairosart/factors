@@ -891,7 +891,7 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_stock_prices_prediction(df_prices, symbol, title="Stock prices prediction", xlabel="Date", ylabel="Price"):
+def plot_stock_prices_prediction(df_index, prices, prediction, title="Stock prices prediction", xlabel="Date", ylabel="Price"):
     """Plot Stock Prices.
 
     Parameters:
@@ -904,19 +904,17 @@ def plot_stock_prices_prediction(df_prices, symbol, title="Stock prices predicti
     Plot prices prediction
     """
     trace_prices = go.Scatter(
-                x=df_prices.index,
-                y=df_prices['Price'],
-                name = symbol,
+                x=df_index,
+                y=prices,
+                name = 'Price',
                 line = dict(color = '#17BECF'),
-                fill='tonexty',
                 opacity = 0.8)
 
     trace_prices_pred = go.Scatter(
-                x=df_prices.index,
-                y=df_prices['Price prediction'],
-                name=symbol,
+                x=df_index,
+                y=prediction,
+                name='Price prediction',
                 line=dict(color='#FF8000'),
-                fill='tonexty',
                 opacity=0.8)
 
 
@@ -950,7 +948,7 @@ def plot_stock_prices_prediction(df_prices, symbol, title="Stock prices predicti
                             dict(step='all')
                         ])
                 ),
-                range = [df_prices.values[0], df_prices.values[1]]),
+                range=[df_index.values[0], df_index.values[1]]),
 
         yaxis = dict(
                 title=ylabel,

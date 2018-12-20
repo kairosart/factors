@@ -182,9 +182,10 @@ def showvalues():
 
         # Saving predictions
         results = pd.DataFrame({'Price': y_test, 'Price prediction': predY})
-
+        results.sort_index(inplace=True)
         # Plot prediction
-        plot_prices_pred = plot_stock_prices_prediction(results, symbol)
+
+        plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])
         return render_template(
             # name of template
             "forecastPrices.html",
