@@ -1,3 +1,5 @@
+import math
+
 from flask import Flask, render_template, session, jsonify, request, flash
 from form import StartValuesForm
 import pandas as pd
@@ -11,8 +13,9 @@ from util import create_df_benchmark, fetchOnlineData, get_learner_data_file, ge
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
 from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, compute_bollinger_value, get_RSI, plot_cum_return,  plot_momentum, plot_sma_indicator, plot_rsi_indicator, plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
-
-
+from linRegLearner import LinRegLearner
+# prep
+from sklearn.model_selection import train_test_split
 
 
 app = Flask(__name__)
@@ -65,16 +68,15 @@ def showvalues():
     # ****Stock prices chart****
     plot_prices = plot_stock_prices(portf_value.index, portf_value[symbol], symbol)
 
-    # ****Momentum chart****
+
     # Normalize the prices Dataframe
     normed = pd.DataFrame()
     normed[symbol] = portf_value[symbol].values / portf_value[symbol].iloc[0];
-
+    normed['date'] = portf_value.index
+    normed.set_index('date', inplace=True)
+    # ****Momentum chart****
     # Compute momentum
     sym_mom = get_momentum(normed[symbol], window=10)
-
-    # Create momentum chart
-    plot_mom = plot_momentum(portf_value.index, normed[symbol], symbol, sym_mom, "Momentum Indicator", (12, 8))
 
     # ****Bollinger Bands****
     # Compute rolling mean
@@ -86,27 +88,13 @@ def showvalues():
     # Compute upper and lower bands
     upper_band, lower_band = get_bollinger_bands(rm_JPM, rstd_JPM)
 
-    # Plot raw symbol values, rolling mean and Bollinger Bands
-    dates = pd.date_range(start_d, yesterday)
-    plot_boll = plot_bollinger(dates, portf_value.index, portf_value[symbol], symbol, upper_band, lower_band, rm_JPM,
-                   num_std=1, title="Bollinger Indicator", fig_size=(12, 6))
-
-
-    # ****Simple moving average (SMA)****
-    # Compute SMA
-    sma_JPM, q = get_sma(normed[symbol], window=10)
-
-    # Plot symbol values, SMA and SMA quality
-    plot_sma = plot_sma_indicator(dates, portf_value.index, normed[symbol], symbol, sma_JPM, q, "Simple Moving Average (SMA)")
-
-
     # ****Relative Strength Index (RSI)****
     # Compute RSI
     rsi_value = get_RSI(portf_value[symbol])
 
-    # Plot RSI
-    plot_rsi =  plot_rsi_indicator(dates, portf_value.index, portf_value[symbol], symbol, rsi_value, window=14,
-                       title="RSI Indicator", fig_size=(12, 6))
+    # ****Simple moving average (SMA)****
+    # Compute SMA
+    sma, q = get_sma(normed[symbol], window=10)
 
     # Session variables
     session['start_val'] = request.form['start_val']
@@ -115,29 +103,97 @@ def showvalues():
     session['num_shares'] = request.form['num_shares']
     session['commission'] = request.form['commission']
     session['impact'] = request.form['impact']
+    session['type'] = request.form['forecast']
+
+    if session['type'] == "showvalues":
+        # Price movements
+
+        # Create momentum chart
+        plot_mom = plot_momentum(portf_value.index, normed[symbol], symbol, sym_mom, "Momentum Indicator", (12, 8))
 
 
-    return render_template(
-    # name of template
-	"stockpriceschart.html",
+        # Plot raw symbol values, rolling mean and Bollinger Bands
+        dates = pd.date_range(start_d, yesterday)
+        plot_boll = plot_bollinger(dates, portf_value.index, portf_value[symbol], symbol, upper_band, lower_band,
+                                   rm_JPM,
+                                   num_std=1, title="Bollinger Indicator", fig_size=(12, 6))
 
-    # now we pass in our variables into the template
-    start_val = request.form['start_val'],
-    symbol = symbol,
-    commission = request.form['commission'],
-    impact = request.form['impact'],
-    num_shares = request.form['num_shares'],
-    start_date = start_d,
-    end_date = yesterday,
-    tables=[portf_value.to_html()],
-    titles = ['na', 'Stock Prices '],
-    div_placeholder_stock_prices = Markup(plot_prices),
-    div_placeholder_momentum = Markup(plot_mom),
-    div_placeholder_bollinger = Markup(plot_boll),
-    div_placeholder_sma = Markup(plot_sma),
-    div_placeholder_rsi = Markup(plot_rsi)
+        # Plot symbol values, SMA and SMA quality
+        plot_sma = plot_sma_indicator(dates, portf_value.index, normed[symbol], symbol, sma, q,
+                                      "Simple Moving Average (SMA)")
 
-    )
+
+        # Plot RSI
+        plot_rsi = plot_rsi_indicator(dates, portf_value.index, portf_value[symbol], symbol, rsi_value, window=14,
+                                      title="RSI Indicator", fig_size=(12, 6))
+        return render_template(
+        # name of template
+        "stockpriceschart.html",
+
+        # now we pass in our variables into the template
+        start_val = request.form['start_val'],
+        symbol = symbol,
+        commission = request.form['commission'],
+        impact = request.form['impact'],
+        num_shares = request.form['num_shares'],
+        start_date = start_d,
+        end_date = yesterday,
+        tables=[portf_value.to_html()],
+        titles = ['na', 'Stock Prices '],
+        div_placeholder_stock_prices = Markup(plot_prices),
+        div_placeholder_momentum = Markup(plot_mom),
+        div_placeholder_bollinger = Markup(plot_boll),
+        div_placeholder_sma = Markup(plot_sma),
+        div_placeholder_rsi = Markup(plot_rsi)
+        )
+    else:
+        # Price forecasting
+
+
+
+        # Create momentum column
+        normed['Momentum'] = sym_mom
+
+        # Create SMA column
+        normed['SMA'] = sma
+
+        # Create SMA column
+        normed['RSI'] = rsi_value
+
+        # Clean nan values
+        normed = normed.fillna(0)
+
+        # Define X and y
+        feature_cols = ['Momentum', 'SMA', 'RSI']
+        X = normed[feature_cols]
+        y = normed[symbol]
+
+        # split X and y into training and testing sets
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+
+        # Learner
+        learner = LinRegLearner()
+        learner.addEvidence(X_train, y_train)
+        predY = learner.query(X_test)
+        rmse = math.sqrt(((y_test - predY) ** 2).sum() / y_test.shape[0])
+
+        # Saving predictions
+        results = pd.DataFrame({'Price': y_test, 'Price prediction': predY})
+
+        return render_template(
+            # name of template
+            "forecastPrices.html",
+            # now we pass in our variables into the template
+            start_val=request.form['start_val'],
+            symbol=symbol,
+            commission=request.form['commission'],
+            impact=request.form['impact'],
+            num_shares=request.form['num_shares'],
+            start_date=start_d,
+            end_date=yesterday,
+            table=normed,
+            titles=['na', 'Stock Prices '],
+        )
 
 # Training
 @app.route('/benchmark', methods=['POST', 'GET'])
@@ -271,91 +327,6 @@ def training():
         std_daily_ret_b_testing = round(test_std_daily_ret_bm, 3),
         avg_daily_ret_b_testing = round(test_avg_daily_ret_bm, 3),
         final_value_b_testing = round(test_final_value_bm, 3)
-
-    )
-
-# Forecasting prices
-@app.route('/forecastprices', methods=['POST', 'GET'])
-def forecastPrices():
-
-    # Get portfolio values from Yahoo
-    symbol = request.form.get('ticker_select', type=str)
-
-    # Get 1 year of data to train and test
-    start_d = dt.date.today() - dt.timedelta(365)
-    yesterday = dt.date.today() - dt.timedelta(1)
-    # Get dates from initial date to yesterday from Yahoo
-    try:
-        download = fetchOnlineData(start_d, symbol)
-        if download == False:
-            return render_template(
-                # name of template
-                "startValuesForm.html",
-                error=True)
-    except:
-        return render_template(
-            # name of template
-            "startValuesForm.html",
-            error=True)
-
-    portf_value = get_data(symbol)
-
-
-
-    # ****Stock prices chart****
-    plot_prices = plot_stock_prices(portf_value.index, portf_value[symbol], symbol)
-
-    # ****Momentum chart****
-    # Normalize the prices Dataframe
-    normed = portf_value.copy()
-    normed[symbol] = portf_value[symbol].values / portf_value[symbol].iloc[0];
-
-    # Compute momentum
-    sym_mom = get_momentum(normed[symbol], window=10)
-
-    # Create momentum column
-    normed['Momentum'] = sym_mom
-
-
-
-    # ****Simple moving average (SMA)****
-    # Compute SMA
-    sma, q = get_sma(normed[symbol], window=10)
-
-    # Create SMA column
-    normed['SMA'] = sma
-
-
-    # ****Relative Strength Index (RSI)****
-    # Compute RSI
-    rsi_value = get_RSI(portf_value[symbol])
-
-    # Create SMA column
-    normed['RSI'] = rsi_value
-
-    # Session variables
-    session['start_val'] = request.form['start_val']
-    session['symbol'] = symbol
-    session['start_d'] = start_d.strftime('%Y/%m/%d')
-    session['num_shares'] = request.form['num_shares']
-    session['commission'] = request.form['commission']
-    session['impact'] = request.form['impact']
-
-
-    return render_template(
-    # name of template
-	"forecastPrices.html",
-
-    # now we pass in our variables into the template
-    start_val = request.form['start_val'],
-    symbol = symbol,
-    commission = request.form['commission'],
-    impact = request.form['impact'],
-    num_shares = request.form['num_shares'],
-    start_date = start_d,
-    end_date = yesterday,
-    tables=[portf_value.to_html()],
-    titles = ['na', 'Stock Prices '],
 
     )
 

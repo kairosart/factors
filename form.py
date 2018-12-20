@@ -13,7 +13,9 @@ class StartValuesForm(FlaskForm):
     impact = DecimalField('Impact')
     num_shares = IntegerField('Shares number', [validators.DataRequired("Please enter number of shares.")])
     submit = SubmitField("Send")
-    forecast = RadioField('Forecast type', choices = [('forecastprices','Price'),('showvalues','Price movements')], default='Price')
+    forecast = RadioField('Forecast type',
+                          choices = [('forecastprices','Price'),('showvalues','Price movements')],
+                          default='forecastprices')
 
     def get_tickers(setf, filename):
         df = pd.read_csv(symbol_to_path(filename), usecols=['Symbol'])

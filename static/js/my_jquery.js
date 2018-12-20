@@ -2,7 +2,6 @@
 
 $(document).ready(function(e){
     $("#submitButton").on('click',function(){
-
         $(this).val("Wait a second...");
         $(this).css('color','white');
         $(this).css('background-color', 'red');
@@ -17,8 +16,5 @@ $(document).ready(function(e){
         $(this).css('color','white');
         $(this).css('background-color', 'red');
     });
-    $('input[type=radio]').on('click', function(){
-        href = $(this).val();
-        $('#form').attr("action", href)
-    });
+
 });
