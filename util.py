@@ -9,6 +9,8 @@ import csv
 # To fetch data
 from pandas_datareader import data as pdr
 import fix_yahoo_finance as yf
+from sklearn.preprocessing import MinMaxScaler
+
 yf.pdr_override()
 
 def symbol_to_path(symbol, base_dir=None):
@@ -97,6 +99,11 @@ def normalize_data(df):
     """Normalize stock prices using the first row of the dataframe"""
     return df/df.iloc[0,:]
 
+def scaling_data(df, column):
+    # Scaling column
+    scaler = MinMaxScaler()
+    df[column] = scaler.fit_transform(df[[column]])
+    return df
 
 def compute_daily_returns(df):
     """Compute and return the daily return values"""

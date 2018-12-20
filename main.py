@@ -9,7 +9,8 @@ from markupsafe import Markup
 import fix_yahoo_finance as yf
 yf.pdr_override()
 
-from util import create_df_benchmark, fetchOnlineData, get_learner_data_file, get_data, slice_df
+from util import create_df_benchmark, fetchOnlineData, get_learner_data_file, get_data, slice_df, normalize_data, \
+    scaling_data
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
 from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
@@ -51,6 +52,9 @@ def showvalues():
     # Get 1 year of data to train and test
     start_d = dt.date.today() - dt.timedelta(365)
     yesterday = dt.date.today() - dt.timedelta(1)
+
+    #TODO Check whether there is a file with input data or not before dowunloading
+
     # Get dates from initial date to yesterday from Yahoo
     try:
         download = fetchOnlineData(start_d, symbol)
@@ -73,10 +77,10 @@ def showvalues():
 
 
     # Normalize the prices Dataframe
-    normed = pd.DataFrame()
-    normed[symbol] = portf_value[symbol].values / portf_value[symbol].iloc[0];
+    normed = normalize_data(portf_value)
     normed['date'] = portf_value.index
     normed.set_index('date', inplace=True)
+
     # ****Momentum chart****
     # Compute momentum
     sym_mom = get_momentum(normed[symbol], window=10)
