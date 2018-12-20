@@ -1,4 +1,6 @@
 import math
+import os
+import time
 
 from flask import Flask, render_template, session, jsonify, request, flash
 from form import StartValuesForm
@@ -10,7 +12,7 @@ import fix_yahoo_finance as yf
 yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_learner_data_file, get_data, slice_df, normalize_data, \
-    scaling_data
+    scaling_data, symbol_to_path
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
 from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
@@ -54,6 +56,10 @@ def showvalues():
     yesterday = dt.date.today() - dt.timedelta(1)
 
     #TODO Check whether there is a file with input data or not before dowunloading
+    file = symbol_to_path(symbol)
+    if os.path.isfile(file):
+        (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(file)
+        print("last modified: %s" % time.ctime(mtime))
 
     # Get dates from initial date to yesterday from Yahoo
     try:
@@ -77,7 +83,11 @@ def showvalues():
 
 
     # Normalize the prices Dataframe
+    #TODO Change the way of normalizing data?
+
+
     normed = normalize_data(portf_value)
+    normed_scaled = scaling_data(portf_value[symbol].values)
     normed['date'] = portf_value.index
     normed.set_index('date', inplace=True)
 
