@@ -25,7 +25,8 @@ from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mea
 
 # prep
 from sklearn.model_selection import train_test_split
-
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.linear_model import LinearRegression
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -168,8 +169,6 @@ def showvalues():
     else:
         # Price forecasting
 
-
-
         # Create momentum column
         normed['Momentum'] = sym_mom
 
@@ -190,17 +189,7 @@ def showvalues():
         # split X and y into training and testing sets
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
 
-        # Learner
-        '''
-        learner = LinRegLearner()
-        learner.addEvidence(X_train, y_train)
-        predY = learner.query(X_test)
-        rmse = math.sqrt(((y_test - predY) ** 2).sum() / y_test.shape[0])
-        '''
-        from sklearn.metrics import mean_squared_error, r2_score
 
-        # Train the model using the training data that we created
-        from sklearn.linear_model import LinearRegression
 
         model = LinearRegression()
         model.fit(X_train, y_train)
