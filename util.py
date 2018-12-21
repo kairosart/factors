@@ -105,6 +105,9 @@ def scaling_data(df, column):
     df[column] = scaler.fit_transform(df[[column]])
     return df
 
+
+
+
 def compute_daily_returns(df):
     """Compute and return the daily return values"""
     daily_returns = df.pct_change()

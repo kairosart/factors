@@ -32,11 +32,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="87" column="4" lean-forward="true" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="4" />
+            <state relative-caret-position="271">
+              <caret line="211" column="9" selection-start-line="211" selection-start-column="9" selection-end-line="211" selection-end-column="9" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#1935#2049#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/linRegLearner.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="696">
+              <caret line="44" column="62" lean-forward="true" selection-start-line="44" selection-start-column="50" selection-end-line="44" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -62,7 +72,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2311">
+            <state relative-caret-position="511">
               <caret line="905" selection-start-line="905" selection-end-line="905" />
               <folding>
                 <element signature="e#451#877#0" />
@@ -90,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-137">
-              <caret line="104" column="19" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="19" />
+            <state relative-caret-position="415">
+              <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
               </folding>
@@ -138,9 +148,11 @@
       <find>info</find>
       <find>'Adj Close'</find>
       <find>copy()</find>
+      <find>regression_model</find>
     </findStrings>
     <replaceStrings>
       <replace>symbol</replace>
+      <replace>model</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -168,10 +180,10 @@
         <option value="$PROJECT_DIR$/form.py" />
         <option value="$PROJECT_DIR$/static/js/my_jquery.js" />
         <option value="$PROJECT_DIR$/templates/stockpriceschart.html" />
-        <option value="$PROJECT_DIR$/linRegLearner.py" />
         <option value="$PROJECT_DIR$/templates/forecastPrices.html" />
         <option value="$PROJECT_DIR$/indicators.py" />
         <option value="$PROJECT_DIR$/util.py" />
+        <option value="$PROJECT_DIR$/linRegLearner.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -572,7 +584,21 @@
       <option name="project" value="LOCAL" />
       <updated>1545338671189</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Creating prices forecasting. LinRegLearner.">
+      <created>1545341500266</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1545341500266</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Check whether there is a file with input data or not before dowunloading. Change normalized method.">
+      <created>1545394821503</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1545394821503</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TodoView">
@@ -593,8 +619,8 @@
       <window_info id="Favorites" order="2" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32868758" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3437863" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" weight="0.37398374" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3437863" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" visible="true" weight="0.37398374" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
@@ -692,7 +718,8 @@
     <MESSAGE value="Fixing error cum_returns." />
     <MESSAGE value="Creating prices forecasting." />
     <MESSAGE value="Creating prices forecasting. LinRegLearner." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating prices forecasting. LinRegLearner." />
+    <MESSAGE value="Check whether there is a file with input data or not before dowunloading. Change normalized method." />
+    <option name="LAST_COMMIT_MESSAGE" value="Check whether there is a file with input data or not before dowunloading. Change normalized method." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -704,12 +731,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>265</line>
-          <option name="timeStamp" value="286" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>266</line>
+          <line>290</line>
           <option name="timeStamp" value="287" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -719,7 +741,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>145</line>
+          <line>147</line>
           <option name="timeStamp" value="298" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -729,18 +751,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>90</line>
-          <option name="timeStamp" value="310" />
+          <line>226</line>
+          <option name="timeStamp" value="327" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>91</line>
-          <option name="timeStamp" value="311" />
+          <line>211</line>
+          <option name="timeStamp" value="332" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>124</line>
-          <option name="timeStamp" value="312" />
+          <line>216</line>
+          <option name="timeStamp" value="334" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>221</line>
+          <option name="timeStamp" value="336" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>214</line>
+          <option name="timeStamp" value="337" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -986,13 +1018,6 @@
         <state showInfoPanel="true" rowLines="3" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/linRegLearner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1014,9 +1039,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/indicators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2311">
+        <state relative-caret-position="511">
           <caret line="905" selection-start-line="905" selection-end-line="905" />
           <folding>
             <element signature="e#451#877#0" />
@@ -1040,22 +1075,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
+    <entry file="file://$PROJECT_DIR$/linRegLearner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-137">
-          <caret line="104" column="19" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="19" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="696">
+          <caret line="44" column="62" lean-forward="true" selection-start-line="44" selection-start-column="50" selection-end-line="44" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="87" column="4" lean-forward="true" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="4" />
+        <state relative-caret-position="271">
+          <caret line="211" column="9" selection-start-line="211" selection-start-column="9" selection-end-line="211" selection-end-column="9" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#1935#2049#0" />
           </folding>
         </state>
       </provider>

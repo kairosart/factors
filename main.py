@@ -1,8 +1,9 @@
 import math
 import os
-import time
+import numpy as np
 
 from flask import Flask, render_template, session, jsonify, request, flash
+from sklearn.metrics import accuracy_score, explained_variance_score
 from sklearn.preprocessing import StandardScaler
 
 from form import StartValuesForm
@@ -13,7 +14,7 @@ from markupsafe import Markup
 import fix_yahoo_finance as yf
 yf.pdr_override()
 
-from util import create_df_benchmark, fetchOnlineData, get_learner_data_file, get_data, slice_df, normalize_data, \
+from util import create_df_benchmark, fetchOnlineData, get_data, \
     scaling_data, symbol_to_path
 from strategyLearner import strategyLearner
 from marketsim import compute_portvals_single_symbol, market_simulator
@@ -21,7 +22,7 @@ from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mea
     compute_bollinger_value, get_RSI, plot_cum_return, plot_momentum, plot_sma_indicator, plot_rsi_indicator, \
     plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines, \
     plot_stock_prices_prediction
-from linRegLearner import LinRegLearner
+
 # prep
 from sklearn.model_selection import train_test_split
 
@@ -61,7 +62,6 @@ def showvalues():
     file = symbol_to_path(symbol)
     if os.path.isfile(file):
         (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(file)
-        print("last modified: %s" % time.ctime(ctime))
         file_date = dt.datetime.utcfromtimestamp(ctime).strftime('%Y-%m-%d')
         today = dt.date.today()
         if file_date != str(today):
@@ -88,7 +88,7 @@ def showvalues():
 
     # Normalize the prices Dataframe
     normed = portf_value.copy()
-    normed = scaling_data(normed, symbol)
+    #normed = scaling_data(normed, symbol)
 
     normed['date'] = portf_value.index
     normed.set_index('date', inplace=True)
@@ -191,14 +191,37 @@ def showvalues():
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
 
         # Learner
+        '''
         learner = LinRegLearner()
         learner.addEvidence(X_train, y_train)
         predY = learner.query(X_test)
         rmse = math.sqrt(((y_test - predY) ** 2).sum() / y_test.shape[0])
+        '''
+        from sklearn.metrics import mean_squared_error, r2_score
 
-        # Saving predictions
-        results = pd.DataFrame({'Price': y_test, 'Price prediction': predY})
+        # Train the model using the training data that we created
+        from sklearn.linear_model import LinearRegression
+
+        model = LinearRegression()
+        model.fit(X_train, y_train)
+
+        # We then use the model to make predictions based on the test values of x
+        y_pred = model.predict(X_test)
+
+        # Now that we have trained the model, we can print the coefficient of x that it has predicted
+        print('Coefficient: \n', model.coef_)
+
+        # calculate accuracy
+        print('Accuracy:', explained_variance_score(y_test, y_pred, multioutput='uniform_average'))
+        # Now, we can calculate the models accuracy metrics based on what the actual value of y was
+        print("Mean squared error: %.2f"
+              % mean_squared_error(y_pred, y_test))
+        print('r_2 statistic: %.2f' % r2_score(y_pred, y_test))
+
+        # Predictions
+        results = pd.DataFrame({'Price': y_test, 'Price prediction': y_pred})
         results.sort_index(inplace=True)
+
         # Plot prediction
 
         plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])
@@ -265,7 +288,6 @@ def training():
     df_trades = stl.test_policy(df_training, symbol, start_date=start_date_training,
                                 end_date=end_date_training)
 
-    #cum_returns = map(lambda cum_returns: cum_returns * 100, cum_returns)
     plot_cum = plot_cum_return(epochs, cum_returns)
 
     # Retrieve performance stats via a market simulator
