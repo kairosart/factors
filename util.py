@@ -99,13 +99,11 @@ def normalize_data(df):
     """Normalize stock prices using the first row of the dataframe"""
     return df/df.iloc[0,:]
 
-def scaling_data(values):
+def scaling_data(df, column):
     # Scaling column
     scaler = StandardScaler()
-    values = values.reshape(-1, 1)
-    scaler = scaler.fit(values)
-    normalized = scaler.transform(values)
-    return normalized
+    df[column] = scaler.fit_transform(df[[column]])
+    return df
 
 def compute_daily_returns(df):
     """Compute and return the daily return values"""

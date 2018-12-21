@@ -3,6 +3,8 @@ import os
 import time
 
 from flask import Flask, render_template, session, jsonify, request, flash
+from sklearn.preprocessing import StandardScaler
+
 from form import StartValuesForm
 import pandas as pd
 import datetime as dt
@@ -55,25 +57,27 @@ def showvalues():
     start_d = dt.date.today() - dt.timedelta(365)
     yesterday = dt.date.today() - dt.timedelta(1)
 
-    #TODO Check whether there is a file with input data or not before dowunloading
+    # Check whether there is a file with input data or not before dowunloading
     file = symbol_to_path(symbol)
     if os.path.isfile(file):
         (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(file)
-        print("last modified: %s" % time.ctime(mtime))
-
-    # Get dates from initial date to yesterday from Yahoo
-    try:
-        download = fetchOnlineData(start_d, symbol)
-        if download == False:
-            return render_template(
-                # name of template
-                "startValuesForm.html",
-                error=True)
-    except:
-        return render_template(
-            # name of template
-            "startValuesForm.html",
-            error=True)
+        print("last modified: %s" % time.ctime(ctime))
+        file_date = dt.datetime.utcfromtimestamp(ctime).strftime('%Y-%m-%d')
+        today = dt.date.today()
+        if file_date != str(today):
+        # Get dates from initial date to yesterday from Yahoo
+            try:
+                download = fetchOnlineData(start_d, symbol)
+                if download == False:
+                    return render_template(
+                        # name of template
+                        "startValuesForm.html",
+                        error=True)
+            except:
+                return render_template(
+                    # name of template
+                    "startValuesForm.html",
+                    error=True)
 
     portf_value = get_data(symbol)
 
@@ -83,11 +87,9 @@ def showvalues():
 
 
     # Normalize the prices Dataframe
-    #TODO Change the way of normalizing data?
+    normed = portf_value.copy()
+    normed = scaling_data(normed, symbol)
 
-
-    normed = normalize_data(portf_value)
-    normed_scaled = scaling_data(portf_value[symbol].values)
     normed['date'] = portf_value.index
     normed.set_index('date', inplace=True)
 
