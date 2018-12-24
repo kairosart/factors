@@ -5,11 +5,12 @@ import numpy as np
 from flask import Flask, render_template, session, jsonify, request, flash
 from sklearn.metrics import accuracy_score, explained_variance_score
 from sklearn.preprocessing import StandardScaler
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 
 from form import StartValuesForm
 import pandas as pd
 import datetime as dt
-from sklearn import datasets, svm
+from sklearn import datasets, svm, metrics
 from markupsafe import Markup
 import fix_yahoo_finance as yf
 yf.pdr_override()
@@ -25,8 +26,8 @@ from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mea
 
 # prep
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.linear_model import LinearRegression
+from sklearn import tree
+
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -190,24 +191,70 @@ def showvalues():
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
 
 
+        #TODO Finding the best parameters to predict prices
 
-        model = LinearRegression()
+        # Loop through a few different max depths and check the performance
+        for d in [3, 5, 10]:
+            # Create the tree and fit it
+            decision_tree = DecisionTreeRegressor(max_depth=d)
+            decision_tree.fit(X_train, y_train)
+
+            # Print out the scores on train and test
+            print('max_depth=', str(d))
+            print(decision_tree.score(X_train, y_train))
+            print(decision_tree.score(X_test, y_test), '\n')
+
+        model = tree.DecisionTreeRegressor(max_depth=10)
+
         model.fit(X_train, y_train)
 
-        # We then use the model to make predictions based on the test values of x
+        # Predictions
         y_pred = model.predict(X_test)
 
-        # Now that we have trained the model, we can print the coefficient of x that it has predicted
-        print('Coefficient: \n', model.coef_)
+        # Measuring predictions
+        # Coefficient of determination R^2
+        '''
+        The best possible score is 1.0 and it can be negative (because the model can be arbitrarily worse). A constant model that always predicts the expected value of y, disregarding the input features, would get a R^2 score of 0.0.
+        '''
+        coef_deter = model.score(X_train, y_train)
+        print('Coefficient of determination R^2: %s') %  coef_deter
 
-        # calculate accuracy
-        print('Accuracy:', explained_variance_score(y_test, y_pred, multioutput='uniform_average'))
-        # Now, we can calculate the models accuracy metrics based on what the actual value of y was
-        print("Mean squared error: %.2f"
-              % mean_squared_error(y_pred, y_test))
-        print('r_2 statistic: %.2f' % r2_score(y_pred, y_test))
 
-        # Predictions
+        # Forecast error
+        '''
+        The units of the forecast error are the same as the units of the prediction. A forecast error of zero indicates no error, or perfect skill for that forecast.
+        '''
+        forecast_errors = [y_test[i] - y_pred[i] for i in range(len(y_test))]
+        print('Forecast Errors: %s' % forecast_errors)
+
+        # Forecast bias
+        '''
+        Mean forecast error, also known as the forecast bias. A forecast bias of zero, or a very small number near zero, shows an unbiased model.
+        '''
+        bias = sum(forecast_errors) * 1.0 / len(y_test)
+        print('Bias: %f' % bias)
+
+        # Mean absolute error
+        '''
+        A mean absolute error of zero indicates no error.
+        '''
+        print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
+
+        # Mean squared error
+        '''
+        A mean squared error of zero indicates perfect skill, or no error.
+        '''
+        print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
+
+        # Root mean squared error
+        '''
+        As with the mean squared error, an RMSE of zero indicates no error.
+        '''
+        print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+
+
+
+
         results = pd.DataFrame({'Price': y_test, 'Price prediction': y_pred})
         results.sort_index(inplace=True)
 
