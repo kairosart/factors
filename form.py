@@ -1,11 +1,17 @@
+from datetime import date
+
 import pandas as pd
 from util import symbol_to_path
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, DecimalField, SubmitField, RadioField, SelectField
+from wtforms import IntegerField, DecimalField, SubmitField, RadioField, SelectField, DateField
 from wtforms import validators
 
 
-# Form class
+def get_tickers(filename):
+    df = pd.read_csv(symbol_to_path(filename), usecols=['Symbol'])
+    return df
+
+# Price movements Form class
 class StartValuesForm(FlaskForm):
     start_val = IntegerField('Initial Capital', [validators.DataRequired("Please enter a value.")])
     symbol = SelectField('Stock Symbol')
@@ -17,6 +23,14 @@ class StartValuesForm(FlaskForm):
                           choices = [('forecastprices','Price'),('showvalues','Price movements')],
                           default='forecastprices')
 
-    def get_tickers(setf, filename):
-        df = pd.read_csv(symbol_to_path(filename), usecols=['Symbol'])
-        return df
+
+
+
+class pricesForecast(FlaskForm):
+    forecastDate = DateField('Forecast Date ex: 2018-10-20',format='%Y-%m-%d')
+    symbol = SelectField('Stock Symbol')
+    modelSelection = SelectField('Select model')
+    forecastType = SelectField('Forecast')
+    lookback = SelectField('Lookback')
+    submit = SubmitField("Send")
+

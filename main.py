@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score, explained_variance_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 
-from form import StartValuesForm
+from form import StartValuesForm, get_tickers, pricesForecast
 import pandas as pd
 import datetime as dt
 from sklearn import datasets, svm, metrics
@@ -191,8 +191,6 @@ def showvalues():
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
 
 
-        #TODO Finding the best parameters to predict prices
-
         # Loop through a few different max depths and check the performance
         for d in [3, 5, 10]:
             # Create the tree and fit it
@@ -276,139 +274,7 @@ def showvalues():
             titles=['na', 'Stock Prices '],
         )
 
-# Training
-@app.route('/benchmark', methods=['POST', 'GET'])
-def training():
-    # **** Training ***
-    # Getting session variables
-    start_val = int(session.get('start_val', None))
-    symbol = session.get('symbol', None)
-    num_shares = int(session.get('num_shares', None))
-    commission = float(session.get('commission', None))
-    impact = float(session.get('impact', None))
 
-
-    # Create a dataframe from csv file
-    df = get_data(symbol)
-
-
-    # We'll get 80% data to train
-    split_percentage = 0.8
-    split = int(split_percentage * len(df))
-
-    # Train data set
-    df_training = df[:split]
-
-    # Test data set
-    df_testing = df[split:]
-
-    # Training dates
-    start_date_training = df_training.index[0]
-    end_date_training = df_training.index[-1]
-
-    # Testing dates
-    start_date_testing = df_testing.index[0]
-    end_date_testing = df_testing.index[-1]
-
-    # Get a dataframe of benchmark data. Benchmark is a portfolio starting with
-    # $100,000, investing in 1000 shares of symbol and holding that position
-    df_benchmark_trades = create_df_benchmark(df_training, num_shares)
-
-    # **** Training ****
-    # Train a StrategyLearner
-    stl = strategyLearner(num_shares=num_shares, impact=impact,
-                          commission=commission, verbose=True,
-                          num_states=3000, num_actions=3)
-
-    epochs, cum_returns = stl.add_evidence(df_training, symbol, start_val=start_val, start_date=start_date_training, end_date=end_date_training)
-    df_trades = stl.test_policy(df_training, symbol, start_date=start_date_training,
-                                end_date=end_date_training)
-
-    plot_cum = plot_cum_return(epochs, cum_returns)
-
-    # Retrieve performance stats via a market simulator
-    print("Performances during training period for {}".format(symbol))
-    print("Date Range: {} to {}".format(start_date_training, end_date_training))
-    orders_count, sharpe_ratio, cum_ret, std_daily_ret, avg_daily_ret, final_value, cum_ret_bm, avg_daily_ret_bm, std_daily_ret_bm, sharpe_ratio_bm, final_value_bm, portvals, portvals_bm, df_orders = \
-        market_simulator(df_training, df_trades, df_benchmark_trades, symbol=symbol,
-                     start_val=start_val, commission=commission, impact=impact)
-
-
-
-    plot_norm_data = plot_norm_data_vertical_lines(
-                            df_orders,
-                            portvals,
-                            portvals_bm,
-                            vert_lines=False,
-                            title="Training Portfolio Value",
-                            xtitle="Dates",
-                            ytitle="Value ($)")
-
-
-    # **** Testing ****
-    # Out-of-sample or testing period: Perform similiar steps as above,
-    # except that we don't train the data (i.e. run add_evidence again)
-
-    df_benchmark_trades = create_df_benchmark(df_testing, num_shares)
-    df_trades = stl.test_policy(df_testing, symbol,  start_date=start_date_testing,
-                                end_date=end_date_testing)
-    print("\nPerformances during testing period for {}".format(symbol))
-    print("Date Range: {} to {}".format(start_date_testing, end_date_testing))
-
-
-    # Retrieve performance stats via a market simulator
-    test_orders_count, test_sharpe_ratio, test_cum_ret, test_std_daily_ret, test_avg_daily_ret, test_final_value, test_cum_ret_bm, test_avg_daily_ret_bm, test_std_daily_ret_bm, test_sharpe_ratio_bm, test_final_value_bm, test_portvals, test_portvals_bm, test_df_orders = \
-        market_simulator(df_testing, df_trades, df_benchmark_trades, symbol=symbol,
-                     start_val=start_val, commission=commission, impact=impact)
-
-    plot_norm_data_test = plot_norm_data_vertical_lines(
-                            test_df_orders,
-                            test_portvals,
-                            test_portvals_bm,
-                            vert_lines=True,
-                            title="Testing Portfolio Value",
-                            xtitle="Dates",
-                            ytitle="Value ($)")
-
-    return render_template(
-        # name of template
-        "training.html",
-
-        # Training data
-        start_date = start_date_training,
-        end_date = end_date_training,
-        symbol = symbol,
-        div_placeholder_plot_cum = Markup(plot_cum),
-        div_placeholder_plot_norm_data = Markup(plot_norm_data),
-        orders_count_p = orders_count,
-        sharpe_ratio_p = round(sharpe_ratio, 3),
-        cum_ret_p = round(cum_ret, 3),
-        std_daily_ret_p = round(std_daily_ret, 3),
-        avg_daily_ret_p = round(avg_daily_ret, 3),
-        final_value_p = round(final_value, 3),
-        sharpe_ratio_b = round(sharpe_ratio_bm, 3),
-        cum_ret_b = round(cum_ret_bm, 3),
-        std_daily_ret_b = round(std_daily_ret_bm, 3),
-        avg_daily_ret_b = round(avg_daily_ret_bm, 3),
-        final_value_b = round(final_value_bm, 3),
-
-        # Testing datasets
-        start_date_testing = start_date_testing,
-        end_date_testing = end_date_testing,
-        div_placeholder_plot_norm_data_testing = Markup(plot_norm_data_test),
-        orders_count_p_testing = test_orders_count,
-        sharpe_ratio_p_testing = round(test_sharpe_ratio, 3),
-        cum_ret_p_testing = round(test_cum_ret, 3),
-        std_daily_ret_p_testing = round(test_std_daily_ret, 3),
-        avg_daily_ret_p_testing = round(test_avg_daily_ret, 3),
-        final_value_p_testing = round(test_final_value, 3),
-        sharpe_ratio_b_testing = round(test_sharpe_ratio_bm, 3),
-        cum_ret_b_testing = round(test_cum_ret_bm, 3),
-        std_daily_ret_b_testing = round(test_std_daily_ret_bm, 3),
-        avg_daily_ret_b_testing = round(test_avg_daily_ret_bm, 3),
-        final_value_b_testing = round(test_final_value_bm, 3)
-
-    )
 
 
 # Initial form to get values
@@ -417,7 +283,7 @@ def introStartValues():
     form = StartValuesForm()
 
     # Get ticker name list
-    tickers = form.get_tickers('nasdaq_tickers_name')
+    tickers = get_tickers('nasdaq_tickers_name')
 
     if request.method == 'POST':
         if form.validate() == False:
@@ -431,7 +297,25 @@ def introStartValues():
                                form = form,
                                data=tickers)
 
+# Initial form to get values for price forecasting
+@app.route('/showforecastform', methods = ['GET', 'POST'])
+def showforecastform():
+    form = pricesForecast()
 
+    # Get ticker name list
+    tickers = get_tickers('nasdaq_tickers_name')
+
+    if request.method == 'POST':
+        if not form.validate_on_submit():
+            flash('All fields are required.')
+            return render_template('pricesForecastForm.html', form = form)
+        else:
+            return render_template('success.html')
+    elif request.method == 'GET':
+
+        return render_template('pricesForecastForm.html',
+                               form = form,
+                               data=tickers)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
