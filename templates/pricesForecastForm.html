@@ -23,57 +23,23 @@
         </div>
 
 
-          {% for message in form.forecastDate.errors %}
-             <div>{{ message }}</div>
-          {% endfor %}
-
-
-
-
-          <form id="form" class="form" action = "/showforecastform" method = post>
-             <fieldset>
-
-                {{ form.hidden_tag() }}
-
-                <div class="form-group">
-                    {{ form.csrf_token }}<br>
-                    {{ form.forecastDate.label }} {{ form.forecastDate(class_="form-control") }} <br>
-
-                    {{ form.symbol.label }}<br>
-                    <select name="ticker_select" class="custom-select">
-                        {% for key,value in data.iterrows() %}
-                              <option value="{{ value['Symbol'] }}">{{ value['Symbol'] }}</option>
-                        {% endfor %}
-                    </select>
-                    <br><br>
-
-
-                    {{ form.modelSelection.label }}<br>
-                    <select name="model_Selection" class="custom-select">
-                         <option value=1>Decision Tree</option>
-                    </select>
-                    <br><br>
-                    {{ form.forecastType.label }}<br>
-                    <select name="forecast_Type" class="custom-select">
-                        <option value=1>One week</option>
-                        <option value=2>Two weeks</option>
-                        <option value=3>1 month</option>
-                    </select>
-                    <br><br>
-
-                    {{ form.lookback.label }}<br>
-                    <select name="look_Back" class="custom-select">
-                        <option value=1>One months</option>
-                        <option value=2>Three months</option>
-                        <option value=3>Six months</option>
-                    </select>
-                    <br><br>
-                    {{ form.submit(class_="btn btn-primary btn-lg btn-block", id="submitButton") }}
-
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
+                            <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
 
-             </fieldset>
-          </form>
+
+
     {% endif %}
 
 <div>

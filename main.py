@@ -3,6 +3,7 @@ import os
 import numpy as np
 
 from flask import Flask, render_template, session, jsonify, request, flash
+
 from sklearn.metrics import accuracy_score, explained_variance_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
@@ -288,7 +289,7 @@ def introStartValues():
     if request.method == 'POST':
         if form.validate() == False:
             flash('All fields are required.')
-            return render_template('startValuesForm.html', form = form)
+            return render_template('startValuesForm.html', form=form)
         else:
             return render_template('success.html')
     elif request.method == 'GET':
@@ -306,9 +307,9 @@ def showforecastform():
     tickers = get_tickers('nasdaq_tickers_name')
 
     if request.method == 'POST':
-        if not form.validate_on_submit():
+        if form.validate() == False:
             flash('All fields are required.')
-            return render_template('pricesForecastForm.html', form = form)
+            return render_template('pricesForecastForm.html', form=form)
         else:
             return render_template('success.html')
     elif request.method == 'GET':

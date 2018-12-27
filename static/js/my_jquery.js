@@ -17,4 +17,13 @@ $(document).ready(function(e){
         $(this).css('background-color', 'red');
     });
 
+
 });
+
+$(function () {
+	$('#datetimepicker4').datetimepicker({
+	format: 'L'
+  });
+});
+
+

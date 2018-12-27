@@ -3,7 +3,7 @@ from datetime import date
 import pandas as pd
 from util import symbol_to_path
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, DecimalField, SubmitField, RadioField, SelectField, DateField
+from wtforms import IntegerField, DecimalField, SubmitField, RadioField, SelectField, StringField
 from wtforms import validators
 
 
@@ -24,13 +24,8 @@ class StartValuesForm(FlaskForm):
                           default='forecastprices')
 
 
-
-
 class pricesForecast(FlaskForm):
-    forecastDate = DateField('Forecast Date ex: 2018-10-20',format='%Y-%m-%d')
-    symbol = SelectField('Stock Symbol')
-    modelSelection = SelectField('Select model')
-    forecastType = SelectField('Forecast')
-    lookback = SelectField('Lookback')
+    forecastDate = StringField('Forecast Date')
+
     submit = SubmitField("Send")
 
