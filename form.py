@@ -1,9 +1,9 @@
-from datetime import date
+from datetime import date, datetime
 
 import pandas as pd
 from util import symbol_to_path
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, DecimalField, SubmitField, RadioField, SelectField, StringField
+from wtforms import IntegerField, DecimalField, SubmitField, RadioField, SelectField, StringField, DateField
 from wtforms import validators
 
 
@@ -25,7 +25,10 @@ class StartValuesForm(FlaskForm):
 
 
 class pricesForecast(FlaskForm):
-    forecastDate = StringField('Forecast Date')
+    forecastDate = DateField('Forecast Date',
+                             format='%m/%d/%Y',
+                             default=datetime.today(),
+                             validators=[validators.DataRequired()])
 
     submit = SubmitField("Send")
 

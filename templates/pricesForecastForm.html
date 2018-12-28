@@ -22,23 +22,30 @@
           </div>
         </div>
 
-
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
-                            <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+        <form id="form" class="form" action = "/showforecastform" method = post>
+         <fieldset>
+             {{ form.hidden_tag() }}
+             <div class="form-group">
+                {{ form.csrf_token }}<br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form.forecastDate.label }} <br>
+                                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                    {{ form.forecastDate(class="form-control datetimepicker-input") }}
+                                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+             </div>
 
-
+         </fieldset>
+        </form>
 
     {% endif %}
 
