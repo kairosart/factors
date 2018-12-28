@@ -29,6 +29,10 @@ class pricesForecast(FlaskForm):
                              format='%m/%d/%Y',
                              default=datetime.today(),
                              validators=[validators.DataRequired()])
-
+    symbol = SelectField('Stock Symbol', coerce=int)
+    modelSelection = SelectField('Select model')
+    forecastType = SelectField('Forecast')
+    lookback = SelectField('Lookback')
     submit = SubmitField("Send")
+
 

@@ -3,7 +3,7 @@
 
 
 {% block content %}
-    <legend>Forecastin prices Form</legend>
+    <legend>Forecasting prices Form</legend>
     {% if error %}
 		<div class="card text-white  bg-danger mb-3" style="">
 		  <div class="card-header">ERROR</div>
@@ -24,26 +24,55 @@
 
         <form id="form" class="form" action = "/showforecastform" method = post>
          <fieldset>
+             <!-- Datepicker -->
              {{ form.hidden_tag() }}
              <div class="form-group">
                 {{ form.csrf_token }}<br>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                {{ form.forecastDate.label }} <br>
-                                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                    {{ form.forecastDate(class="form-control datetimepicker-input") }}
-                                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                {{ form.forecastDate.label }} <br>
+                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                    {{ form.forecastDate(class="form-control datetimepicker-input") }}
+                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
                 </div>
              </div>
 
+             <!-- Symbol -->
+             {{ form.symbol.label }}<br>
+                 <select name="ticker_select" class="custom-select">
+                     {% for key,value in data.iterrows() %}
+                           <option value="{{ value['Symbol'] }}">{{ value['Symbol'] }}</option>
+                     {% endfor %}
+                 </select>
+                 <br><br>
+
+             <!-- Model -->
+             {{ form.modelSelection.label }}<br>
+                 <select name="model_Selection" class="custom-select">
+                      <option value=1>Decision Tree</option>
+                 </select>
+                 <br><br>
+
+             <!-- Forecast -->
+             {{ form.forecastType.label }}<br>
+             <select name="forecast_Type" class="custom-select">
+                 <option value=1>One week</option>
+                 <option value=2>Two weeks</option>
+                 <option value=3>1 month</option>
+             </select>
+             <br><br>
+
+             <!-- Lookback -->
+             {{ form.lookback.label }}<br>
+             <select name="look_Back" class="custom-select">
+                 <option value=1>One months</option>
+                 <option value=2>Three months</option>
+                 <option value=3>Six months</option>
+             </select>
+             <br><br>
+
+             {{ form.submit(class_="btn btn-primary btn-lg btn-block", id="submitButton") }}
          </fieldset>
         </form>
 
