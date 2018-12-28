@@ -21,6 +21,8 @@ def showforcastpricesvalues(request):
 
     # Get Forecast date
     forecast_date = str(request.get('forecastDate'))
+    forecast_date = dt.datetime.strptime(forecast_date, '%m/%d/%Y')
+
 
     # Get Forecast model
     forecast_model = str(request.get('model_Selection'))
@@ -33,7 +35,7 @@ def showforcastpricesvalues(request):
 
 
     # Get 1 year of data to train and test
-    start_d = dt.date.today() - dt.timedelta(forecast_lookback)
+    start_d = forecast_date - dt.timedelta(forecast_lookback)
     yesterday = dt.date.today() - dt.timedelta(1)
 
     # Check whether there is a file with input data or not before dowunloading

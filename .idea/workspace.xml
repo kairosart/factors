@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/AABA.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/AABA.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pricesForecastForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pricesForecastForm.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="312" column="55" selection-start-line="312" selection-start-column="55" selection-end-line="312" selection-end-column="55" />
+            <state relative-caret-position="-1124">
+              <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
                 <element signature="e#15609#16143#0" />
@@ -33,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="179" column="55" lean-forward="true" selection-start-line="179" selection-start-column="11" selection-end-line="179" selection-end-column="55" />
+            <state relative-caret-position="367">
+              <caret line="37" column="27" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
               <folding>
                 <element signature="e#49#58#0" expanded="true" />
               </folding>
@@ -66,17 +63,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1008">
+            <state relative-caret-position="432">
               <caret line="60" column="65" lean-forward="true" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="76" column="95" selection-start-line="76" selection-start-column="95" selection-end-line="76" selection-end-column="95" />
             </state>
           </provider>
         </entry>
@@ -93,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/form.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+            <state relative-caret-position="220">
+              <caret line="28" column="45" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="45" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -165,8 +153,8 @@
         <option value="$PROJECT_DIR$/form.py" />
         <option value="$PROJECT_DIR$/templates/pricesForecastForm.html" />
         <option value="$PROJECT_DIR$/templates/forecastPrice.py" />
-        <option value="$PROJECT_DIR$/forecastPrice.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/forecastPrice.py" />
       </list>
     </option>
   </component>
@@ -646,7 +634,14 @@
       <option name="project" value="LOCAL" />
       <updated>1546004141273</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Creating price forecast chart.">
+      <created>1546028019720</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1546028019720</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TodoView">
@@ -667,8 +662,8 @@
       <window_info id="Favorites" order="2" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32868758" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3437863" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" weight="0.37398374" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3437863" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" visible="true" weight="0.37398374" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
@@ -746,7 +741,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="PyCharm file" />
     <MESSAGE value="Changing to primitive way of reading a file with data." />
     <MESSAGE value="Fix cvs dates trouble." />
     <MESSAGE value="Fixing main.py" />
@@ -771,7 +765,8 @@
     <MESSAGE value="Creating prediction model. Tuning tree parameters." />
     <MESSAGE value="Creating price forecast form. Datepicker." />
     <MESSAGE value="Creating price forecast form." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating price forecast form." />
+    <MESSAGE value="Creating price forecast chart." />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating price forecast chart." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -788,47 +783,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>152</line>
+          <line>151</line>
           <option name="timeStamp" value="298" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>265</line>
-          <option name="timeStamp" value="327" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>260</line>
-          <option name="timeStamp" value="336" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>243</line>
-          <option name="timeStamp" value="346" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>249</line>
-          <option name="timeStamp" value="347" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>255</line>
-          <option name="timeStamp" value="348" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>290</line>
+          <line>182</line>
           <option name="timeStamp" value="361" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>291</line>
+          <line>183</line>
           <option name="timeStamp" value="362" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>313</line>
+          <line>205</line>
           <option name="timeStamp" value="377" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -840,6 +810,26 @@
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
           <line>22</line>
           <option name="timeStamp" value="384" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="385" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="386" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="387" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>37</line>
+          <option name="timeStamp" value="388" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1091,34 +1081,10 @@
         <state relative-caret-position="-936" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="76" column="95" selection-start-line="76" selection-start-column="95" selection-end-line="76" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/my_jquery.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="60" column="65" lean-forward="true" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -1145,23 +1111,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="179" column="55" lean-forward="true" selection-start-line="179" selection-start-column="11" selection-end-line="179" selection-end-column="55" />
+        <state relative-caret-position="-1124">
+          <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
           <folding>
-            <element signature="e#49#58#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#15609#16143#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="312" column="55" selection-start-line="312" selection-start-column="55" selection-end-line="312" selection-end-column="55" />
+        <state relative-caret-position="340">
+          <caret line="76" column="95" selection-start-line="76" selection-start-column="95" selection-end-line="76" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="60" column="65" lean-forward="true" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/form.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="45" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#15609#16143#0" />
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="37" column="27" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
+          <folding>
+            <element signature="e#49#58#0" expanded="true" />
           </folding>
         </state>
       </provider>

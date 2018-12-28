@@ -127,157 +127,49 @@ def showvalues():
     session['num_shares'] = request.form['num_shares']
     session['commission'] = request.form['commission']
     session['impact'] = request.form['impact']
-    session['type'] = request.form['forecast']
-
-    if session['type'] == "showvalues":
-        # Price movements
-
-        # Create momentum chart
-        plot_mom = plot_momentum(portf_value.index, normed[symbol], symbol, sym_mom, "Momentum Indicator", (12, 8))
 
 
-        # Plot raw symbol values, rolling mean and Bollinger Bands
-        dates = pd.date_range(start_d, yesterday)
-        plot_boll = plot_bollinger(dates, portf_value.index, portf_value[symbol], symbol, upper_band, lower_band,
-                                   rm_JPM,
-                                   num_std=1, title="Bollinger Indicator", fig_size=(12, 6))
+    # Price movements
 
-        # Plot symbol values, SMA and SMA quality
-        plot_sma = plot_sma_indicator(dates, portf_value.index, normed[symbol], symbol, sma, q,
-                                      "Simple Moving Average (SMA)")
+    # Create momentum chart
+    plot_mom = plot_momentum(portf_value.index, normed[symbol], symbol, sym_mom, "Momentum Indicator", (12, 8))
 
 
-        # Plot RSI
-        plot_rsi = plot_rsi_indicator(dates, portf_value.index, portf_value[symbol], symbol, rsi_value, window=14,
-                                      title="RSI Indicator", fig_size=(12, 6))
-        return render_template(
-        # name of template
-        "stockpriceschart.html",
+    # Plot raw symbol values, rolling mean and Bollinger Bands
+    dates = pd.date_range(start_d, yesterday)
+    plot_boll = plot_bollinger(dates, portf_value.index, portf_value[symbol], symbol, upper_band, lower_band,
+                               rm_JPM,
+                               num_std=1, title="Bollinger Indicator", fig_size=(12, 6))
 
-        # now we pass in our variables into the template
-        start_val = request.form['start_val'],
-        symbol = symbol,
-        commission = request.form['commission'],
-        impact = request.form['impact'],
-        num_shares = request.form['num_shares'],
-        start_date = start_d,
-        end_date = yesterday,
-        tables=[portf_value.to_html()],
-        titles = ['na', 'Stock Prices '],
-        div_placeholder_stock_prices = Markup(plot_prices),
-        div_placeholder_momentum = Markup(plot_mom),
-        div_placeholder_bollinger = Markup(plot_boll),
-        div_placeholder_sma = Markup(plot_sma),
-        div_placeholder_rsi = Markup(plot_rsi)
-        )
-    else:
-        #TODO Delete this part
-
-        # Price forecasting
-
-        # Create momentum column
-        normed['Momentum'] = sym_mom
-
-        # Create SMA column
-        normed['SMA'] = sma
-
-        # Create SMA column
-        normed['RSI'] = rsi_value
-
-        # Clean nan values
-        normed = normed.fillna(0)
-
-        # Define X and y
-        feature_cols = ['Momentum', 'SMA', 'RSI']
-        X = normed[feature_cols]
-        y = normed[symbol]
-
-        # split X and y into training and testing sets
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+    # Plot symbol values, SMA and SMA quality
+    plot_sma = plot_sma_indicator(dates, portf_value.index, normed[symbol], symbol, sma, q,
+                                  "Simple Moving Average (SMA)")
 
 
-        # Loop through a few different max depths and check the performance
-        for d in [3, 5, 10]:
-            # Create the tree and fit it
-            decision_tree = DecisionTreeRegressor(max_depth=d)
-            decision_tree.fit(X_train, y_train)
+    # Plot RSI
+    plot_rsi = plot_rsi_indicator(dates, portf_value.index, portf_value[symbol], symbol, rsi_value, window=14,
+                                  title="RSI Indicator", fig_size=(12, 6))
+    return render_template(
+    # name of template
+    "stockpriceschart.html",
 
-            # Print out the scores on train and test
-            print('max_depth=', str(d))
-            print(decision_tree.score(X_train, y_train))
-            print(decision_tree.score(X_test, y_test), '\n')
+    # now we pass in our variables into the template
+    start_val = request.form['start_val'],
+    symbol = symbol,
+    commission = request.form['commission'],
+    impact = request.form['impact'],
+    num_shares = request.form['num_shares'],
+    start_date = start_d,
+    end_date = yesterday,
+    tables=[portf_value.to_html()],
+    titles = ['na', 'Stock Prices '],
+    div_placeholder_stock_prices = Markup(plot_prices),
+    div_placeholder_momentum = Markup(plot_mom),
+    div_placeholder_bollinger = Markup(plot_boll),
+    div_placeholder_sma = Markup(plot_sma),
+    div_placeholder_rsi = Markup(plot_rsi)
+    )
 
-        model = tree.DecisionTreeRegressor(max_depth=10)
-
-        model.fit(X_train, y_train)
-
-        # Predictions
-        y_pred = model.predict(X_test)
-
-        # Measuring predictions
-        # Coefficient of determination R^2
-        '''
-        The best possible score is 1.0 and it can be negative (because the model can be arbitrarily worse). A constant model that always predicts the expected value of y, disregarding the input features, would get a R^2 score of 0.0.
-        '''
-        coef_deter = model.score(X_train, y_train)
-        print('Coefficient of determination R^2: %s') %  coef_deter
-
-
-        # Forecast error
-        '''
-        The units of the forecast error are the same as the units of the prediction. A forecast error of zero indicates no error, or perfect skill for that forecast.
-        '''
-        forecast_errors = [y_test[i] - y_pred[i] for i in range(len(y_test))]
-        print('Forecast Errors: %s' % forecast_errors)
-
-        # Forecast bias
-        '''
-        Mean forecast error, also known as the forecast bias. A forecast bias of zero, or a very small number near zero, shows an unbiased model.
-        '''
-        bias = sum(forecast_errors) * 1.0 / len(y_test)
-        print('Bias: %f' % bias)
-
-        # Mean absolute error
-        '''
-        A mean absolute error of zero indicates no error.
-        '''
-        print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
-
-        # Mean squared error
-        '''
-        A mean squared error of zero indicates perfect skill, or no error.
-        '''
-        print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
-
-        # Root mean squared error
-        '''
-        As with the mean squared error, an RMSE of zero indicates no error.
-        '''
-        print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
-
-
-
-
-        results = pd.DataFrame({'Price': y_test, 'Price prediction': y_pred})
-        results.sort_index(inplace=True)
-
-        # Plot prediction
-
-        plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])
-        return render_template(
-            # name of template
-            "forecastPrices.html",
-            # now we pass in our variables into the template
-            start_val=request.form['start_val'],
-            symbol=symbol,
-            commission=request.form['commission'],
-            impact=request.form['impact'],
-            num_shares=request.form['num_shares'],
-            start_date=start_d,
-            end_date=yesterday,
-            div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
-            titles=['na', 'Stock Prices '],
-        )
 
 
 # Initial form to get indicators values
