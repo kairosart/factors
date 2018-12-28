@@ -8,12 +8,15 @@ from sklearn.metrics import accuracy_score, explained_variance_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 
+from forecastPrice import showforcastpricesvalues
 from form import StartValuesForm, get_tickers, pricesForecast
 import pandas as pd
 import datetime as dt
 from sklearn import datasets, svm, metrics
 from markupsafe import Markup
 import fix_yahoo_finance as yf
+
+
 yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_data, \
@@ -47,10 +50,9 @@ def overview():
     "overview.html"
     )
 
-# Load Dataset from scikit-learn.
-digits = datasets.load_digits()
 
-# Show values
+
+# Show indicators values
 @app.route('/showvalues', methods=['POST', 'GET'])
 def showvalues():
 
@@ -169,6 +171,8 @@ def showvalues():
         div_placeholder_rsi = Markup(plot_rsi)
         )
     else:
+        #TODO Delete this part
+
         # Price forecasting
 
         # Create momentum column
@@ -276,9 +280,7 @@ def showvalues():
         )
 
 
-
-
-# Initial form to get values
+# Initial form to get indicators values
 @app.route('/form', methods = ['GET', 'POST'])
 def introStartValues():
     form = StartValuesForm()
@@ -307,15 +309,22 @@ def showforecastform():
     tickers = get_tickers('nasdaq_tickers_name')
 
     if request.method == 'POST':
-        if form.validate() == False:
-            flash('All fields are required.')
-            return render_template('pricesForecastForm.html', form=form)
-        else:
-            return render_template('success.html')
+        result = request.form
+        symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(result)
+        return render_template(
+            # name of template
+            "forecastPrices.html",
+            # now we pass in our variables into the template
+            symbol=symbol,
+            start_date=start_d,
+            end_date=yesterday,
+            div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
+            titles=['na', 'Stock Prices '],
+        )
     elif request.method == 'GET':
 
         return render_template('pricesForecastForm.html',
-                               form = form,
+                               form=form,
                                data=tickers)
 
 if __name__ == '__main__':

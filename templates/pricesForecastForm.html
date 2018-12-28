@@ -55,20 +55,20 @@
                  <br><br>
 
              <!-- Forecast -->
-             {{ form.forecastType.label }}<br>
-             <select name="forecast_Type" class="custom-select">
-                 <option value=1>One week</option>
-                 <option value=2>Two weeks</option>
-                 <option value=3>1 month</option>
+             {{ form.forecastTime.label }}<br>
+             <select name="forecast_Time" class="custom-select">
+                 <option value=7>One week</option>
+                 <option value=14>Two weeks</option>
+                 <option value=30>1 month</option>
              </select>
              <br><br>
 
              <!-- Lookback -->
              {{ form.lookback.label }}<br>
              <select name="look_Back" class="custom-select">
-                 <option value=1>One months</option>
-                 <option value=2>Three months</option>
-                 <option value=3>Six months</option>
+                 <option value=30>One months</option>
+                 <option value=90>Three months</option>
+                 <option value=180>Six months</option>
              </select>
              <br><br>
 

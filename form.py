@@ -31,7 +31,7 @@ class pricesForecast(FlaskForm):
                              validators=[validators.DataRequired()])
     symbol = SelectField('Stock Symbol', coerce=int)
     modelSelection = SelectField('Select model')
-    forecastType = SelectField('Forecast')
+    forecastTime = SelectField('Forecast')
     lookback = SelectField('Lookback')
     submit = SubmitField("Send")
 
