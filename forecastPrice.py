@@ -156,18 +156,21 @@ def showforcastpricesvalues(request):
     '''
     A mean absolute error of zero indicates no error.
     '''
+    mae = metrics.mean_absolute_error(y_test, y_pred)
     print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
 
     # Mean squared error
     '''
     A mean squared error of zero indicates perfect skill, or no error.
     '''
+    mse = metrics.mean_squared_error(y_test, y_pred)
     print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
 
     # Root mean squared error
     '''
     As with the mean squared error, an RMSE of zero indicates no error.
     '''
+    rmse = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
     print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 
 
@@ -179,4 +182,4 @@ def showforcastpricesvalues(request):
     # Plot prediction
 
     plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])
-    return symbol, start_d, yesterday, plot_prices_pred
+    return symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse

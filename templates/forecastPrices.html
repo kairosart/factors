@@ -1,9 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
-    <legend>Price forecasting for {{ symbol }}</legend>
-    <br><br>
+    <legend>Price forecasting</legend>
+    <p class="text-success">
+		{{ symbol }} data from {{ start_date }} to {{ end_date }}
+	</p>
     {{ div_placeholder_stock_prices_pred }}
 
+    <div class="table-responsive">
+		<table class= "table table-sm">
+			<thead>
+			 <tr>
+				 <th scope="col">Metric</th>
+				 <th scope="col">Value</th>
+			 </tr>
+		 </thead>
+			<tbody>
+				<tr>
+					<td>Coef. determ. R^2</td>
+					<td>{{ coef_deter }}</td>
+				</tr>
+				<tr>
+					<td>Bias</td>
+					<td>{{bias }}</td>
+				</tr>
+				<tr>
+					<td>MAE</td>
+					<td>{{ mae }}</td>
+				</tr>
+				<tr>
+					<td>MSE</td>
+					<td>{{ mse }}</td>
+				</tr>
+				<tr>
+					<td>RMSE</td>
+					<td>{{ rmse }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 <br><br>
 
