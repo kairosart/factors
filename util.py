@@ -210,7 +210,7 @@ def create_df_benchmark(df, num_shares):
     # Create benchmark df: buy num_shares and hold them till the last date
     df_benchmark_trades = pd.DataFrame(
         data=[(benchmark_prices.index.min(), num_shares),
-        (benchmark_prices.index.max(), -num_shares)],
+        (benchmark_prices.index.max(), -int(num_shares))],
         columns=["Date", "Shares"])
     df_benchmark_trades.set_index("Date", inplace=True)
     return df_benchmark_trades
