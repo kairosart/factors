@@ -5,44 +5,103 @@
 		{{ symbol }} data from {{ start_date }} to {{ end_date }}
 	</p>
     {{ div_placeholder_stock_prices_pred }}
-
+    <br><br>
     <div class="table-responsive">
 		<table class= "table table-sm">
 			<thead>
 			 <tr>
-				 <th scope="col">Metric</th>
-				 <th scope="col">Value</th>
+				 <th scope="col"><b>Metric</b></th>
+				 <th scope="col"><b>Value</b></th>
 			 </tr>
 		 </thead>
 			<tbody>
 				<tr>
-					<td>Coef. determ. R^2</td>
+					<td>
+                        <button type="button"
+                                class="btn btn-outline-info btn-xs"
+                                title="Coefficient determination R^2"
+                                data-toggle="popover"
+                                data-trigger="focus"
+                                data-placement="right"
+                                data-content="The best possible score is 1.0 and it can be negative (because the model can be arbitrarily worse). A constant model that always predicts the expected value of y, disregarding the input features, would get a R^2 score of 0.0."
+                                data-original-title="Coefficient of determination R^2">
+                                    <i class="fa fa-info-circle fa-xs"></i>
+                        </button>
+                        Coef. determ. R^2
+                    </td>
 					<td>{{ coef_deter }}</td>
 				</tr>
 				<tr>
-					<td>Bias</td>
+					<td>
+                        <button type="button"
+                                class="btn btn-outline-info btn-xs"
+                                title="Forecast Bias"
+                                data-toggle="popover"
+                                data-trigger="focus"
+                                data-placement="right"
+                                data-content="Mean forecast error, also known as the forecast bias. A forecast bias of zero, or a very small number near zero, shows an unbiased model."
+                                data-original-title="Bias">
+                                    <i class="fa fa-info-circle fa-xs"></i>
+                        </button>
+                        Bias
+                    </td>
 					<td>{{bias }}</td>
 				</tr>
 				<tr>
-					<td>MAE</td>
+					<td>
+                        <button type="button"
+                                class="btn btn-outline-info btn-xs"
+                                title="Mean Absolute Error"
+                                data-toggle="popover"
+                                data-trigger="focus"
+                                data-placement="right"
+                                data-content="A mean absolute error of zero indicates no error."
+                                data-original-title="MAE">
+                                    <i class="fa fa-info-circle fa-xs"></i>
+                        </button>
+                        MAE
+                    </td>
 					<td>{{ mae }}</td>
 				</tr>
 				<tr>
-					<td>MSE</td>
+					<td>
+                        <button type="button"
+                                class="btn btn-outline-info btn-xs"
+                                title="Mean Square Error"
+                                data-toggle="popover"
+                                data-trigger="focus"
+                                data-placement="right"
+                                data-content="A mean squared error of zero indicates perfect skill, or no error."
+                                data-original-title="MSE">
+                                    <i class="fa fa-info-circle fa-xs"></i>
+                        </button>
+                        MSE
+                    </td>
 					<td>{{ mse }}</td>
 				</tr>
 				<tr>
-					<td>RMSE</td>
+					<td>
+                        <button type="button"
+                                class="btn btn-outline-info btn-xs"
+                                title="Root Mean Square Error"
+                                data-toggle="popover"
+                                data-trigger="focus"
+                                data-placement="right"
+                                data-content="As with the mean squared error, an RMSE of zero indicates no error."
+                                data-original-title="MSE">
+                                    <i class="fa fa-info-circle fa-xs"></i>
+                        </button>
+                        RMSE
+                    </td>
 					<td>{{ rmse }}</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 
-<br><br>
 
-<div>
-  {% include "footer.html" %}
-</div>
+    <div>
+      {% include "footer.html" %}
+    </div>
 
 {% endblock %}
