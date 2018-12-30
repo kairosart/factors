@@ -60,6 +60,19 @@ def showforcastpricesvalues(request):
                     # name of template
                     "pricesForecastForm.html",
                     error=True)
+    else:
+        try:
+            download = fetchOnlineData(start_d, symbol)
+            if download == False:
+                return render_template(
+                    # name of template
+                    "pricesForecastForm.html",
+                    error=True)
+        except:
+            return render_template(
+                # name of template
+                "pricesForecastForm.html",
+                error=True)
 
     portf_value = get_data(symbol)
 
