@@ -38,6 +38,8 @@ def showforcastpricesvalues(request):
     start_d = forecast_date - dt.timedelta(forecast_lookback)
     yesterday = dt.date.today() - dt.timedelta(1)
 
+    #TODO What to do with the file created
+
     # Check whether there is a file with input data or not before dowunloading
     file = symbol_to_path(symbol)
     if os.path.isfile(file):
@@ -135,7 +137,7 @@ def showforcastpricesvalues(request):
     The best possible score is 1.0 and it can be negative (because the model can be arbitrarily worse). A constant model that always predicts the expected value of y, disregarding the input features, would get a R^2 score of 0.0.
     '''
     coef_deter = model.score(X_train, y_train)
-    print('Coefficient of determination R^2: %s') %  coef_deter
+    print('Coefficient of determination R^2: %s' % coef_deter)
 
 
     # Forecast error
