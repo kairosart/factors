@@ -2,7 +2,7 @@
 
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+
 import copy
 import datetime as dt
 from util import get_exchange_days, normalize_data

@@ -1,9 +1,5 @@
 """Analyze a portfolio"""
 
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-import datetime as dt
 import sys
 # Append the path of the directory one level above the current directory to import util
 sys.path.append('../')

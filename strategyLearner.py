@@ -3,8 +3,6 @@
 import numpy as np
 import datetime as dt
 import pandas as pd
-import matplotlib.pyplot as plt
-import pickle
 
 from util import create_df_benchmark, create_df_trades, fetchOnlineData, get_data, slice_df
 import QLearner as ql

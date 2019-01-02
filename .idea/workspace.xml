@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/factors.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/factors.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/indicators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategyLearner.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategyLearner.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,30 +23,40 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="351" selection-start-line="351" selection-end-line="351" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#1637#5931#0" />
-                <element signature="e#15609#16143#0" />
-              </folding>
+            <state relative-caret-position="432">
+              <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
+        <entry file="file://$PROJECT_DIR$/strategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="175" selection-start-line="175" selection-end-line="175" selection-end-column="8" />
-              <folding>
-                <element signature="n#div#0;n#!!top" />
-                <element signature="n#div#1;n#!!top" />
-                <element signature="n#div#2;n#!!top" />
-                <element signature="n#div#3;n#!!top" />
-                <element signature="n#div#4;n#!!top" />
-                <element signature="n#div#5;n#!!top" />
-              </folding>
+            <state relative-caret-position="96">
+              <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/indicators.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -50,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="889">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="1296">
+              <caret line="66" column="30" selection-start-line="66" selection-start-column="30" selection-end-line="66" selection-end-column="30" />
               <folding>
                 <element signature="e#49#58#0" expanded="true" />
               </folding>
@@ -59,19 +73,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-            </state>
-          </provider>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-144" />
+            <state relative-caret-position="216">
+              <caret line="9" column="22" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="22" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -104,6 +116,7 @@
       <list>
         <option value="HTML File" />
         <option value="Python Script" />
+        <option value="Setup Script" />
       </list>
     </option>
   </component>
@@ -136,17 +149,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/templates/alert.html" />
-        <option value="$PROJECT_DIR$/analysis.py" />
         <option value="$PROJECT_DIR$/QLearner.py" />
         <option value="$PROJECT_DIR$/templates/tickers_list.html" />
         <option value="$PROJECT_DIR$/nasdaq.csv" />
         <option value="$PROJECT_DIR$/templates/.ipynb_checkpoints/tickers_list.html" />
         <option value="$PROJECT_DIR$/data/nasdaq_tickers_name.csv" />
-        <option value="$PROJECT_DIR$/strategyLearner.py" />
         <option value="$PROJECT_DIR$/templates/training.html" />
         <option value="$PROJECT_DIR$/marketsim.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/indicators.py" />
         <option value="$PROJECT_DIR$/linRegLearner.py" />
         <option value="$PROJECT_DIR$/static/js/moment.js" />
         <option value="$PROJECT_DIR$/form.py" />
@@ -164,11 +174,15 @@
         <option value="$PROJECT_DIR$/templates/forecastPrices.html" />
         <option value="$PROJECT_DIR$/forecastPrice.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/indicators.py" />
+        <option value="$PROJECT_DIR$/strategyLearner.py" />
+        <option value="$PROJECT_DIR$/analysis.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="317" />
+    <option name="x" value="458" />
+    <option name="y" value="5" />
     <option name="width" value="1346" />
     <option name="height" value="728" />
   </component>
@@ -184,43 +198,6 @@
               <item name="factors" type="b2602c69:ProjectViewProjectNode" />
               <item name="factors" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
-              <item name="factors" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
-              <item name="factors" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
-              <item name="factors" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
-              <item name="factors" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
-              <item name="factors" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
-              <item name="factors" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name=".ipynb_checkpoints" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -232,7 +209,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -338,20 +315,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Show error message when it can be download data from Yahoo.">
-      <created>1544650245188</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1544650245188</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Show error message when it can be download data from Yahoo.">
-      <created>1544650827529</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1544650827529</updated>
     </task>
     <task id="LOCAL-00016" summary="Downolading data from Yahoo when the form has been sent.">
       <created>1544695312805</created>
@@ -682,7 +645,21 @@
       <option name="project" value="LOCAL" />
       <updated>1546205524947</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Creating requirements.txt">
+      <created>1546205604336</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1546205604336</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Creating setup.py">
+      <created>1546263203497</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1546263203499</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -696,7 +673,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-5" y="-4" width="1930" height="1089" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.24403183" />
       <window_info id="Structure" order="1" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
@@ -708,8 +684,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.32752612" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32963374" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.32868758" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.33565623" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50132626" side_tool="true" weight="0.37402886" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32868758" />
       <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32963374" />
@@ -782,7 +758,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Fixing main.py and strategyLearner.py for training and testing. Try on heroku." />
     <MESSAGE value="Modifying requierements.txt" />
     <MESSAGE value="After creating a new env with python 3.6" />
     <MESSAGE value="Show error message when it can be download data from Yahoo." />
@@ -807,14 +782,15 @@
     <MESSAGE value="Creating price forecast chart. Styling table." />
     <MESSAGE value="Fixing download from Yahoo." />
     <MESSAGE value="Creating requirements.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating requirements.txt" />
+    <MESSAGE value="Creating setup.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating setup.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategyLearner.py</url>
-          <line>345</line>
+          <line>343</line>
           <option name="timeStamp" value="247" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -877,8 +853,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/alert.html" />
-    <entry file="file://$PROJECT_DIR$/nasdaq.lst" />
     <entry file="file://$PROJECT_DIR$/nasdaq.lst2" />
     <entry file="file://$PROJECT_DIR$/templates/tickers_list.html" />
     <entry file="file://$PROJECT_DIR$/data/tickers_name.json.csv" />
@@ -917,82 +891,28 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/nasdaq_tickers_name.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" rowLines="3" />
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
           <caret column="6" selection-start-column="6" selection-end-column="6" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/linRegLearner.py" />
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/pandas/core/indexing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="1326" selection-start-line="1326" selection-end-line="1326" />
-        </state>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" rowLines="3" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/linRegLearner.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/pandas/core/indexing.py" />
     <entry file="file://$PROJECT_DIR$/debug.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/collections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="140" selection-start-line="140" selection-end-line="140" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/compat.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/validators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="202" selection-start-line="202" selection-end-line="202" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/fields/core.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="199" selection-start-line="199" selection-end-line="199" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="309" selection-start-line="309" selection-end-line="309" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
-          <caret line="1701" column="13" selection-start-line="1701" selection-start-column="13" selection-end-line="1701" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/bootstrap-datepicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1536">
-          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/moment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="4511" selection-start-line="4511" selection-end-line="4511" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/collections.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/compat.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/validators.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/fields/core.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/form.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/flask/app.py" />
+    <entry file="file://$PROJECT_DIR$/static/js/bootstrap-datepicker.js" />
+    <entry file="file://$PROJECT_DIR$/static/js/moment.js" />
     <entry file="file://$PROJECT_DIR$/static/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-936" />
@@ -1008,36 +928,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/indicators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#451#877#0" />
-            <element signature="e#927#1220#0" />
-            <element signature="e#1255#1444#0" />
-            <element signature="e#1488#1633#0" />
-            <element signature="e#1677#1910#0" />
-            <element signature="e#1979#2386#0" />
-            <element signature="e#2455#2895#0" />
-            <element signature="e#2929#3508#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/AABA.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/strategyLearner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="179" column="44" lean-forward="true" selection-start-line="179" selection-start-column="44" selection-end-line="179" selection-end-column="44" />
-          <folding>
-            <element signature="e#80#98#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
@@ -1054,13 +948,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/glyphicons.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3024">
-          <caret line="126" column="1" lean-forward="true" selection-start-line="126" selection-start-column="1" selection-end-line="126" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/glyphicons.css" />
     <entry file="file://$PROJECT_DIR$/templates/overview.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
@@ -1068,13 +956,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/popper.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/popper.min.js" />
     <entry file="file://$PROJECT_DIR$/templates/training.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
@@ -1089,21 +971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="388">
           <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="175" selection-start-line="175" selection-end-line="175" selection-end-column="8" />
-          <folding>
-            <element signature="n#div#0;n#!!top" />
-            <element signature="n#div#1;n#!!top" />
-            <element signature="n#div#2;n#!!top" />
-            <element signature="n#div#3;n#!!top" />
-            <element signature="n#div#4;n#!!top" />
-            <element signature="n#div#5;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1124,8 +991,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/footer.html">
+    <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1032">
+          <caret line="175" selection-start-line="175" selection-end-line="175" selection-end-column="8" />
+          <folding>
+            <element signature="n#div#0;n#!!top" />
+            <element signature="n#div#1;n#!!top" />
+            <element signature="n#div#2;n#!!top" />
+            <element signature="n#div#3;n#!!top" />
+            <element signature="n#div#4;n#!!top" />
+            <element signature="n#div#5;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strategyLearner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#451#877#0" />
+            <element signature="e#927#1220#0" />
+            <element signature="e#1255#1444#0" />
+            <element signature="e#1488#1633#0" />
+            <element signature="e#1677#1910#0" />
+            <element signature="e#1979#2386#0" />
+            <element signature="e#2455#2895#0" />
+            <element signature="e#2929#3508#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1296">
+          <caret line="66" column="30" selection-start-line="66" selection-start-column="30" selection-end-line="66" selection-end-column="30" />
+          <folding>
+            <element signature="e#49#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="22" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/forecastPrices.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -1142,39 +1079,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-144" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="351" selection-start-line="351" selection-end-line="351" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1637#5931#0" />
-            <element signature="e#15609#16143#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="889">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
-          <folding>
-            <element signature="e#49#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/templates/footer.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
