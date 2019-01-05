@@ -37,19 +37,19 @@ def get_sma_indicator(price, rolling_mean):
     """
     return price / rolling_mean - 1
 
-def get_sma(values, window):
+def get_sma(values, window=10):
     """Return Simple moving average of given values, using specified window size."""
     sma = pd.Series(values.rolling(window,center=False).mean())
     q = (sma / values) - 1
     return sma, q
 
-def get_rolling_mean(values, window):
+def get_rolling_mean(values, window=10):
     """Return rolling mean of given values, using specified window size."""
     #values.rolling(window).mean
     return values.rolling(window).mean()
 
 
-def get_rolling_std(values, window):
+def get_rolling_std(values, window=10):
     """Return rolling standard deviation of given values, using specified window size."""
     # todo: Compute and return rolling standard deviation
     #return pd.rolling_std(values, window=window)

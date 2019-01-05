@@ -4,7 +4,6 @@ import os
 import numpy as np
 import pandas as pd
 from flask import render_template
-from markupsafe import Markup
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn import tree, metrics
@@ -23,6 +22,7 @@ def showforcastpricesvalues(request):
     forecast_date = str(request.get('forecastDate'))
     forecast_date = dt.datetime.strptime(forecast_date, '%m/%d/%Y')
 
+    #TODO Make other models
 
     # Get Forecast model
     forecast_model = str(request.get('model_Selection'))
@@ -38,41 +38,18 @@ def showforcastpricesvalues(request):
     start_d = forecast_date - dt.timedelta(forecast_lookback)
     yesterday = dt.date.today() - dt.timedelta(1)
 
-    #TODO What to do with the file created
-
-    # Check whether there is a file with input data or not before dowunloading
-    file = symbol_to_path(symbol)
-    if os.path.isfile(file):
-        (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(file)
-        file_date = dt.datetime.utcfromtimestamp(ctime).strftime('%Y-%m-%d')
-        today = dt.date.today()
-        if file_date != str(today):
-        # Get dates from initial date to yesterday from Yahoo
-            try:
-                download = fetchOnlineData(start_d, symbol)
-                if download == False:
-                    return render_template(
-                        # name of template
-                        "pricesForecastForm.html",
-                        error=True)
-            except:
-                return render_template(
-                    # name of template
-                    "pricesForecastForm.html",
-                    error=True)
-    else:
-        try:
-            download = fetchOnlineData(start_d, symbol)
-            if download == False:
-                return render_template(
-                    # name of template
-                    "pricesForecastForm.html",
-                    error=True)
-        except:
+    try:
+        download = fetchOnlineData(start_d, symbol, yesterday)
+        if download == False:
             return render_template(
                 # name of template
                 "pricesForecastForm.html",
                 error=True)
+    except:
+        return render_template(
+            # name of template
+            "pricesForecastForm.html",
+            error=True)
 
     portf_value = get_data(symbol)
 
@@ -117,17 +94,21 @@ def showforcastpricesvalues(request):
     # Clean nan values
     normed = normed.fillna(0)
 
+    # Sort dataframe by index
+    normed.sort_index()
+
     # Define X and y
     feature_cols = ['Momentum', 'SMA', 'RSI']
     X = normed[feature_cols]
     y = normed[symbol]
 
     # split X and y into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffle=False)
 
 
+    # Use only to get the best parameter for max_depth
     # Loop through a few different max depths and check the performance
-    for d in [3, 5, 10]:
+    '''for d in [3, 5, 10]:
         # Create the tree and fit it
         decision_tree = DecisionTreeRegressor(max_depth=d)
         decision_tree.fit(X_train, y_train)
@@ -136,7 +117,7 @@ def showforcastpricesvalues(request):
         print('max_depth=', str(d))
         print(decision_tree.score(X_train, y_train))
         print(decision_tree.score(X_test, y_test), '\n')
-
+    '''
     model = tree.DecisionTreeRegressor(max_depth=10)
 
     model.fit(X_train, y_train)
@@ -188,11 +169,55 @@ def showforcastpricesvalues(request):
     rmse = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
     print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 
-
-
-
     results = pd.DataFrame({'Price': y_test, 'Price prediction': y_pred})
     results.sort_index(inplace=True)
+
+    # TODO Calculate forecast after today
+
+    # Create forecasting for future prices
+
+    # Normalize the prices Dataframe
+    normed = pd.Series.to_frame(y_test)
+    # normed = scaling_data(normed, symbol)
+
+    forecast_time = forecast_time-1
+
+    # ****Momentum chart****
+    # Compute momentum
+    sym_mom = get_momentum(normed[symbol], window=forecast_time)
+
+    # ****Bollinger Bands****
+    # Compute rolling mean
+    rm_JPM = get_rolling_mean(normed[symbol], window=forecast_time)
+
+    # Compute rolling standard deviation
+    rstd_JPM = get_rolling_std(normed[symbol], window=forecast_time)
+
+    # Compute upper and lower bands
+    upper_band, lower_band = get_bollinger_bands(rm_JPM, rstd_JPM)
+
+    # ****Relative Strength Index (RSI)****
+    # Compute RSI
+    rsi_value = get_RSI(normed[symbol])
+
+    # ****Simple moving average (SMA)****
+    # Compute SMA
+    sma, q = get_sma(normed[symbol], window=forecast_time)
+
+    # Create momentum column
+    normed['Momentum'] = sym_mom
+
+    # Create SMA column
+    normed['SMA'] = sma
+
+    # Create SMA column
+    normed['RSI'] = rsi_value
+
+    # Clean nan values
+    normed = normed.fillna(0)
+
+    # Sort dataframe by index
+    normed.sort_index()
 
     # Plot prediction
 

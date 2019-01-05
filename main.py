@@ -1,20 +1,9 @@
-import math
 import os
-import pickle
-
-import numpy as np
-
-from flask import Flask, render_template, session, jsonify, request, flash
-
-from sklearn.metrics import accuracy_score, explained_variance_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-
+from flask import Flask, render_template, session, request, flash
 from forecastPrice import showforcastpricesvalues
 from form import StartValuesForm, get_tickers, pricesForecast
 import pandas as pd
 import datetime as dt
-from sklearn import datasets, svm, metrics
 from markupsafe import Markup
 import fix_yahoo_finance as yf
 
@@ -22,13 +11,12 @@ import fix_yahoo_finance as yf
 yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_data, \
-    scaling_data, symbol_to_path
+    symbol_to_path
 from strategyLearner import strategyLearner
-from marketsim import compute_portvals_single_symbol, market_simulator
-from indicators import get_momentum, get_sma, get_sma_indicator, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
-    compute_bollinger_value, get_RSI, plot_cum_return, plot_momentum, plot_sma_indicator, plot_rsi_indicator, \
-    plot_momentum_sma_indicator, plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines, \
-    plot_stock_prices_prediction
+from marketsim import market_simulator
+from indicators import get_momentum, get_sma, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
+    get_RSI, plot_cum_return, plot_momentum, plot_sma_indicator, plot_rsi_indicator, \
+    plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
 
 # prep
 from sklearn.model_selection import train_test_split
@@ -206,7 +194,7 @@ def showvalues():
         if file_date != str(today):
         # Get dates from initial date to yesterday from Yahoo
             try:
-                download = fetchOnlineData(start_d, symbol)
+                download = fetchOnlineData(start_d, symbol, yesterday)
                 if download == False:
                     return render_template(
                         # name of template
@@ -219,7 +207,7 @@ def showvalues():
                     error=True)
     else:
         try:
-            download = fetchOnlineData(start_d, symbol)
+            download = fetchOnlineData(start_d, symbol, yesterday)
             if download == False:
                 return render_template(
                     # name of template

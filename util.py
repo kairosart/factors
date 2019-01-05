@@ -45,6 +45,7 @@ def slice_df(df_to_slice, dates):
 
 
 def df_to_cvs(df, symbol):
+    # Save dataframe to CSV file
     outname = symbol + '.csv'
     outdir = './data'
     if not os.path.exists(outdir):
@@ -52,7 +53,9 @@ def df_to_cvs(df, symbol):
     fullname = os.path.join(outdir, outname)
     df.to_csv(fullname)
 
-def fetchOnlineData(dt_start, symbol):
+
+
+def fetchOnlineData(dt_start, symbol, dt_end):
     # Add a day to dt_end for Yahoo purpose
     dt_end = dt.date.today() - dt.timedelta(1)
 
