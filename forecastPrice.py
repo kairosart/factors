@@ -159,18 +159,17 @@ def showforcastpricesvalues(request):
     # Create forecasting for future prices
     for i in range(forecast_time):
         # Calculate next price
-        next_price = model.predict(X_test)
-
-
+        # TODO Only get the first price, the following are all the same
+        next_price = model.predict(X_test)[-1]
         # Add data to normed dataframe
         last_date = normed.iloc[[-1]].index
         t = last_date + dt.timedelta(days=1)
-        #next_day = pd.Series(t.format())
         next_day = pd.to_datetime(t, unit='s')
+
 
         # Create a date column to reindex
         normed['date'] = normed.index
-        normed.loc[len(normed.index)] = [next_price[-1], "NaN", "NaN", "NaN", next_day[0]]
+        normed.loc[len(normed.index)] = [next_price, "NaN", "NaN", "NaN", next_day[0]]
 
         # Get indicators
         sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
@@ -182,7 +181,20 @@ def showforcastpricesvalues(request):
 
         # Reindex
         normed.set_index('date', inplace=True)
-        print(normed)
+
+        # Update X_test with new value
+        # Create a date column to reindex
+        X_test['date'] = X_test.index
+        X_test.loc[len(X_test.index)] = ["NaN", "NaN", "NaN", next_day[0]]
+
+
+        # Update normed
+        X_test.at[X_test.index[-1], 'Momentum'] = sym_mom[-1]
+        X_test.at[X_test.index[-1], 'SMA'] = sma[-1]
+        X_test.at[X_test.index[-1], 'RSI'] = rsi_value[-1]
+
+        # Reindex
+        X_test.set_index('date', inplace=True)
 
 
     # ****Momentum chart****
