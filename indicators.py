@@ -25,7 +25,8 @@ def get_momentum(price, window=10):
     Returns: Momentum, series of the same size as input data
     """
     momentum = pd.Series(np.nan, index=price.index)
-    momentum.iloc[window:] = price.iloc[window:] / price.values[:-window] - 1
+    momentum.iloc[window:] = (price.iloc[window:] / price.values[:-window]) - 1
+    print(momentum.iloc[window:])
     return momentum
 
 def get_sma_indicator(price, rolling_mean):

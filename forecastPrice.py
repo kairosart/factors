@@ -60,27 +60,9 @@ def showforcastpricesvalues(request):
     normed['date'] = portf_value.index
     normed.set_index('date', inplace=True)
 
-    # ****Momentum chart****
-    # Compute momentum
-    sym_mom = get_momentum(normed[symbol], window=10)
+    # Get indicators
+    sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
 
-    # ****Bollinger Bands****
-    # Compute rolling mean
-    rm_JPM = get_rolling_mean(portf_value[symbol], window=10)
-
-    # Compute rolling standard deviation
-    rstd_JPM = get_rolling_std(portf_value[symbol], window=10)
-
-    # Compute upper and lower bands
-    upper_band, lower_band = get_bollinger_bands(rm_JPM, rstd_JPM)
-
-    # ****Relative Strength Index (RSI)****
-    # Compute RSI
-    rsi_value = get_RSI(portf_value[symbol])
-
-    # ****Simple moving average (SMA)****
-    # Compute SMA
-    sma, q = get_sma(normed[symbol], window=10)
 
     # Create momentum column
     normed['Momentum'] = sym_mom
@@ -175,26 +157,45 @@ def showforcastpricesvalues(request):
     # TODO Calculate forecast after today
 
     # Create forecasting for future prices
+    for i in range(forecast_time):
+        # Calculate next price
+        next_price = model.predict(X_test)
 
-    # Normalize the prices Dataframe
-    normed = pd.Series.to_frame(y_test)
-    # normed = scaling_data(normed, symbol)
 
-    forecast_time = forecast_time-1
+        # Add data to normed dataframe
+        last_date = normed.iloc[[-1]].index
+        t = last_date + dt.timedelta(days=1)
+        #next_day = pd.Series(t.format())
+        next_day = pd.to_datetime(t, unit='s')
+
+        # Create a date column to reindex
+        normed['date'] = normed.index
+        normed.loc[len(normed.index)] = [next_price[-1], "NaN", "NaN", "NaN", next_day[0]]
+
+        # Get indicators
+        sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
+
+        # Update normed
+        normed.at[normed.index[-1], 'Momentum'] = sym_mom[-1]
+        normed.at[normed.index[-1], 'SMA'] = sma[-1]
+        normed.at[normed.index[-1], 'RSI'] = rsi_value[-1]
+
+        # Reindex
+        normed.set_index('date', inplace=True)
+        print(normed)
+
 
     # ****Momentum chart****
+    # Plot prediction
+
+    plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])
+    return symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse
+
+
+def get_indicators(normed, symbol):
+
     # Compute momentum
-    sym_mom = get_momentum(normed[symbol], window=forecast_time)
-
-    # ****Bollinger Bands****
-    # Compute rolling mean
-    rm_JPM = get_rolling_mean(normed[symbol], window=forecast_time)
-
-    # Compute rolling standard deviation
-    rstd_JPM = get_rolling_std(normed[symbol], window=forecast_time)
-
-    # Compute upper and lower bands
-    upper_band, lower_band = get_bollinger_bands(rm_JPM, rstd_JPM)
+    sym_mom = get_momentum(normed[symbol], window=10)
 
     # ****Relative Strength Index (RSI)****
     # Compute RSI
@@ -202,24 +203,5 @@ def showforcastpricesvalues(request):
 
     # ****Simple moving average (SMA)****
     # Compute SMA
-    sma, q = get_sma(normed[symbol], window=forecast_time)
-
-    # Create momentum column
-    normed['Momentum'] = sym_mom
-
-    # Create SMA column
-    normed['SMA'] = sma
-
-    # Create SMA column
-    normed['RSI'] = rsi_value
-
-    # Clean nan values
-    normed = normed.fillna(0)
-
-    # Sort dataframe by index
-    normed.sort_index()
-
-    # Plot prediction
-
-    plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])
-    return symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse
+    sma, q = get_sma(normed[symbol], window=10)
+    return sym_mom, sma, q, rsi_value
