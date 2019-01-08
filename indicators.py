@@ -98,21 +98,16 @@ def get_RSI(prices, n=14):
 
     for i in range(n, len(prices)):
         delta = deltas[i-1] # cause the diff is 1 shorter
-
         if delta>0:
             upval = delta
             downval = 0.
         else:
             upval = 0.
             downval = -delta
-
         up = (up*(n-1) + upval)/n
         down = (down*(n-1) + downval)/n
-
         rs = up/down
         rsi[i] = 100. - 100./(1.+rs)
-
-
     return rsi
 
 

@@ -8,8 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn import tree, metrics
 
-from indicators import plot_stock_prices_prediction, get_momentum, get_rolling_mean, get_rolling_std, get_RSI, get_sma, \
-    get_bollinger_bands
+from indicators import plot_stock_prices_prediction, get_momentum, get_sma, get_RSI
 from util import symbol_to_path, fetchOnlineData, get_data
 import datetime as dt
 
@@ -160,41 +159,36 @@ def showforcastpricesvalues(request):
     for i in range(forecast_time):
         # Calculate next price
         # TODO Only get the first price, the following are all the same
-        next_price = model.predict(X_test)[-1]
+        if isinstance(X_test, pd.DataFrame):
+            next_price = model.predict(X_test)[-1]
+        else:
+            next_price = model.predict(X_test.reshape(1, -1))
+
         # Add data to normed dataframe
         last_date = normed.iloc[[-1]].index
         t = last_date + dt.timedelta(days=1)
         next_day = pd.to_datetime(t, unit='s')
 
-
-        # Create a date column to reindex
-        normed['date'] = normed.index
-        normed.loc[len(normed.index)] = [next_price, "NaN", "NaN", "NaN", next_day[0]]
-
         # Get indicators
         sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
 
+        # Create a date column to reindex
+        normed['date'] = normed.index
+        normed.loc[len(normed.index)] = [float(next_price), "NaN", "NaN", "NaN", next_day[0]]
+
+
+
         # Update normed
-        normed.at[normed.index[-1], 'Momentum'] = sym_mom[-1]
+        normed.at[normed.index[-1], 'Momentum'] = float(sym_mom[-1])
         normed.at[normed.index[-1], 'SMA'] = sma[-1]
-        normed.at[normed.index[-1], 'RSI'] = rsi_value[-1]
+        normed.at[normed.index[-1], 'RSI'] = float(rsi_value[-1])
 
         # Reindex
         normed.set_index('date', inplace=True)
 
-        # Update X_test with new value
-        # Create a date column to reindex
-        X_test['date'] = X_test.index
-        X_test.loc[len(X_test.index)] = ["NaN", "NaN", "NaN", next_day[0]]
+        # Data to predict the next price
+        X_test = np.array([sym_mom[-1], sma[-1], rsi_value[-1]])
 
-
-        # Update normed
-        X_test.at[X_test.index[-1], 'Momentum'] = sym_mom[-1]
-        X_test.at[X_test.index[-1], 'SMA'] = sma[-1]
-        X_test.at[X_test.index[-1], 'RSI'] = rsi_value[-1]
-
-        # Reindex
-        X_test.set_index('date', inplace=True)
 
 
     # ****Momentum chart****
@@ -211,7 +205,7 @@ def get_indicators(normed, symbol):
 
     # ****Relative Strength Index (RSI)****
     # Compute RSI
-    rsi_value = get_RSI(normed[symbol])
+    rsi_value = get_RSI(normed[symbol], 7)
 
     # ****Simple moving average (SMA)****
     # Compute SMA
