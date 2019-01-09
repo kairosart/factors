@@ -4,12 +4,13 @@ import os
 import numpy as np
 import pandas as pd
 from flask import render_template
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeRegressor
-from sklearn import tree, metrics
-
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn import tree, metrics, neighbors
+from sklearn.model_selection import cross_val_score
+from math import sqrt
 from indicators import plot_stock_prices_prediction, get_momentum, get_sma, get_RSI
-from util import symbol_to_path, fetchOnlineData, get_data
+from util import fetchOnlineData, get_data
 import datetime as dt
 
 def showforcastpricesvalues(request):
@@ -78,20 +79,24 @@ def showforcastpricesvalues(request):
     # Sort dataframe by index
     normed.sort_index()
 
+    corr_df = normed.corr(method='pearson')
+    print("--------------- CORRELATIONS ---------------")
+    print(corr_df)
+
     # Define X and y
-    feature_cols = ['Momentum', 'SMA', 'RSI']
+    feature_cols = ['Momentum', 'RSI']
     X = normed[feature_cols]
     y = normed[symbol]
 
     # split X and y into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffle=False)
 
-
+    '''
     # Use only to get the best parameter for max_depth
     # Loop through a few different max depths and check the performance
-    '''for d in [3, 5, 10]:
+    for d in [3, 5, 10]:
         # Create the tree and fit it
-        decision_tree = DecisionTreeRegressor(max_depth=d)
+        decision_tree = tree.DecisionTreeRegressor(max_depth=d)
         decision_tree.fit(X_train, y_train)
 
         # Print out the scores on train and test
@@ -99,14 +104,30 @@ def showforcastpricesvalues(request):
         print(decision_tree.score(X_train, y_train))
         print(decision_tree.score(X_test, y_test), '\n')
     '''
-    model = tree.DecisionTreeRegressor(max_depth=10)
+
+    if forecast_model == '1':
+        model = tree.DecisionTreeRegressor(max_depth=10)
+    elif forecast_model == '2':
+        params = {'n_neighbors': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
+
+        knn = neighbors.KNeighborsRegressor()
+        print('KNN: %s' % knn)
+        model = GridSearchCV(knn, params, cv=5)
+        model.fit(X_train, y_train)
+        model.best_params_
 
     model.fit(X_train, y_train)
+
 
     # Predictions
     y_pred = model.predict(X_test)
 
     # Measuring predictions
+
+    # Accuracy
+    scores = cross_val_score(model, X_test, y_test, cv=10)
+    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() / 2))
+
     # Coefficient of determination R^2
     '''
     The best possible score is 1.0 and it can be negative (because the model can be arbitrarily worse). A constant model that always predicts the expected value of y, disregarding the input features, would get a R^2 score of 0.0.
@@ -150,6 +171,7 @@ def showforcastpricesvalues(request):
     rmse = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
     print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 
+
     results = pd.DataFrame({'Price': y_test, 'Price prediction': y_pred})
     results.sort_index(inplace=True)
 
@@ -159,10 +181,9 @@ def showforcastpricesvalues(request):
     for i in range(forecast_time):
         # Calculate next price
         # TODO Only get the first price, the following are all the same
-        if isinstance(X_test, pd.DataFrame):
-            next_price = model.predict(X_test)[-1]
-        else:
-            next_price = model.predict(X_test.reshape(1, -1))
+        # Data to predict the next price
+        X_test = np.array([sym_mom[-1], rsi_value[-1]])
+        next_price = model.predict(X_test.reshape(1, -1))
 
         # Add data to normed dataframe
         last_date = normed.iloc[[-1]].index
@@ -176,8 +197,6 @@ def showforcastpricesvalues(request):
         normed['date'] = normed.index
         normed.loc[len(normed.index)] = [float(next_price), "NaN", "NaN", "NaN", next_day[0]]
 
-
-
         # Update normed
         normed.at[normed.index[-1], 'Momentum'] = float(sym_mom[-1])
         normed.at[normed.index[-1], 'SMA'] = sma[-1]
@@ -186,8 +205,7 @@ def showforcastpricesvalues(request):
         # Reindex
         normed.set_index('date', inplace=True)
 
-        # Data to predict the next price
-        X_test = np.array([sym_mom[-1], sma[-1], rsi_value[-1]])
+
 
 
 
@@ -211,3 +229,5 @@ def get_indicators(normed, symbol):
     # Compute SMA
     sma, q = get_sma(normed[symbol], window=10)
     return sym_mom, sma, q, rsi_value
+
+
