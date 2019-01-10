@@ -10,7 +10,7 @@ from sklearn import tree, metrics, neighbors
 from sklearn.model_selection import cross_val_score
 from math import sqrt
 from indicators import plot_stock_prices_prediction, get_momentum, get_sma, get_RSI
-from util import fetchOnlineData, get_data
+from util import fetchOnlineData, get_data, df_to_cvs
 import datetime as dt
 
 def showforcastpricesvalues(request):
@@ -60,6 +60,11 @@ def showforcastpricesvalues(request):
     normed['date'] = portf_value.index
     normed.set_index('date', inplace=True)
 
+    #TODO Delete after finishing jupyter tests
+
+    #Save to file
+    df_to_cvs(normed, symbol)
+
     # Get indicators
     sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
 
@@ -108,6 +113,7 @@ def showforcastpricesvalues(request):
     if forecast_model == '1':
         model = tree.DecisionTreeRegressor(max_depth=10)
     elif forecast_model == '2':
+        #TODO Implement KNN
         params = {'n_neighbors': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
 
         knn = neighbors.KNeighborsRegressor()

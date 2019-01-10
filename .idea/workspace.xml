@@ -4,7 +4,6 @@
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/indicators.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,11 +48,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="161" column="5" lean-forward="true" selection-start-line="161" selection-start-column="5" selection-end-line="161" selection-end-column="5" />
+            <state relative-caret-position="130">
+              <caret line="88" column="18" lean-forward="true" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
               <folding>
                 <element signature="e#49#58#0" expanded="true" />
+                <element signature="e#5254#6227#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -86,8 +95,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1152">
-              <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
+            <state relative-caret-position="295">
+              <caret line="46" column="13" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="13" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
               </folding>
@@ -147,7 +156,6 @@
         <option value="$PROJECT_DIR$/static/js/moment.js" />
         <option value="$PROJECT_DIR$/form.py" />
         <option value="$PROJECT_DIR$/templates/forecastPrice.py" />
-        <option value="$PROJECT_DIR$/templates/pricesForecastForm.html" />
         <option value="$PROJECT_DIR$/templates/startValuesForm.html" />
         <option value="$PROJECT_DIR$/templates/overview.html" />
         <option value="$PROJECT_DIR$/static/js/popper-min.js" />
@@ -164,12 +172,13 @@
         <option value="$PROJECT_DIR$/strategyLearner.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/indicators.py" />
+        <option value="$PROJECT_DIR$/templates/pricesForecastForm.html" />
         <option value="$PROJECT_DIR$/forecastPrice.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="360" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1928" />
     <option name="width" value="1346" />
     <option name="height" value="728" />
   </component>
@@ -179,7 +188,22 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="factors" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="factors" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -292,20 +316,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Creating price forecast form.">
-      <created>1546004141273</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1546004141273</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Creating price forecast chart.">
-      <created>1546028019720</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1546028019720</updated>
     </task>
     <task id="LOCAL-00048" summary="Creating price forecast chart.">
       <created>1546029284192</created>
@@ -636,7 +646,21 @@
       <option name="project" value="LOCAL" />
       <updated>1546894571022</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="Create forecasting for future prices.">
+      <created>1546981619430</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1546981619443</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Implementing KNN.">
+      <created>1547067766254</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1547067766255</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -649,19 +673,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-5" y="-4" width="1930" height="1089" extended-state="6" />
+    <frame x="1928" y="0" width="1346" height="728" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.24403183" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.17140661" />
       <window_info id="Structure" order="1" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
       <window_info id="Favorites" order="2" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32868758" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3437863" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.37049943" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.34" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.329849" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.328" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.33565623" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5050398" side_tool="true" weight="0.6387921" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32868758" />
@@ -735,7 +759,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Downolading data from Yahoo when the form has been sent." />
     <MESSAGE value="Creating dropdown select for tickers." />
     <MESSAGE value="Making indicators info collapsible." />
     <MESSAGE value="Creating index.html" />
@@ -760,7 +783,8 @@
     <MESSAGE value="Changing environment to miniconda3 with python 3.7." />
     <MESSAGE value="Fixing requirements.txt" />
     <MESSAGE value="Create forecasting for future prices." />
-    <option name="LAST_COMMIT_MESSAGE" value="Create forecasting for future prices." />
+    <MESSAGE value="Implementing KNN." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementing KNN." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -782,18 +806,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>196</line>
+          <line>220</line>
           <option name="timeStamp" value="418" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>172</line>
-          <option name="timeStamp" value="507" />
+          <line>124</line>
+          <option name="timeStamp" value="524" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>175</line>
-          <option name="timeStamp" value="508" />
+          <line>68</line>
+          <option name="timeStamp" value="525" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="526" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -832,7 +861,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/tickers_name.json" />
     <entry file="file://$PROJECT_DIR$/templates/.ipynb_checkpoints/startValuesForm-checkpoint.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -900,19 +928,6 @@
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/AABA.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -1053,16 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1152">
-          <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
@@ -1081,12 +1086,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../lib/python3.7/site-packages/sklearn/model_selection/_search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="840" selection-start-line="840" selection-end-line="840" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="13" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/AABA.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="161" column="5" lean-forward="true" selection-start-line="161" selection-start-column="5" selection-end-line="161" selection-end-column="5" />
+        <state relative-caret-position="130">
+          <caret line="88" column="18" lean-forward="true" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
           <folding>
             <element signature="e#49#58#0" expanded="true" />
+            <element signature="e#5254#6227#0" />
           </folding>
         </state>
       </provider>
