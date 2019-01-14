@@ -23,8 +23,6 @@ def showforcastpricesvalues(request):
     forecast_date = str(request.get('forecastDate'))
     forecast_date = dt.datetime.strptime(forecast_date, '%m/%d/%Y')
 
-    #TODO Make other models
-
     # Get Forecast model
     forecast_model = str(request.get('model_Selection'))
 
@@ -61,10 +59,6 @@ def showforcastpricesvalues(request):
     normed['date'] = portf_value.index
     normed.set_index('date', inplace=True)
 
-    #TODO Delete after finishing jupyter tests
-
-    #Save to file
-    df_to_cvs(normed, symbol)
 
     # Get indicators
     sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
@@ -111,16 +105,21 @@ def showforcastpricesvalues(request):
         print(decision_tree.score(X_test, y_test), '\n')
     '''
 
+    # Decision Tree Regressor
     if forecast_model == '1':
         model = tree.DecisionTreeRegressor(max_depth=10)
 
 
+    # KNN
     elif forecast_model == '2':
         params = {'n_neighbors': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
         knn = neighbors.KNeighborsRegressor()
         print('KNN: %s' % knn)
         model = GridSearchCV(knn, params, cv=5)
+    # TODO Install pyramid-arima and implement it
+    # ARIMA
     elif forecast_model == '3':
+        return
 
     model.fit(X_train, y_train)
 
