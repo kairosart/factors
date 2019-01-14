@@ -13,6 +13,7 @@ from indicators import plot_stock_prices_prediction, get_momentum, get_sma, get_
 from util import fetchOnlineData, get_data, df_to_cvs
 import datetime as dt
 
+
 def showforcastpricesvalues(request):
 
     # Get symbol
@@ -112,15 +113,14 @@ def showforcastpricesvalues(request):
 
     if forecast_model == '1':
         model = tree.DecisionTreeRegressor(max_depth=10)
-    elif forecast_model == '2':
-        #TODO Implement KNN
-        params = {'n_neighbors': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
 
+
+    elif forecast_model == '2':
+        params = {'n_neighbors': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
         knn = neighbors.KNeighborsRegressor()
         print('KNN: %s' % knn)
         model = GridSearchCV(knn, params, cv=5)
-        model.fit(X_train, y_train)
-        model.best_params_
+    elif forecast_model == '3':
 
     model.fit(X_train, y_train)
 
@@ -182,7 +182,7 @@ def showforcastpricesvalues(request):
     results.sort_index(inplace=True)
 
     # TODO Calculate forecast after today
-
+    '''
     # Create forecasting for future prices
     for i in range(forecast_time):
         # Calculate next price
@@ -210,7 +210,7 @@ def showforcastpricesvalues(request):
 
         # Reindex
         normed.set_index('date', inplace=True)
-
+    '''
 
 
 
