@@ -956,3 +956,73 @@ def plot_stock_prices_prediction(df_index, prices, prediction, title="Stock pric
     fig = dict(data=data, layout=layout)
     chart = plot(fig, show_link=False, output_type='div')
     return chart
+
+def plot_stock_prices_prediction_ARIMA(df_index, prices, prediction, title="Stock prices prediction", xlabel="Date", ylabel="Price"):
+    """Plot Stock Prices.
+
+    Parameters:
+    df_prices: Prices dataframe
+    title: Chart title
+    xlabel: X axis title
+    ylable: Y axis title
+
+    Returns:
+    Plot prices prediction
+    """
+    trace_prices = go.Scatter(
+                x=df_index,
+                y=prices,
+                name = 'Price',
+                line = dict(color = '#17BECF'),
+                opacity = 0.8)
+
+    trace_prices_pred = go.Scatter(
+                x=df_index,
+                y=prediction,
+                name='Price prediction',
+                line=dict(color='#FF8000'),
+                opacity=0.8)
+
+
+    data = [trace_prices, trace_prices_pred]
+
+    layout = dict(
+        title = title,
+        showlegend=True,
+        legend=dict(
+                orientation="h"),
+        margin=go.layout.Margin(
+            l=50,
+            r=10,
+            b=100,
+            t=100,
+            pad=4
+        ),
+        xaxis = dict(
+                title=xlabel,
+                linecolor='#000', linewidth=1,
+                rangeselector=dict(
+                        buttons=list([
+                            dict(count=1,
+                                 label='1m',
+                                 step='month',
+                                 stepmode='backward'),
+                            dict(count=6,
+                                 label='6m',
+                                 step='month',
+                                 stepmode='backward'),
+                            dict(step='all')
+                        ])
+                ),
+                range=[df_index.values[0], df_index.values[1]]),
+
+        yaxis = dict(
+                title=ylabel,
+                linecolor='#000', linewidth=1
+                ),
+    )
+
+
+    fig = dict(data=data, layout=layout)
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart

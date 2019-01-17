@@ -337,7 +337,7 @@ def showforecastform():
 
     if request.method == 'POST':
         result = request.form
-        symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(result)
+        symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(result)
         return render_template(
             # name of template
             "forecastPrices.html",
@@ -345,11 +345,6 @@ def showforecastform():
             symbol=symbol,
             start_date=start_d,
             end_date=yesterday,
-            coef_deter=round(coef_deter, 3),
-            bias=round(bias, 3),
-            mae=round(mae, 3),
-            mse=round(mse, 3),
-            rmse=round(rmse, 3),
             div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
             titles=['na', 'Stock Prices '],
         )
