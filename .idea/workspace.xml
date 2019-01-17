@@ -2,52 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="Implementing ARIMA">
-      <change beforePath="$PROJECT_DIR$/.idea/factors.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/factors.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Forecasting_prices.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/__future__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/_bootlocale.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/_collections_abc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/_dummy_thread.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/_weakrefset.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/abc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/base64.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/bisect.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/codecs.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/collections" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/config-3.6m-x86_64-linux-gnu" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/copy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/copyreg.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/distutils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/distutils/distutils.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/encodings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/enum.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/fnmatch.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/functools.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/genericpath.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/hashlib.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/heapq.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/hmac.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/imp.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/importlib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/io.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/keyword.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/lib-dynload" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/linecache.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/locale.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/no-global-site-packages.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/ntpath.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/operator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/orig-prefix.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/os.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/posixpath.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/random.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/re.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/reprlib.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/rlcompleter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/shutil.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/python3.6/site-packages/easy_install.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/python3.6/site-packages/pip-18.1.dist-info/INSTALLER" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/python3.6/site-packages/pip-18.1.dist-info/LICENSE.txt" beforeDir="false" />
@@ -482,19 +438,6 @@
       <change beforePath="$PROJECT_DIR$/lib/python3.6/site-packages/wheel/pkginfo.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/python3.6/site-packages/wheel/util.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/python3.6/site-packages/wheel/wheelfile.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/site.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/sre_compile.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/sre_constants.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/sre_parse.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/stat.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/struct.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/tarfile.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/tempfile.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/token.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/tokenize.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/types.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/warnings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/python3.6/weakref.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -537,10 +480,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-816">
-              <caret line="116" column="30" selection-start-line="116" selection-start-column="30" selection-end-line="116" selection-end-column="30" />
+            <state relative-caret-position="336">
+              <caret line="59" column="42" lean-forward="true" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="42" />
               <folding>
                 <element signature="e#49#58#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="655">
+              <caret line="46" column="13" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="13" />
+              <folding>
+                <element signature="e#43#64#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -661,6 +616,11 @@
             <path>
               <item name="factors" type="b2602c69:ProjectViewProjectNode" />
               <item name="factors" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="factors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="factors" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -795,20 +755,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Creating price forecast chart. Styling table.">
-      <created>1546199044709</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1546199044710</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Creating price forecast chart. Styling table.">
-      <created>1546200574465</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1546200574465</updated>
     </task>
     <task id="LOCAL-00053" summary="Fixing download from Yahoo.">
       <created>1546201451382</created>
@@ -1139,7 +1085,21 @@
       <option name="project" value="LOCAL" />
       <updated>1547474600103</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="Implementing ARIMA">
+      <created>1547673548056</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1547673548057</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Implementing ARIMA">
+      <created>1547674483361</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1547674483362</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1534,22 +1494,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../lib/python3.7/site-packages/sklearn/model_selection/_search.py" />
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="46" column="13" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="13" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/AABA.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" rowLines="3" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/strategyLearner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1597,10 +1541,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/AABA.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="318">
+          <caret line="125" selection-start-line="125" selection-end-line="125" selection-end-column="10" />
+        </state>
+      </provider>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" rowLines="3" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="655">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="13" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-816">
-          <caret line="116" column="30" selection-start-line="116" selection-start-column="30" selection-end-line="116" selection-end-column="30" />
+        <state relative-caret-position="336">
+          <caret line="59" column="42" lean-forward="true" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="42" />
           <folding>
             <element signature="e#49#58#0" expanded="true" />
           </folding>
