@@ -12,7 +12,7 @@ from math import sqrt
 from indicators import plot_stock_prices_prediction, get_momentum, get_sma, get_RSI
 from util import fetchOnlineData, get_data, df_to_cvs
 import datetime as dt
-
+from statsmodels.tsa.arima_model import ARIMAResults
 
 def showforcastpricesvalues(request):
 
@@ -116,10 +116,21 @@ def showforcastpricesvalues(request):
         knn = neighbors.KNeighborsRegressor()
         print('KNN: %s' % knn)
         model = GridSearchCV(knn, params, cv=5)
-    # TODO Install pyramid-arima and implement it
+    # TODO ARIMA MODEL
     # ARIMA
     elif forecast_model == '3':
-        return
+        # load model
+        loaded = ARIMAResults.load('arima_model.pkl')
+        forecast = loaded.forecast(steps=forecast_time)[0]
+
+        # Setting dates for dataframe
+        dates = pd.date_range(forecast_date, periods=forecast_time)
+
+        df = pd.DataFrame(forecast)
+        df['Dates'] = dates
+        df.set_index('Dates', inplace=True)
+        df.rename(columns={0: 'Price'}, inplace=True)
+
 
     model.fit(X_train, y_train)
 
