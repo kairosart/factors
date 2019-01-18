@@ -193,12 +193,7 @@ def showforcastpricesvalues(request):
         df.set_index('Dates', inplace=True)
         df.rename(columns={0: 'Price'}, inplace=True)
 
-        # Setting lookback dataframe
-        dates = pd.date_range(forecast_lookback, forecast_date)
 
-        # Create a dataframe with adjusted close prices for the symbol and for cash
-        df_prices = slice_df(portf_value, dates)
-        df_prices
 
     # TODO Calculate forecast after today
     '''

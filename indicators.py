@@ -957,7 +957,7 @@ def plot_stock_prices_prediction(df_index, prices, prediction, title="Stock pric
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_stock_prices_prediction_ARIMA(df_index, prices, prediction, title="Stock prices prediction", xlabel="Date", ylabel="Price"):
+def plot_stock_prices_prediction_ARIMA(df_index, prediction, title="Stock prices prediction", xlabel="Date", ylabel="Price"):
     """Plot Stock Prices.
 
     Parameters:
@@ -969,12 +969,6 @@ def plot_stock_prices_prediction_ARIMA(df_index, prices, prediction, title="Stoc
     Returns:
     Plot prices prediction
     """
-    trace_prices = go.Scatter(
-                x=df_index,
-                y=prices,
-                name = 'Price',
-                line = dict(color = '#17BECF'),
-                opacity = 0.8)
 
     trace_prices_pred = go.Scatter(
                 x=df_index,
@@ -984,7 +978,7 @@ def plot_stock_prices_prediction_ARIMA(df_index, prices, prediction, title="Stoc
                 opacity=0.8)
 
 
-    data = [trace_prices, trace_prices_pred]
+    data = [trace_prices_pred]
 
     layout = dict(
         title = title,
