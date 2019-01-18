@@ -339,6 +339,7 @@ def showforecastform():
         result = request.form
         if result['model_Selection'] == '3':
             symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(result)
+
             return render_template(
                 # name of template
                 "forecastPrices.html",
@@ -347,7 +348,7 @@ def showforecastform():
                 start_date=start_d,
                 end_date=yesterday,
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
-                div_placeholder_model_sumary=Markup(model_sumary),
+                summary=Markup(model_sumary.tables[0].as_html()),
                 titles=['na', 'Stock Prices '],
             )
         else:

@@ -193,7 +193,7 @@ def showforcastpricesvalues(request):
         df.set_index('Dates', inplace=True)
         df.rename(columns={0: 'Price'}, inplace=True)
 
-        #TODO ARIMA Model Results
+        # ARIMA Model Results
         model_sumary = model.summary()
     if forecast_model == '3':
         # TODO ARIMA CHART

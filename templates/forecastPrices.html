@@ -6,8 +6,10 @@
 	</p>
     {{ div_placeholder_stock_prices_pred }}
     <br><br>
-    {% if div_placeholder_model_sumary %}
-        {{ div_placeholder_model_sumary }}
+    {% if summary %}
+        <div class="table-responsive">
+            {{ summary }}
+        </div>
     {% else %}
         <div class="table-responsive">
 		<table class= "table table-sm">
