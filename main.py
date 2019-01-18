@@ -337,20 +337,36 @@ def showforecastform():
 
     if request.method == 'POST':
         result = request.form
-        if str(request.get('model_Selection')) == '3':
-            symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(result)
+        if result['model_Selection'] == '3':
+            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(result)
+            return render_template(
+                # name of template
+                "forecastPrices.html",
+                # now we pass in our variables into the template
+                symbol=symbol,
+                start_date=start_d,
+                end_date=yesterday,
+                div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
+                div_placeholder_model_sumary=Markup(model_sumary),
+                titles=['na', 'Stock Prices '],
+            )
         else:
             symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(result)
-        return render_template(
-            # name of template
-            "forecastPrices.html",
-            # now we pass in our variables into the template
-            symbol=symbol,
-            start_date=start_d,
-            end_date=yesterday,
-            div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
-            titles=['na', 'Stock Prices '],
-        )
+            return render_template(
+                # name of template
+                "forecastPrices.html",
+                # now we pass in our variables into the template
+                symbol=symbol,
+                start_date=start_d,
+                end_date=yesterday,
+                coef_deter=round(coef_deter, 3),
+                bias=round(bias, 3),
+                mae=round(mae, 3),
+                mse=round(mse, 3),
+                rmse=round(rmse, 3),
+                div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
+                titles=['na', 'Stock Prices '],
+            )
     elif request.method == 'GET':
 
         return render_template('pricesForecastForm.html',

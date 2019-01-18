@@ -183,8 +183,8 @@ def showforcastpricesvalues(request):
     # ARIMA
     elif forecast_model == '3':
         # load model
-        loaded = ARIMAResults.load('arima_model.pkl')
-        forecast = loaded.forecast(steps=forecast_time)[0]
+        model = ARIMAResults.load('arima_model.pkl')
+        forecast = model.forecast(steps=forecast_time)[0]
 
         # Setting prediction dataframe
         dates = pd.date_range(forecast_date, periods=forecast_time)
@@ -193,47 +193,13 @@ def showforcastpricesvalues(request):
         df.set_index('Dates', inplace=True)
         df.rename(columns={0: 'Price'}, inplace=True)
 
-
-
-    # TODO Calculate forecast after today
-    '''
-    # Create forecasting for future prices
-    for i in range(forecast_time):
-        # Calculate next price
-        # TODO Only get the first price, the following are all the same
-        # Data to predict the next price
-        X_test = np.array([sym_mom[-1], rsi_value[-1]])
-        next_price = model.predict(X_test.reshape(1, -1))
-
-        # Add data to normed dataframe
-        last_date = normed.iloc[[-1]].index
-        t = last_date + dt.timedelta(days=1)
-        next_day = pd.to_datetime(t, unit='s')
-
-        # Get indicators
-        sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
-
-        # Create a date column to reindex
-        normed['date'] = normed.index
-        normed.loc[len(normed.index)] = [float(next_price), "NaN", "NaN", "NaN", next_day[0]]
-
-        # Update normed
-        normed.at[normed.index[-1], 'Momentum'] = float(sym_mom[-1])
-        normed.at[normed.index[-1], 'SMA'] = sma[-1]
-        normed.at[normed.index[-1], 'RSI'] = float(rsi_value[-1])
-
-        # Reindex
-        normed.set_index('date', inplace=True)
-    '''
-
-
-
-
+        #TODO ARIMA Model Results
+        model_sumary = model.summary()
     if forecast_model == '3':
         # TODO ARIMA CHART
 
         plot_prices_pred = plot_stock_prices_prediction_ARIMA(df.index, df['Price'], symbol)
-        return symbol, start_d, yesterday, plot_prices_pred
+        return symbol, start_d, yesterday, plot_prices_pred, model_sumary
     else:
         # Plot prediction
         plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])

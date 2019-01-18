@@ -6,7 +6,10 @@
 	</p>
     {{ div_placeholder_stock_prices_pred }}
     <br><br>
-    <div class="table-responsive">
+    {% if div_placeholder_model_sumary %}
+        {{ div_placeholder_model_sumary }}
+    {% else %}
+        <div class="table-responsive">
 		<table class= "table table-sm">
 			<thead>
 			 <tr>
@@ -98,7 +101,7 @@
 			</tbody>
 		</table>
 	</div>
-
+    {% endif %}
 
     <div>
       {% include "footer.html" %}
