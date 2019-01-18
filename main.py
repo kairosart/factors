@@ -337,7 +337,10 @@ def showforecastform():
 
     if request.method == 'POST':
         result = request.form
-        symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(result)
+        if str(request.get('model_Selection')) == '3':
+            symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(result)
+        else:
+            symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(result)
         return render_template(
             # name of template
             "forecastPrices.html",
