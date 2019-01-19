@@ -15,43 +15,7 @@ from util import fetchOnlineData, get_data, df_to_cvs, slice_df
 import datetime as dt
 from statsmodels.tsa.arima_model import ARIMAResults
 
-def showforcastpricesvalues(request):
-
-    # Get symbol
-    symbol = str(request.get('ticker_select'))
-
-    # Get Forecast date
-    forecast_date = str(request.get('forecastDate'))
-    forecast_date = dt.datetime.strptime(forecast_date, '%m/%d/%Y')
-
-    # Get Forecast model
-    forecast_model = str(request.get('model_Selection'))
-
-    # Get Forecast time
-    forecast_time = int(request.get('forecast_Time'))
-
-    # Get Lookback
-    forecast_lookback = int(request.get('look_Back'))
-
-
-    # Get 1 year of data to train and test
-    start_d = forecast_date - dt.timedelta(forecast_lookback)
-    yesterday = dt.date.today() - dt.timedelta(1)
-
-    try:
-        download = fetchOnlineData(start_d, symbol, yesterday)
-        if download == False:
-            return render_template(
-                # name of template
-                "pricesForecastForm.html",
-                error=True)
-    except:
-        return render_template(
-            # name of template
-            "pricesForecastForm.html",
-            error=True)
-
-    portf_value = get_data(symbol)
+def showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time):
 
     # Normalize the prices Dataframe
     normed = portf_value.copy()
@@ -193,17 +157,15 @@ def showforcastpricesvalues(request):
         df.set_index('Dates', inplace=True)
         df.rename(columns={0: 'Price'}, inplace=True)
 
+        # TODO ARIMA CHART
         # ARIMA Model Results
         model_sumary = model.summary()
-    if forecast_model == '3':
-        # TODO ARIMA CHART
-
         plot_prices_pred = plot_stock_prices_prediction_ARIMA(df.index, df['Price'], symbol)
         return symbol, start_d, yesterday, plot_prices_pred, model_sumary
-    else:
-        # Plot prediction
-        plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])
-        return symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse
+
+    # Plot prediction
+    plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])
+    return symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse
 
 
 def get_indicators(normed, symbol):

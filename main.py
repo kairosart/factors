@@ -6,8 +6,6 @@ import pandas as pd
 import datetime as dt
 from markupsafe import Markup
 import fix_yahoo_finance as yf
-
-
 yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_data, \
@@ -18,13 +16,10 @@ from indicators import get_momentum, get_sma, get_rolling_mean, get_rolling_std,
     get_RSI, plot_cum_return, plot_momentum, plot_sma_indicator, plot_rsi_indicator, \
     plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
 
-# prep
-from sklearn.model_selection import train_test_split
-from sklearn import tree
-
 
 app = Flask(__name__)
 app.config.from_object('config')
+
 
 @app.route('/')
 def home():
@@ -337,8 +332,45 @@ def showforecastform():
 
     if request.method == 'POST':
         result = request.form
+        # Get symbol
+        symbol = request.form.get('ticker_select', type=str)
+
+        # Get Forecast date
+        forecast_date = request.form.get('forecastDate', type=str)
+        forecast_date = dt.datetime.strptime(forecast_date, '%m/%d/%Y')
+
+        # Get Forecast model
+        forecast_model = request.form.get('model_Selection', type=str)
+
+        # Get Forecast time
+        forecast_time = request.form.get('forecast_Time', type=int)
+
+        # Get Lookback
+        forecast_lookback = request.form.get('look_Back', type=int)
+
+        # Get 1 year of data to train and test
+        start_d = forecast_date - dt.timedelta(forecast_lookback)
+        start_d = f"{start_d:%m/%d/%Y}"
+        yesterday = dt.date.today() - dt.timedelta(1)
+
+        try:
+            download = fetchOnlineData(start_d, symbol, yesterday)
+            if download == False:
+                return render_template(
+                    # name of template
+                    "pricesForecastForm.html",
+                    error=True)
+        except:
+            # TODO Managing errors
+            # raise Exception("Can't connect to database")
+            return render_template(
+                # name of template
+                "pricesForecastForm.html",
+                error=True)
+
+        portf_value = get_data(symbol)
         if result['model_Selection'] == '3':
-            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(result)
+            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time)
 
             return render_template(
                 # name of template
