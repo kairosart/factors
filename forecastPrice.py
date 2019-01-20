@@ -1,21 +1,44 @@
 """ Implement price forecasting for a stock """
 
-import os
 import numpy as np
 import pandas as pd
-from flask import render_template
-from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn import tree, metrics, neighbors
 from sklearn.model_selection import cross_val_score
-from math import sqrt
 from indicators import plot_stock_prices_prediction, get_momentum, get_sma, get_RSI, plot_stock_prices, \
     plot_stock_prices_prediction_ARIMA
-from util import fetchOnlineData, get_data, df_to_cvs, slice_df
-import datetime as dt
 from statsmodels.tsa.arima_model import ARIMAResults
 
-def showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time):
+def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, forecast_date):
+    '''
+
+    :param symbol: Stock symbol
+    :param portf_value: Prices dataframe
+    :param forecast_model: Model for forecasting
+    :param forecast_time: Number of days to forecast in the future
+    :param start_d: Lookback date
+    :param forecast_date: Forecasting date
+    :return: Summary and scores.
+    '''
+
+    # ARIMA
+    if forecast_model == '3':
+        # load model
+        model = ARIMAResults.load('arima_model.pkl')
+        forecast = model.forecast(steps=forecast_time)[0]
+
+        # Setting prediction dataframe
+        dates = pd.date_range(forecast_date, periods=forecast_time)
+        df = pd.DataFrame(forecast)
+        df['Dates'] = dates
+        df.set_index('Dates', inplace=True)
+        df.rename(columns={0: 'Price'}, inplace=True)
+
+        # TODO ARIMA CHART
+        # ARIMA Model Results
+        model_sumary = model.summary()
+        plot_prices_pred = plot_stock_prices_prediction_ARIMA(df.index, df['Price'], symbol)
+        return symbol, start_d, forecast_date, plot_prices_pred, model_sumary
 
     # Normalize the prices Dataframe
     normed = portf_value.copy()
@@ -23,6 +46,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time)
 
     normed['date'] = portf_value.index
     normed.set_index('date', inplace=True)
+    normed.rename(columns={'Adj Close': symbol}, inplace=True)
 
 
     # Get indicators
@@ -134,38 +158,18 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time)
     # Decision Tree Regressor
     if forecast_model == '1':
         model = tree.DecisionTreeRegressor(max_depth=10)
-        results, coef_deter, forecast_errors, bias, mae, mse, rmse = model_fit_pred(X_train, y_train, X_test)
-
     # KNN
     elif forecast_model == '2':
         params = {'n_neighbors': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
         knn = neighbors.KNeighborsRegressor()
         print('KNN: %s' % knn)
         model = GridSearchCV(knn, params, cv=5)
-        results, coef_deter, forecast_errors, bias, mae, mse, rmse = model_fit_pred(X_train, y_train, X_test)
 
-    # ARIMA
-    elif forecast_model == '3':
-        # load model
-        model = ARIMAResults.load('arima_model.pkl')
-        forecast = model.forecast(steps=forecast_time)[0]
-
-        # Setting prediction dataframe
-        dates = pd.date_range(forecast_date, periods=forecast_time)
-        df = pd.DataFrame(forecast)
-        df['Dates'] = dates
-        df.set_index('Dates', inplace=True)
-        df.rename(columns={0: 'Price'}, inplace=True)
-
-        # TODO ARIMA CHART
-        # ARIMA Model Results
-        model_sumary = model.summary()
-        plot_prices_pred = plot_stock_prices_prediction_ARIMA(df.index, df['Price'], symbol)
-        return symbol, start_d, yesterday, plot_prices_pred, model_sumary
+    results, coef_deter, forecast_errors, bias, mae, mse, rmse = model_fit_pred(X_train, y_train, X_test)
 
     # Plot prediction
     plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])
-    return symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse
+    return symbol, start_d, forecast_date, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse
 
 
 def get_indicators(normed, symbol):

@@ -59,6 +59,7 @@ def fetchOnlineData(dt_start, symbol, dt_end):
     # Add a day to dt_end for Yahoo purpose
     dt_end = dt.date.today() - dt.timedelta(1)
 
+
     # Get data of trading days between the start and the end.
     df = pdr.get_data_yahoo(
             # tickers list (single tickers accepts a string as well)
@@ -80,8 +81,12 @@ def fetchOnlineData(dt_start, symbol, dt_end):
             auto_adjust = False
     )
     if len(df.index):
-        df_to_cvs(df, symbol)
-        return True
+        del df['Open']
+        del df['High']
+        del df['Low']
+        del df['Close']
+        del df['Volume']
+        return df
     else:
         return False
 

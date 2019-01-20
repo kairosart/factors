@@ -348,29 +348,17 @@ def showforecastform():
         # Get Lookback
         forecast_lookback = request.form.get('look_Back', type=int)
 
-        # Get 1 year of data to train and test
+        # Get lookback date of data to train and test
         start_d = forecast_date - dt.timedelta(forecast_lookback)
-        start_d = f"{start_d:%m/%d/%Y}"
+        start_d = f"{start_d:%Y-%m-%d}"
         yesterday = dt.date.today() - dt.timedelta(1)
 
-        try:
-            download = fetchOnlineData(start_d, symbol, yesterday)
-            if download == False:
-                return render_template(
-                    # name of template
-                    "pricesForecastForm.html",
-                    error=True)
-        except:
-            # TODO Managing errors
-            # raise Exception("Can't connect to database")
-            return render_template(
-                # name of template
-                "pricesForecastForm.html",
-                error=True)
 
-        portf_value = get_data(symbol)
+        portf_value = fetchOnlineData(start_d, symbol, yesterday)
+
+
         if result['model_Selection'] == '3':
-            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time)
+            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday)
 
             return render_template(
                 # name of template
@@ -384,7 +372,7 @@ def showforecastform():
                 titles=['na', 'Stock Prices '],
             )
         else:
-            symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(result)
+            symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday)
             return render_template(
                 # name of template
                 "forecastPrices.html",
