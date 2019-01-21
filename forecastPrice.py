@@ -45,7 +45,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         df.rename(columns={0: 'Price'}, inplace=True)
 
 
-        # TODO Confidence interval chart
+        # TODO Confidence interval arc chart
         # ARIMA Model Results
         model_sumary = model.summary()
         plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)

@@ -180,44 +180,12 @@ def showvalues():
     start_d = dt.date.today() - dt.timedelta(365)
     yesterday = dt.date.today() - dt.timedelta(1)
 
-    # Check whether there is a file with input data or not before downloading
-    file = symbol_to_path(symbol)
-    if os.path.isfile(file):
-        (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(file)
-        file_date = dt.datetime.utcfromtimestamp(ctime).strftime('%Y-%m-%d')
-        today = dt.date.today()
-        if file_date != str(today):
-        # Get dates from initial date to yesterday from Yahoo
-            try:
-                download = fetchOnlineData(start_d, symbol, yesterday)
-                if download == False:
-                    return render_template(
-                        # name of template
-                        "startValuesForm.html",
-                        error=True)
-            except:
-                return render_template(
-                    # name of template
-                    "startValuesForm.html",
-                    error=True)
-    else:
-        try:
-            download = fetchOnlineData(start_d, symbol, yesterday)
-            if download == False:
-                return render_template(
-                    # name of template
-                    "startValuesForm.html",
-                    error=True)
-        except:
-            return render_template(
-                # name of template
-                "startValuesForm.html",
-                error=True)
-    portf_value = get_data(symbol)
+
+    portf_value = fetchOnlineData(start_d, symbol, yesterday)
 
 
     # ****Stock prices chart****
-    plot_prices = plot_stock_prices(portf_value.index, portf_value[symbol], symbol)
+    plot_prices = plot_stock_prices(portf_value.index, portf_value['Adj Close'], symbol)
 
 
     # Normalize the prices Dataframe
@@ -229,25 +197,25 @@ def showvalues():
 
     # ****Momentum chart****
     # Compute momentum
-    sym_mom = get_momentum(normed[symbol], window=10)
+    sym_mom = get_momentum(normed['Adj Close'], window=10)
 
     # ****Bollinger Bands****
     # Compute rolling mean
-    rm_JPM = get_rolling_mean(portf_value[symbol], window=10)
+    rm_JPM = get_rolling_mean(portf_value['Adj Close'], window=10)
 
     # Compute rolling standard deviation
-    rstd_JPM = get_rolling_std(portf_value[symbol], window=10)
+    rstd_JPM = get_rolling_std(portf_value['Adj Close'], window=10)
 
     # Compute upper and lower bands
     upper_band, lower_band = get_bollinger_bands(rm_JPM, rstd_JPM)
 
     # ****Relative Strength Index (RSI)****
     # Compute RSI
-    rsi_value = get_RSI(portf_value[symbol])
+    rsi_value = get_RSI(portf_value['Adj Close'])
 
     # ****Simple moving average (SMA)****
     # Compute SMA
-    sma, q = get_sma(normed[symbol], window=10)
+    sma, q = get_sma(normed['Adj Close'], window=10)
 
     # Session variables
     session['start_val'] = request.form['start_val']
@@ -261,22 +229,22 @@ def showvalues():
     # Price movements
 
     # Create momentum chart
-    plot_mom = plot_momentum(portf_value.index, normed[symbol], symbol, sym_mom, "Momentum Indicator", (12, 8))
+    plot_mom = plot_momentum(portf_value.index, normed['Adj Close'], symbol, sym_mom, "Momentum Indicator", (12, 8))
 
 
     # Plot raw symbol values, rolling mean and Bollinger Bands
     dates = pd.date_range(start_d, yesterday)
-    plot_boll = plot_bollinger(dates, portf_value.index, portf_value[symbol], symbol, upper_band, lower_band,
+    plot_boll = plot_bollinger(dates, portf_value.index, portf_value['Adj Close'], symbol, upper_band, lower_band,
                                rm_JPM,
                                num_std=1, title="Bollinger Indicator", fig_size=(12, 6))
 
     # Plot symbol values, SMA and SMA quality
-    plot_sma = plot_sma_indicator(dates, portf_value.index, normed[symbol], symbol, sma, q,
+    plot_sma = plot_sma_indicator(dates, portf_value.index, normed['Adj Close'], symbol, sma, q,
                                   "Simple Moving Average (SMA)")
 
 
     # Plot RSI
-    plot_rsi = plot_rsi_indicator(dates, portf_value.index, portf_value[symbol], symbol, rsi_value, window=14,
+    plot_rsi = plot_rsi_indicator(dates, portf_value.index, portf_value['Adj Close'], symbol, rsi_value, window=14,
                                   title="RSI Indicator", fig_size=(12, 6))
     return render_template(
         # name of template
