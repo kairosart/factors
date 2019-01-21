@@ -957,28 +957,36 @@ def plot_stock_prices_prediction(df_index, prices, prediction, title="Stock pric
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_stock_prices_prediction_ARIMA(df_index, prediction, title="Stock prices prediction", xlabel="Date", ylabel="Price"):
+def plot_stock_prices_prediction_ARIMA(df_prices, df, title="Stock prices prediction", xlabel="Date", ylabel="Price"):
     """Plot Stock Prices.
 
     Parameters:
-    df_prices: Prices dataframe
+    df_prices: LookBack Prices dataframe
+    df: Prediction dataframe
     title: Chart title
     xlabel: X axis title
     ylable: Y axis title
 
     Returns:
-    Plot prices prediction
+    Plot prices prediction and lookback prices
     """
 
+    trace_prices = go.Scatter(
+                x=df_prices.index,
+                y=df_prices['Adj Close'],
+                name='Price',
+                line=dict(color='#17BECF'),
+                opacity=0.8)
+
     trace_prices_pred = go.Scatter(
-                x=df_index,
-                y=prediction,
+                x=df.index,
+                y=df['Price'],
                 name='Price prediction',
                 line=dict(color='#FF8000'),
                 opacity=0.8)
 
 
-    data = [trace_prices_pred]
+    data = [trace_prices, trace_prices_pred]
 
     layout = dict(
         title = title,
@@ -1008,7 +1016,7 @@ def plot_stock_prices_prediction_ARIMA(df_index, prediction, title="Stock prices
                             dict(step='all')
                         ])
                 ),
-                range=[df_index.values[0], df_index.values[1]]),
+                range=[df_prices.values[0], df.values[1]]),
 
         yaxis = dict(
                 title=ylabel,

@@ -358,7 +358,7 @@ def showforecastform():
 
 
         if result['model_Selection'] == '3':
-            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday)
+            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
 
             return render_template(
                 # name of template

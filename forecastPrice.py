@@ -2,6 +2,7 @@
 
 import numpy as np
 import pandas as pd
+import datetime as dt
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn import tree, metrics, neighbors
 from sklearn.model_selection import cross_val_score
@@ -9,7 +10,10 @@ from indicators import plot_stock_prices_prediction, get_momentum, get_sma, get_
     plot_stock_prices_prediction_ARIMA
 from statsmodels.tsa.arima_model import ARIMAResults
 
-def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, forecast_date):
+from util import slice_df
+
+
+def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, forecast_date, forecast_lookback):
     '''
 
     :param symbol: Stock symbol
@@ -18,6 +22,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     :param forecast_time: Number of days to forecast in the future
     :param start_d: Lookback date
     :param forecast_date: Forecasting date
+    :param forecast_lookback: Number of day to lookback
     :return: Summary and scores.
     '''
 
@@ -27,6 +32,11 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         model = ARIMAResults.load('arima_model.pkl')
         forecast = model.forecast(steps=forecast_time)[0]
 
+        # Lookback data
+        lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
+        dates = pd.date_range(lookback_date, periods=forecast_lookback)
+        df_prices = slice_df(portf_value, dates)
+
         # Setting prediction dataframe
         dates = pd.date_range(forecast_date, periods=forecast_time)
         df = pd.DataFrame(forecast)
@@ -34,10 +44,11 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         df.set_index('Dates', inplace=True)
         df.rename(columns={0: 'Price'}, inplace=True)
 
-        # TODO ARIMA CHART
+
+        # TODO Confidence interval chart
         # ARIMA Model Results
         model_sumary = model.summary()
-        plot_prices_pred = plot_stock_prices_prediction_ARIMA(df.index, df['Price'], symbol)
+        plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, model_sumary
 
     # Normalize the prices Dataframe
