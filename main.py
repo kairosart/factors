@@ -340,7 +340,7 @@ def showforecastform():
                 titles=['na', 'Stock Prices '],
             )
         else:
-            symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday)
+            symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
             return render_template(
                 # name of template
                 "forecastPrices.html",
