@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-exported-files.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/factors.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/factors.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="Changing the way we get data. Instead saving in a cvs file, we create a dataframe.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Forecasting_prices.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
@@ -28,8 +24,6 @@
       <change beforePath="$PROJECT_DIR$/bin/python3" beforeDir="false" afterPath="$PROJECT_DIR$/bin/python3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/python3.6" beforeDir="false" afterPath="$PROJECT_DIR$/bin/python3.6" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/wheel" beforeDir="false" afterPath="$PROJECT_DIR$/bin/wheel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/python3.6m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+            <state relative-caret-position="96">
+              <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
               <folding>
                 <element signature="n#div#0;n#!!top" />
                 <element signature="n#div#1;n#!!top" />
@@ -69,28 +63,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Forecasting_prices.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="4" />
+        <entry file="file://$PROJECT_DIR$/forecastPrice.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="89">
+              <caret line="10" column="16" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/forecastPrice.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="8" lean-forward="true" selection-start-column="8" selection-end-column="8" />
+            <state relative-caret-position="144">
+              <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -192,16 +177,16 @@
         <option value="$PROJECT_DIR$/templates/pricesForecastForm.html" />
         <option value="$PROJECT_DIR$/templates/stockpriceschart.html" />
         <option value="$PROJECT_DIR$/test.ipynb" />
-        <option value="$PROJECT_DIR$/Forecasting_prices.ipynb" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/Forecasting_prices.ipynb" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1358" />
+    <option name="y" value="39" />
     <option name="width" value="1280" />
-    <option name="height" value="728" />
+    <option name="height" value="732" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -376,13 +361,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546437576285</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1546437576286</updated>
     </task>
     <task id="LOCAL-00069" summary="Changing environment to miniconda3 with python 3.7.">
       <created>1546437698844</created>
@@ -720,7 +698,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548104259631</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="Creating a new virtual env and README.md">
+      <created>1548274119566</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1548274119567</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -733,15 +718,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1275" y="-4" width="1930" height="1089" extended-state="6" />
+    <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.2132626" />
-      <window_info id="Structure" order="1" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
-      <window_info id="Favorites" order="2" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.32289156" />
+      <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.32289156" />
+      <window_info id="Favorites" order="2" sideWeight="0.5068493" side_tool="true" weight="0.32289156" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32752612" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34146342" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3652174" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.34262484" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -823,7 +808,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Creating prices forecasting." />
     <MESSAGE value="Creating prices forecasting. LinRegLearner." />
     <MESSAGE value="Check whether there is a file with input data or not before dowunloading. Change normalized method." />
     <MESSAGE value="Creating prediction model." />
@@ -848,7 +832,8 @@
     <MESSAGE value="Modifying jupyter notebook." />
     <MESSAGE value="Price forecasting plot." />
     <MESSAGE value="Changing the way we get data. Instead saving in a cvs file, we create a dataframe." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changing the way we get data. Instead saving in a cvs file, we create a dataframe." />
+    <MESSAGE value="Creating a new virtual env and README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating a new virtual env and README.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -905,7 +890,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/linRegLearner.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/pandas/core/indexing.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/collections.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/compat.py" />
@@ -1089,17 +1073,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-            <element signature="e#1554#1964#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.ipynb" />
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -1112,20 +1085,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1368">
           <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Forecasting_prices.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -1147,18 +1106,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
+    <entry file="file://$PROJECT_DIR$/pyvenv.cfg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-          <folding>
-            <element signature="n#div#0;n#!!top" />
-            <element signature="n#div#1;n#!!top" />
-            <element signature="n#div#2;n#!!top" />
-            <element signature="n#div#3;n#!!top" />
-            <element signature="n#div#4;n#!!top" />
-            <element signature="n#div#5;n#!!top" />
-          </folding>
+        <state relative-caret-position="174">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="10" column="16" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -1174,10 +1142,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
+    <entry file="file://$PROJECT_DIR$/Forecasting_prices.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
         <state>
-          <caret column="8" lean-forward="true" selection-start-column="8" selection-end-column="8" />
+          <selected id="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+          <folding>
+            <element signature="n#div#0;n#!!top" />
+            <element signature="n#div#1;n#!!top" />
+            <element signature="n#div#2;n#!!top" />
+            <element signature="n#div#3;n#!!top" />
+            <element signature="n#div#4;n#!!top" />
+            <element signature="n#div#5;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
