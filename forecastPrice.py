@@ -51,6 +51,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, model_sumary
 
+    # TODO Implement LSTM Method
+
     # Normalize the prices Dataframe
     normed = portf_value.copy()
     #normed = scaling_data(normed, symbol)
