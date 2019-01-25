@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="Changing the way we get data. Instead saving in a cvs file, we create a dataframe.">
+      <change afterPath="$PROJECT_DIR$/LSTM_forecasting_prices.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Forecasting_prices.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
@@ -24,6 +25,7 @@
       <change beforePath="$PROJECT_DIR$/bin/python3" beforeDir="false" afterPath="$PROJECT_DIR$/bin/python3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/python3.6" beforeDir="false" afterPath="$PROJECT_DIR$/bin/python3.6" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/wheel" beforeDir="false" afterPath="$PROJECT_DIR$/bin/wheel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,16 +41,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1368">
+            <state>
               <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
+            <state relative-caret-position="-408">
               <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
               <folding>
                 <element signature="n#div#0;n#!!top" />
@@ -57,6 +59,18 @@
                 <element signature="n#div#3;n#!!top" />
                 <element signature="n#div#4;n#!!top" />
                 <element signature="n#div#5;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-258">
+              <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+              <folding>
+                <element signature="e#43#64#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -170,7 +184,6 @@
         <option value="$PROJECT_DIR$/templates/startValuesForm.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/static/js/my_jquery.js" />
-        <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/data/AABA.csv" />
         <option value="$PROJECT_DIR$/indicators.py" />
         <option value="$PROJECT_DIR$/forecastPrice.py" />
@@ -180,11 +193,14 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Forecasting_prices.ipynb" />
+        <option value="$PROJECT_DIR$/LSTM_forecasting_prices.ipynb" />
+        <option value="$PROJECT_DIR$/util.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="39" />
+    <option name="x" value="1485" />
+    <option name="y" value="12" />
     <option name="width" value="1280" />
     <option name="height" value="732" />
   </component>
@@ -263,7 +279,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.code">
     <configuration name="factors" type="JupiterNotebook" factoryName="Jupyter Notebook" show_console_on_std_err="true" show_console_on_std_out="true">
       <module name="factors" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -279,6 +295,27 @@
       <option name="additionalOptions" value="" />
       <option name="ipnbHost" value="127.0.0.1" />
       <option name="ipnbPort" value="8888" />
+      <method v="2" />
+    </configuration>
+    <configuration name="code" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="factors" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="/code.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python">
@@ -346,6 +383,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.code" />
         <item itemvalue="Python.util" />
         <item itemvalue="Python.strategyLearner" />
       </list>
@@ -361,13 +399,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546437698844</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1546437698844</updated>
     </task>
     <task id="LOCAL-00070" summary="Changing environment to miniconda3 with python 3.7.">
       <created>1546455485341</created>
@@ -705,7 +736,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548274119567</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="Implementing LSTM.">
+      <created>1548364942204</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1548364942205</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -718,16 +756,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
+    <frame x="1275" y="-4" width="1930" height="1089" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.32289156" />
-      <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.32289156" />
-      <window_info id="Favorites" order="2" sideWeight="0.5068493" side_tool="true" weight="0.32289156" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49403748" visible="true" weight="0.2132626" />
+      <window_info id="Structure" order="1" sideWeight="0.50596255" side_tool="true" weight="0.2132626" />
+      <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32752612" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3652174" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.34262484" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31823462" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.36645964" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
@@ -808,7 +846,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Creating prices forecasting. LinRegLearner." />
     <MESSAGE value="Check whether there is a file with input data or not before dowunloading. Change normalized method." />
     <MESSAGE value="Creating prediction model." />
     <MESSAGE value="Creating prediction model. Tuning tree parameters." />
@@ -833,25 +870,31 @@
     <MESSAGE value="Price forecasting plot." />
     <MESSAGE value="Changing the way we get data. Instead saving in a cvs file, we create a dataframe." />
     <MESSAGE value="Creating a new virtual env and README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating a new virtual env and README.md" />
+    <MESSAGE value="Implementing LSTM." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementing LSTM." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/util.py</url>
-          <line>216</line>
+          <line>217</line>
           <option name="timeStamp" value="400" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/util.py</url>
-          <line>218</line>
+          <line>219</line>
           <option name="timeStamp" value="401" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/util.py</url>
-          <line>222</line>
+          <line>223</line>
           <option name="timeStamp" value="402" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>mock:///code.py</url>
+          <line>51</line>
+          <option name="timeStamp" value="407" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -890,9 +933,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/pandas/core/indexing.py" />
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/collections.py" />
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/compat.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/validators.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/fields/core.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/form.py" />
@@ -1083,7 +1123,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1368">
+        <state>
           <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
         </state>
       </provider>
@@ -1108,13 +1148,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pyvenv.cfg">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1142,16 +1175,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///run/user/1000/jupyter/nbserver-27475-open.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/python3.6/tokenize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="451" selection-start-line="451" selection-end-line="451" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Forecasting_prices.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
-          <selected id="49" />
+          <selected id="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LSTM_forecasting_prices.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
+        <state relative-caret-position="-408">
           <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
           <folding>
             <element signature="n#div#0;n#!!top" />
@@ -1160,6 +1210,16 @@
             <element signature="n#div#3;n#!!top" />
             <element signature="n#div#4;n#!!top" />
             <element signature="n#div#5;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-258">
+          <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -55,7 +55,7 @@ def df_to_cvs(df, symbol):
 
 
 
-def fetchOnlineData(dt_start, symbol, dt_end):
+def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True):
     # Add a day to dt_end for Yahoo purpose
     dt_end = dt.date.today() - dt.timedelta(1)
 
@@ -80,12 +80,13 @@ def fetchOnlineData(dt_start, symbol, dt_end):
             # (optional, default is False)
             auto_adjust = False
     )
-    if len(df.index):
-        del df['Open']
-        del df['High']
-        del df['Low']
-        del df['Close']
-        del df['Volume']
+    if len(df.index) > 0:
+        if del_cols == True:
+            del df['Open']
+            del df['High']
+            del df['Low']
+            del df['Close']
+            del df['Volume']
         return df
     else:
         return False
