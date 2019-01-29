@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="Changing the way we get data. Instead saving in a cvs file, we create a dataframe.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LSTM_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/LSTM_forecasting_prices.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate.csh" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate.fish" beforeDir="false" />
@@ -64,8 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-258">
-              <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+            <state relative-caret-position="270">
+              <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
               </folding>
@@ -73,10 +74,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
+            <state relative-caret-position="496">
               <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
               <folding>
                 <element signature="e#49#67#0" expanded="true" />
@@ -85,11 +86,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/python3.6/site-packages/seaborn/axisgrid.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="586" column="53" selection-start-line="585" selection-start-column="21" selection-end-line="586" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -144,6 +154,8 @@
       <find>model_fit_pred</find>
       <find>fetchOnlineData</find>
       <find>plot_stock_prices_prediction</find>
+      <find>.concat</find>
+      <find>date_range</find>
     </findStrings>
     <replaceStrings>
       <replace>symbol</replace>
@@ -199,8 +211,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1485" />
-    <option name="y" value="12" />
+    <option name="x" value="37" />
+    <option name="y" value="57" />
     <option name="width" value="1280" />
     <option name="height" value="732" />
   </component>
@@ -399,20 +411,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546456031624</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1546456031624</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546457972232</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1546457972232</updated>
     </task>
     <task id="LOCAL-00074" summary="Changing environment to miniconda3 with python 3.7.">
       <created>1546458628387</created>
@@ -743,7 +741,21 @@
       <option name="project" value="LOCAL" />
       <updated>1548452116336</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="LSTM Moded.">
+      <created>1548702905117</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1548702905118</updated>
+    </task>
+    <task id="LOCAL-00122" summary="LSTM Model.">
+      <created>1548706190569</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1548706190569</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -756,15 +768,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1275" y="-4" width="1930" height="1089" extended-state="6" />
+    <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49403748" visible="true" weight="0.2132626" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49403748" visible="true" weight="0.21044177" />
       <window_info id="Structure" order="1" sideWeight="0.50596255" side_tool="true" weight="0.2132626" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32752612" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31823462" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32670808" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.21987578" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.36645964" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -846,8 +858,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Creating prediction model. Tuning tree parameters." />
-    <MESSAGE value="Creating price forecast form. Datepicker." />
     <MESSAGE value="Creating price forecast form." />
     <MESSAGE value="Creating price forecast chart." />
     <MESSAGE value="Creating price forecast chart. Adding metrics to results page." />
@@ -871,7 +881,9 @@
     <MESSAGE value="Implementing LSTM." />
     <MESSAGE value="Implementing LSTM Model." />
     <MESSAGE value="Implementing LSTM Jupyter Notebook" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing LSTM Jupyter Notebook" />
+    <MESSAGE value="LSTM Moded." />
+    <MESSAGE value="LSTM Model." />
+    <option name="LAST_COMMIT_MESSAGE" value="LSTM Model." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -933,7 +945,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/validators.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/fields/core.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/wtforms/form.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/factors/lib/python2.7/site-packages/flask/app.py" />
@@ -1181,16 +1192,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-258">
-          <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
@@ -1206,7 +1207,7 @@
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1217,13 +1218,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
+        <state relative-caret-position="496">
           <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
           <folding>
             <element signature="e#49#67#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/python3.6/site-packages/seaborn/axisgrid.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="586" column="53" selection-start-line="585" selection-start-column="21" selection-end-line="586" selection-end-column="53" />
         </state>
       </provider>
     </entry>
