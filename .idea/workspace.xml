@@ -89,8 +89,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/python3.6/site-packages/seaborn/axisgrid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="586" column="53" selection-start-line="585" selection-start-column="21" selection-end-line="586" selection-end-column="53" />
+            <state relative-caret-position="195">
+              <caret line="585" column="24" selection-start-line="585" selection-start-column="24" selection-end-line="585" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -207,6 +207,7 @@
         <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/forecastPrice.py" />
         <option value="$PROJECT_DIR$/LSTM_forecasting_prices.ipynb" />
+        <option value="$PROJECT_DIR$/lib/python3.6/site-packages/seaborn/axisgrid.py" />
       </list>
     </option>
   </component>
@@ -411,13 +412,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546458628387</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1546458628387</updated>
     </task>
     <task id="LOCAL-00075" summary="Changing environment to miniconda3 with python 3.7.">
       <created>1546458842630</created>
@@ -755,7 +749,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548706190569</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="LSTM Model.">
+      <created>1548793322246</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1548793322247</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1240,8 +1241,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/python3.6/site-packages/seaborn/axisgrid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="586" column="53" selection-start-line="585" selection-start-column="21" selection-end-line="586" selection-end-column="53" />
+        <state relative-caret-position="195">
+          <caret line="585" column="24" selection-start-line="585" selection-start-column="24" selection-end-line="585" selection-end-column="24" />
         </state>
       </provider>
     </entry>
