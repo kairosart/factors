@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="Changing the way we get data. Instead saving in a cvs file, we create a dataframe.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LSTM_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/LSTM_forecasting_prices.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate.csh" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate.fish" beforeDir="false" />
@@ -90,7 +89,7 @@
         <entry file="file://$PROJECT_DIR$/lib/python3.6/site-packages/seaborn/axisgrid.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="585" column="24" selection-start-line="585" selection-start-column="24" selection-end-line="585" selection-end-column="24" />
+              <caret line="585" column="42" lean-forward="true" selection-start-line="585" selection-start-column="42" selection-end-line="585" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -412,20 +411,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546458842630</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1546458842630</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546458945272</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1546458945272</updated>
     </task>
     <task id="LOCAL-00077" summary="Changing environment to miniconda3 with python 3.7.">
       <created>1546459050120</created>
@@ -756,7 +741,21 @@
       <option name="project" value="LOCAL" />
       <updated>1548793322247</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="LSTM saving model.">
+      <created>1548795457928</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1548795457929</updated>
+    </task>
+    <task id="LOCAL-00125" summary="LSTM2 Model.">
+      <created>1548797456197</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1548797456197</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -770,9 +769,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49403748" visible="true" weight="0.21044177" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49403748" visible="true" weight="0.3188755" />
       <window_info id="Structure" order="1" sideWeight="0.50596255" side_tool="true" weight="0.2132626" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -783,7 +781,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.15447155" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" weight="0.34030196" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" weight="0.33913043" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50344825" side_tool="true" weight="0.33448672" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32868758" />
       <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32963374" />
@@ -859,8 +857,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Creating price forecast form." />
-    <MESSAGE value="Creating price forecast chart." />
     <MESSAGE value="Creating price forecast chart. Adding metrics to results page." />
     <MESSAGE value="Creating price forecast chart. Styling table." />
     <MESSAGE value="Fixing download from Yahoo." />
@@ -884,7 +880,9 @@
     <MESSAGE value="Implementing LSTM Jupyter Notebook" />
     <MESSAGE value="LSTM Moded." />
     <MESSAGE value="LSTM Model." />
-    <option name="LAST_COMMIT_MESSAGE" value="LSTM Model." />
+    <MESSAGE value="LSTM saving model." />
+    <MESSAGE value="LSTM2 Model." />
+    <option name="LAST_COMMIT_MESSAGE" value="LSTM2 Model." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1242,7 +1240,7 @@
     <entry file="file://$PROJECT_DIR$/lib/python3.6/site-packages/seaborn/axisgrid.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="585" column="24" selection-start-line="585" selection-start-column="24" selection-end-line="585" selection-end-column="24" />
+          <caret line="585" column="42" lean-forward="true" selection-start-line="585" selection-start-column="42" selection-end-line="585" selection-end-column="42" />
         </state>
       </provider>
     </entry>
