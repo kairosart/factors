@@ -242,6 +242,9 @@ def create_df_trades(orders, symbol, num_shares, cash_pos=0, long_pos=1, short_p
 
 
 def get_nasdaq_tickers():
+    """
+    Get Tickets name from Nasdaq
+    """
     os.system("curl --ftp-ssl anonymous:jupi@jupi.com "
               "ftp://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt "
               "> nasdaq.lst")
@@ -250,6 +253,17 @@ def get_nasdaq_tickers():
     os.system("awk '{print $1}' nasdaq.lst2 > nasdaq.csv")
     os.system("echo; head nasdaq.csv; echo '...'; tail nasdaq.csv")
     os.system("cp nasdaq.csv ./data/nasdaq.csv")
+
+
+
+def create_dataset(dataset):
+    """convert an array of values into a dataset matrix"""
+
+    dataX, dataY = [], []
+    for i in range(len(dataset)-1):
+        dataX.append(dataset[i])
+        dataY.append(dataset[i + 1])
+    return np.asarray(dataX), np.asarray(dataY)
 
 if __name__=="__main__":
     get_nasdaq_tickers()

@@ -3,14 +3,18 @@
 import numpy as np
 import pandas as pd
 import datetime as dt
+
+from keras.models import load_model
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn import tree, metrics, neighbors
 from sklearn.model_selection import cross_val_score
+from sklearn.preprocessing import MinMaxScaler
+
 from indicators import plot_stock_prices_prediction, get_momentum, get_sma, get_RSI, plot_stock_prices, \
     plot_stock_prices_prediction_ARIMA
 from statsmodels.tsa.arima_model import ARIMAResults
 
-from util import slice_df
+from util import slice_df, create_dataset
 
 
 def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, forecast_date, forecast_lookback):
@@ -52,6 +56,52 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         return symbol, start_d, forecast_date, plot_prices_pred, model_sumary
 
     # TODO Implement LSTM Method
+    # LSTM
+    if forecast_model == '4':
+        # load_model
+        model = load_model('./lstm_model')
+
+        # Next Bussiness day
+        start = forecast_date
+        end = start + dt.timedelta(forecast_time)
+        next_bussiness_day = pd.date_range(start, end, freq='BM')
+
+        # Adding a date column to portf_value
+        portf_value['date'] = portf_value.index
+
+        #TODO Make loop for every new date
+
+        # load the dataset
+        dataset = portf_value['Adj Close'].values
+        dataset = dataset.astype('float32')
+        dataset.reshape(1, -1)
+
+        # normalize the dataset
+        scaler = MinMaxScaler(feature_range=(0, 1))
+        dataset = scaler.fit_transform(dataset)
+
+        # prepare the X and Y label
+        X, y = create_dataset(dataset)
+        # Take 80% of data as the training sample and 20% as testing sample
+        trainX, testX, trainY, testY = train_test_split(X, y, test_size=0.20, shuffle=False)
+
+        # reshape input to be [samples, time steps, features]
+        trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
+        testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
+
+        # Prediction
+        testPredict = model.predict(testX)
+        futurePredict = model.predict(np.asarray([[testPredict[-1]]]))
+        futurePredict = scaler.inverse_transform(futurePredict)
+        prediction = futurePredict.item(0)
+
+
+        # Adding last prediction to portf_value
+        portf_value.loc[len(portf_value)] = [prediction, next_bussiness_day]
+
+        #df.set_index('Dates', inplace=True)
+        #df.rename(columns={0: 'Price'}, inplace=True)
+
 
     # Normalize the prices Dataframe
     normed = portf_value.copy()
