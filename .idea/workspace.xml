@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="Changing the way we get data. Instead saving in a cvs file, we create a dataframe.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate.csh" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/activate.fish" beforeDir="false" />
@@ -22,7 +23,6 @@
       <change beforePath="$PROJECT_DIR$/bin/python3" beforeDir="false" afterPath="$PROJECT_DIR$/bin/python3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/python3.6" beforeDir="false" afterPath="$PROJECT_DIR$/bin/python3.6" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/wheel" beforeDir="false" afterPath="$PROJECT_DIR$/bin/wheel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,8 +86,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="116" selection-start-line="116" selection-end-line="116" />
+            <state relative-caret-position="1">
+              <caret line="93" column="39" lean-forward="true" selection-start-line="93" selection-start-column="39" selection-end-line="93" selection-end-column="39" />
               <folding>
                 <element signature="e#49#67#0" expanded="true" />
               </folding>
@@ -264,9 +264,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -411,13 +412,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00081" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546460344072</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1546460344072</updated>
     </task>
     <task id="LOCAL-00082" summary="Changing environment to miniconda3 with python 3.7.">
       <created>1546461052792</created>
@@ -755,7 +749,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549053385018</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="LSTM Model.">
+      <created>1549054619112</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1549054619112</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -769,7 +770,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1275" y="-4" width="1930" height="1089" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49403748" visible="true" weight="0.21061008" />
       <window_info id="Structure" order="1" sideWeight="0.50596255" side_tool="true" weight="0.2132626" />
@@ -777,11 +777,11 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3263647" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.19163764" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.35772356" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.35772356" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.30429733" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.9303136" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" weight="0.33913043" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50344825" side_tool="true" weight="0.33448672" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32868758" />
@@ -905,12 +905,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>125</line>
+          <line>126</line>
           <option name="timeStamp" value="410" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>128</line>
+          <line>129</line>
           <option name="timeStamp" value="411" />
         </line-breakpoint>
       </breakpoints>
@@ -1266,8 +1266,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="116" selection-start-line="116" selection-end-line="116" />
+        <state relative-caret-position="1">
+          <caret line="93" column="39" lean-forward="true" selection-start-line="93" selection-start-column="39" selection-end-line="93" selection-end-column="39" />
           <folding>
             <element signature="e#49#67#0" expanded="true" />
           </folding>
