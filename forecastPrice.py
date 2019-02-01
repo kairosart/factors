@@ -74,14 +74,13 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d %H:%M:%S')
 
-        # Setting prediction dataframe
-        df = pd.DataFrame()
+        # Setting prediction dataframe cols and list for adding rows to dataframe
+        cols = ['Price', 'date']
+        lst = []
 
         # Create date column to save next date
         portf_value['date'] = portf_value.index
 
-
-        #TODO Make loop for every new date
         for i in bussines_days:
             # load the dataset
             dataset = np.array(portf_value.iloc[:, 0].tolist())[np.newaxis]
@@ -112,14 +111,17 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             portf_value.loc[len(portf_value)] = [prediction, i]
 
             # Adding value to predictions dataframe
-            df.append({"Adj Close": prediction, "Date": i})
+            lst.append([prediction, i])
+            df = pd.DataFrame(lst, columns=cols)
 
         df.set_index('date', inplace=True)
-        df.rename(columns={0: 'Price'}, inplace=True)
+
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_LSTM(df_prices, df, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred
+
+        #TODO Add results to chart page
 
     # Normalize the prices Dataframe
     normed = portf_value.copy()
