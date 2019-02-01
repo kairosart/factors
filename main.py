@@ -324,7 +324,7 @@ def showforecastform():
 
         portf_value = fetchOnlineData(start_d, symbol, yesterday)
 
-
+        # ARIMA Model
         if result['model_Selection'] == '3':
             symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
 
@@ -339,8 +339,9 @@ def showforecastform():
                 summary=Markup(model_sumary.tables[0].as_html()),
                 titles=['na', 'Stock Prices '],
             )
+        # LSTM Model
         elif result['model_Selection'] == '4':
-            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
+            symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
 
             return render_template(
                 # name of template
@@ -350,7 +351,6 @@ def showforecastform():
                 start_date=start_d,
                 end_date=yesterday,
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
-                summary=Markup(model_sumary.tables[0].as_html()),
                 titles=['na', 'Stock Prices '],
             )
         else:

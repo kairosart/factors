@@ -1028,3 +1028,76 @@ def plot_stock_prices_prediction_ARIMA(df_prices, df, title="Stock prices predic
     fig = dict(data=data, layout=layout)
     chart = plot(fig, show_link=False, output_type='div')
     return chart
+
+
+def plot_stock_prices_prediction_LSTM(df_prices, df, title="Stock prices prediction", xlabel="Date", ylabel="Price"):
+    """Plot Stock Prices.
+
+    Parameters:
+    df_prices: LookBack Prices dataframe
+    df: Prediction dataframe
+    title: Chart title
+    xlabel: X axis title
+    ylable: Y axis title
+
+    Returns:
+    Plot prices prediction and lookback prices
+    """
+
+    trace_prices = go.Scatter(
+                x=df_prices.index,
+                y=df_prices['Adj Close'],
+                name='Price',
+                line=dict(color='#17BECF'),
+                opacity=0.8)
+
+    trace_prices_pred = go.Scatter(
+                x=df.index,
+                y=df['Price'],
+                name='Price prediction',
+                line=dict(color='#FF8000'),
+                opacity=0.8)
+
+
+    data = [trace_prices, trace_prices_pred]
+
+    layout = dict(
+        title = title,
+        showlegend=True,
+        legend=dict(
+                orientation="h"),
+        margin=go.layout.Margin(
+            l=50,
+            r=10,
+            b=100,
+            t=100,
+            pad=4
+        ),
+        xaxis = dict(
+                title=xlabel,
+                linecolor='#000', linewidth=1,
+                rangeselector=dict(
+                        buttons=list([
+                            dict(count=1,
+                                 label='1m',
+                                 step='month',
+                                 stepmode='backward'),
+                            dict(count=6,
+                                 label='6m',
+                                 step='month',
+                                 stepmode='backward'),
+                            dict(step='all')
+                        ])
+                ),
+                range=[df_prices.values[0], df.values[1]]),
+
+        yaxis = dict(
+                title=ylabel,
+                linecolor='#000', linewidth=1
+                ),
+    )
+
+
+    fig = dict(data=data, layout=layout)
+    chart = plot(fig, show_link=False, output_type='div')
+    return chart

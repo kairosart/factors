@@ -11,7 +11,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import MinMaxScaler
 
 from indicators import plot_stock_prices_prediction, get_momentum, get_sma, get_RSI, plot_stock_prices, \
-    plot_stock_prices_prediction_ARIMA
+    plot_stock_prices_prediction_ARIMA, plot_stock_prices_prediction_LSTM
 from statsmodels.tsa.arima_model import ARIMAResults
 
 from util import slice_df, create_dataset
@@ -52,6 +52,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # TODO Confidence interval arc chart
         # ARIMA Model Results
         model_sumary = model.summary()
+
+        # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, model_sumary
 
@@ -61,47 +63,63 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # load_model
         model = load_model('./lstm_model')
 
-        # Next Bussiness day
-        start = forecast_date
-        end = start + dt.timedelta(forecast_time)
-        next_bussiness_day = pd.date_range(start, end, freq='BM')
+        # Lookback data
+        lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
+        dates = pd.date_range(lookback_date, periods=forecast_lookback)
+        df_prices = slice_df(portf_value, dates)
 
-        # Adding a date column to portf_value
+        # Bussines days
+        start = forecast_date.strftime("%Y-%m-%d")
+
+        rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
+        bussines_days = rng.strftime('%Y-%m-%d %H:%M:%S')
+
+        # Setting prediction dataframe
+        df = pd.DataFrame()
+
+        # Create date column to save next date
         portf_value['date'] = portf_value.index
 
+
         #TODO Make loop for every new date
+        for i in bussines_days:
+            # load the dataset
+            dataset = np.array(portf_value.iloc[:, 0].tolist())[np.newaxis]
+            dataset = dataset.T
+            dataset = dataset.astype('float32')
 
-        # load the dataset
-        dataset = portf_value['Adj Close'].values
-        dataset = dataset.astype('float32')
-        dataset.reshape(1, -1)
+            # normalize the dataset
+            scaler = MinMaxScaler(feature_range=(0, 1))
+            dataset = scaler.fit_transform(dataset)
 
-        # normalize the dataset
-        scaler = MinMaxScaler(feature_range=(0, 1))
-        dataset = scaler.fit_transform(dataset)
+            # prepare the X and Y label
+            X, y = create_dataset(dataset)
+            # Take 80% of data as the training sample and 20% as testing sample
+            trainX, testX, trainY, testY = train_test_split(X, y, test_size=0.20, shuffle=False)
 
-        # prepare the X and Y label
-        X, y = create_dataset(dataset)
-        # Take 80% of data as the training sample and 20% as testing sample
-        trainX, testX, trainY, testY = train_test_split(X, y, test_size=0.20, shuffle=False)
+            # reshape input to be [samples, time steps, features]
+            trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
+            testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
 
-        # reshape input to be [samples, time steps, features]
-        trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
-        testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
-
-        # Prediction
-        testPredict = model.predict(testX)
-        futurePredict = model.predict(np.asarray([[testPredict[-1]]]))
-        futurePredict = scaler.inverse_transform(futurePredict)
-        prediction = futurePredict.item(0)
+            # Prediction
+            testPredict = model.predict(testX)
+            futurePredict = model.predict(np.asarray([[testPredict[-1]]]))
+            futurePredict = scaler.inverse_transform(futurePredict)
+            prediction = futurePredict.item(0)
 
 
-        # Adding last prediction to portf_value
-        portf_value.loc[len(portf_value)] = [prediction, next_bussiness_day]
+            # Adding last prediction to portf_value
+            portf_value.loc[len(portf_value)] = [prediction, i]
 
-        #df.set_index('Dates', inplace=True)
-        #df.rename(columns={0: 'Price'}, inplace=True)
+            # Adding value to predictions dataframe
+            df.append({"Adj Close": prediction, "Date": i})
 
+        df.set_index('date', inplace=True)
+        df.rename(columns={0: 'Price'}, inplace=True)
+
+        # Plot chart
+        plot_prices_pred = plot_stock_prices_prediction_LSTM(df_prices, df, symbol)
+        return symbol, start_d, forecast_date, plot_prices_pred
 
     # Normalize the prices Dataframe
     normed = portf_value.copy()

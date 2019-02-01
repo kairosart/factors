@@ -10,8 +10,9 @@ import csv
 from pandas_datareader import data as pdr
 import fix_yahoo_finance as yf
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
-
 yf.pdr_override()
+
+
 
 def symbol_to_path(symbol, base_dir=None):
     """Return CSV file path given ticker symbol."""
@@ -264,6 +265,9 @@ def create_dataset(dataset):
         dataX.append(dataset[i])
         dataY.append(dataset[i + 1])
     return np.asarray(dataX), np.asarray(dataY)
+
+
+
 
 if __name__=="__main__":
     get_nasdaq_tickers()
