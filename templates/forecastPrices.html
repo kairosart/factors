@@ -1,15 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
     <legend>Price forecasting</legend>
-    <p class="text-success">
-		{{ symbol }} data from {{ start_date }} to {{ end_date }}
-	</p>
+    <div class="table-responsive">
+		<table class= "table table-sm">
+            <tbody>
+                <tr>
+                <td><p class="text-success">
+                    Symbol: <b>{{ symbol }}</b>
+                    </p>
+                </td>
+                <td><p class="text-success">
+                        Forecast date: <b>{{ forecast_date }}</b>
+                    </p>
+                </td>
+                <td><p class="text-success">
+                        Forecast: <b>{{ forecast_time }} day(s)</b>
+                    </p>
+                </td>
+                </tr>
+                <tr>
+                <td><p class="text-success">
+                        Model: <b>{{ forecast_model }}</b>
+                    </p>
+                </td>
+                <td><p class="text-success">
+                        Look back: <b>{{ forecast_lookback }}</b>
+                    </p>
+                </td>
+                <td><p class="text-success">
+                        Forecast final date: <b>{{ forecast_final_date }}</b>
+                    </p>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
     {{ div_placeholder_stock_prices_pred }}
     <br><br>
-    {% if summary %}
+    {% if model == "ARIMA" %}
         <div class="table-responsive">
             {{ summary }}
         </div>
+    {% elif model == "LSTM" %}
+
     {% else %}
         <div class="table-responsive">
 		<table class= "table table-sm">

@@ -123,6 +123,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         #TODO Add results to chart page
 
+
     # Normalize the prices Dataframe
     normed = portf_value.copy()
     #normed = scaling_data(normed, symbol)
@@ -151,9 +152,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     # Sort dataframe by index
     normed.sort_index()
 
-    corr_df = normed.corr(method='pearson')
-    print("--------------- CORRELATIONS ---------------")
-    print(corr_df)
 
     # Define X and y
     feature_cols = ['Momentum', 'RSI']
@@ -256,7 +254,11 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
 
 def get_indicators(normed, symbol):
-
+    """
+    :param normed: Prices dataframe normalized
+    :param symbol: Symbol
+    :return: Indicators values
+    """
     # Compute momentum
     sym_mom = get_momentum(normed[symbol], window=10)
 

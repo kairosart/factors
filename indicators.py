@@ -111,6 +111,7 @@ def get_RSI(prices, n=14):
     return rsi
 
 
+
 def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel="Date", ylabel="Price", fig_size=(12, 6)):
     """Plot Stock Prices.
 

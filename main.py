@@ -333,25 +333,34 @@ def showforecastform():
                 "forecastPrices.html",
                 # now we pass in our variables into the template
                 symbol=symbol,
-                start_date=start_d,
+                forecast_date=forecast_date,
+                forecast_model='ARIMA',
+                forecast_lookback= forecast_lookback,
+                forecast_time=forecast_time,
                 end_date=yesterday,
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
                 summary=Markup(model_sumary.tables[0].as_html()),
                 titles=['na', 'Stock Prices '],
+                model='ARIMA',
             )
         # LSTM Model
         elif result['model_Selection'] == '4':
-            symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
+            symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, yesterday, forecast_lookback)
+            ffd = forecast_date + dt.timedelta(forecast_time)
 
             return render_template(
                 # name of template
                 "forecastPrices.html",
                 # now we pass in our variables into the template
                 symbol=symbol,
-                start_date=start_d,
-                end_date=yesterday,
+                forecast_date=forecast_date.strftime("%Y-%m-%d"),
+                forecast_model='LSTM',
+                forecast_lookback=forecast_lookback,
+                forecast_time=forecast_time,
+                forecast_final_date=ffd.strftime("%Y-%m-%d"),
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
                 titles=['na', 'Stock Prices '],
+                model='LSTM',
             )
         else:
             symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
