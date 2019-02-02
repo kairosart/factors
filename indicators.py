@@ -110,7 +110,23 @@ def get_RSI(prices, n=14):
         rsi[i] = 100. - 100./(1.+rs)
     return rsi
 
+def get_indicators(normed, symbol):
+    """
+    :param normed: Prices dataframe normalized
+    :param symbol: Symbol
+    :return: Indicators values
+    """
+    # Compute momentum
+    sym_mom = get_momentum(normed[symbol], window=10)
 
+    # ****Relative Strength Index (RSI)****
+    # Compute RSI
+    rsi_value = get_RSI(normed[symbol], 7)
+
+    # ****Simple moving average (SMA)****
+    # Compute SMA
+    sma, q = get_sma(normed[symbol], window=10)
+    return sym_mom, sma, q, rsi_value
 
 def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel="Date", ylabel="Price", fig_size=(12, 6)):
     """Plot Stock Prices.

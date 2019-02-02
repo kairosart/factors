@@ -10,7 +10,7 @@ from sklearn import tree, metrics, neighbors
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import MinMaxScaler
 
-from indicators import plot_stock_prices_prediction, get_momentum, get_sma, get_RSI, plot_stock_prices, \
+from indicators import plot_stock_prices_prediction, get_indicators, \
     plot_stock_prices_prediction_ARIMA, plot_stock_prices_prediction_LSTM
 from statsmodels.tsa.arima_model import ARIMAResults
 
@@ -253,22 +253,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     return symbol, start_d, forecast_date, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse
 
 
-def get_indicators(normed, symbol):
-    """
-    :param normed: Prices dataframe normalized
-    :param symbol: Symbol
-    :return: Indicators values
-    """
-    # Compute momentum
-    sym_mom = get_momentum(normed[symbol], window=10)
 
-    # ****Relative Strength Index (RSI)****
-    # Compute RSI
-    rsi_value = get_RSI(normed[symbol], 7)
-
-    # ****Simple moving average (SMA)****
-    # Compute SMA
-    sma, q = get_sma(normed[symbol], window=10)
-    return sym_mom, sma, q, rsi_value
 
 
