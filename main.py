@@ -9,7 +9,7 @@ import fix_yahoo_finance as yf
 yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_data, \
-    symbol_to_path
+    symbol_to_path, df_to_cvs
 from strategyLearner import strategyLearner
 from marketsim import market_simulator
 from indicators import get_momentum, get_sma, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
@@ -183,6 +183,8 @@ def showvalues():
 
     portf_value = fetchOnlineData(start_d, symbol, yesterday)
 
+    # Save data to csv file
+    df_to_cvs(portf_value, symbol)
 
     # ****Stock prices chart****
     plot_prices = plot_stock_prices(portf_value.index, portf_value['Adj Close'], symbol)
