@@ -57,7 +57,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, model_sumary
 
-    # TODO Implement LSTM Method
+
     # LSTM
     if forecast_model == '4':
         # load_model
@@ -174,7 +174,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         print(decision_tree.score(X_train, y_train))
         print(decision_tree.score(X_test, y_test), '\n')
     '''
-
+    #TODO Change the way of predicting. Instead of X_test use forecast_time
     def model_fit_pred(X_train, y_train, X_test):
         '''Fit a model and get predictions and metrics'''
 
@@ -186,7 +186,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Measuring predictions
 
         # Accuracy
-        scores = cross_val_score(model, X_test, y_test, cv=10)
+        scores = cross_val_score(model, X_test, y_test, cv=7)
         print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() / 2))
 
         # Coefficient of determination R^2

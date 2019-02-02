@@ -333,9 +333,8 @@ def showforecastform():
                 "forecastPrices.html",
                 # now we pass in our variables into the template
                 symbol=symbol,
-                forecast_date=forecast_date,
-                forecast_model='ARIMA',
-                forecast_lookback= forecast_lookback,
+                forecast_date=forecast_date.strftime("%Y-%m-%d"),
+                forecast_model_name='ARIMA',
                 forecast_time=forecast_time,
                 end_date=yesterday,
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
@@ -346,7 +345,6 @@ def showforecastform():
         # LSTM Model
         elif result['model_Selection'] == '4':
             symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, yesterday, forecast_lookback)
-            ffd = forecast_date + dt.timedelta(forecast_time)
 
             return render_template(
                 # name of template
@@ -354,23 +352,31 @@ def showforecastform():
                 # now we pass in our variables into the template
                 symbol=symbol,
                 forecast_date=forecast_date.strftime("%Y-%m-%d"),
-                forecast_model='LSTM',
-                forecast_lookback=forecast_lookback,
+                forecast_model_name='LSTM',
                 forecast_time=forecast_time,
-                forecast_final_date=ffd.strftime("%Y-%m-%d"),
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
                 titles=['na', 'Stock Prices '],
                 model='LSTM',
             )
         else:
             symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
+            final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
+            final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
+            if forecast_model == '1':
+                forecast_name = 'Decision Tree'
+            elif forecast_model == '2':
+                forecast_name = 'KNN'
+
             return render_template(
                 # name of template
                 "forecastPrices.html",
                 # now we pass in our variables into the template
                 symbol=symbol,
-                start_date=start_d,
-                end_date=yesterday,
+                forecast_date=forecast_date.strftime("%Y-%m-%d"),
+                forecast_model_name=forecast_name,
+                forecast_time=forecast_time,
+                forecast_lookback=forecast_lookback,
+                forecast_final_date=final_forecast_day,
                 coef_deter=round(coef_deter, 3),
                 bias=round(bias, 3),
                 mae=round(mae, 3),
