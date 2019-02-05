@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/decision_tree_regression.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/decision_tree_regression.ipynb" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
@@ -42,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1430">
-              <caret line="233" column="77" lean-forward="true" selection-start-line="233" selection-start-column="8" selection-end-line="233" selection-end-column="77" />
+            <state relative-caret-position="24">
+              <caret line="106" column="17" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
               <folding>
                 <element signature="e#49#67#0" expanded="true" />
               </folding>
@@ -122,6 +121,7 @@
       <find>plot_stock_prices_prediction</find>
       <find>.concat</find>
       <find>date_range</find>
+      <find>order</find>
     </findStrings>
     <replaceStrings>
       <replace>symbol</replace>
@@ -392,20 +392,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00087" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546463425871</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1546463425871</updated>
-    </task>
-    <task id="LOCAL-00088" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546463634870</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1546463634870</updated>
     </task>
     <task id="LOCAL-00089" summary="Changing environment to miniconda3 with python 3.7.">
       <created>1546463724592</created>
@@ -736,7 +722,21 @@
       <option name="project" value="LOCAL" />
       <updated>1549142661607</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="Creating Decision Tree model.">
+      <created>1549315166309</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1549315166309</updated>
+    </task>
+    <task id="LOCAL-00137" summary="Creating Decision Tree model.">
+      <created>1549363478369</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1549363478369</updated>
+    </task>
+    <option name="localTasksCounter" value="138" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -839,7 +839,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Creating setup.py" />
     <MESSAGE value="Changing environment to miniconda3 with python 3.7." />
     <MESSAGE value="Fixing requirements.txt" />
     <MESSAGE value="Create forecasting for future prices." />
@@ -864,7 +863,8 @@
     <MESSAGE value="LSTM Model front end." />
     <MESSAGE value="Creatind Decision Tree Regresion Jupyter Notebook." />
     <MESSAGE value="Fixing save data to csv file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing save data to csv file." />
+    <MESSAGE value="Creating Decision Tree model." />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating Decision Tree model." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1240,8 +1240,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1430">
-          <caret line="233" column="77" lean-forward="true" selection-start-line="233" selection-start-column="8" selection-end-line="233" selection-end-column="77" />
+        <state relative-caret-position="24">
+          <caret line="106" column="17" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
           <folding>
             <element signature="e#49#67#0" expanded="true" />
           </folding>
