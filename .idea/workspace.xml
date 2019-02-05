@@ -41,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="106" column="17" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
+            <state relative-caret-position="336">
+              <caret line="119" column="16" selection-start-line="119" selection-start-column="16" selection-end-line="119" selection-end-column="16" />
               <folding>
                 <element signature="e#49#67#0" expanded="true" />
               </folding>
@@ -393,13 +393,6 @@
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
     </task>
-    <task id="LOCAL-00089" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546463724592</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1546463724592</updated>
-    </task>
     <task id="LOCAL-00090" summary="Changing environment to miniconda3 with python 3.7.">
       <created>1546463824241</created>
       <option name="number" value="00090" />
@@ -736,7 +729,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549363478369</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="Creating Decision Tree model.">
+      <created>1549373676847</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1549373676848</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1240,8 +1240,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="106" column="17" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
+        <state relative-caret-position="336">
+          <caret line="119" column="16" selection-start-line="119" selection-start-column="16" selection-end-line="119" selection-end-column="16" />
           <folding>
             <element signature="e#49#67#0" expanded="true" />
           </folding>
