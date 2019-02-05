@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/decision_tree_regression.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/decision_tree_regression.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
@@ -41,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="119" column="16" selection-start-line="119" selection-start-column="16" selection-end-line="119" selection-end-column="16" />
+            <state relative-caret-position="2576">
+              <caret line="183" column="38" lean-forward="true" selection-start-line="182" selection-start-column="8" selection-end-line="183" selection-end-column="38" />
               <folding>
                 <element signature="e#49#67#0" expanded="true" />
               </folding>
@@ -393,13 +393,6 @@
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
     </task>
-    <task id="LOCAL-00090" summary="Changing environment to miniconda3 with python 3.7.">
-      <created>1546463824241</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1546463824241</updated>
-    </task>
     <task id="LOCAL-00091" summary="Fixing requirements.txt">
       <created>1546464029166</created>
       <option name="number" value="00091" />
@@ -736,7 +729,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549373676848</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="Creating Decision Tree model.">
+      <created>1549393890553</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1549393890553</updated>
+    </task>
+    <option name="localTasksCounter" value="140" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -750,14 +750,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49403748" weight="0.3188755" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49403748" visible="true" weight="0.3188755" />
       <window_info id="Structure" order="1" sideWeight="0.50596255" side_tool="true" weight="0.2132626" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3263647" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20124224" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20124224" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.35772356" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1240,8 +1239,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="119" column="16" selection-start-line="119" selection-start-column="16" selection-end-line="119" selection-end-column="16" />
+        <state relative-caret-position="2576">
+          <caret line="183" column="38" lean-forward="true" selection-start-line="182" selection-start-column="8" selection-end-line="183" selection-end-column="38" />
           <folding>
             <element signature="e#49#67#0" expanded="true" />
           </folding>
