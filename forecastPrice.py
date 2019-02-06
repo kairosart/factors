@@ -1,4 +1,5 @@
 """ Implement price forecasting for a stock """
+import pickle
 
 import numpy as np
 import pandas as pd
@@ -9,6 +10,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn import tree, metrics, neighbors
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.externals import joblib
 
 from indicators import plot_stock_prices_prediction, get_indicators, \
     plot_stock_prices_prediction_ARIMA, plot_stock_prices_prediction_LSTM
@@ -29,6 +31,44 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     :param forecast_lookback: Number of day to lookback
     :return: Summary and scores.
     '''
+
+    # Decision Tree (XGBoost)
+    if forecast_model == '1':
+        # load model
+        model = pickle.load(open("./xgboost.pkl", "rb"))
+
+        # Normalize the prices Dataframe
+        normed = portf_value.copy()
+        # normed = scaling_data(normed, symbol)
+
+        normed['date'] = portf_value.index
+        normed.set_index('date', inplace=True)
+        normed.rename(columns={'Adj Close': symbol}, inplace=True)
+
+
+
+        # Clean nan values
+        normed = normed.fillna(0)
+
+        # Sort dataframe by index
+        normed.sort_index()
+
+        # Bussines days
+        start = forecast_date.strftime("%Y-%m-%d")
+        rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
+        bussines_days = rng.strftime('%Y-%m-%d %H:%M:%S')
+
+        dataset = []
+
+        for i in bussines_days:
+            # Get indicators
+            sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
+            dataset.append([sym_mom, rsi_value])
+            # Calculate price
+            result = model.predict(dataset)
+
+
+        print(result)
 
     # ARIMA
     if forecast_model == '3':
@@ -70,7 +110,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         # Bussines days
         start = forecast_date.strftime("%Y-%m-%d")
-
         rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d %H:%M:%S')
 

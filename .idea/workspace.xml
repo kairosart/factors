@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/xgboost.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/decision_tree_regression.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/decision_tree_regression.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
@@ -38,13 +40,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="426">
+              <caret line="363" column="112" selection-start-line="363" selection-start-column="110" selection-end-line="363" selection-end-column="133" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2576">
-              <caret line="183" column="38" lean-forward="true" selection-start-line="182" selection-start-column="8" selection-end-line="183" selection-end-column="38" />
+            <state relative-caret-position="283">
+              <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
               <folding>
-                <element signature="e#49#67#0" expanded="true" />
+                <element signature="e#48#61#0" expanded="true" />
+                <element signature="e#2199#3113#0" />
               </folding>
             </state>
           </provider>
@@ -53,31 +68,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-259">
-              <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
+            <state relative-caret-position="74">
+              <caret line="112" column="4" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="4" />
               <folding>
                 <element signature="e#38#56#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/decision_tree_regression.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="218" selection-start-line="218" selection-end-line="218" />
-              <folding>
-                <element signature="e#43#64#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,6 +116,7 @@
       <find>.concat</find>
       <find>date_range</find>
       <find>order</find>
+      <find>df_prices</find>
     </findStrings>
     <replaceStrings>
       <replace>symbol</replace>
@@ -172,16 +167,15 @@
         <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/templates/forecastPrices.html" />
         <option value="$PROJECT_DIR$/indicators.py" />
-        <option value="$PROJECT_DIR$/forecastPrice.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb" />
         <option value="$PROJECT_DIR$/decision_tree_regression.ipynb" />
+        <option value="$PROJECT_DIR$/forecastPrice.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-28" />
-    <option name="y" value="35" />
+    <option name="x" value="1442" />
     <option name="width" value="1280" />
     <option name="height" value="732" />
   </component>
@@ -249,7 +243,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.decisionTreeClassifier">
+  <component name="RunManager" selected="Python.main">
     <configuration name="factors" type="JupiterNotebook" factoryName="Jupyter Notebook" show_console_on_std_err="true" show_console_on_std_out="true">
       <module name="factors" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -392,13 +386,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00091" summary="Fixing requirements.txt">
-      <created>1546464029166</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1546464029166</updated>
     </task>
     <task id="LOCAL-00092" summary="Create forecasting for future prices.">
       <created>1546723501751</created>
@@ -736,7 +723,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549393890553</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="Creating Decision Tree model.">
+      <created>1549401916743</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1549401916743</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -749,15 +743,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
+    <frame x="1275" y="-4" width="1930" height="1089" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49403748" visible="true" weight="0.3188755" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49403748" visible="true" weight="0.21061008" />
       <window_info id="Structure" order="1" sideWeight="0.50596255" side_tool="true" weight="0.2132626" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3263647" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20124224" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.35772356" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.18815331" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.35772356" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
@@ -870,18 +865,33 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>136</line>
+          <line>175</line>
           <option name="timeStamp" value="427" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>161</line>
+          <line>200</line>
           <option name="timeStamp" value="428" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
           <line>186</line>
           <option name="timeStamp" value="429" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>70</line>
+          <option name="timeStamp" value="431" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>62</line>
+          <option name="timeStamp" value="433" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>67</line>
+          <option name="timeStamp" value="434" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1177,37 +1187,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/indicators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-259">
-          <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
-          <folding>
-            <element signature="e#38#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="218" selection-start-line="218" selection-end-line="218" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2437">
-          <caret line="185" column="6" selection-start-line="185" selection-start-column="6" selection-end-line="185" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#10175#10707#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Python_projects/Kaggel_mental-health-in-tech-survey/src/LogisticRegression.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -1230,6 +1209,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-132">
+          <caret line="218" selection-start-line="218" selection-end-line="218" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/decision_tree_regression.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -1237,12 +1226,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="363" column="112" selection-start-line="363" selection-start-column="110" selection-end-line="363" selection-end-column="133" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="112" column="4" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="4" />
+          <folding>
+            <element signature="e#38#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2576">
-          <caret line="183" column="38" lean-forward="true" selection-start-line="182" selection-start-column="8" selection-end-line="183" selection-end-column="38" />
+        <state relative-caret-position="283">
+          <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
           <folding>
-            <element signature="e#49#67#0" expanded="true" />
+            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#2199#3113#0" />
           </folding>
         </state>
       </provider>
