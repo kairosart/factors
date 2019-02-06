@@ -45,8 +45,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         normed.set_index('date', inplace=True)
         normed.rename(columns={'Adj Close': symbol}, inplace=True)
 
-
-
         # Clean nan values
         normed = normed.fillna(0)
 
@@ -58,15 +56,26 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d %H:%M:%S')
 
-        dataset = []
+
+        dataset = pd.DataFrame()
 
         for i in bussines_days:
             # Get indicators
             sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
-            dataset.append([sym_mom, rsi_value])
+
+            # Create momentum column
+            dataset['Momentum'] = sym_mom
+
+            # Create SMA column
+            dataset['RSI'] = rsi_value
+
+            # Clean nan values
+            dataset = dataset.fillna(0)
+
             # Calculate price
             result = model.predict(dataset)
 
+            # Add last value of result to normed
 
         print(result)
 
