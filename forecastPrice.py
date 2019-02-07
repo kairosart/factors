@@ -13,7 +13,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.externals import joblib
 
 from indicators import plot_stock_prices_prediction, get_indicators, \
-    plot_stock_prices_prediction_ARIMA, plot_stock_prices_prediction_LSTM
+    plot_stock_prices_prediction_ARIMA, plot_stock_prices_prediction_LSTM, get_momentum
 from statsmodels.tsa.arima_model import ARIMAResults
 
 from util import slice_df, create_dataset
@@ -42,7 +42,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # normed = scaling_data(normed, symbol)
 
         normed['date'] = portf_value.index
-        normed.set_index('date', inplace=True)
+        #normed.set_index('date', inplace=True)
         normed.rename(columns={'Adj Close': symbol}, inplace=True)
 
         # Clean nan values
@@ -56,28 +56,40 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d %H:%M:%S')
 
+        # Get indicators
+        sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
 
         dataset = pd.DataFrame()
+
+        # Create momentum column
+        dataset['Momentum'] = sym_mom.values;
+
+        # Create RSI column
+        dataset['RSI'] = rsi_value;
+
+        # Clean nan values
+        dataset = dataset.fillna(0)
 
         for i in bussines_days:
             # Get indicators
             sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
 
-            # Create momentum column
-            dataset['Momentum'] = sym_mom
-
-            # Create SMA column
-            dataset['RSI'] = rsi_value
-
-            # Clean nan values
-            dataset = dataset.fillna(0)
-
             # Calculate price
-            result = model.predict(dataset)
+            prediction = model.predict(dataset)
 
             # Add last value of result to normed
+            p = prediction[-1]
+            print('Prediction: ', p)
+            normed.loc[len(normed)] = [p, i]
 
-        print(result)
+            # Add last indicators to dataset
+            dataset.loc[len(dataset)] = [sym_mom.values, rsi_value]
+
+        normed.set_index('date', inplace=True);
+
+        # Plot chart
+        plot_prices_pred = plot_stock_prices_prediction_LSTM(df_prices, normed, symbol)
+        return symbol, start_d, forecast_date, plot_prices_pred
 
     # ARIMA
     if forecast_model == '3':
