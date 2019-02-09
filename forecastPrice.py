@@ -70,6 +70,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Clean nan values
         dataset = dataset.fillna(0)
 
+        count = 0;
         for i in bussines_days:
             # Get indicators
             sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
@@ -82,8 +83,14 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             print('Prediction: ', p)
             normed.loc[len(normed)] = [p, i]
 
-            # Add last indicators to dataset
-            dataset.loc[len(dataset)] = [sym_mom.values, rsi_value]
+            # Get last momentum value
+            s = sym_mom.take([-1]).values[0]
+
+            # If the indicators aren't the first ones, add them to dataset
+            if count != 0:
+                dataset.loc[len(dataset)] = [s, rsi_value[-1]]
+
+            count = count + 1
 
         normed.set_index('date', inplace=True);
 
