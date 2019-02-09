@@ -329,7 +329,8 @@ def showforecastform():
         # ARIMA Model
         if result['model_Selection'] == '3':
             symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
-
+            final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
+            final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
             return render_template(
                 # name of template
                 "forecastPrices.html",
@@ -338,7 +339,8 @@ def showforecastform():
                 forecast_date=forecast_date.strftime("%Y-%m-%d"),
                 forecast_model_name='ARIMA',
                 forecast_time=forecast_time,
-                end_date=yesterday,
+                forecast_lookback=forecast_lookback,
+                forecast_final_date=final_forecast_day,
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
                 summary=Markup(model_sumary.tables[0].as_html()),
                 titles=['na', 'Stock Prices '],
@@ -347,7 +349,8 @@ def showforecastform():
         # LSTM Model
         elif result['model_Selection'] == '4':
             symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, yesterday, forecast_lookback)
-
+            final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
+            final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
             return render_template(
                 # name of template
                 "forecastPrices.html",
@@ -356,14 +359,35 @@ def showforecastform():
                 forecast_date=forecast_date.strftime("%Y-%m-%d"),
                 forecast_model_name='LSTM',
                 forecast_time=forecast_time,
+                forecast_lookback=forecast_lookback,
+                forecast_final_date=final_forecast_day,
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
                 titles=['na', 'Stock Prices '],
                 model='LSTM',
             )
-        else:
-            symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
+        elif result['model_Selection'] == '1':
+            symbol, start_d, yesterday,  plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model,
+                                                                                   forecast_time, start_d, yesterday,
+                                                                                   forecast_lookback)
+
             final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
             final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
+            return render_template(
+                # name of template
+                "forecastPrices.html",
+                # now we pass in our variables into the template
+                symbol=symbol,
+                forecast_date=forecast_date.strftime("%Y-%m-%d"),
+                forecast_model_name="Decision Tree XGBoost",
+                forecast_time=forecast_time,
+                forecast_lookback=forecast_lookback,
+                forecast_final_date=final_forecast_day,
+                div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
+                titles=['na', 'Stock Prices '],
+            )
+        else:
+            symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
+
             if forecast_model == '1':
                 forecast_name = 'Decision Tree'
             elif forecast_model == '2':
@@ -378,7 +402,6 @@ def showforecastform():
                 forecast_model_name=forecast_name,
                 forecast_time=forecast_time,
                 forecast_lookback=forecast_lookback,
-                forecast_final_date=final_forecast_day,
                 coef_deter=round(coef_deter, 3),
                 bias=round(bias, 3),
                 mae=round(mae, 3),

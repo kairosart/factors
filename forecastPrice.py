@@ -13,7 +13,8 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.externals import joblib
 
 from indicators import plot_stock_prices_prediction, get_indicators, \
-    plot_stock_prices_prediction_ARIMA, plot_stock_prices_prediction_LSTM, get_momentum
+    plot_stock_prices_prediction_ARIMA, plot_stock_prices_prediction_LSTM, get_momentum, \
+    plot_stock_prices_prediction_XGBoost
 from statsmodels.tsa.arima_model import ARIMAResults
 
 from util import slice_df, create_dataset
@@ -28,14 +29,19 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     :param forecast_time: Number of days to forecast in the future
     :param start_d: Lookback date
     :param forecast_date: Forecasting date
-    :param forecast_lookback: Number of day to lookback
-    :return: Summary and scores.
+    :param forecast_lookback: Number of days to lookback
+    :return: Prices Plot.
     '''
 
     # Decision Tree (XGBoost)
     if forecast_model == '1':
         # load model
         model = pickle.load(open("./xgboost.pkl", "rb"))
+
+        # Lookback data
+        lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
+        dates = pd.date_range(lookback_date, periods=forecast_lookback)
+        df_prices = slice_df(portf_value, dates)
 
         # Normalize the prices Dataframe
         normed = portf_value.copy()
@@ -72,8 +78,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         count = 0;
         for i in bussines_days:
-            # Get indicators
-            sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
 
             # Calculate price
             prediction = model.predict(dataset)
@@ -82,6 +86,17 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             p = prediction[-1]
             print('Prediction: ', p)
             normed.loc[len(normed)] = [p, i]
+
+            # Setting prediction dataframe cols and list for adding rows to dataframe
+            cols = ['Price', 'date']
+            lst = []
+
+            # Adding value to predictions dataframe for plotting
+            lst.append([prediction, i])
+            df = pd.DataFrame(lst, columns=cols)
+
+            # Get indicators
+            sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
 
             # Get last momentum value
             s = sym_mom.take([-1]).values[0]
@@ -92,10 +107,10 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
             count = count + 1
 
-        normed.set_index('date', inplace=True);
+        df.set_index('date', inplace=True)
 
         # Plot chart
-        plot_prices_pred = plot_stock_prices_prediction_LSTM(df_prices, normed, symbol)
+        plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred
 
     # ARIMA
