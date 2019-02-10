@@ -128,6 +128,8 @@ def get_indicators(normed, symbol):
     sma, q = get_sma(normed[symbol], window=10)
     return sym_mom, sma, q, rsi_value
 
+
+
 def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel="Date", ylabel="Price", fig_size=(12, 6)):
     """Plot Stock Prices.
 

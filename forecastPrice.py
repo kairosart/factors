@@ -17,8 +17,70 @@ from indicators import plot_stock_prices_prediction, get_indicators, \
     plot_stock_prices_prediction_XGBoost
 from statsmodels.tsa.arima_model import ARIMAResults
 
-from util import slice_df, create_dataset
+from util import slice_df, create_dataset, normalize_data
 
+
+# TODO Change the way of predicting. Instead of X_test use forecast_time
+def model_fit_pred(model, X_train, y_train, X_test, y_test):
+    '''Fit a model and get predictions and metrics'''
+
+    model.fit(X_train, y_train)
+
+    # Predictions
+    y_pred = model.predict(X_test)
+
+    # Measuring predictions
+
+    # Accuracy
+    scores = cross_val_score(model, X_test, y_test)
+    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() / 2))
+
+    # Coefficient of determination R^2
+    '''
+    The best possible score is 1.0 and it can be negative (because the model can be arbitrarily worse). A constant model that always predicts the expected value of y, disregarding the input features, would get a R^2 score of 0.0.
+    '''
+    coef_deter = model.score(X_train, y_train)
+    print('Coefficient of determination R^2: %s' % coef_deter)
+
+    # Forecast error
+    '''
+    The units of the forecast error are the same as the units of the prediction. A forecast error of zero indicates no error, or perfect skill for that forecast.
+    '''
+    forecast_errors = [y_test[i] - y_pred[i] for i in range(len(y_test))]
+    print('Forecast Errors: %s' % forecast_errors)
+
+    # Forecast bias
+    '''
+    Mean forecast error, also known as the forecast bias. A forecast bias of zero, or a very small number near zero, shows an unbiased model.
+    '''
+    bias = sum(forecast_errors) * 1.0 / len(y_test)
+    print('Bias: %f' % bias)
+
+    # Mean absolute error
+    '''
+    A mean absolute error of zero indicates no error.
+    '''
+    mae = metrics.mean_absolute_error(y_test, y_pred)
+    print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
+
+    # Mean squared error
+    '''
+    A mean squared error of zero indicates perfect skill, or no error.
+    '''
+    mse = metrics.mean_squared_error(y_test, y_pred)
+    print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
+
+    # Root mean squared error
+    '''
+    As with the mean squared error, an RMSE of zero indicates no error.
+    '''
+    rmse = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
+    print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+
+    results = pd.DataFrame({'Price': y_test, 'Price prediction': y_pred})
+    results.sort_index(inplace=True)
+
+    return results, coef_deter, forecast_errors, bias, mae, mse, rmse
 
 def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, forecast_date, forecast_lookback):
     '''
@@ -65,6 +127,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Get indicators
         sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
 
+        # Create dataframe for saving indicators
         dataset = pd.DataFrame()
 
         # Create momentum column
@@ -75,6 +138,10 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         # Clean nan values
         dataset = dataset.fillna(0)
+
+        # Setting prediction dataframe cols and list for adding rows to dataframe
+        cols = ['Price', 'date']
+        lst = []
 
         count = 0;
         for i in bussines_days:
@@ -87,14 +154,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             print('Prediction: ', p)
             normed.loc[len(normed)] = [p, i]
 
-            # Setting prediction dataframe cols and list for adding rows to dataframe
-            cols = ['Price', 'date']
-            lst = []
-
-            # Adding value to predictions dataframe for plotting
-            lst.append([prediction, i])
-            df = pd.DataFrame(lst, columns=cols)
-
             # Get indicators
             sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
 
@@ -105,13 +164,39 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             if count != 0:
                 dataset.loc[len(dataset)] = [s, rsi_value[-1]]
 
+            # Adding value to predictions dataframe for plotting
+            lst.append([p, i])
+            df = pd.DataFrame(lst, columns=cols)
+
             count = count + 1
+
 
         df.set_index('date', inplace=True)
 
+
+        # Slice dataset to predictions
+        dataset = dataset.tail(count)
+
+        # Add prediction prices to dataset
+        dataset[symbol] = prediction[-count]
+
+        # Normalize dataset
+        normalize_data(dataset)
+
+        # Define X and y
+        feature_cols = ['Momentum', 'RSI']
+        X = dataset[feature_cols]
+        y = dataset[symbol]
+
+        # split X and y into training and testing sets
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffle=False)
+
+        # Calculate metric results
+        results, coef_deter, forecast_errors, bias, mae, mse, rmse = model_fit_pred(model, X_train, y_train, X_test, y_test)
+
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df, symbol)
-        return symbol, start_d, forecast_date, plot_prices_pred
+        return symbol, start_d, forecast_date, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse
 
     # ARIMA
     if forecast_model == '3':
@@ -243,80 +328,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     # split X and y into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffle=False)
 
-    '''
-    # Use only to get the best parameter for max_depth
-    # Loop through a few different max depths and check the performance
-    for d in [3, 5, 10]:
-        # Create the tree and fit it
-        decision_tree = tree.DecisionTreeRegressor(max_depth=d)
-        decision_tree.fit(X_train, y_train)
 
-        # Print out the scores on train and test
-        print('max_depth=', str(d))
-        print(decision_tree.score(X_train, y_train))
-        print(decision_tree.score(X_test, y_test), '\n')
-    '''
-    #TODO Change the way of predicting. Instead of X_test use forecast_time
-    def model_fit_pred(X_train, y_train, X_test):
-        '''Fit a model and get predictions and metrics'''
 
-        model.fit(X_train, y_train)
-
-        # Predictions
-        y_pred = model.predict(X_test)
-
-        # Measuring predictions
-
-        # Accuracy
-        scores = cross_val_score(model, X_test, y_test, cv=7)
-        print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() / 2))
-
-        # Coefficient of determination R^2
-        '''
-        The best possible score is 1.0 and it can be negative (because the model can be arbitrarily worse). A constant model that always predicts the expected value of y, disregarding the input features, would get a R^2 score of 0.0.
-        '''
-        coef_deter = model.score(X_train, y_train)
-        print('Coefficient of determination R^2: %s' % coef_deter)
-
-        # Forecast error
-        '''
-        The units of the forecast error are the same as the units of the prediction. A forecast error of zero indicates no error, or perfect skill for that forecast.
-        '''
-        forecast_errors = [y_test[i] - y_pred[i] for i in range(len(y_test))]
-        print('Forecast Errors: %s' % forecast_errors)
-
-        # Forecast bias
-        '''
-        Mean forecast error, also known as the forecast bias. A forecast bias of zero, or a very small number near zero, shows an unbiased model.
-        '''
-        bias = sum(forecast_errors) * 1.0 / len(y_test)
-        print('Bias: %f' % bias)
-
-        # Mean absolute error
-        '''
-        A mean absolute error of zero indicates no error.
-        '''
-        mae = metrics.mean_absolute_error(y_test, y_pred)
-        print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
-
-        # Mean squared error
-        '''
-        A mean squared error of zero indicates perfect skill, or no error.
-        '''
-        mse = metrics.mean_squared_error(y_test, y_pred)
-        print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
-
-        # Root mean squared error
-        '''
-        As with the mean squared error, an RMSE of zero indicates no error.
-        '''
-        rmse = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
-        print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
-
-        results = pd.DataFrame({'Price': y_test, 'Price prediction': y_pred})
-        results.sort_index(inplace=True)
-
-        return results, coef_deter, forecast_errors, bias, mae, mse, rmse
 
     # Decision Tree Regressor
     if forecast_model == '1':
