@@ -17,8 +17,62 @@ from indicators import plot_stock_prices_prediction, get_indicators, \
     plot_stock_prices_prediction_XGBoost
 from statsmodels.tsa.arima_model import ARIMAResults
 
-from util import slice_df, create_dataset, normalize_data
+from util import slice_df, create_dataset
 
+
+def prepare_data_for_metrics(portf_value, symbol):
+    """
+
+    :param portf_value: Dataframe with prices
+    :param symbol: Stock symbol
+    :return: Splitting training and testing sets
+    """
+    # Normalize the prices Dataframe
+    normed = portf_value.copy()
+    # normed = scaling_data(normed, symbol)
+
+    normed['date'] = portf_value.index
+    normed.set_index('date', inplace=True)
+    normed.rename(columns={'Adj Close': symbol}, inplace=True)
+
+    # Get indicators
+    sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
+
+    # Create momentum column
+    normed['Momentum'] = sym_mom
+
+    # Create SMA column
+    normed['RSI'] = rsi_value
+
+    # Clean nan values
+    normed = normed.fillna(0)
+
+    # Sort dataframe by index
+    normed.sort_index()
+
+    # normalize the dataset
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    dataset = scaler.fit_transform(normed)
+
+    # Create dataset dataframe
+    df_normed = pd.DataFrame(dataset, index=range(dataset.shape[0]),
+                      columns=range(dataset.shape[1]))
+
+    # Rename columns
+    df_normed.rename(columns={0: symbol}, inplace=True)
+    df_normed.rename(columns={1: 'Momentum'}, inplace=True)
+    df_normed.rename(columns={2: 'RSI'}, inplace=True)
+
+
+    # Define X and y
+    feature_cols = ['Momentum', 'RSI']
+    X = df_normed[feature_cols]
+    y = df_normed[symbol]
+
+    # split X and y into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffle=False)
+
+    return X_train, X_test, y_train, y_test
 
 # TODO Change the way of predicting. Instead of X_test use forecast_time
 def model_fit_pred(model, X_train, y_train, X_test, y_test):
@@ -173,26 +227,16 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         df.set_index('date', inplace=True)
 
+        # TODO Maybe delete it
 
-        # Slice dataset to predictions
-        dataset = dataset.tail(count)
+        # Prepare data for metrics
+        X_train, X_test, y_train, y_test = prepare_data_for_metrics(portf_value, symbol)
 
-        # Add prediction prices to dataset
-        dataset[symbol] = prediction[-count]
+        # TODO Calculate metrics
 
-        # Normalize dataset
-        normalize_data(dataset)
+        # Daile return
 
-        # Define X and y
-        feature_cols = ['Momentum', 'RSI']
-        X = dataset[feature_cols]
-        y = dataset[symbol]
-
-        # split X and y into training and testing sets
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffle=False)
-
-        # Calculate metric results
-        results, coef_deter, forecast_errors, bias, mae, mse, rmse = model_fit_pred(model, X_train, y_train, X_test, y_test)
+        # % of change
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df, symbol)
@@ -289,44 +333,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         return symbol, start_d, forecast_date, plot_prices_pred
 
         #TODO Add results to chart page
-
-
-    # Normalize the prices Dataframe
-    normed = portf_value.copy()
-    #normed = scaling_data(normed, symbol)
-
-    normed['date'] = portf_value.index
-    normed.set_index('date', inplace=True)
-    normed.rename(columns={'Adj Close': symbol}, inplace=True)
-
-
-    # Get indicators
-    sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
-
-
-    # Create momentum column
-    normed['Momentum'] = sym_mom
-
-    # Create SMA column
-    normed['SMA'] = sma
-
-    # Create SMA column
-    normed['RSI'] = rsi_value
-
-    # Clean nan values
-    normed = normed.fillna(0)
-
-    # Sort dataframe by index
-    normed.sort_index()
-
-
-    # Define X and y
-    feature_cols = ['Momentum', 'RSI']
-    X = normed[feature_cols]
-    y = normed[symbol]
-
-    # split X and y into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffle=False)
 
 
 

@@ -109,6 +109,7 @@ def normalize_data(df):
     """Normalize stock prices using the first row of the dataframe"""
     return df/df.iloc[0,:]
 
+
 def scaling_data(df, column):
     # Scaling column
     scaler = StandardScaler()

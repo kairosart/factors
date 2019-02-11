@@ -110,6 +110,8 @@ def get_RSI(prices, n=14):
         rsi[i] = 100. - 100./(1.+rs)
     return rsi
 
+
+
 def get_indicators(normed, symbol):
     """
     :param normed: Prices dataframe normalized
