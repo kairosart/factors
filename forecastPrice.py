@@ -235,6 +235,12 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # TODO Calculate metrics
 
         # Daile return
+        # Get last row of df_prices
+        last_date = df_prices.loc[df_prices.index[-1]].name
+        last_date = last_date.strftime("%Y-%m-%d")
+        last_price = df_prices.loc[df_prices.index[-1]][0]
+        df.loc[len(dataset)] = [last_date, last_price]
+        daily_return = df.pct_change(1)
 
         # % of change
 
