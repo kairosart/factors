@@ -249,16 +249,29 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         df.sort_index(inplace=True)
 
 
-        # Percentage change between the current and a prior element.
-        daily_return_percentage = df.pct_change(1)
-        daily_return_percentage = daily_return_percentage.fillna(0)
+        # Daily Return Percentage change between the current and a prior element.
+        drp = df.pct_change(1)
         # Rename price column to % variation
-        daily_return_percentage.rename(columns={'Price': '%\u25B3'}, inplace=True)
+        drp.rename(columns={'Price': '%\u25B3'}, inplace=True)
 
+        # Compute the price difference of two elements
+        diff = df.diff()
+        # Rename price column to $ variation
+        diff.rename(columns={'Price': '$\u25B3'}, inplace=True)
+
+        # Concat diff with drp
+        metric = pd.concat([diff, drp], axis=1)
+
+        # Concat forecast prices with metric
+        metric = pd.concat([df, diff, drp], axis=1)
+        metric.rename(columns={'Price': 'Forecast'}, inplace=True)
+
+        # Clean NaN
+        metric = metric.fillna(0)
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df, symbol)
-        return symbol, start_d, forecast_date, plot_prices_pred, daily_return_percentage
+        return symbol, start_d, forecast_date, plot_prices_pred, metric
 
     # ARIMA
     if forecast_model == '3':
