@@ -234,19 +234,31 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         # TODO Calculate metrics
 
-        # Daile return
+        # Daily return
         # Get last row of df_prices
+        df['date'] = df.index
         last_date = df_prices.loc[df_prices.index[-1]].name
         last_date = last_date.strftime("%Y-%m-%d")
         last_price = df_prices.loc[df_prices.index[-1]][0]
-        df.loc[len(dataset)] = [last_date, last_price]
-        daily_return = df.pct_change(1)
 
-        # % of change
+        # Add last date and price to dataframe
+        df.loc[len(dataset)] = [last_price, last_date ]
+        df.set_index('date', inplace=True)
+        df.index = pd.to_datetime(df.index, format='%Y-%m-%d')
+        df.index = df.index.strftime("%Y-%m-%d")
+        df.sort_index(inplace=True)
+
+
+        # Percentage change between the current and a prior element.
+        daily_return_percentage = df.pct_change(1)
+        daily_return_percentage = daily_return_percentage.fillna(0)
+        # Rename price column to % variation
+        daily_return_percentage.rename(columns={'Price': '%\u25B3'}, inplace=True)
+
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df, symbol)
-        return symbol, start_d, forecast_date, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse
+        return symbol, start_d, forecast_date, plot_prices_pred, daily_return_percentage
 
     # ARIMA
     if forecast_model == '3':

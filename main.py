@@ -367,7 +367,7 @@ def showforecastform():
             )
         # Decision Tree XGBoost model
         elif result['model_Selection'] == '1':
-            symbol, start_d, yesterday,  plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(symbol, portf_value, forecast_model,
+            symbol, start_d, yesterday,  plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
                                                                                    forecast_time, start_d, yesterday,
                                                                                    forecast_lookback)
 
@@ -383,13 +383,10 @@ def showforecastform():
                 forecast_time=forecast_time,
                 forecast_lookback=forecast_lookback,
                 forecast_final_date=final_forecast_day,
-                coef_deter=round(coef_deter, 3),
-                bias=round(bias, 3),
-                mae=round(mae, 3),
-                mse=round(mse, 3),
-                rmse=round(rmse, 3),
+                daily_return_percentage=Markup(daily_return_percentage.to_html()),
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
                 titles=['na', 'Stock Prices '],
+                model='XGBoost',
             )
         else:
             symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)

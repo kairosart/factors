@@ -46,7 +46,10 @@
         <div class="table-responsive">
             {{ summary }}
         </div>
-    {% elif model == "LSTM" %}
+    {% elif model == "XGBoost" %}
+        <div class="table-responsive">
+            {{ daily_return_percentage | safe }}
+        </div>
 
     {% else %}
         <div class="table-responsive">
