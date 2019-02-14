@@ -383,7 +383,7 @@ def showforecastform():
                 forecast_time=forecast_time,
                 forecast_lookback=forecast_lookback,
                 forecast_final_date=final_forecast_day,
-                daily_return_percentage=Markup(daily_return_percentage.to_html()),
+                daily_return_percentage=Markup(daily_return_percentage.to_html(classes="table-sm")),
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
                 titles=['na', 'Stock Prices '],
                 model='XGBoost',

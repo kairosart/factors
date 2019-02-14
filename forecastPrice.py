@@ -269,6 +269,11 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Clean NaN
         metric = metric.fillna(0)
 
+        # Set decimals to 2
+        metric['Forecast'] = metric['Forecast'].apply(lambda x: round(x, 2))
+        metric['%\u25B3'] = metric['%\u25B3'].apply(lambda x: round(x, 2))
+        metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 2))
+
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, metric
