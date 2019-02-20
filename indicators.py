@@ -128,7 +128,12 @@ def get_indicators(normed, symbol):
     # ****Simple moving average (SMA)****
     # Compute SMA
     sma, q = get_sma(normed[symbol], window=10)
-    return sym_mom, sma, q, rsi_value
+
+    # ****Bollinger Bands****
+    # Compute rolling mean
+    rm = get_rolling_mean(normed[symbol], window=10)
+
+    return sym_mom, sma, q, rsi_value, rm
 
 
 
