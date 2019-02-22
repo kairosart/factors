@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XGBoost.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/XGBoost.ipynb" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
@@ -40,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="299" column="3" selection-start-line="299" selection-start-column="3" selection-end-line="299" selection-end-column="3" />
+            <state relative-caret-position="105">
+              <caret line="206" selection-start-line="203" selection-start-column="4" selection-end-line="206" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#10249#10781#0" />
@@ -64,8 +65,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6312">
-              <caret line="19" column="41" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="41" />
+            <state relative-caret-position="76">
+              <caret line="262" column="46" selection-start-line="262" selection-start-column="40" selection-end-line="262" selection-end-column="46" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
               </folding>
@@ -88,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="1148" selection-start-line="1148" selection-end-line="1148" />
+            <state relative-caret-position="309">
+              <caret line="119" column="7" selection-start-line="119" selection-start-column="7" selection-end-line="119" selection-end-column="7" />
               <folding>
                 <element signature="e#38#56#0" expanded="true" />
                 <element signature="e#420#882#0" />
@@ -100,7 +101,6 @@
                 <element signature="e#1993#2400#0" />
                 <element signature="e#2469#2909#0" />
                 <element signature="e#2943#3517#0" />
-                <element signature="e#3559#4004#0" />
                 <element signature="e#4133#5903#0" />
                 <element signature="e#22360#26746#0" />
                 <element signature="e#26880#28733#0" />
@@ -124,7 +124,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>LONG</find>
       <find>end_date</find>
       <find>get_data</find>
       <find>info</find>
@@ -154,6 +153,7 @@
       <find>set_index</find>
       <find>nan</find>
       <find>concat</find>
+      <find>reshape(-1,</find>
     </findStrings>
     <replaceStrings>
       <replace>symbol</replace>
@@ -204,18 +204,19 @@
         <option value="$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb" />
         <option value="$PROJECT_DIR$/decision_tree_regression.ipynb" />
         <option value="$PROJECT_DIR$/util.py" />
-        <option value="$PROJECT_DIR$/indicators.py" />
         <option value="$PROJECT_DIR$/templates/forecastPrices.html" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/forecastPrice.py" />
+        <option value="$PROJECT_DIR$/indicators.py" />
+        <option value="$PROJECT_DIR$/XGBoost.ipynb" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-5" />
-    <option name="y" value="52" />
-    <option name="width" value="1290" />
-    <option name="height" value="1033" />
+    <option name="x" value="140" />
+    <option name="y" value="56" />
+    <option name="width" value="1280" />
+    <option name="height" value="732" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -424,20 +425,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00106" summary="Implementing ARIMA">
-      <created>1547807564245</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1547807564245</updated>
-    </task>
-    <task id="LOCAL-00107" summary="Implementing ARIMA">
-      <created>1547807592705</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1547807592705</updated>
     </task>
     <task id="LOCAL-00108" summary="Implementing ARIMA">
       <created>1547815229218</created>
@@ -768,7 +755,21 @@
       <option name="project" value="LOCAL" />
       <updated>1550668740379</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="Creating XGBoost model notebook.">
+      <created>1550691784630</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1550691784630</updated>
+    </task>
+    <task id="LOCAL-00156" summary="Creating XGBoost model notebook.">
+      <created>1550696059252</created>
+      <option name="number" value="00156" />
+      <option name="presentableId" value="LOCAL-00156" />
+      <option name="project" value="LOCAL" />
+      <updated>1550696059252</updated>
+    </task>
+    <option name="localTasksCounter" value="157" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -784,18 +785,18 @@
     <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49367088" visible="true" weight="0.15903614" />
-      <window_info id="Structure" order="1" sideWeight="0.5063291" side_tool="true" weight="0.23713528" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49330357" visible="true" weight="0.15823293" />
+      <window_info id="Structure" order="1" sideWeight="0.5066964" side_tool="true" visible="true" weight="0.15823293" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3263647" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32546583" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.18815331" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.35772356" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.44367015" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" visible="true" weight="0.3614907" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.44347826" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" weight="0.3614907" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50344825" side_tool="true" weight="0.33448672" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32868758" />
       <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32963374" />
@@ -968,7 +969,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/js/popper.min.js" />
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -1242,29 +1242,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/indicators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="1148" selection-start-line="1148" selection-end-line="1148" />
-          <folding>
-            <element signature="e#38#56#0" expanded="true" />
-            <element signature="e#420#882#0" />
-            <element signature="e#932#1225#0" />
-            <element signature="e#1263#1452#0" />
-            <element signature="e#1499#1644#0" />
-            <element signature="e#1691#1924#0" />
-            <element signature="e#1993#2400#0" />
-            <element signature="e#2469#2909#0" />
-            <element signature="e#2943#3517#0" />
-            <element signature="e#3559#4004#0" />
-            <element signature="e#4133#5903#0" />
-            <element signature="e#22360#26746#0" />
-            <element signature="e#26880#28733#0" />
-            <element signature="e#28858#30781#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6">
@@ -1280,10 +1257,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/forecastPrices.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="299" column="3" selection-start-line="299" selection-start-column="3" selection-end-line="299" selection-end-column="3" />
+        <state relative-caret-position="105">
+          <caret line="206" selection-start-line="203" selection-start-column="4" selection-end-line="206" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#10249#10781#0" />
@@ -1293,17 +1277,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/forecastPrices.html">
+    <entry file="file://$PROJECT_DIR$/XGBoost.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
+        <state relative-caret-position="309">
+          <caret line="119" column="7" selection-start-line="119" selection-start-column="7" selection-end-line="119" selection-end-column="7" />
+          <folding>
+            <element signature="e#38#56#0" expanded="true" />
+            <element signature="e#420#882#0" />
+            <element signature="e#932#1225#0" />
+            <element signature="e#1263#1452#0" />
+            <element signature="e#1499#1644#0" />
+            <element signature="e#1691#1924#0" />
+            <element signature="e#1993#2400#0" />
+            <element signature="e#2469#2909#0" />
+            <element signature="e#2943#3517#0" />
+            <element signature="e#4133#5903#0" />
+            <element signature="e#22360#26746#0" />
+            <element signature="e#26880#28733#0" />
+            <element signature="e#28858#30781#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6312">
-          <caret line="19" column="41" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="41" />
+        <state relative-caret-position="76">
+          <caret line="262" column="46" selection-start-line="262" selection-start-column="40" selection-end-line="262" selection-end-column="46" />
           <folding>
             <element signature="e#48#61#0" expanded="true" />
           </folding>
