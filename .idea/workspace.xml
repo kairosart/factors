@@ -65,8 +65,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="227" column="42" lean-forward="true" selection-start-line="227" selection-start-column="7" selection-end-line="227" selection-end-column="42" />
+            <state relative-caret-position="74">
+              <caret line="151" column="6" lean-forward="true" selection-start-line="151" selection-start-column="6" selection-end-line="151" selection-end-column="21" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
               </folding>
@@ -213,8 +213,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="140" />
-    <option name="y" value="56" />
+    <option name="x" value="-36" />
+    <option name="y" value="129" />
     <option name="width" value="1280" />
     <option name="height" value="732" />
   </component>
@@ -425,20 +425,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00111" summary="Creating modal spinner.">
-      <created>1547930699262</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1547930699265</updated>
-    </task>
-    <task id="LOCAL-00112" summary="Creating modals.">
-      <created>1548020140106</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1548020140106</updated>
     </task>
     <task id="LOCAL-00113" summary="Modifying jupyter notebook.">
       <created>1548074549286</created>
@@ -769,7 +755,21 @@
       <option name="project" value="LOCAL" />
       <updated>1551039483965</updated>
     </task>
-    <option name="localTasksCounter" value="160" />
+    <task id="LOCAL-00160" summary="Creating XGBoost model notebook.">
+      <created>1551041750036</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1551041750036</updated>
+    </task>
+    <task id="LOCAL-00161" summary="Creating XGBoost model notebook.">
+      <created>1551042673383</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1551042673383</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -783,10 +783,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49416342" visible="true" weight="0.15823293" />
-      <window_info id="Structure" order="1" sideWeight="0.50583655" side_tool="true" visible="true" weight="0.15823293" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4946071" visible="true" weight="0.15823293" />
+      <window_info id="Structure" order="1" sideWeight="0.5053929" side_tool="true" visible="true" weight="0.15823293" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32546583" />
@@ -796,7 +795,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.44347826" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" visible="true" weight="0.3614907" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" visible="true" weight="0.19378883" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50344825" side_tool="true" weight="0.33448672" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32868758" />
       <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32963374" />
@@ -1308,8 +1307,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="227" column="42" lean-forward="true" selection-start-line="227" selection-start-column="7" selection-end-line="227" selection-end-column="42" />
+        <state relative-caret-position="74">
+          <caret line="151" column="6" lean-forward="true" selection-start-line="151" selection-start-column="6" selection-end-line="151" selection-end-column="21" />
           <folding>
             <element signature="e#48#61#0" expanded="true" />
           </folding>
