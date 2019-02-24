@@ -65,8 +65,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="262" column="46" selection-start-line="262" selection-start-column="40" selection-end-line="262" selection-end-column="46" />
+            <state relative-caret-position="172">
+              <caret line="266" column="66" lean-forward="true" selection-start-line="266" selection-start-column="7" selection-end-line="266" selection-end-column="66" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
               </folding>
@@ -77,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="115" column="51" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="51" />
+            <state relative-caret-position="-103">
+              <caret line="85" selection-start-line="85" selection-end-line="89" selection-end-column="28" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
               </folding>
@@ -89,7 +89,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
+            <state relative-caret-position="1008">
               <caret line="119" column="7" selection-start-line="119" selection-start-column="7" selection-end-line="119" selection-end-column="7" />
               <folding>
                 <element signature="e#38#56#0" expanded="true" />
@@ -152,8 +152,8 @@
       <find>as_html()</find>
       <find>set_index</find>
       <find>nan</find>
-      <find>concat</find>
       <find>reshape(-1,</find>
+      <find>concat</find>
     </findStrings>
     <replaceStrings>
       <replace>symbol</replace>
@@ -425,20 +425,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00108" summary="Implementing ARIMA">
-      <created>1547815229218</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1547815229218</updated>
-    </task>
-    <task id="LOCAL-00109" summary="Implementing ARIMA">
-      <created>1547845450503</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1547845450503</updated>
     </task>
     <task id="LOCAL-00110" summary="Getting error when Yahoo is not recheable.">
       <created>1547906104503</created>
@@ -769,7 +755,21 @@
       <option name="project" value="LOCAL" />
       <updated>1550696059252</updated>
     </task>
-    <option name="localTasksCounter" value="157" />
+    <task id="LOCAL-00157" summary="Creating XGBoost model notebook.">
+      <created>1550869914458</created>
+      <option name="number" value="00157" />
+      <option name="presentableId" value="LOCAL-00157" />
+      <option name="project" value="LOCAL" />
+      <updated>1550869914458</updated>
+    </task>
+    <task id="LOCAL-00158" summary="Creating XGBoost model notebook.">
+      <created>1550957060478</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1550957060478</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -785,8 +785,8 @@
     <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49330357" visible="true" weight="0.15823293" />
-      <window_info id="Structure" order="1" sideWeight="0.5066964" side_tool="true" visible="true" weight="0.15823293" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49416342" visible="true" weight="0.15823293" />
+      <window_info id="Structure" order="1" sideWeight="0.50583655" side_tool="true" visible="true" weight="0.15823293" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32546583" />
@@ -795,8 +795,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.44347826" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" weight="0.3614907" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.44347826" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" visible="true" weight="0.3614907" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50344825" side_tool="true" weight="0.33448672" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32868758" />
       <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32963374" />
@@ -1232,16 +1232,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="115" column="51" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="51" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6">
@@ -1286,7 +1276,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/indicators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
+        <state relative-caret-position="1008">
           <caret line="119" column="7" selection-start-line="119" selection-start-column="7" selection-end-line="119" selection-end-column="7" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
@@ -1306,10 +1296,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-103">
+          <caret line="85" selection-start-line="85" selection-end-line="89" selection-end-column="28" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="262" column="46" selection-start-line="262" selection-start-column="40" selection-end-line="262" selection-end-column="46" />
+        <state relative-caret-position="172">
+          <caret line="266" column="66" lean-forward="true" selection-start-line="266" selection-start-column="7" selection-end-line="266" selection-end-column="66" />
           <folding>
             <element signature="e#48#61#0" expanded="true" />
           </folding>
