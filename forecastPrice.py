@@ -19,6 +19,8 @@ from statsmodels.tsa.arima_model import ARIMAResults
 
 from util import slice_df, create_dataset
 
+# TA Library (https://github.com/bukosabino/ta)
+from ta import *
 
 def prepare_data_for_metrics(portf_value, symbol):
     """
@@ -149,7 +151,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     :return: Prices Plot.
     '''
 
-    # Decision Tree (XGBoost)
+    # XGBoost
     if forecast_model == '1':
         # load model
         model = pickle.load(open("./xgboost.pkl", "rb"))
@@ -159,41 +161,48 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         dates = pd.date_range(lookback_date, periods=forecast_lookback)
         df_prices = slice_df(portf_value, dates)
 
-        # Normalize the prices Dataframe
-        normed = portf_value.copy()
-        # normed = scaling_data(normed, symbol)
+        ###############################
+        # Create datafrane with all TA indicators
+        df = add_all_ta_features(portf_value, "Open", "High", "Low", "Close", "Volume", fillna=True)
 
-        normed['date'] = portf_value.index
-        #normed.set_index('date', inplace=True)
-        normed.rename(columns={'Adj Close': symbol}, inplace=True)
+        # Delete unuseful columns
+        del df['Open']
+        del df['High']
+        del df['Low']
+        del df['Close']
+        del df['Volume']
 
-        # Clean nan values
-        normed = normed.fillna(0)
+        # Create 'date' column for posterior index
+        df['date'] = df.index
 
-        # Sort dataframe by index
-        normed.sort_index()
+        # Rename column for correlation matrix. Can't have spaces.
+        df.rename(columns={'Adj Close': 'Adj_Close'}, inplace=True)
+
+        # Reset index
+        df.reset_index(inplace=True)
+
+        ## Indicators to use
+        '''
+            * others_cr: Cumulative Return.
+            * trend_ema_fast: Fast Exponential Moving Averages(EMA)
+            * volatility_kcl: Keltner Channel'''
+
+        # Create a dataframe with indicators to use
+        dataset = df[['Adj_Close', 'others_cr', 'trend_ema_fast', 'volatility_kcl']].copy()
+
+        # Scale data for using reg:logistic as array
+        scaler = MinMaxScaler(feature_range=(0, 1))
+        features = df[['others_cr', 'trend_ema_fast', 'volatility_kcl']]
+        dataset_scaled = scaler.fit_transform(features)
+
+        ###############################
 
         # Bussines days
         start = forecast_date.strftime("%Y-%m-%d")
         rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d %H:%M:%S')
 
-        # Get indicators
-        sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
-
-        # Create dataframe for saving indicators
-        dataset = pd.DataFrame()
-
-        # Create momentum column
-        dataset['Momentum'] = sym_mom.values;
-
-        # Create RSI column
-        dataset['RSI'] = rsi_value;
-
-        # Clean nan values
-        dataset = dataset.fillna(0)
-
-        # Setting prediction dataframe cols and list for adding rows to dataframe
+        # Setting prediction dataframe cols and list for saving predictions
         cols = ['Price', 'date']
         lst = []
 
@@ -201,26 +210,38 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         for i in bussines_days:
 
             # Calculate price
-            prediction = model.predict(dataset)
-
-            # Add last value of result to normed
+            prediction = model.predict(dataset_scaled)
             p = prediction[-1]
+
             print('Prediction: ', p)
-            normed.loc[len(normed)] = [p, i]
 
-            # Get indicators
-            sym_mom, sma, q, rsi_value = get_indicators(normed, symbol)
+            # Adding value to predictions dataframe for plotting
+            lst.append([p, i])
+            df = pd.DataFrame(lst, columns=cols)
 
-            # Get last momentum value
-            s = sym_mom.take([-1]).values[0]
+            ###### GET INDICATORS ######
+
+            # Calculate others_cr: Cumulative Return.
+            cum_return = cumulative_return(prediction)
+            cr = cum_return.take([-1]).values[0]
+
+            # Calculate trend_ema_fast: Fast Exponential Moving Averages (EMA)
+            ema = ema_indicator(prediction)
+            ema = ema.take([-1]).values[0]
+
+            # Calculate volatility_kcl: Keltner Channel
+            # TODO Maybee this indicator is not worht it.
+
+            # Add result to dataset array
+            dataset.loc[len(dataset)] = [p, cr, ema, 0]
+
+
 
             # If the indicators aren't the first ones, add them to dataset
             if count != 0:
                 dataset.loc[len(dataset)] = [s, rsi_value[-1]]
 
-            # Adding value to predictions dataframe for plotting
-            lst.append([p, i])
-            df = pd.DataFrame(lst, columns=cols)
+
 
             count = count + 1
 

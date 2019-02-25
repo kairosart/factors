@@ -17,6 +17,7 @@ from indicators import get_momentum, get_sma, get_rolling_mean, get_rolling_std,
     plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
 
 
+
 app = Flask(__name__)
 app.config.from_object('config')
 
@@ -328,6 +329,7 @@ def showforecastform():
 
         # ARIMA Model
         if result['model_Selection'] == '3':
+            portf_value = fetchOnlineData(start_d, symbol, yesterday)
             symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
             final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
             final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
@@ -348,6 +350,7 @@ def showforecastform():
             )
         # LSTM Model
         elif result['model_Selection'] == '4':
+            portf_value = fetchOnlineData(start_d, symbol, yesterday)
             symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, yesterday, forecast_lookback)
             final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
             final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
@@ -365,8 +368,11 @@ def showforecastform():
                 titles=['na', 'Stock Prices '],
                 model='LSTM',
             )
-        # Decision Tree XGBoost model
+        # XGBoost model
         elif result['model_Selection'] == '1':
+            # Import data from Yahoo
+            portf_value = fetchOnlineData(start_d, symbol, yesterday, del_cols=False)
+
             symbol, start_d, yesterday,  plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
                                                                                    forecast_time, start_d, yesterday,
                                                                                    forecast_lookback)
