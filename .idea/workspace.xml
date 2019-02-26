@@ -4,6 +4,8 @@
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/XGBoost.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/XGBoost.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xgboost.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/xgboost.pkl" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
@@ -39,15 +41,23 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="206" selection-start-line="203" selection-start-column="4" selection-end-line="206" />
+            <state relative-caret-position="156">
+              <caret line="373" selection-start-line="373" selection-end-line="373" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#10249#10781#0" />
-                <element signature="e#11989#12799#0" />
-                <element signature="e#12880#13571#0" />
+                <element signature="e#11989#13086#0" />
               </folding>
             </state>
           </provider>
@@ -56,7 +66,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/forecastPrices.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="35">
+            <state relative-caret-position="312">
               <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
             </state>
           </provider>
@@ -65,22 +75,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="151" column="6" lean-forward="true" selection-start-line="151" selection-start-column="6" selection-end-line="151" selection-end-column="21" />
+            <state relative-caret-position="259">
+              <caret line="211" column="49" selection-start-line="211" selection-start-column="49" selection-end-line="211" selection-end-column="49" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-103">
-              <caret line="85" selection-start-line="85" selection-end-line="89" selection-end-column="28" />
-              <folding>
-                <element signature="e#43#64#0" expanded="true" />
+                <element signature="e#771#2037#0" />
+                <element signature="e#838#3202#0" />
+                <element signature="e#8508#9422#0" />
+                <element signature="e#9474#11821#0" />
               </folding>
             </state>
           </provider>
@@ -200,21 +202,21 @@
         <option value="$PROJECT_DIR$/Forecasting_prices.ipynb" />
         <option value="$PROJECT_DIR$/LSTM_forecasting_prices.ipynb" />
         <option value="$PROJECT_DIR$/lib/python3.6/site-packages/seaborn/axisgrid.py" />
-        <option value="$PROJECT_DIR$/templates/pricesForecastForm.html" />
         <option value="$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb" />
         <option value="$PROJECT_DIR$/decision_tree_regression.ipynb" />
         <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/templates/forecastPrices.html" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/forecastPrice.py" />
         <option value="$PROJECT_DIR$/indicators.py" />
         <option value="$PROJECT_DIR$/XGBoost.ipynb" />
+        <option value="$PROJECT_DIR$/templates/pricesForecastForm.html" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/forecastPrice.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-36" />
-    <option name="y" value="129" />
+    <option name="x" value="1440" />
+    <option name="y" value="34" />
     <option name="width" value="1280" />
     <option name="height" value="732" />
   </component>
@@ -425,20 +427,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00113" summary="Modifying jupyter notebook.">
-      <created>1548074549286</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1548074549286</updated>
-    </task>
-    <task id="LOCAL-00114" summary="Modifying jupyter notebook.">
-      <created>1548096068627</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1548096068627</updated>
     </task>
     <task id="LOCAL-00115" summary="Price forecasting plot.">
       <created>1548100697750</created>
@@ -769,7 +757,21 @@
       <option name="project" value="LOCAL" />
       <updated>1551042673383</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary="Creating XGBoost model notebook.">
+      <created>1551043337915</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1551043337915</updated>
+    </task>
+    <task id="LOCAL-00163" summary="Creating XGBoost model backend.">
+      <created>1551128885753</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1551128885754</updated>
+    </task>
+    <option name="localTasksCounter" value="164" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -782,20 +784,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
+    <frame x="1275" y="-4" width="1930" height="1089" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4946071" visible="true" weight="0.15823293" />
-      <window_info id="Structure" order="1" sideWeight="0.5053929" side_tool="true" visible="true" weight="0.15823293" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49367088" visible="true" weight="0.18461539" />
+      <window_info id="Structure" order="1" sideWeight="0.5063291" side_tool="true" visible="true" weight="0.18461539" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32546583" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.18815331" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.35772356" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.35772356" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.44347826" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" visible="true" weight="0.19378883" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.4425087" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" weight="0.18118466" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50344825" side_tool="true" weight="0.33448672" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32868758" />
       <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32963374" />
@@ -871,7 +874,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Create forecasting for future prices." />
     <MESSAGE value="Implementing KNN." />
     <MESSAGE value="Testing models in Jupyter." />
     <MESSAGE value="Implementing ARIMA" />
@@ -896,40 +898,66 @@
     <MESSAGE value="Creating Decision Tree model." />
     <MESSAGE value="Creating Decision Tree model metrics." />
     <MESSAGE value="Creating XGBoost model notebook." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating XGBoost model notebook." />
+    <MESSAGE value="Creating XGBoost model backend." />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating XGBoost model backend." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>186</line>
+          <line>187</line>
           <option name="timeStamp" value="429" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>80</line>
+          <line>82</line>
           <option name="timeStamp" value="489" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>83</line>
+          <line>85</line>
           <option name="timeStamp" value="490" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>102</line>
+          <line>104</line>
           <option name="timeStamp" value="493" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>88</line>
+          <line>90</line>
           <option name="timeStamp" value="494" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>277</line>
+          <line>263</line>
           <option name="timeStamp" value="510" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>238</line>
+          <option name="timeStamp" value="544" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>212</line>
+          <option name="timeStamp" value="546" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>197</line>
+          <option name="timeStamp" value="548" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>202</line>
+          <option name="timeStamp" value="549" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
+          <line>217</line>
+          <option name="timeStamp" value="550" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -950,6 +978,11 @@
       </expression>
     </expressions>
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>p</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>model.score</expression-string>
         <language-id>Python</language-id>
@@ -1195,13 +1228,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Python_projects/Kaggel_mental-health-in-tech-survey/src/LogisticRegression.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -1246,26 +1272,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/forecastPrices.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="206" selection-start-line="203" selection-start-column="4" selection-end-line="206" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#10249#10781#0" />
-            <element signature="e#11989#12799#0" />
-            <element signature="e#12880#13571#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/XGBoost.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -1295,10 +1301,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/forecastPrices.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="373" selection-start-line="373" selection-end-line="373" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#10249#10781#0" />
+            <element signature="e#11989#13086#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-103">
-          <caret line="85" selection-start-line="85" selection-end-line="89" selection-end-column="28" />
+        <state relative-caret-position="156">
+          <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
           <folding>
             <element signature="e#43#64#0" expanded="true" />
           </folding>
@@ -1307,10 +1339,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="151" column="6" lean-forward="true" selection-start-line="151" selection-start-column="6" selection-end-line="151" selection-end-column="21" />
+        <state relative-caret-position="259">
+          <caret line="211" column="49" selection-start-line="211" selection-start-column="49" selection-end-line="211" selection-end-column="49" />
           <folding>
             <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#771#2037#0" />
+            <element signature="e#838#3202#0" />
+            <element signature="e#8508#9422#0" />
+            <element signature="e#9474#11821#0" />
           </folding>
         </state>
       </provider>

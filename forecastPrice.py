@@ -159,7 +159,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Lookback data
         lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
         dates = pd.date_range(lookback_date, periods=forecast_lookback)
-        df_prices = slice_df(portf_value, dates)
+        #df_prices = slice_df(portf_value, dates)
+        df_prices = portf_value[['Adj Close']].copy()
 
         ###############################
         # Create datafrane with all TA indicators
@@ -183,12 +184,10 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         ## Indicators to use
         '''
-            * others_cr: Cumulative Return.
-            * trend_ema_fast: Fast Exponential Moving Averages(EMA)
-            * volatility_kcl: Keltner Channel'''
+            * others_cr: Cumulative Return. (Close)
+            * trend_ema_fast: Fast Exponential Moving Averages(EMA) (Close)
+            * volatility_kcl: Keltner channel (KC) (High, Low, Close)'''
 
-        # Create a dataframe with indicators to use
-        dataset = df[['Adj_Close', 'others_cr', 'trend_ema_fast', 'volatility_kcl']].copy()
 
         # Scale data for using reg:logistic as array
         scaler = MinMaxScaler(feature_range=(0, 1))
@@ -197,86 +196,52 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         ###############################
 
-        # Bussines days
+        # Next Bussines days
         start = forecast_date.strftime("%Y-%m-%d")
-        rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
-        bussines_days = rng.strftime('%Y-%m-%d %H:%M:%S')
+        rng = pd.date_range(pd.Timestamp(start), periods=1, freq='B')
+        bussines_days = rng.strftime('%Y-%m-%d')
 
         # Setting prediction dataframe cols and list for saving predictions
         cols = ['Price', 'date']
         lst = []
 
-        count = 0;
-        for i in bussines_days:
+        # Calculate price
+        prediction = model.predict(dataset_scaled)
 
-            # Calculate price
-            prediction = model.predict(dataset_scaled)
-            p = prediction[-1]
+        # TODO Standarize data
+        preds = scaler.inverse_transform([prediction])
+        p = prediction[-1]
 
-            print('Prediction: ', p)
+        print('Prediction: ', p)
 
-            # Adding value to predictions dataframe for plotting
-            lst.append([p, i])
-            df = pd.DataFrame(lst, columns=cols)
-
-            ###### GET INDICATORS ######
-
-            # Calculate others_cr: Cumulative Return.
-            cum_return = cumulative_return(prediction)
-            cr = cum_return.take([-1]).values[0]
-
-            # Calculate trend_ema_fast: Fast Exponential Moving Averages (EMA)
-            ema = ema_indicator(prediction)
-            ema = ema.take([-1]).values[0]
-
-            # Calculate volatility_kcl: Keltner Channel
-            # TODO Maybee this indicator is not worht it.
-
-            # Add result to dataset array
-            dataset.loc[len(dataset)] = [p, cr, ema, 0]
-
-
-
-            # If the indicators aren't the first ones, add them to dataset
-            if count != 0:
-                dataset.loc[len(dataset)] = [s, rsi_value[-1]]
-
-
-
-            count = count + 1
-
-
-        df.set_index('date', inplace=True)
-
-        # TODO Maybe delete it
-
-        # Prepare data for metrics
-        X_train, X_test, y_train, y_test = prepare_data_for_metrics(portf_value, symbol)
+        # Adding value to predictions dataframe for plotting
+        lst.append([p, bussines_days.values[0]])
+        df_predictions = pd.DataFrame(lst, columns=cols)
 
         # TODO Calculate metrics
 
         # Daily return
         # Get last row of df_prices
-        df['date'] = df.index
+        df_predictions.index  = df_predictions['date']
         last_date = df_prices.loc[df_prices.index[-1]].name
         last_date = last_date.strftime("%Y-%m-%d")
         last_price = df_prices.loc[df_prices.index[-1]][0]
 
         # Add last date and price to dataframe
-        df.loc[len(dataset)] = [last_price, last_date ]
-        df.set_index('date', inplace=True)
-        df.index = pd.to_datetime(df.index, format='%Y-%m-%d')
-        df.index = df.index.strftime("%Y-%m-%d")
-        df.sort_index(inplace=True)
+        df_predictions.loc[len(dataset)] = [last_price, last_date ]
+        df_predictions.set_index('date', inplace=True)
+        df_predictions.index = pd.to_datetime(df_predictions.index, format='%Y-%m-%d')
+        df_predictions.index = df_predictions.index.strftime("%Y-%m-%d")
+        df_predictions.sort_index(inplace=True)
 
 
         # Daily Return Percentage change between the current and a prior element.
-        drp = df.pct_change(1)
+        drp = df_predictions.pct_change(1)
         # Rename price column to % variation
         drp.rename(columns={'Price': '%\u25B3'}, inplace=True)
 
         # Compute the price difference of two elements
-        diff = df.diff()
+        diff = df_predictions.diff()
         # Rename price column to $ variation
         diff.rename(columns={'Price': '$\u25B3'}, inplace=True)
 
@@ -284,7 +249,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         metric = pd.concat([diff, drp], axis=1)
 
         # Concat forecast prices with metric
-        metric = pd.concat([df, diff, drp], axis=1)
+        metric = pd.concat([df_predictions, diff, drp], axis=1)
         metric.rename(columns={'Price': 'Forecast'}, inplace=True)
 
         # Clean NaN
@@ -296,7 +261,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 2))
 
         # Plot chart
-        plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df, symbol)
+        plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df_predictions, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, metric
 
     # ARIMA
