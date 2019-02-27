@@ -210,7 +210,10 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         # TODO Standarize data
         preds = scaler.inverse_transform([prediction])
-        p = prediction[-1]
+
+        # Convert array to series
+        mylist = preds.tolist()
+        p = mylist[-1][-1]
 
         print('Prediction: ', p)
 

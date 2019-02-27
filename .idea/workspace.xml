@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/XGBoost.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/XGBoost.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xgboost.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/xgboost.pkl" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
@@ -75,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="211" column="49" selection-start-line="211" selection-start-column="49" selection-end-line="211" selection-end-column="49" />
+            <state relative-caret-position="283">
+              <caret line="215" column="12" selection-start-line="215" selection-start-column="12" selection-end-line="215" selection-end-column="12" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
                 <element signature="e#771#2037#0" />
@@ -215,8 +214,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1440" />
-    <option name="y" value="34" />
+    <option name="x" value="13" />
+    <option name="y" value="74" />
     <option name="width" value="1280" />
     <option name="height" value="732" />
   </component>
@@ -427,13 +426,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00115" summary="Price forecasting plot.">
-      <created>1548100697750</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1548100697750</updated>
     </task>
     <task id="LOCAL-00116" summary="Changing the way we get data. Instead saving in a cvs file, we create a dataframe.">
       <created>1548104259630</created>
@@ -771,7 +763,14 @@
       <option name="project" value="LOCAL" />
       <updated>1551128885754</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="Creating XGBoost model backend.">
+      <created>1551215751104</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1551215751104</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -784,16 +783,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1275" y="-4" width="1930" height="1089" extended-state="6" />
+    <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49367088" visible="true" weight="0.18461539" />
-      <window_info id="Structure" order="1" sideWeight="0.5063291" side_tool="true" visible="true" weight="0.18461539" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49295774" visible="true" weight="0.27951807" />
+      <window_info id="Structure" order="1" sideWeight="0.5070422" side_tool="true" visible="true" weight="0.27951807" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32546583" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.18815331" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.35772356" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.38260868" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
@@ -931,32 +930,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>263</line>
+          <line>266</line>
           <option name="timeStamp" value="510" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>238</line>
+          <line>241</line>
           <option name="timeStamp" value="544" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>212</line>
+          <line>213</line>
           <option name="timeStamp" value="546" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>197</line>
-          <option name="timeStamp" value="548" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>202</line>
-          <option name="timeStamp" value="549" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>217</line>
+          <line>220</line>
           <option name="timeStamp" value="550" />
         </line-breakpoint>
       </breakpoints>
@@ -1339,8 +1328,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="211" column="49" selection-start-line="211" selection-start-column="49" selection-end-line="211" selection-end-column="49" />
+        <state relative-caret-position="283">
+          <caret line="215" column="12" selection-start-line="215" selection-start-column="12" selection-end-line="215" selection-end-column="12" />
           <folding>
             <element signature="e#48#61#0" expanded="true" />
             <element signature="e#771#2037#0" />
