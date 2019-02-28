@@ -10,7 +10,8 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn import tree, metrics, neighbors
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.externals import joblib
+from sklearn import preprocessing
+
 
 from indicators import plot_stock_prices_prediction, get_indicators, \
     plot_stock_prices_prediction_ARIMA, plot_stock_prices_prediction_LSTM, get_momentum, \
@@ -153,6 +154,12 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
     # XGBoost
     if forecast_model == '1':
+        ## Indicators to use
+        '''
+            * others_cr: Cumulative Return. (Close)
+            * trend_ema_fast: Fast Exponential Moving Averages(EMA) (Close)
+            * volatility_kcl: Keltner channel (KC) (High, Low, Close)'''
+
         # load model
         model = pickle.load(open("./xgboost.pkl", "rb"))
 
@@ -182,19 +189,15 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Reset index
         df.reset_index(inplace=True)
 
-        ## Indicators to use
-        '''
-            * others_cr: Cumulative Return. (Close)
-            * trend_ema_fast: Fast Exponential Moving Averages(EMA) (Close)
-            * volatility_kcl: Keltner channel (KC) (High, Low, Close)'''
-
-
         # Scale data for using reg:logistic as array
         scaler = MinMaxScaler(feature_range=(0, 1))
         features = df[['others_cr', 'trend_ema_fast', 'volatility_kcl']]
         dataset_scaled = scaler.fit_transform(features)
 
-        ###############################
+        # Scale X_test (Adj_Close)
+        scaler1 = MinMaxScaler(feature_range=(0, 1))
+        feature = df[['Adj_Close']]
+        X_test_scaled = scaler1.fit_transform(feature)
 
         # Next Bussines days
         start = forecast_date.strftime("%Y-%m-%d")
@@ -207,15 +210,11 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         # Calculate price
         prediction = model.predict(dataset_scaled)
-
-        # TODO Standarize data
-        preds = scaler.inverse_transform([prediction])
+        preds = scaler1.inverse_transform(prediction.reshape(-1, 1))
 
         # Convert array to series
         mylist = preds.tolist()
         p = mylist[-1][-1]
-
-        print('Prediction: ', p)
 
         # Adding value to predictions dataframe for plotting
         lst.append([p, bussines_days.values[0]])
@@ -231,7 +230,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         last_price = df_prices.loc[df_prices.index[-1]][0]
 
         # Add last date and price to dataframe
-        df_predictions.loc[len(dataset)] = [last_price, last_date ]
+        df_predictions.loc[len(df_predictions)] = [last_price, last_date ]
         df_predictions.set_index('date', inplace=True)
         df_predictions.index = pd.to_datetime(df_predictions.index, format='%Y-%m-%d')
         df_predictions.index = df_predictions.index.strftime("%Y-%m-%d")
