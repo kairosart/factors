@@ -286,7 +286,7 @@ def introStartValues():
             flash('All fields are required.')
             return render_template('startValuesForm.html', form=form)
         else:
-            return render_template('success.html')
+            return render_template('error.html')
     elif request.method == 'GET':
 
         return render_template('startValuesForm.html',
@@ -324,12 +324,22 @@ def showforecastform():
         start_d = f"{start_d:%Y-%m-%d}"
         yesterday = dt.date.today() - dt.timedelta(1)
 
+        # Import data from Yahoo
+        if result['model_Selection'] == '1':
+            portf_value = fetchOnlineData(start_d, symbol, yesterday, del_cols=False)
+        else:
+            portf_value = fetchOnlineData(start_d, symbol, yesterday)
 
-        portf_value = fetchOnlineData(start_d, symbol, yesterday)
+        if not isinstance(portf_value, pd.DataFrame):
+            return render_template(
+                # name of template
+                "error.html",
+                # now we pass in our variables into the template
+                error="Error downloading data from Yahoo. Try again",
+            )
 
         # ARIMA Model
         if result['model_Selection'] == '3':
-            portf_value = fetchOnlineData(start_d, symbol, yesterday)
             symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
             final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
             final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
@@ -350,7 +360,6 @@ def showforecastform():
             )
         # LSTM Model
         elif result['model_Selection'] == '4':
-            portf_value = fetchOnlineData(start_d, symbol, yesterday)
             symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, yesterday, forecast_lookback)
             final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
             final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
@@ -370,8 +379,6 @@ def showforecastform():
             )
         # XGBoost model
         elif result['model_Selection'] == '1':
-            # Import data from Yahoo
-            portf_value = fetchOnlineData(start_d, symbol, yesterday, del_cols=False)
 
             symbol, start_d, yesterday,  plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
                                                                                    forecast_time, start_d, yesterday,

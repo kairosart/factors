@@ -60,36 +60,36 @@ def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True):
     # Add a day to dt_end for Yahoo purpose
     dt_end = dt.date.today() - dt.timedelta(1)
 
-
-    # Get data of trading days between the start and the end.
-    df = pdr.get_data_yahoo(
-            # tickers list (single tickers accepts a string as well)
-            tickers = symbol,
-            # start date (YYYY-MM-DD / datetime.datetime object)
-            # (optional, defaults is 1950-01-01)
-            start = dt_start,
-            # end date (YYYY-MM-DD / datetime.datetime object)
-            # (optional, defaults is Today)
-            end = dt_end,
-            # return a multi-index dataframe
-            # (optional, default is Panel, which is deprecated)
-            as_panel = False,
-            # group by ticker (to access via data['SPY'])
-            # (optional, default is 'column')
-            group_by = 'ticker',
-            # adjust all OHLC automatically
-            # (optional, default is False)
-            auto_adjust = False
-    )
-    if len(df.index) > 0:
-        if del_cols == True:
-            del df['Open']
-            del df['High']
-            del df['Low']
-            del df['Close']
-            del df['Volume']
-        return df
-    else:
+    try:
+        # Get data of trading days between the start and the end.
+        df = pdr.get_data_yahoo(
+                # tickers list (single tickers accepts a string as well)
+                tickers = symbol,
+                # start date (YYYY-MM-DD / datetime.datetime object)
+                # (optional, defaults is 1950-01-01)
+                start = dt_start,
+                # end date (YYYY-MM-DD / datetime.datetime object)
+                # (optional, defaults is Today)
+                end = dt_end,
+                # return a multi-index dataframe
+                # (optional, default is Panel, which is deprecated)
+                as_panel = False,
+                # group by ticker (to access via data['SPY'])
+                # (optional, default is 'column')
+                group_by = 'ticker',
+                # adjust all OHLC automatically
+                # (optional, default is False)
+                auto_adjust = False
+        )
+        if len(df.index) > 0:
+            if del_cols == True:
+                del df['Open']
+                del df['High']
+                del df['Low']
+                del df['Close']
+                del df['Volume']
+            return df
+    except:
         return False
 
 

@@ -185,7 +185,7 @@ def introStartValues():
             flash('All fields are required.')
             return render_template('startValuesForm.html', form = form)
         else:
-            return render_template('success.html')
+            return render_template('error.html')
     elif request.method == 'GET':
         return render_template('startValuesForm.html', form = form)
 

@@ -7,8 +7,14 @@ $(document).ready(function(e){
         $(this).css('color','white');
         $(this).css('background-color', 'red');
     });
-    $('[data-toggle="popover"]').popover();
 
+
+    $("#buttonTryAgain").on('click',function(){
+		parent.history.back();
+        return false;
+    });
+
+    $('[data-toggle="popover"]').popover();
 });
 
 $(function () {
