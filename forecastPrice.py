@@ -169,7 +169,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         #df_prices = slice_df(portf_value, dates)
         df_prices = portf_value[['Adj Close']].copy()
 
-        ###############################
         # Create datafrane with all TA indicators
         df = add_all_ta_features(portf_value, "Open", "High", "Low", "Close", "Volume", fillna=True)
 
@@ -371,11 +370,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         print('KNN: %s' % knn)
         model = GridSearchCV(knn, params, cv=5)
 
-    results, coef_deter, forecast_errors, bias, mae, mse, rmse = model_fit_pred(X_train, y_train, X_test)
-
-    # Plot prediction
-    plot_prices_pred = plot_stock_prices_prediction(results.index, results['Price'], results['Price prediction'])
-    return symbol, start_d, forecast_date, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse
 
 
 
