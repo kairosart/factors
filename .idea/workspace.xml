@@ -86,8 +86,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="198" column="54" lean-forward="true" selection-start-line="195" selection-start-column="8" selection-end-line="198" selection-end-column="54" />
+            <state relative-caret-position="24">
+              <caret line="195" column="34" lean-forward="true" selection-start-line="195" selection-start-column="34" selection-end-line="195" selection-end-column="34" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
               </folding>
@@ -419,20 +419,6 @@
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
     </task>
-    <task id="LOCAL-00120" summary="Implementing LSTM Jupyter Notebook">
-      <created>1548452116335</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1548452116336</updated>
-    </task>
-    <task id="LOCAL-00121" summary="LSTM Moded.">
-      <created>1548702905117</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1548702905118</updated>
-    </task>
     <task id="LOCAL-00122" summary="LSTM Model.">
       <created>1548706190569</created>
       <option name="number" value="00122" />
@@ -762,7 +748,21 @@
       <option name="project" value="LOCAL" />
       <updated>1551473943050</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="Creating KNN model notebook.">
+      <created>1551729374845</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1551729374849</updated>
+    </task>
+    <task id="LOCAL-00170" summary="Creating KNN model notebook.">
+      <created>1551734227537</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1551734227538</updated>
+    </task>
+    <option name="localTasksCounter" value="171" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -776,9 +776,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-5" y="52" width="1290" height="1033" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.27951807" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.27951807" />
       <window_info id="Structure" order="1" sideWeight="0.5056391" side_tool="true" weight="0.18461539" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -788,7 +787,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.44223604" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" visible="true" weight="0.16149068" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" weight="0.18118466" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5050398" side_tool="true" weight="0.3821138" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32868758" />
@@ -1294,8 +1293,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="198" column="54" lean-forward="true" selection-start-line="195" selection-start-column="8" selection-end-line="198" selection-end-column="54" />
+        <state relative-caret-position="24">
+          <caret line="195" column="34" lean-forward="true" selection-start-line="195" selection-start-column="34" selection-end-line="195" selection-end-column="34" />
           <folding>
             <element signature="e#48#61#0" expanded="true" />
           </folding>
