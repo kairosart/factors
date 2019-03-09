@@ -384,7 +384,7 @@ def showforecastform():
                                                                                    forecast_time, start_d, yesterday,
                                                                                    forecast_lookback)
 
-            final_forecast_day = dt.date.today() + dt.timedelta(1)
+            final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
             final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
             return render_template(
                 # name of template
@@ -393,7 +393,7 @@ def showforecastform():
                 symbol=symbol,
                 forecast_date=forecast_date.strftime("%Y-%m-%d"),
                 forecast_model_name="Decision Tree XGBoost",
-                forecast_time=1,
+                forecast_time=forecast_time,
                 forecast_lookback=forecast_lookback,
                 forecast_final_date=final_forecast_day,
                 daily_return_percentage=Markup(daily_return_percentage.to_html(classes="table-sm")),
@@ -408,7 +408,7 @@ def showforecastform():
                                                                                    forecast_time, start_d, yesterday,
                                                                                    forecast_lookback)
 
-            final_forecast_day = dt.date.today() + dt.timedelta(1)
+            final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
             final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
             return render_template(
                 # name of template
@@ -417,7 +417,7 @@ def showforecastform():
                 symbol=symbol,
                 forecast_date=forecast_date.strftime("%Y-%m-%d"),
                 forecast_model_name="KNN",
-                forecast_time=1,
+                forecast_time=forecast_time,
                 forecast_lookback=forecast_lookback,
                 forecast_final_date=final_forecast_day,
                 daily_return_percentage=Markup(daily_return_percentage.to_html(classes="table-sm")),
