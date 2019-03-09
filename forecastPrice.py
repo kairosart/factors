@@ -265,6 +265,118 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df_predictions, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, metric
 
+    # KNN Model
+    if forecast_model == '2':
+        ## Indicators to use
+        '''
+            * others_cr: Cumulative Return. (Close)
+            * trend_ema_fast: Fast Exponential Moving Averages(EMA) (Close)
+            * volatility_kcl: Keltner channel (KC) (High, Low, Close)'''
+
+        # load model
+        model = pickle.load(open("./knn.pkl", "rb"))
+
+        # Lookback data
+        lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
+        dates = pd.date_range(lookback_date, periods=forecast_lookback)
+        # df_prices = slice_df(portf_value, dates)
+        df_prices = portf_value[['Adj Close']].copy()
+
+        # Create datafrane with all TA indicators
+        df = add_all_ta_features(portf_value, "Open", "High", "Low", "Close", "Volume", fillna=True)
+
+        # Delete unuseful columns
+        del df['Open']
+        del df['High']
+        del df['Low']
+        del df['Close']
+        del df['Volume']
+
+        # Create 'date' column for posterior index
+        df['date'] = df.index
+
+        # Rename column for correlation matrix. Can't have spaces.
+        df.rename(columns={'Adj Close': 'Adj_Close'}, inplace=True)
+
+        # Reset index
+        df.reset_index(inplace=True)
+
+        # Scale data for using reg:logistic as array
+        scaler = MinMaxScaler(feature_range=(0, 1))
+        features = df[['others_cr', 'trend_ema_fast', 'volatility_kcl']]
+        dataset_scaled = scaler.fit_transform(features)
+
+        # Scale X_test (Adj_Close)
+        scaler1 = MinMaxScaler(feature_range=(0, 1))
+        feature = df[['Adj_Close']]
+        X_test_scaled = scaler1.fit_transform(feature)
+
+        # Next Bussines days
+        start = forecast_date.strftime("%Y-%m-%d")
+        rng = pd.date_range(pd.Timestamp(start), periods=1, freq='B')
+        bussines_days = rng.strftime('%Y-%m-%d')
+
+        # Setting prediction dataframe cols and list for saving predictions
+        cols = ['Price', 'date']
+        lst = []
+
+        # Calculate price
+        prediction = model.predict(dataset_scaled)
+        preds = scaler1.inverse_transform(prediction.reshape(-1, 1))
+
+        # Convert array to series
+        mylist = preds.tolist()
+        p = mylist[-1][-1]
+
+        # Adding value to predictions dataframe for plotting
+        lst.append([p, bussines_days.values[0]])
+        df_predictions = pd.DataFrame(lst, columns=cols)
+
+        # TODO Calculate metrics
+
+        # Daily return
+        # Get last row of df_prices
+        df_predictions.index = df_predictions['date']
+        last_date = df_prices.loc[df_prices.index[-1]].name
+        last_date = last_date.strftime("%Y-%m-%d")
+        last_price = df_prices.loc[df_prices.index[-1]][0]
+
+        # Add last date and price to dataframe
+        df_predictions.loc[len(df_predictions)] = [last_price, last_date]
+        df_predictions.set_index('date', inplace=True)
+        df_predictions.index = pd.to_datetime(df_predictions.index, format='%Y-%m-%d')
+        df_predictions.index = df_predictions.index.strftime("%Y-%m-%d")
+        df_predictions.sort_index(inplace=True)
+
+        # Daily Return Percentage change between the current and a prior element.
+        drp = df_predictions.pct_change(1)
+        # Rename price column to % variation
+        drp.rename(columns={'Price': '%\u25B3'}, inplace=True)
+
+        # Compute the price difference of two elements
+        diff = df_predictions.diff()
+        # Rename price column to $ variation
+        diff.rename(columns={'Price': '$\u25B3'}, inplace=True)
+
+        # Concat diff with drp
+        metric = pd.concat([diff, drp], axis=1)
+
+        # Concat forecast prices with metric
+        metric = pd.concat([df_predictions, diff, drp], axis=1)
+        metric.rename(columns={'Price': 'Forecast'}, inplace=True)
+
+        # Clean NaN
+        metric = metric.fillna(0)
+
+        # Set decimals to 2
+        metric['Forecast'] = metric['Forecast'].apply(lambda x: round(x, 2))
+        metric['%\u25B3'] = metric['%\u25B3'].apply(lambda x: round(x, 2))
+        metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 2))
+
+        # Plot chart
+        plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df_predictions, symbol)
+        return symbol, start_d, forecast_date, plot_prices_pred, metric
+
     # ARIMA
     if forecast_model == '3':
         # load model

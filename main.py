@@ -325,7 +325,7 @@ def showforecastform():
         yesterday = dt.date.today() - dt.timedelta(1)
 
         # Import data from Yahoo
-        if result['model_Selection'] == '1':
+        if result['model_Selection'] == '1' or result['model_Selection'] == '2':
             portf_value = fetchOnlineData(start_d, symbol, yesterday, del_cols=False)
         else:
             portf_value = fetchOnlineData(start_d, symbol, yesterday)
@@ -384,7 +384,7 @@ def showforecastform():
                                                                                    forecast_time, start_d, yesterday,
                                                                                    forecast_lookback)
 
-            final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
+            final_forecast_day = dt.date.today() + dt.timedelta(1)
             final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
             return render_template(
                 # name of template
@@ -393,7 +393,7 @@ def showforecastform():
                 symbol=symbol,
                 forecast_date=forecast_date.strftime("%Y-%m-%d"),
                 forecast_model_name="Decision Tree XGBoost",
-                forecast_time=forecast_time,
+                forecast_time=1,
                 forecast_lookback=forecast_lookback,
                 forecast_final_date=final_forecast_day,
                 daily_return_percentage=Markup(daily_return_percentage.to_html(classes="table-sm")),
@@ -401,31 +401,32 @@ def showforecastform():
                 titles=['na', 'Stock Prices '],
                 model='XGBoost',
             )
-        else:
-            symbol, start_d, yesterday, plot_prices_pred, coef_deter, forecast_errors, bias, mae, mse, rmse = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
+        # KNN model
+        elif result['model_Selection'] == '2':
 
-            if forecast_model == '1':
-                forecast_name = 'Decision Tree'
-            elif forecast_model == '2':
-                forecast_name = 'KNN'
+            symbol, start_d, yesterday,  plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
+                                                                                   forecast_time, start_d, yesterday,
+                                                                                   forecast_lookback)
 
+            final_forecast_day = dt.date.today() + dt.timedelta(1)
+            final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
             return render_template(
                 # name of template
                 "forecastPrices.html",
                 # now we pass in our variables into the template
                 symbol=symbol,
                 forecast_date=forecast_date.strftime("%Y-%m-%d"),
-                forecast_model_name=forecast_name,
-                forecast_time=forecast_time,
+                forecast_model_name="KNN",
+                forecast_time=1,
                 forecast_lookback=forecast_lookback,
-                coef_deter=round(coef_deter, 3),
-                bias=round(bias, 3),
-                mae=round(mae, 3),
-                mse=round(mse, 3),
-                rmse=round(rmse, 3),
+                forecast_final_date=final_forecast_day,
+                daily_return_percentage=Markup(daily_return_percentage.to_html(classes="table-sm")),
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
                 titles=['na', 'Stock Prices '],
+                model='KNN',
             )
+
+
     elif request.method == 'GET':
 
         return render_template('pricesForecastForm.html',

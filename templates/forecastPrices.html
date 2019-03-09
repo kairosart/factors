@@ -46,7 +46,10 @@
         <div class="table-responsive-md">
             {{ daily_return_percentage | safe }}
         </div>
-
+    {% elif model == "KNN" %}
+        <div class="table-responsive-md">
+            {{ daily_return_percentage | safe }}
+        </div>
     {% else %}
         <div class="table-responsive">
 		<table class= "table table-sm">
