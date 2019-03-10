@@ -5,8 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KNN_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/KNN_forecasting_prices.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/forecastPrices.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forecastPrices.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pricesForecastForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pricesForecastForm.html" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
@@ -45,8 +43,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="74" selection-start-line="74" selection-end-line="74" />
+            <state relative-caret-position="88">
+              <caret line="89" column="35" selection-start-line="89" selection-start-column="35" selection-end-line="89" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/js/my_jquery.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -54,12 +61,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="392" column="30" lean-forward="true" selection-start-line="392" selection-start-column="30" selection-end-line="392" selection-end-column="30" />
+            <state relative-caret-position="159">
+              <caret line="316" column="52" selection-start-line="316" selection-start-column="52" selection-end-line="316" selection-end-column="52" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#12474#13501#0" />
                 <element signature="e#13582#14526#0" />
+                <element signature="e#14611#15869#0" />
+                <element signature="e#15990#17248#0" />
                 <element signature="e#17071#17207#0" />
               </folding>
             </state>
@@ -90,13 +98,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1058">
-              <caret line="327" column="31" lean-forward="true" selection-start-line="327" selection-start-column="31" selection-end-line="327" selection-end-column="31" />
+            <state relative-caret-position="535">
+              <caret line="399" column="20" selection-start-line="399" selection-start-column="20" selection-end-line="399" selection-end-column="20" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
                 <element signature="e#5224#9447#0" />
-                <element signature="e#9499#10413#0" />
-                <element signature="e#10465#12812#0" />
               </folding>
             </state>
           </provider>
@@ -196,21 +202,20 @@
         <option value="$PROJECT_DIR$/indicators.py" />
         <option value="$PROJECT_DIR$/XGBoost.ipynb" />
         <option value="$PROJECT_DIR$/templates/success.html" />
-        <option value="$PROJECT_DIR$/static/js/my_jquery.js" />
         <option value="$PROJECT_DIR$/templates/error.html" />
         <option value="$PROJECT_DIR$/util.py" />
-        <option value="$PROJECT_DIR$/forecastPrice.py" />
         <option value="$PROJECT_DIR$/templates/forecastPrices.html" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/static/js/my_jquery.js" />
+        <option value="$PROJECT_DIR$/forecastPrice.py" />
         <option value="$PROJECT_DIR$/templates/pricesForecastForm.html" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1546" />
-    <option name="y" value="4" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="179" />
     <option name="width" value="1280" />
-    <option name="height" value="736" />
+    <option name="height" value="728" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -425,20 +430,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00124" summary="LSTM saving model.">
-      <created>1548795457928</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1548795457929</updated>
-    </task>
-    <task id="LOCAL-00125" summary="LSTM2 Model.">
-      <created>1548797456197</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1548797456197</updated>
     </task>
     <task id="LOCAL-00126" summary="LSTM2 Model.">
       <created>1548876246255</created>
@@ -769,7 +760,21 @@
       <option name="project" value="LOCAL" />
       <updated>1551821053921</updated>
     </task>
-    <option name="localTasksCounter" value="173" />
+    <task id="LOCAL-00173" summary="Creating KNN model notebook.">
+      <created>1552159083129</created>
+      <option name="number" value="00173" />
+      <option name="presentableId" value="LOCAL-00173" />
+      <option name="project" value="LOCAL" />
+      <updated>1552159083129</updated>
+    </task>
+    <task id="LOCAL-00174" summary="Change selection options in Forecasting prices form">
+      <created>1552163673889</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1552163673890</updated>
+    </task>
+    <option name="localTasksCounter" value="175" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -782,16 +787,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1275" y="-4" width="1930" height="1089" extended-state="6" />
+    <frame x="0" y="179" width="1280" height="728" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.18461539" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.28178138" />
       <window_info id="Structure" order="1" sideWeight="0.5056391" side_tool="true" weight="0.18461539" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32520324" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.17537747" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.4076655" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.302" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.29036003" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
@@ -872,7 +877,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Testing models in Jupyter." />
     <MESSAGE value="Implementing ARIMA" />
     <MESSAGE value="Getting error when Yahoo is not recheable." />
     <MESSAGE value="Creating modal spinner." />
@@ -897,7 +901,8 @@
     <MESSAGE value="Creating XGBoost model notebook." />
     <MESSAGE value="Creating XGBoost model backend." />
     <MESSAGE value="Creating KNN model notebook." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating KNN model notebook." />
+    <MESSAGE value="Change selection options in Forecasting prices form" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change selection options in Forecasting prices form" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1098,13 +1103,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LSTM_forecasting_prices.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/python3.6/site-packages/seaborn/axisgrid.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
@@ -1209,13 +1207,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/my_jquery.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/error.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -1272,28 +1263,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1058">
-          <caret line="327" column="31" lean-forward="true" selection-start-line="327" selection-start-column="31" selection-end-line="327" selection-end-column="31" />
+        <state relative-caret-position="159">
+          <caret line="316" column="52" selection-start-line="316" selection-start-column="52" selection-end-line="316" selection-end-column="52" />
           <folding>
-            <element signature="e#48#61#0" expanded="true" />
-            <element signature="e#5224#9447#0" />
-            <element signature="e#9499#10413#0" />
-            <element signature="e#10465#12812#0" />
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#13582#14526#0" />
+            <element signature="e#14611#15869#0" />
+            <element signature="e#15990#17248#0" />
+            <element signature="e#17071#17207#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/static/js/my_jquery.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="392" column="30" lean-forward="true" selection-start-line="392" selection-start-column="30" selection-end-line="392" selection-end-column="30" />
+        <state relative-caret-position="192">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LSTM_forecasting_prices.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="399" column="20" selection-start-line="399" selection-start-column="20" selection-end-line="399" selection-end-column="20" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#12474#13501#0" />
-            <element signature="e#13582#14526#0" />
-            <element signature="e#17071#17207#0" />
+            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#5224#9447#0" />
           </folding>
         </state>
       </provider>
@@ -1307,8 +1311,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
+        <state relative-caret-position="88">
+          <caret line="89" column="35" selection-start-line="89" selection-start-column="35" selection-end-line="89" selection-end-column="35" />
         </state>
       </provider>
     </entry>

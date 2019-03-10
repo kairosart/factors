@@ -381,6 +381,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     if forecast_model == '3':
         # load model
         model = ARIMAResults.load('arima_model.pkl')
+        # TODO Next n business days
         forecast = model.forecast(steps=forecast_time)[0]
 
         # Lookback data
@@ -396,7 +397,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         df.rename(columns={0: 'Price'}, inplace=True)
 
 
-        # TODO Confidence interval arc chart
+        # TODO Plot Confidence interval arc chart
         # ARIMA Model Results
         model_sumary = model.summary()
 
@@ -472,15 +473,15 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
 
 
-    # Decision Tree Regressor
-    if forecast_model == '1':
-        model = tree.DecisionTreeRegressor(max_depth=10)
-    # KNN
-    elif forecast_model == '2':
-        params = {'n_neighbors': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
-        knn = neighbors.KNeighborsRegressor()
-        print('KNN: %s' % knn)
-        model = GridSearchCV(knn, params, cv=5)
+
+
+
+
+
+
+
+
+
 
 
 
