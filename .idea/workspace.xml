@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KNN_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/KNN_forecasting_prices.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pricesForecastForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pricesForecastForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ARIMA_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/ARIMA_forecasting_prices.ipynb" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
@@ -40,7 +38,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
@@ -95,14 +93,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
+            <state relative-caret-position="1502">
               <caret line="399" column="20" selection-start-line="399" selection-start-column="20" selection-end-line="399" selection-end-column="20" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
-                <element signature="e#5224#9447#0" />
+                <element signature="e#9503#14398#0" />
               </folding>
             </state>
           </provider>
@@ -430,20 +428,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00126" summary="LSTM2 Model.">
-      <created>1548876246255</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1548876246255</updated>
-    </task>
-    <task id="LOCAL-00127" summary="LSTM Model.">
-      <created>1548965373736</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1548965373736</updated>
     </task>
     <task id="LOCAL-00128" summary="LSTM Model implentation.">
       <created>1548969516627</created>
@@ -774,7 +758,21 @@
       <option name="project" value="LOCAL" />
       <updated>1552163673890</updated>
     </task>
-    <option name="localTasksCounter" value="175" />
+    <task id="LOCAL-00175" summary="Change ARIMA Model Notebook.">
+      <created>1552249848521</created>
+      <option name="number" value="00175" />
+      <option name="presentableId" value="LOCAL-00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1552249848521</updated>
+    </task>
+    <task id="LOCAL-00176" summary="Change ARIMA Model Notebook.">
+      <created>1552298032509</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1552298032509</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -790,12 +788,12 @@
     <frame x="0" y="179" width="1280" height="728" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.28178138" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.28178138" />
       <window_info id="Structure" order="1" sideWeight="0.5056391" side_tool="true" weight="0.18461539" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32520324" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.302" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.092" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.29036003" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -877,7 +875,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Implementing ARIMA" />
     <MESSAGE value="Getting error when Yahoo is not recheable." />
     <MESSAGE value="Creating modal spinner." />
     <MESSAGE value="Creating modals." />
@@ -902,7 +899,8 @@
     <MESSAGE value="Creating XGBoost model backend." />
     <MESSAGE value="Creating KNN model notebook." />
     <MESSAGE value="Change selection options in Forecasting prices form" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change selection options in Forecasting prices form" />
+    <MESSAGE value="Change ARIMA Model Notebook." />
+    <option name="LAST_COMMIT_MESSAGE" value="Change ARIMA Model Notebook." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1291,17 +1289,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="399" column="20" selection-start-line="399" selection-start-column="20" selection-end-line="399" selection-end-column="20" />
-          <folding>
-            <element signature="e#48#61#0" expanded="true" />
-            <element signature="e#5224#9447#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/forecastPrices.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -1313,6 +1300,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="89" column="35" selection-start-line="89" selection-start-column="35" selection-end-line="89" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1502">
+          <caret line="399" column="20" selection-start-line="399" selection-start-column="20" selection-end-line="399" selection-end-column="20" />
+          <folding>
+            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#9503#14398#0" />
+          </folding>
         </state>
       </provider>
     </entry>
