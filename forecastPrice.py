@@ -382,16 +382,22 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # load model
         model = ARIMAResults.load('arima_model.pkl')
         # TODO Next n business days
-        forecast = model.forecast(steps=forecast_time)[0]
+        # Bussines days
+        start = forecast_date.strftime("%Y-%m-%d")
+        rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
+        bussines_days = rng.strftime('%Y-%m-%d %H:%M:%S')
+        forecast = model.forecast(steps=bussines_days.size)
 
         # Lookback data
         lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
         dates = pd.date_range(lookback_date, periods=forecast_lookback)
         df_prices = slice_df(portf_value, dates)
 
+
+
         # Setting prediction dataframe
         dates = pd.date_range(forecast_date, periods=forecast_time)
-        df = pd.DataFrame(forecast)
+        df = pd.DataFrame(forecast.tolist())
         df['Dates'] = dates
         df.set_index('Dates', inplace=True)
         df.rename(columns={0: 'Price'}, inplace=True)
