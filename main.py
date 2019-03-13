@@ -314,7 +314,12 @@ def showforecastform():
         forecast_model = request.form.get('model_Selection', type=str)
 
         # Get Forecast time
-        forecast_time = request.form.get('forecast_Time', type=int)
+        forecast_time = request.form.get('forecast_Time', type=str)
+
+        # Get values from forecast_time
+        end = None
+        forecast_time = int(forecast_time[7:end])
+
 
         # Get Lookback
         forecast_lookback = request.form.get('look_Back', type=int)
@@ -325,7 +330,7 @@ def showforecastform():
         yesterday = dt.date.today() - dt.timedelta(1)
 
         # Import data from Yahoo
-        if result['model_Selection'] == '1' or result['model_Selection'] == '2':
+        if result['model_Selection'] == 'model1' or result['model_Selection'] == 'model2':
             portf_value = fetchOnlineData(start_d, symbol, yesterday, del_cols=False)
         else:
             portf_value = fetchOnlineData(start_d, symbol, yesterday)
@@ -338,47 +343,9 @@ def showforecastform():
                 error="Error downloading data from Yahoo. Try again",
             )
 
-        # ARIMA Model
-        if result['model_Selection'] == '3':
-            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value, forecast_model,  forecast_time, start_d, yesterday, forecast_lookback)
-            final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
-            final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
-            return render_template(
-                # name of template
-                "forecastPrices.html",
-                # now we pass in our variables into the template
-                symbol=symbol,
-                forecast_date=forecast_date.strftime("%Y-%m-%d"),
-                forecast_model_name='ARIMA',
-                forecast_time=forecast_time,
-                forecast_lookback=forecast_lookback,
-                forecast_final_date=final_forecast_day,
-                div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
-                summary=Markup(model_sumary.tables[0].as_html()),
-                titles=['na', 'Stock Prices '],
-                model='ARIMA',
-            )
-        # LSTM Model
-        elif result['model_Selection'] == '4':
-            symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, start_d, yesterday, forecast_lookback)
-            final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
-            final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
-            return render_template(
-                # name of template
-                "forecastPrices.html",
-                # now we pass in our variables into the template
-                symbol=symbol,
-                forecast_date=forecast_date.strftime("%Y-%m-%d"),
-                forecast_model_name='LSTM',
-                forecast_time=forecast_time,
-                forecast_lookback=forecast_lookback,
-                forecast_final_date=final_forecast_day,
-                div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
-                titles=['na', 'Stock Prices '],
-                model='LSTM',
-            )
+
         # XGBoost model
-        elif result['model_Selection'] == '1':
+        if result['model_Selection'] == 'model1':
 
             symbol, start_d, yesterday,  plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
                                                                                    forecast_time, start_d, yesterday,
@@ -402,7 +369,7 @@ def showforecastform():
                 model='XGBoost',
             )
         # KNN model
-        elif result['model_Selection'] == '2':
+        elif result['model_Selection'] == 'model2':
 
             symbol, start_d, yesterday,  plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
                                                                                    forecast_time, start_d, yesterday,
@@ -425,7 +392,51 @@ def showforecastform():
                 titles=['na', 'Stock Prices '],
                 model='KNN',
             )
-
+        # ARIMA Model
+        elif result['model_Selection'] == 'model3':
+            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value,
+                                                                                                 forecast_model,
+                                                                                                 forecast_time, start_d,
+                                                                                                 yesterday,
+                                                                                                 forecast_lookback)
+            final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
+            final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
+            return render_template(
+                # name of template
+                "forecastPrices.html",
+                # now we pass in our variables into the template
+                symbol=symbol,
+                forecast_date=forecast_date.strftime("%Y-%m-%d"),
+                forecast_model_name='ARIMA',
+                forecast_time=forecast_time,
+                forecast_lookback=forecast_lookback,
+                forecast_final_date=final_forecast_day,
+                div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
+                summary=Markup(model_sumary.tables[0].as_html()),
+                titles=['na', 'Stock Prices '],
+                model='ARIMA',
+            )
+        # LSTM Model
+        elif result['model_Selection'] == 'model4':
+            symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model,
+                                                                                   forecast_time, start_d, yesterday,
+                                                                                   forecast_lookback)
+            final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
+            final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
+            return render_template(
+                # name of template
+                "forecastPrices.html",
+                # now we pass in our variables into the template
+                symbol=symbol,
+                forecast_date=forecast_date.strftime("%Y-%m-%d"),
+                forecast_model_name='LSTM',
+                forecast_time=forecast_time,
+                forecast_lookback=forecast_lookback,
+                forecast_final_date=final_forecast_day,
+                div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
+                titles=['na', 'Stock Prices '],
+                model='LSTM',
+            )
 
     elif request.method == 'GET':
 

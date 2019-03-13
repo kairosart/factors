@@ -51,10 +51,10 @@
              <!-- Model -->
              {{ form.modelSelection.label }}<br>
                 <select name="model_Selection" id="model_Selection" class="custom-select">
-                    <option value=1>XGBoost</option>
-                    <option value=2>KNN</option>
-                    <option value=3>ARIMA</option>
-                    <option value=4>LSTM</option>
+                    <option value="model1">XGBoost</option>
+                    <option value="model2">KNN</option>
+                    <option value="model3">ARIMA</option>
+                    <option value="model4">LSTM</option>
                 </select>
                  <br><br>
 
@@ -62,20 +62,20 @@
              {{ form.forecastTime.label }}<br>
              <select name="forecast_Time" id="forecast_Time" class="custom-select">
                 <!--Below shows when 'XGBoost' is selected is hidden otherwise-->
-                <option value=1>1 day</option>
+                <option value="model1_1">1 day</option>
 
                 <!--Below shows when 'KNN' is selected is hidden otherwise-->
-                <option value=2>1 day</option>
+                <option value="model2_1">1 day</option>
 
                 <!--Below shows when 'ARIMA' is selected is hidden otherwise-->
-                <option value=3>One week</option>
-                <option value=3>Two weeks</option>
-                <option value=3>1 month</option>
+                <option value="model3_7">One week</option>
+                <option value="model3_14">Two weeks</option>
+                <option value="model3_30">1 month</option>
 
                  <!--Below shows when 'LSTM' is selected is hidden otherwise-->
-                <option value=4>One week</option>
-                <option value=4>Two weeks</option>
-                <option value=4>1 month</option>
+                <option value="model4_7">One week</option>
+                <option value="model4_14">Two weeks</option>
+                <option value="model4_30">1 month</option>
             </select>
              <br><br>
 

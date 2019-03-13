@@ -153,7 +153,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     '''
 
     # XGBoost
-    if forecast_model == '1':
+    if forecast_model == 'model1':
         ## Indicators to use
         '''
             * others_cr: Cumulative Return. (Close)
@@ -266,7 +266,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         return symbol, start_d, forecast_date, plot_prices_pred, metric
 
     # KNN Model
-    if forecast_model == '2':
+    if forecast_model == 'model2':
         ## Indicators to use
         '''
             * others_cr: Cumulative Return. (Close)
@@ -378,10 +378,9 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         return symbol, start_d, forecast_date, plot_prices_pred, metric
 
     # ARIMA
-    if forecast_model == '3':
+    if forecast_model == 'model3':
         # load model
         model = ARIMAResults.load('arima_model.pkl')
-        # TODO Next n business days
 
         # Setting dates and prices dataframe
         lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
@@ -393,9 +392,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
 
         # Predicting
-        # TODO Calculate next forecast_time business day
         forecast = model.forecast(steps=forecast_time)
-
 
         # Setting dates for dataframe
         df=pd.DataFrame(forecast[0])
@@ -414,7 +411,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
 
     # LSTM
-    if forecast_model == '4':
+    if forecast_model == 'model4':
         # load_model
         model = load_model('./lstm_model')
 
