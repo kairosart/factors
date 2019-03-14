@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/my_jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/my_jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pricesForecastForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pricesForecastForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ARIMA_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/ARIMA_forecasting_prices.ipynb" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
@@ -87,11 +84,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-52">
-              <caret line="395" lean-forward="true" selection-start-line="395" selection-end-line="395" />
+            <state relative-caret-position="335">
+              <caret line="234" column="75" selection-start-line="234" selection-start-column="52" selection-end-line="234" selection-end-column="75" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
-                <element signature="e#5224#9447#0" />
                 <element signature="e#9503#14398#0" />
               </folding>
             </state>
@@ -442,20 +438,6 @@
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
     </task>
-    <task id="LOCAL-00132" summary="LSTM Model front end.">
-      <created>1549137042957</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1549137042957</updated>
-    </task>
-    <task id="LOCAL-00133" summary="LSTM Model front end.">
-      <created>1549139267206</created>
-      <option name="number" value="00133" />
-      <option name="presentableId" value="LOCAL-00133" />
-      <option name="project" value="LOCAL" />
-      <updated>1549139267206</updated>
-    </task>
     <task id="LOCAL-00134" summary="Creatind Decision Tree Regresion Jupyter Notebook.">
       <created>1549141583541</created>
       <option name="number" value="00134" />
@@ -785,7 +767,21 @@
       <option name="project" value="LOCAL" />
       <updated>1552424869685</updated>
     </task>
-    <option name="localTasksCounter" value="181" />
+    <task id="LOCAL-00181" summary="Modifying the way of selecting model and forecast time.">
+      <created>1552506941312</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1552506941312</updated>
+    </task>
+    <task id="LOCAL-00182" summary="ARIMA Model Plotting predictions.">
+      <created>1552511380854</created>
+      <option name="number" value="00182" />
+      <option name="presentableId" value="LOCAL-00182" />
+      <option name="project" value="LOCAL" />
+      <updated>1552511380854</updated>
+    </task>
+    <option name="localTasksCounter" value="183" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -888,8 +884,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Creating modal spinner." />
-    <MESSAGE value="Creating modals." />
     <MESSAGE value="Modifying jupyter notebook." />
     <MESSAGE value="Price forecasting plot." />
     <MESSAGE value="Changing the way we get data. Instead saving in a cvs file, we create a dataframe." />
@@ -913,7 +907,9 @@
     <MESSAGE value="Change selection options in Forecasting prices form" />
     <MESSAGE value="Change ARIMA Model Notebook." />
     <MESSAGE value="Calculating next n business days in ARIMA Model." />
-    <option name="LAST_COMMIT_MESSAGE" value="Calculating next n business days in ARIMA Model." />
+    <MESSAGE value="Modifying the way of selecting model and forecast time." />
+    <MESSAGE value="ARIMA Model Plotting predictions." />
+    <option name="LAST_COMMIT_MESSAGE" value="ARIMA Model Plotting predictions." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1314,11 +1310,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-52">
-          <caret line="395" lean-forward="true" selection-start-line="395" selection-end-line="395" />
+        <state relative-caret-position="335">
+          <caret line="234" column="75" selection-start-line="234" selection-start-column="52" selection-end-line="234" selection-end-column="75" />
           <folding>
             <element signature="e#48#61#0" expanded="true" />
-            <element signature="e#5224#9447#0" />
             <element signature="e#9503#14398#0" />
           </folding>
         </state>
