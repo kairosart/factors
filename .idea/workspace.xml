@@ -84,8 +84,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="234" column="75" selection-start-line="234" selection-start-column="52" selection-end-line="234" selection-end-column="75" />
+            <state relative-caret-position="287">
+              <caret line="232" column="57" selection-start-line="232" selection-start-column="23" selection-end-line="232" selection-end-column="57" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
                 <element signature="e#9503#14398#0" />
@@ -438,20 +438,6 @@
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
     </task>
-    <task id="LOCAL-00134" summary="Creatind Decision Tree Regresion Jupyter Notebook.">
-      <created>1549141583541</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1549141583542</updated>
-    </task>
-    <task id="LOCAL-00135" summary="Fixing save data to csv file.">
-      <created>1549142661607</created>
-      <option name="number" value="00135" />
-      <option name="presentableId" value="LOCAL-00135" />
-      <option name="project" value="LOCAL" />
-      <updated>1549142661607</updated>
-    </task>
     <task id="LOCAL-00136" summary="Creating Decision Tree model.">
       <created>1549315166309</created>
       <option name="number" value="00136" />
@@ -781,7 +767,21 @@
       <option name="project" value="LOCAL" />
       <updated>1552511380854</updated>
     </task>
-    <option name="localTasksCounter" value="183" />
+    <task id="LOCAL-00183" summary="ARIMA Model Notebook Plotting predictions.">
+      <created>1552598129096</created>
+      <option name="number" value="00183" />
+      <option name="presentableId" value="LOCAL-00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1552598129097</updated>
+    </task>
+    <task id="LOCAL-00184" summary="ARIMA Model Notebook Plotting predictions.">
+      <created>1552599012678</created>
+      <option name="number" value="00184" />
+      <option name="presentableId" value="LOCAL-00184" />
+      <option name="project" value="LOCAL" />
+      <updated>1552599012678</updated>
+    </task>
+    <option name="localTasksCounter" value="185" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -884,7 +884,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Modifying jupyter notebook." />
     <MESSAGE value="Price forecasting plot." />
     <MESSAGE value="Changing the way we get data. Instead saving in a cvs file, we create a dataframe." />
     <MESSAGE value="Creating a new virtual env and README.md" />
@@ -909,7 +908,8 @@
     <MESSAGE value="Calculating next n business days in ARIMA Model." />
     <MESSAGE value="Modifying the way of selecting model and forecast time." />
     <MESSAGE value="ARIMA Model Plotting predictions." />
-    <option name="LAST_COMMIT_MESSAGE" value="ARIMA Model Plotting predictions." />
+    <MESSAGE value="ARIMA Model Notebook Plotting predictions." />
+    <option name="LAST_COMMIT_MESSAGE" value="ARIMA Model Notebook Plotting predictions." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1310,8 +1310,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="234" column="75" selection-start-line="234" selection-start-column="52" selection-end-line="234" selection-end-column="75" />
+        <state relative-caret-position="287">
+          <caret line="232" column="57" selection-start-line="232" selection-start-column="23" selection-end-line="232" selection-end-column="57" />
           <folding>
             <element signature="e#48#61#0" expanded="true" />
             <element signature="e#9503#14398#0" />
