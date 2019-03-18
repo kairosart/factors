@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ARIMA_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/ARIMA_forecasting_prices.ipynb" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
       <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" />
@@ -85,7 +84,7 @@
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="287">
-              <caret line="232" column="57" selection-start-line="232" selection-start-column="23" selection-end-line="232" selection-end-column="57" />
+              <caret line="232" column="54" selection-start-line="232" selection-start-column="23" selection-end-line="232" selection-end-column="57" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
                 <element signature="e#9503#14398#0" />
@@ -438,20 +437,6 @@
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
     </task>
-    <task id="LOCAL-00136" summary="Creating Decision Tree model.">
-      <created>1549315166309</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
-      <option name="project" value="LOCAL" />
-      <updated>1549315166309</updated>
-    </task>
-    <task id="LOCAL-00137" summary="Creating Decision Tree model.">
-      <created>1549363478369</created>
-      <option name="number" value="00137" />
-      <option name="presentableId" value="LOCAL-00137" />
-      <option name="project" value="LOCAL" />
-      <updated>1549363478369</updated>
-    </task>
     <task id="LOCAL-00138" summary="Creating Decision Tree model.">
       <created>1549373676847</created>
       <option name="number" value="00138" />
@@ -781,7 +766,21 @@
       <option name="project" value="LOCAL" />
       <updated>1552599012678</updated>
     </task>
-    <option name="localTasksCounter" value="185" />
+    <task id="LOCAL-00185" summary="ARIMA Model Notebook Plotting predictions.">
+      <created>1552682336893</created>
+      <option name="number" value="00185" />
+      <option name="presentableId" value="LOCAL-00185" />
+      <option name="project" value="LOCAL" />
+      <updated>1552682336893</updated>
+    </task>
+    <task id="LOCAL-00186" summary="ARIMA Model Notebook predictions.">
+      <created>1552856300352</created>
+      <option name="number" value="00186" />
+      <option name="presentableId" value="LOCAL-00186" />
+      <option name="project" value="LOCAL" />
+      <updated>1552856300352</updated>
+    </task>
+    <option name="localTasksCounter" value="187" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -884,7 +883,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Price forecasting plot." />
     <MESSAGE value="Changing the way we get data. Instead saving in a cvs file, we create a dataframe." />
     <MESSAGE value="Creating a new virtual env and README.md" />
     <MESSAGE value="Implementing LSTM." />
@@ -909,7 +907,8 @@
     <MESSAGE value="Modifying the way of selecting model and forecast time." />
     <MESSAGE value="ARIMA Model Plotting predictions." />
     <MESSAGE value="ARIMA Model Notebook Plotting predictions." />
-    <option name="LAST_COMMIT_MESSAGE" value="ARIMA Model Notebook Plotting predictions." />
+    <MESSAGE value="ARIMA Model Notebook predictions." />
+    <option name="LAST_COMMIT_MESSAGE" value="ARIMA Model Notebook predictions." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1311,7 +1310,7 @@
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
-          <caret line="232" column="57" selection-start-line="232" selection-start-column="23" selection-end-line="232" selection-end-column="57" />
+          <caret line="232" column="54" selection-start-line="232" selection-start-column="23" selection-end-line="232" selection-end-column="57" />
           <folding>
             <element signature="e#48#61#0" expanded="true" />
             <element signature="e#9503#14398#0" />
