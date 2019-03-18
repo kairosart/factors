@@ -437,20 +437,6 @@
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
     </task>
-    <task id="LOCAL-00138" summary="Creating Decision Tree model.">
-      <created>1549373676847</created>
-      <option name="number" value="00138" />
-      <option name="presentableId" value="LOCAL-00138" />
-      <option name="project" value="LOCAL" />
-      <updated>1549373676848</updated>
-    </task>
-    <task id="LOCAL-00139" summary="Creating Decision Tree model.">
-      <created>1549393890553</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
-      <option name="project" value="LOCAL" />
-      <updated>1549393890553</updated>
-    </task>
     <task id="LOCAL-00140" summary="Creating Decision Tree model.">
       <created>1549401916743</created>
       <option name="number" value="00140" />
@@ -780,7 +766,21 @@
       <option name="project" value="LOCAL" />
       <updated>1552856300352</updated>
     </task>
-    <option name="localTasksCounter" value="187" />
+    <task id="LOCAL-00187" summary="ARIMA Model Notebook predictions.">
+      <created>1552936553388</created>
+      <option name="number" value="00187" />
+      <option name="presentableId" value="LOCAL-00187" />
+      <option name="project" value="LOCAL" />
+      <updated>1552936553389</updated>
+    </task>
+    <task id="LOCAL-00188" summary="ARIMA Model Notebook predictions.">
+      <created>1552943979925</created>
+      <option name="number" value="00188" />
+      <option name="presentableId" value="LOCAL-00188" />
+      <option name="project" value="LOCAL" />
+      <updated>1552943979925</updated>
+    </task>
+    <option name="localTasksCounter" value="189" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
