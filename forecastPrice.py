@@ -391,17 +391,43 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         start = forecast_date.strftime("%Y-%m-%d")
         rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
 
-        # Predicting
-        forecast = model.forecast(steps=forecast_time)
+
+        # Preparing data
+        series = pd.Series(portf_value['Adj Close'].values)
+        y = series.values
+        predictions = list()
+        history = [x for x in y]
+        conf = list()
+
+
+        for t in range(forecast_time):
+            output = model.forecast(1, alpha=0.05)
+            yhat = output[0]
+            predictions.append(yhat)
+            obs = test[t]
+            history.append(obs)
+            l = output[2].tolist()
+            conf.append(l)
+
+        # Forecast
+        fc, se, conf = model.forecast(forecast_time, alpha=0.05)  # 95% conf
+
+        # Make as pandas series
+        fc_series = pd.Series(fc, index=rng)
+        lower_series = pd.Series(conf[:, 0], index=rng)
+        upper_series = pd.Series(conf[:, 1], index=rng)
 
         # Setting dates for dataframe
-        df=pd.DataFrame(forecast[0])
+        df=pd.DataFrame()
+        df['Forecast'] = fc_series
+        df['lower_band'] = lower_series
+        df['upper_band'] = upper_series
         df['date'] = rng
         df.set_index('date', inplace=True)
         df.rename(columns = {0:'Price'}, inplace=True)
 
 
-        # TODO Plot Confidence interval arc chart
+        # TODO Plot confidence band
         # ARIMA Model Results
         model_sumary = model.summary()
 

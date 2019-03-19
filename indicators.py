@@ -1006,13 +1006,32 @@ def plot_stock_prices_prediction_ARIMA(df_prices, df, title="Stock prices predic
 
     trace_prices_pred = go.Scatter(
                 x=df.index,
-                y=df['Price'],
+                y=df['Forecast'],
                 name='Price prediction',
                 line=dict(color='#FF8000'),
                 opacity=0.8)
 
+    trace_confidence_low_band = go.Scatter(
+                x=df.index,
+                y=df['lower_band'],
+                name='Conf Lower Band',
+                fill=None,
+                mode='lines',
+                line=dict(
+                    color='rgb(204, 204, 179)',),
+                )
 
-    data = [trace_prices, trace_prices_pred]
+    trace_confidence_up_band = go.Scatter(
+                x=df.index,
+                y=df['upper_band'],
+                name='Conf. Upper Band',
+                fill='tonexty',
+                mode='lines',
+                line=dict(
+                    color='rgb(204, 204, 179)', ),
+                )
+
+    data = [trace_prices, trace_prices_pred, trace_confidence_low_band, trace_confidence_up_band]
 
     layout = dict(
         title = title,
