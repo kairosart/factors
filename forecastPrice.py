@@ -16,7 +16,7 @@ from sklearn import preprocessing
 from indicators import plot_stock_prices_prediction, get_indicators, \
     plot_stock_prices_prediction_ARIMA, plot_stock_prices_prediction_LSTM, get_momentum, \
     plot_stock_prices_prediction_XGBoost
-from statsmodels.tsa.arima_model import ARIMAResults
+from statsmodels.tsa.arima_model import ARIMA, ARIMAResults
 
 from util import slice_df, create_dataset
 
@@ -380,7 +380,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     # ARIMA
     if forecast_model == 'model3':
         # load model
-        model = ARIMAResults.load('arima_model.pkl')
+        #model = ARIMAResults.load('arima_model.pkl')
 
         # Setting dates and prices dataframe
         lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
@@ -393,29 +393,42 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
 
         # Preparing data
-        series = pd.Series(portf_value['Adj Close'].values)
+        series =  pd.Series(portf_value['Adj Close'].values)
         y = series.values
-        predictions = list()
         history = [x for x in y]
+        predictions = list()
         conf = list()
 
 
-        for t in range(forecast_time):
-            output = model.forecast(1, alpha=0.05)
-            yhat = output[0]
+
+
+        # Rolling forecasts
+        '''
+        Load the model and use it in a rolling-forecast manner, 
+        updating the transform and model for each time step. 
+        This is the preferred method as it is how one would use 
+        this model in practice as it would achieve the best performance.
+        '''
+
+        for i in range(0, 7):
+            # predict
+            model = ARIMA(history, order=(4,0,1))
+            model_fit = model.fit(disp=0)
+            yhat = model_fit.forecast()
             predictions.append(yhat)
-            obs = test[t]
-            history.append(obs)
-            l = output[2].tolist()
+            # observation
+            history.append(yhat[0])
+            l = yhat[2].tolist()
             conf.append(l)
+            print('No.=%f, predicted=%f' % (i, yhat[0]))
 
         # Forecast
-        fc, se, conf = model.forecast(forecast_time, alpha=0.05)  # 95% conf
+        #fc, se, conf = model.forecast(forecast_time, alpha=0.05)  # 95% conf
 
         # Make as pandas series
-        fc_series = pd.Series(fc, index=rng)
-        lower_series = pd.Series(conf[:, 0], index=rng)
-        upper_series = pd.Series(conf[:, 1], index=rng)
+        fc_series = pd.Series(predictions, index=rng)
+        lower_series = pd.Series( (v[0][0] for v in conf), index=rng)
+        upper_series = pd.Series( (v[0][1] for v in conf), index=rng)
 
         # Setting dates for dataframe
         df=pd.DataFrame()
