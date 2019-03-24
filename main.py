@@ -394,7 +394,7 @@ def showforecastform():
             )
         # ARIMA Model
         elif result['model_Selection'] == 'model3':
-            symbol, start_d, yesterday, plot_prices_pred, model_sumary = showforcastpricesvalues(symbol, portf_value,
+            symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value,
                                                                                                  forecast_model,
                                                                                                  forecast_time, start_d,
                                                                                                  yesterday,
@@ -412,7 +412,6 @@ def showforecastform():
                 forecast_lookback=forecast_lookback,
                 forecast_final_date=final_forecast_day,
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
-                summary=Markup(model_sumary.tables[0].as_html()),
                 titles=['na', 'Stock Prices '],
                 model='ARIMA',
             )

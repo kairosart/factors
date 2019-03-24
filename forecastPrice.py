@@ -379,8 +379,14 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
     # ARIMA
     if forecast_model == 'model3':
-        # load model
-        #model = ARIMAResults.load('arima_model.pkl')
+        # Rolling forecasts
+        '''                                                                 
+        Load the model and use it in a rolling-forecast manner,             
+        updating the transform and model for each time step.                
+        This is the preferred method as it is how one would use             
+        this model in practice as it would achieve the best performance.    
+        '''
+
 
         # Setting dates and prices dataframe
         lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
@@ -392,35 +398,50 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
 
 
+
+
         # Preparing data
-        series =  pd.Series(portf_value['Adj Close'].values)
-        y = series.values
-        history = [x for x in y]
         predictions = list()
         conf = list()
 
+        # Create date column to save next date
+        portf_value['date'] = portf_value.index
 
+        for i in range(0, len(rng)):
+            # load the dataset
+            dataset = np.array(portf_value.iloc[:, 0].tolist())[np.newaxis]
+            dataset = dataset.T
+            dataset = dataset.astype('float32')
 
+            # normalize the dataset
+            scaler = MinMaxScaler(feature_range=(0, 1))
+            dataset = scaler.fit_transform(dataset)
 
-        # Rolling forecasts
-        '''
-        Load the model and use it in a rolling-forecast manner, 
-        updating the transform and model for each time step. 
-        This is the preferred method as it is how one would use 
-        this model in practice as it would achieve the best performance.
-        '''
-
-        for i in range(0, 7):
             # predict
-            model = ARIMA(history, order=(4,0,1))
+            model = ARIMA(dataset, order=(4,0,1))
             model_fit = model.fit(disp=0)
             yhat = model_fit.forecast()
-            predictions.append(yhat)
+
+            # Prediction Inverse scale
+            prediction = yhat[0].reshape(-1, 1)
+            futurePredict = scaler.inverse_transform(prediction)
+
             # observation
-            history.append(yhat[0])
-            l = yhat[2].tolist()
+            inv_scaled_conf =  scaler.inverse_transform(yhat[2].reshape(1, -1))
+            l = inv_scaled_conf.tolist()
+
             conf.append(l)
-            print('No.=%f, predicted=%f' % (i, yhat[0]))
+
+            # Adding last prediction to portf_value
+            prediction = futurePredict.item(0)
+            portf_value.loc[len(portf_value)] = [prediction, i]
+
+            # Adding value to predictions dataframe
+            predictions.append([prediction, i])
+            print('No.=%f, predicted=%f' % (i, prediction))
+
+
+
 
         # Forecast
         #fc, se, conf = model.forecast(forecast_time, alpha=0.05)  # 95% conf
@@ -432,21 +453,20 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         # Setting dates for dataframe
         df=pd.DataFrame()
-        df['Forecast'] = fc_series
-        df['lower_band'] = lower_series
-        df['upper_band'] = upper_series
-        df['date'] = rng
-        df.set_index('date', inplace=True)
+        df['Forecast'] = fc_series[:0]
+        df['lower_band'] = lower_series[:0]
+        df['upper_band'] = upper_series[:0]
+
         df.rename(columns = {0:'Price'}, inplace=True)
 
 
-        # TODO Plot confidence band
+
         # ARIMA Model Results
-        model_sumary = model.summary()
+        #model_sumary = model.summary()
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)
-        return symbol, start_d, forecast_date, plot_prices_pred, model_sumary
+        return symbol, start_d, forecast_date, plot_prices_pred
 
 
     # LSTM

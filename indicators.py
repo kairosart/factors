@@ -1006,7 +1006,7 @@ def plot_stock_prices_prediction_ARIMA(df_prices, df, title="Stock prices predic
 
     trace_prices_pred = go.Scatter(
                 x=df.index,
-                y=df['Forecast'],
+                y=df['Price'],
                 name='Price prediction',
                 line=dict(color='#FF8000'),
                 opacity=0.8)
