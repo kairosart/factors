@@ -93,7 +93,7 @@ def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True):
         return False
 
 # TODO Create function to get data from Alpha Vantage https://www.alphavantage.co
-
+# API key is: 477OAZQ4753FSGAI
 
 
 

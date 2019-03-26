@@ -420,20 +420,20 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             # predict
             model = ARIMA(dataset, order=(4,0,1))
             model_fit = model.fit(disp=0)
-            yhat = model_fit.forecast()
+            yhat, se, conf = model_fit.forecast(alpha=0.05)
 
             # Prediction Inverse scale
             prediction = yhat[0].reshape(-1, 1)
             futurePredict = scaler.inverse_transform(prediction)
 
-            # observation
-            inv_scaled_conf =  scaler.inverse_transform(yhat[2].reshape(1, -1))
-            l = inv_scaled_conf
+            # Confidence intervals inverse transform
+            inv_scaled_conf =  scaler.inverse_transform(conf[0][0].reshape(1, -1))
+            inv_scaled_conf1 =  scaler.inverse_transform(conf[0][1].reshape(1, -1))
 
             # Confident intervals
 
-            lower_band = l[0][0]
-            upper_band = l[0][1]
+            lower_band = inv_scaled_conf[0][0]
+            upper_band = inv_scaled_conf1[0][0]
 
             # Adding last prediction to portf_value
             prediction = futurePredict.item(0)
