@@ -92,6 +92,8 @@ def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True):
     except:
         return False
 
+# TODO Create function to get data from Alpha Vantage https://www.alphavantage.co
+
 
 
 

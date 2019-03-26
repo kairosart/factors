@@ -387,7 +387,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         this model in practice as it would achieve the best performance.    
         '''
 
-
         # Setting dates and prices dataframe
         lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
         dates = pd.date_range(lookback_date, periods=forecast_lookback)
@@ -396,18 +395,19 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Bussines days
         start = forecast_date.strftime("%Y-%m-%d")
         rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
+        bussines_days = rng.strftime('%Y-%m-%d')
 
 
 
 
-        # Preparing data
-        predictions = list()
-        conf = list()
+        # Setting prediction dataframe cols and list for adding rows to dataframe
+        cols = ['Price', 'date', 'lower_band', 'upper_band']
+        lst = []
 
         # Create date column to save next date
         portf_value['date'] = portf_value.index
 
-        for i in range(0, len(rng)):
+        for i in bussines_days:
             # load the dataset
             dataset = np.array(portf_value.iloc[:, 0].tolist())[np.newaxis]
             dataset = dataset.T
@@ -428,35 +428,25 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
             # observation
             inv_scaled_conf =  scaler.inverse_transform(yhat[2].reshape(1, -1))
-            l = inv_scaled_conf.tolist()
+            l = inv_scaled_conf
 
-            conf.append(l)
+            # Confident intervals
+
+            lower_band = l[0][0]
+            upper_band = l[0][1]
 
             # Adding last prediction to portf_value
             prediction = futurePredict.item(0)
             portf_value.loc[len(portf_value)] = [prediction, i]
 
-            # Adding value to predictions dataframe
-            predictions.append([prediction, i])
-            print('No.=%f, predicted=%f' % (i, prediction))
+            # Adding value to predictions dictionary
+            lst.append([prediction, i, lower_band, upper_band])
+
+            # Setting dataframe for predictions and confident intervals
+            df = pd.DataFrame(lst, columns=cols)
 
 
-
-
-        # Forecast
-        #fc, se, conf = model.forecast(forecast_time, alpha=0.05)  # 95% conf
-
-        # Make as pandas series
-        fc_series = pd.Series(predictions, index=rng)
-        lower_series = pd.Series( (v[0][0] for v in conf), index=rng)
-        upper_series = pd.Series( (v[0][1] for v in conf), index=rng)
-
-        # Setting dates for dataframe
-        df=pd.DataFrame()
-        df['Forecast'] = fc_series[:0]
-        df['lower_band'] = lower_series[:0]
-        df['upper_band'] = upper_series[:0]
-
+        df.set_index('date', inplace=True)
         df.rename(columns = {0:'Price'}, inplace=True)
 
 
