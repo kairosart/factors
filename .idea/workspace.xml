@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="ARIMA Model plotting Rolling forecast.">
+    <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ARIMA_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/ARIMA_forecasting_prices.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="">
@@ -43,7 +44,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6">
+            <state relative-caret-position="968">
               <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
             </state>
           </provider>
@@ -61,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="89" column="14" lean-forward="true" selection-start-line="89" selection-start-column="14" selection-end-line="89" selection-end-column="14" />
+            <state relative-caret-position="1040">
+              <caret line="90" selection-start-line="90" selection-end-line="90" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
               </folding>
@@ -77,6 +78,7 @@
               <caret line="2" selection-start-line="2" selection-end-line="2" />
               <folding>
                 <element signature="e#12642#13900#0" />
+                <element signature="e#15990#17248#0" />
                 <element signature="e#16817#17927#0" />
                 <element signature="e#17071#17207#0" />
               </folding>
@@ -93,11 +95,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="434" column="46" selection-start-line="434" selection-start-column="46" selection-end-line="434" selection-end-column="46" />
+            <state relative-caret-position="111">
+              <caret line="396" selection-start-line="396" selection-end-line="396" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
                 <element signature="e#5224#9447#0" />
@@ -106,11 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-203">
-              <caret line="1008" selection-start-line="1008" selection-end-line="1008" />
+            <state relative-caret-position="176">
+              <caret line="999" selection-start-line="999" selection-end-line="999" />
               <folding>
                 <element signature="e#38#56#0" expanded="true" />
                 <element signature="e#420#882#0" />
@@ -167,8 +169,8 @@
       <find>submitButton2</find>
       <find>concat</find>
       <find>df['date']</find>
-      <find>col</find>
       <find>forecast_time</find>
+      <find>col</find>
       <find>range</find>
     </findStrings>
     <replaceStrings>
@@ -223,8 +225,8 @@
         <option value="$PROJECT_DIR$/static/js/my_jquery.js" />
         <option value="$PROJECT_DIR$/templates/pricesForecastForm.html" />
         <option value="$PROJECT_DIR$/templates/forecastPrices.html" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/indicators.py" />
+        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/forecastPrice.py" />
       </list>
@@ -449,13 +451,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543953451073</updated>
-    </task>
-    <task id="LOCAL-00145" summary="Creating Decision Tree model.">
-      <created>1549746916578</created>
-      <option name="number" value="00145" />
-      <option name="presentableId" value="LOCAL-00145" />
-      <option name="project" value="LOCAL" />
-      <updated>1549746916578</updated>
     </task>
     <task id="LOCAL-00146" summary="Creating Decision Tree model.">
       <created>1549834202194</created>
@@ -793,7 +788,14 @@
       <option name="project" value="LOCAL" />
       <updated>1553632258973</updated>
     </task>
-    <option name="localTasksCounter" value="194" />
+    <task id="LOCAL-00194" summary="ARIMA Model plotting Rolling forecast.">
+      <created>1553634523734</created>
+      <option name="number" value="00194" />
+      <option name="presentableId" value="LOCAL-00194" />
+      <option name="project" value="LOCAL" />
+      <updated>1553634523734</updated>
+    </task>
+    <option name="localTasksCounter" value="195" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -807,14 +809,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1275" y="-4" width="1930" height="1089" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.2790451" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4943609" weight="0.2790451" />
       <window_info id="Structure" order="1" sideWeight="0.5056391" side_tool="true" weight="0.18461539" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32520324" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22183508" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.2891986" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22183508" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.2891986" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
@@ -951,9 +954,14 @@
           <option name="timeStamp" value="494" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/indicators.py</url>
+          <line>999</line>
+          <option name="timeStamp" value="668" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
-          <line>434</line>
-          <option name="timeStamp" value="645" />
+          <line>396</line>
+          <option name="timeStamp" value="669" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1263,17 +1271,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6">
-          <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/forecastPrices.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="42" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="968">
+          <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -1283,16 +1291,38 @@
           <caret line="2" selection-start-line="2" selection-end-line="2" />
           <folding>
             <element signature="e#12642#13900#0" />
+            <element signature="e#15990#17248#0" />
             <element signature="e#16817#17927#0" />
             <element signature="e#17071#17207#0" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1040">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="396" selection-start-line="396" selection-end-line="396" />
+          <folding>
+            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#5224#9447#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/indicators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-203">
-          <caret line="1008" selection-start-line="1008" selection-end-line="1008" />
+        <state relative-caret-position="176">
+          <caret line="999" selection-start-line="999" selection-end-line="999" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
             <element signature="e#420#882#0" />
@@ -1303,27 +1333,6 @@
             <element signature="e#1993#2400#0" />
             <element signature="e#2469#2909#0" />
             <element signature="e#2943#3517#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="89" column="14" lean-forward="true" selection-start-line="89" selection-start-column="14" selection-end-line="89" selection-end-column="14" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="434" column="46" selection-start-line="434" selection-start-column="46" selection-end-line="434" selection-end-column="46" />
-          <folding>
-            <element signature="e#48#61#0" expanded="true" />
-            <element signature="e#5224#9447#0" />
           </folding>
         </state>
       </provider>

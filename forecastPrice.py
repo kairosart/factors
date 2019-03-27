@@ -389,11 +389,17 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         # Setting dates and prices dataframe
         lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
-        dates = pd.date_range(lookback_date, periods=forecast_lookback)
+        dates = pd.date_range(lookback_date, periods=forecast_lookback + 1)
         df_prices = slice_df(portf_value, dates)
 
         # Bussines days
-        start = forecast_date.strftime("%Y-%m-%d")
+        # Check whether today is on portf_value
+        lvi =  pd.Timestamp.date(portf_value.last_valid_index())
+        today = dt.date.today()
+        if lvi == today:
+            start = forecast_date + dt.timedelta(1)
+        else:
+            start = forecast_date
         rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d')
 
@@ -434,6 +440,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
             lower_band = inv_scaled_conf[0][0]
             upper_band = inv_scaled_conf1[0][0]
+            
+
 
             # Adding last prediction to portf_value
             prediction = futurePredict.item(0)
@@ -445,7 +453,14 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             # Setting dataframe for predictions and confident intervals
             df = pd.DataFrame(lst, columns=cols)
 
+        # Order confidence values for plotting
+        lower_list = df['lower_band'].tolist()
+        lower_list.sort(reverse=True)
+        upper_list = df['upper_band'].tolist()
+        upper_list.sort()
 
+        df['lower_band'] = lower_list
+        df['upper_band'] = upper_list
         df.set_index('date', inplace=True)
         df.rename(columns = {0:'Price'}, inplace=True)
 

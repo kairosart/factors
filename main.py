@@ -368,6 +368,7 @@ def showforecastform():
                 titles=['na', 'Stock Prices '],
                 model='XGBoost',
             )
+
         # KNN model
         elif result['model_Selection'] == 'model2':
 
@@ -392,12 +393,13 @@ def showforecastform():
                 titles=['na', 'Stock Prices '],
                 model='KNN',
             )
+
         # ARIMA Model
         elif result['model_Selection'] == 'model3':
             symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value,
                                                                                                  forecast_model,
                                                                                                  forecast_time, start_d,
-                                                                                                 yesterday,
+                                                                                                 forecast_date,
                                                                                                  forecast_lookback)
             final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
             final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
