@@ -152,7 +152,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
     :return: Prices Plot.
     '''
 
-    # XGBoost
+    # XGBoost (1 day forecasting)
     if forecast_model == 'model1':
         ## Indicators to use
         '''
@@ -265,7 +265,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df_predictions, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, metric
 
-    # KNN Model
+    # KNN Model (1 day forecasting)
     if forecast_model == 'model2':
         ## Indicators to use
         '''
@@ -413,6 +413,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Create date column to save next date
         portf_value['date'] = portf_value.index
 
+        # Forecasting for every business day
         for i in bussines_days:
             # load the dataset
             dataset = np.array(portf_value.iloc[:, 0].tolist())[np.newaxis]
@@ -459,12 +460,13 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         upper_list = df['upper_band'].tolist()
         upper_list.sort()
 
+        # Adding confidence bands data to dataframe
         df['lower_band'] = lower_list
         df['upper_band'] = upper_list
         df.set_index('date', inplace=True)
         df.rename(columns = {0:'Price'}, inplace=True)
 
-
+        # TODO Create ARIMA Report
 
         # ARIMA Model Results
         #model_sumary = model.summary()
@@ -479,15 +481,21 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # load_model
         model = load_model('./lstm_model')
 
-        # Lookback data
+        # Setting dates and prices dataframe
         lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
-        dates = pd.date_range(lookback_date, periods=forecast_lookback)
+        dates = pd.date_range(lookback_date, periods=forecast_lookback + 1)
         df_prices = slice_df(portf_value, dates)
 
         # Bussines days
-        start = forecast_date.strftime("%Y-%m-%d")
+        # Check whether today is on portf_value
+        lvi =  pd.Timestamp.date(portf_value.last_valid_index())
+        today = dt.date.today()
+        if lvi == today:
+            start = forecast_date + dt.timedelta(1)
+        else:
+            start = forecast_date
         rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
-        bussines_days = rng.strftime('%Y-%m-%d %H:%M:%S')
+        bussines_days = rng.strftime('%Y-%m-%d')
 
         # Setting prediction dataframe cols and list for adding rows to dataframe
         cols = ['Price', 'date']
