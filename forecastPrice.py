@@ -438,11 +438,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             inv_scaled_conf1 =  scaler.inverse_transform(conf[0][1].reshape(1, -1))
 
             # Confident intervals
-
             lower_band = inv_scaled_conf[0][0]
             upper_band = inv_scaled_conf1[0][0]
-            
-
 
             # Adding last prediction to portf_value
             prediction = futurePredict.item(0)
@@ -466,14 +463,50 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         df.set_index('date', inplace=True)
         df.rename(columns = {0:'Price'}, inplace=True)
 
-        # TODO Create ARIMA Report
+        # Create ARIMA Report
+        df_predictions = df[['Price']].copy()
+        df_predictions['date'] = df_predictions.index
+        last_date = df_prices.loc[df_prices.index[-1]].name
+        last_date = last_date.strftime("%Y-%m-%d")
+        last_price = df_prices.loc[df_prices.index[-1]][0]
 
+        # Add last date and price to dataframe
+        df_predictions.loc[len(df_predictions)] = [last_price, last_date]
+        df_predictions.set_index('date', inplace=True)
+        df_predictions.index = pd.to_datetime(df_predictions.index, format='%Y-%m-%d')
+        df_predictions.index = df_predictions.index.strftime("%Y-%m-%d")
+        df_predictions.sort_index(inplace=True)
+
+        # Daily Return Percentage change between the current and a prior element.
+        drp = df_predictions.pct_change(1)
+        # Rename price column to % variation
+        drp.rename(columns={'Price': '%\u25B3'}, inplace=True)
+
+        # Compute the price difference of two elements
+        diff = df_predictions.diff()
+        # Rename price column to $ variation
+        diff.rename(columns={'Price': '$\u25B3'}, inplace=True)
+
+        # Concat diff with drp
+        metric = pd.concat([diff, drp], axis=1)
+
+        # Concat forecast prices with metric
+        metric = pd.concat([df_predictions, diff, drp], axis=1)
+        metric.rename(columns={'Price': 'Forecast'}, inplace=True)
+
+        # Clean NaN
+        metric = metric.fillna(0)
+
+        # Set decimals to 2
+        metric['Forecast'] = metric['Forecast'].apply(lambda x: round(x, 2))
+        metric['%\u25B3'] = metric['%\u25B3'].apply(lambda x: round(x, 3))
+        metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 3))
         # ARIMA Model Results
         #model_sumary = model.summary()
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)
-        return symbol, start_d, forecast_date, plot_prices_pred
+        return symbol, start_d, forecast_date, plot_prices_pred, metric
 
 
     # LSTM

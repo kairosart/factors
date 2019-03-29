@@ -40,7 +40,7 @@
     <br><br>
     {% if model == "ARIMA" %}
         <div class="table-responsive">
-
+            {{ daily_return_percentage | safe }}
         </div>
     {% elif model == "XGBoost" %}
         <div class="table-responsive-md">
