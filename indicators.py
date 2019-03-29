@@ -1067,6 +1067,7 @@ def plot_stock_prices_prediction_ARIMA(df_prices, df, title="Stock prices predic
                 title=ylabel,
                 linecolor='#000', linewidth=1
                 ),
+
     )
 
 

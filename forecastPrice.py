@@ -423,7 +423,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             model = ARIMA(dataset, order=(4,0,1))
             model_fit = model.fit(disp=0)
             yhat, se, conf = model_fit.forecast(alpha=0.05)
-
+            # TODO Maybe add Std. Error to chart
             print('Std. Error: ', se)
             # Prediction Inverse scale
             prediction = yhat[0].reshape(-1, 1)
