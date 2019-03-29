@@ -332,8 +332,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         lst.append([p, bussines_days.values[0]])
         df_predictions = pd.DataFrame(lst, columns=cols)
 
-        # TODO Calculate metrics
-
         # Daily return
         # Get last row of df_prices
         df_predictions.index = df_predictions['date']
@@ -403,11 +401,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d')
 
-
-
-
         # Setting prediction dataframe cols and list for adding rows to dataframe
-        cols = ['Price', 'date', 'lower_band', 'upper_band']
+        cols = ['Price', 'date', 'lower_band', 'upper_band', 'Std. Error']
         lst = []
 
         # Create date column to save next date
@@ -429,6 +424,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             model_fit = model.fit(disp=0)
             yhat, se, conf = model_fit.forecast(alpha=0.05)
 
+            print('Std. Error: ', se)
             # Prediction Inverse scale
             prediction = yhat[0].reshape(-1, 1)
             futurePredict = scaler.inverse_transform(prediction)
@@ -446,7 +442,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             portf_value.loc[len(portf_value)] = [prediction, i]
 
             # Adding value to predictions dictionary
-            lst.append([prediction, i, lower_band, upper_band])
+            lst.append([prediction, i, lower_band, upper_band, se])
 
             # Setting dataframe for predictions and confident intervals
             df = pd.DataFrame(lst, columns=cols)
@@ -488,7 +484,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         diff.rename(columns={'Price': '$\u25B3'}, inplace=True)
 
         # Concat diff with drp
-        metric = pd.concat([diff, drp], axis=1)
+        #metric = pd.concat([diff, drp], axis=1)
 
         # Concat forecast prices with metric
         metric = pd.concat([df_predictions, diff, drp], axis=1)
@@ -501,13 +497,10 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         metric['Forecast'] = metric['Forecast'].apply(lambda x: round(x, 2))
         metric['%\u25B3'] = metric['%\u25B3'].apply(lambda x: round(x, 3))
         metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 3))
-        # ARIMA Model Results
-        #model_sumary = model.summary()
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, metric
-
 
     # LSTM
     if forecast_model == 'model4':
