@@ -13,6 +13,10 @@ def get_tickers(filename):
 
 # Price movements Form class
 class StartValuesForm(FlaskForm):
+    forecastDate = DateField('Forecast Date',
+                             format='%m/%d/%Y',
+                             default=datetime.today(),
+                             validators=[validators.DataRequired()])
     start_val = IntegerField('Initial Capital', [validators.DataRequired("Please enter a value.")])
     symbol = SelectField('Stock Symbol')
     commission = DecimalField('Commision')

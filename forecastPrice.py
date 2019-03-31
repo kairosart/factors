@@ -423,8 +423,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             model = ARIMA(dataset, order=(4,0,1))
             model_fit = model.fit(disp=0)
             yhat, se, conf = model_fit.forecast(alpha=0.05)
-            # TODO Maybe add Std. Error to chart
-            print('Std. Error: ', se)
+
             # Prediction Inverse scale
             prediction = yhat[0].reshape(-1, 1)
             futurePredict = scaler.inverse_transform(prediction)
@@ -497,6 +496,9 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         metric['Forecast'] = metric['Forecast'].apply(lambda x: round(x, 2))
         metric['%\u25B3'] = metric['%\u25B3'].apply(lambda x: round(x, 3))
         metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 3))
+
+
+        # TODO Accuracy metrics https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)

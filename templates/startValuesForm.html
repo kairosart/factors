@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <legend>Start Values Form</legend>
+    <legend>Learning Trading Agent</legend>
     {% if error %}
 		<div class="card text-white  bg-danger mb-3" style="">
 		  <div class="card-header">ERROR</div>
@@ -37,13 +37,27 @@
 
           <form id="form" class="form" action = "/showvalues" method = post>
              <fieldset>
+                 {{ form.hidden_tag() }}
 
-                {{ form.hidden_tag() }}
+                 <!-- Datepicker -->
+                 <div class="form-group">
+                    {{ form.csrf_token }}<br>
 
+                    {{ form.forecastDate.label }} <br>
+                    <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                        {{ form.forecastDate(class="form-control datetimepicker-input") }}
+                        <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                 </div>
+
+                <!-- Initial capital -->
                 <div class="form-group">
                     {{ form.csrf_token }}<br>
                     {{ form.start_val.label }} {{ form.start_val(class_="form-control", size=10, value=100000) }} <br>
 
+                    <!-- Stock symbol -->
                     {{ form.symbol.label }}<br>
                     <select name="ticker_select" class="custom-select">
                         {% for key,value in data.iterrows() %}
@@ -52,10 +66,13 @@
                     </select>
                     <br><br>
 
+                    <!-- Commision -->
                     {{ form.commission.label }} {{ form.commission(class_="form-control", size=4, value=0.00) }}<br>
 
+                    <!-- Impact -->
                     {{ form.impact.label }} {{ form.impact(class_="form-control", size=4, value=0.00) }}<br>
 
+                    <!-- Shares number -->
                     {{ form.num_shares.label }} {{ form.num_shares(class_="form-control", size=10, value=1000) }}<br>
 
                    <br>

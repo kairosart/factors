@@ -1031,6 +1031,8 @@ def plot_stock_prices_prediction_ARIMA(df_prices, df, title="Stock prices predic
                     color='rgb(204, 204, 179)', ),
                 )
 
+
+
     data = [trace_prices, trace_prices_pred, trace_confidence_low_band, trace_confidence_up_band]
 
     layout = dict(
@@ -1067,7 +1069,11 @@ def plot_stock_prices_prediction_ARIMA(df_prices, df, title="Stock prices predic
                 title=ylabel,
                 linecolor='#000', linewidth=1
                 ),
-
+        yaxis2 = dict(
+            title='Std. Error',
+            overlaying='y',
+            side='right'
+        )
     )
 
 

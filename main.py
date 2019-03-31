@@ -43,6 +43,9 @@ def overview():
 def training():
     # **** Training ***
     # Getting session variables
+
+
+
     start_val = int(session.get('start_val', None))
     symbol = session.get('symbol', None)
     num_shares = int(session.get('num_shares', None))
@@ -51,6 +54,8 @@ def training():
 
     # Create a dataframe from csv file
     df = get_data(symbol)
+
+
 
     # We'll get 80% data to train
     split_percentage = 0.8
@@ -177,12 +182,19 @@ def showvalues():
     # Get portfolio values from Yahoo
     symbol = request.form.get('ticker_select', type=str)
 
-    # Get 1 year of data to train and test
-    start_d = dt.date.today() - dt.timedelta(365)
+    # Get Forecast date
+    forecast_date = request.form.get('forecastDate', type=str)
+    forecast_date = dt.datetime.strptime(forecast_date, '%m/%d/%Y')
+    start_d = f"{forecast_date:%Y-%m-%d}"
     yesterday = dt.date.today() - dt.timedelta(1)
+    # Import data from Yahoo
+    portf_value = fetchOnlineData(forecast_date, symbol, dt.date.today())
 
 
-    portf_value = fetchOnlineData(start_d, symbol, yesterday)
+    # Get 1 year of data to train and test
+    #start_d = dt.date.today() - dt.timedelta(365)
+    #yesterday = dt.date.today() - dt.timedelta(1)
+    #portf_value = fetchOnlineData(start_d, symbol, yesterday)
 
     # Save data to csv file
     df_to_cvs(portf_value, symbol)
@@ -223,7 +235,7 @@ def showvalues():
     # Session variables
     session['start_val'] = request.form['start_val']
     session['symbol'] = symbol
-    session['start_d'] = start_d.strftime('%Y/%m/%d')
+    session['start_d'] = start_d
     session['num_shares'] = request.form['num_shares']
     session['commission'] = request.form['commission']
     session['impact'] = request.form['impact']
