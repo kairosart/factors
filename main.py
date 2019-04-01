@@ -264,7 +264,7 @@ def showvalues():
     return render_template(
         # name of template
         "stockpriceschart.html",
-
+        # TODO Put header with chosen data
         # now we pass in our variables into the template
         start_val = request.form['start_val'],
         symbol = symbol,

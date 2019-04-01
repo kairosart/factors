@@ -1,8 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <legend>Indicators</legend>
+    <legend>Trading Agent indicators</legend>
     <br><br>
+    <div class="table-responsive">
+		<table class= "table table-sm">
+            <tbody>
+                <tr>
+                    <td><p class="text-success">
+                        Symbol: <b>{{ symbol }}</b>
+                        </p>
+                    </td>
+                    <td><p class="text-success">
+                            Initial Capital: <b>{{ start_val }}</b>
+                        </p>
+                    </td>
+                    <td><p class="text-success">
+                            Commision: <b>{{ commission }}</b>
+                        </p>
+                    </td>
+
+                    <td><p class="text-success">
+                            Impact: <b>{{ impact }}</b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="text-success">
+                            No. Shares: <b>{{ num_shares }}</b>
+                        </p>
+                    </td>
+                    <td><p class="text-success">
+                            From date: <b>{{ start_date }}</b>
+                        </p>
+                    </td>
+                    <td><p class="text-success">
+                        To date: <b>{{ end_date }}</b>
+                    </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="btn-group" role="group" aria-label="Choose indicator">
       <button type="button" class="btn btn-primary">Go to indicator</button>
       <div class="btn-group" role="group">

@@ -13,7 +13,7 @@ def get_tickers(filename):
 
 # Price movements Form class
 class StartValuesForm(FlaskForm):
-    forecastDate = DateField('Forecast Date',
+    forecastDate = DateField('Lookback Date',
                              format='%m/%d/%Y',
                              default=datetime.today(),
                              validators=[validators.DataRequired()])

@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <legend>Learning Trading Agent</legend>
+    <legend>Trading Agent
+
+        <button type="button"
+                class="btn btn-outline-info btn-xs"
+                title="What's a Trading Agent"
+                data-toggle="popover"
+                data-trigger="focus"
+                data-placement="right"
+                data-content="Using some indicators the agent will apply a model for training data and will give an expected result in the test."
+                data-original-title="Trading Agent">
+            <i class="fa fa-info-circle fa-xs"></i>
+        </button>
+    </legend>
+
     {% if error %}
 		<div class="card text-white  bg-danger mb-3" style="">
 		  <div class="card-header">ERROR</div>
