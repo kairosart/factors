@@ -4,7 +4,7 @@ import pandas as pd
 from util import symbol_to_path
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, DecimalField, SubmitField, RadioField, SelectField, HiddenField, DateField
-from wtforms import validators, ValidationError
+from wtforms import validators
 import datetime as dt
 
 def get_tickers(filename):
