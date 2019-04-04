@@ -3,19 +3,21 @@ from datetime import date, datetime
 import pandas as pd
 from util import symbol_to_path
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, DecimalField, SubmitField, RadioField, SelectField, StringField, DateField
-from wtforms import validators
-
+from wtforms import IntegerField, DecimalField, SubmitField, RadioField, SelectField, HiddenField, DateField
+from wtforms import validators, ValidationError
+import datetime as dt
 
 def get_tickers(filename):
     df = pd.read_csv(symbol_to_path(filename), usecols=['Symbol'])
     return df
 
-# Price movements Form class
+
+# Trading agent
 class StartValuesForm(FlaskForm):
-    forecastDate = DateField('Lookback Date',
+    d2 = dt.date.today() - dt.timedelta(days=365)
+    loookbakc_date = DateField('Lookback Date (mm/dd/yyyy)',
                              format='%m/%d/%Y',
-                             default=datetime.today(),
+                             default=d2,
                              validators=[validators.DataRequired()])
     start_val = IntegerField('Initial Capital', [validators.DataRequired("Please enter a value.")])
     symbol = SelectField('Stock Symbol')
@@ -23,11 +25,12 @@ class StartValuesForm(FlaskForm):
     impact = DecimalField('Impact')
     num_shares = IntegerField('Shares number', [validators.DataRequired("Please enter number of shares.")])
     submit = SubmitField("Send")
-    forecast = RadioField('Forecast type',
-                          choices = [('forecastprices','Price'),('showvalues','Price movements')],
-                          default='forecastprices')
 
 
+
+
+
+# Price forecasting
 class pricesForecast(FlaskForm):
     forecastDate = DateField('Forecast Date',
                              format='%m/%d/%Y',

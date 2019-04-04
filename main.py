@@ -44,13 +44,12 @@ def training():
     # **** Training ***
     # Getting session variables
 
-
-
     start_val = int(session.get('start_val', None))
     symbol = session.get('symbol', None)
     num_shares = int(session.get('num_shares', None))
     commission = float(session.get('commission', None))
     impact = float(session.get('impact', None))
+
 
     # Create a dataframe from csv file
     df = get_data(symbol)
@@ -182,19 +181,24 @@ def showvalues():
     # Get portfolio values from Yahoo
     symbol = request.form.get('ticker_select', type=str)
 
-    # Get Forecast date
-    forecast_date = request.form.get('forecastDate', type=str)
-    forecast_date = dt.datetime.strptime(forecast_date, '%m/%d/%Y')
-    start_d = f"{forecast_date:%Y-%m-%d}"
-    yesterday = dt.date.today() - dt.timedelta(1)
-    # Import data from Yahoo
-    portf_value = fetchOnlineData(forecast_date, symbol, dt.date.today())
+    # Get lookback date
+    lookback_date = request.form.get('loookbakc_date', type=str)
 
+    # Validate lookback date
+    d1 = dt.datetime.strptime(lookback_date, '%m/%d/%Y')
+    d2 = dt.datetime.today() - dt.timedelta(days=30)
+    date_diff_ok = d1 < d2
 
-    # Get 1 year of data to train and test
-    #start_d = dt.date.today() - dt.timedelta(365)
-    #yesterday = dt.date.today() - dt.timedelta(1)
-    #portf_value = fetchOnlineData(start_d, symbol, yesterday)
+    if date_diff_ok:
+        lookback_date = dt.datetime.strptime(lookback_date, '%m/%d/%Y')
+        start_d = f"{lookback_date:%Y-%m-%d}"
+        yesterday = dt.date.today() - dt.timedelta(1)
+        # Import data from Yahoo
+        portf_value = fetchOnlineData(start_d, symbol, dt.date.today())
+    else:
+        return render_template('error.html',
+                                error="Lookback date must be at least 30 days earlier today.")
+
 
     # Save data to csv file
     df_to_cvs(portf_value, symbol)
@@ -264,7 +268,6 @@ def showvalues():
     return render_template(
         # name of template
         "stockpriceschart.html",
-        # TODO Put header with chosen data
         # now we pass in our variables into the template
         start_val = request.form['start_val'],
         symbol = symbol,

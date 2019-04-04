@@ -28,6 +28,14 @@ $(document).ready(function(e){
 
 
     $('[data-toggle="popover"]').popover();
+
+    $('input[name=submit]')
+    .click(
+         function ()
+         {
+             $(this).prop("disabled",true);
+         }
+    );
 });
 
 $(function () {
@@ -44,6 +52,8 @@ function modal(){
    }, 2000);
 
 }
+
+
 
 
 
