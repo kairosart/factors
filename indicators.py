@@ -26,7 +26,7 @@ def get_momentum(price, window=10):
     """
     momentum = pd.Series(np.nan, index=price.index)
     momentum.iloc[window:] = (price.iloc[window:] / price.values[:-window]) - 1
-    print(momentum.iloc[window:])
+    #print(momentum.iloc[window:])
     return momentum
 
 def get_sma_indicator(price, rolling_mean):
@@ -137,7 +137,7 @@ def get_indicators(normed, symbol):
 
 
 
-def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel="Date", ylabel="Price", fig_size=(12, 6)):
+def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel="Date", ylabel="Price", fig_size=(12, 6), output_type='py'):
     """Plot Stock Prices.
 
     Parameters:
@@ -147,6 +147,7 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
     xlabel: X axis title
     ylable: Y axis title
     fig_size: Width and height of the chart in inches
+    output_type: Type of output for plotting in python (py) or in notebook (nb)
 
     Returns:
     Plot prices
@@ -202,8 +203,11 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
 
 
     fig = dict(data=data, layout=layout)
-    chart = plot(fig, show_link=False, output_type='div')
-    return chart
+    if output_type == 'py':
+        chart = plot(fig, show_link=False, output_type='div')
+        return chart
+    else:
+        return fig
 
 def plot_cum_return(epoch, cum_return, title="Cumulative Return"):
     """Plot cumulative return.
@@ -262,7 +266,7 @@ def plot_cum_return(epoch, cum_return, title="Cumulative Return"):
 
 
 def plot_momentum(df_index, sym_price, symbol, sym_mom, title="Momentum Indicator",
-                  fig_size=(12, 6)):
+                  fig_size=(12, 6), output_type='py'):
     """Plot momentum and prices for a symbol.
 
     Parameters:
@@ -270,6 +274,8 @@ def plot_momentum(df_index, sym_price, symbol, sym_mom, title="Momentum Indicato
     sym_price: Price, typically adjusted close price, series of symbol
     sym_mom: Momentum of symbol
     fig_size: Width and height of the chart in inches
+    output_type: Type of output for plotting in python (py) or in notebook (nb)
+
 
     Returns:
     Plot momentum and prices on the sample plot with two scales
@@ -338,8 +344,11 @@ def plot_momentum(df_index, sym_price, symbol, sym_mom, title="Momentum Indicato
 
 
     fig = dict(data=data, layout=layout)
-    chart = plot(fig, show_link=False, output_type='div')
-    return chart
+    if output_type == 'py':
+        chart = plot(fig, show_link=False, output_type='div')
+        return chart
+    else:
+        return fig
 
 def plot_sma_indicator(dates, df_index, sym_price, symbol, sma_indicator, sma_quality,
                        title="SMA Indicator", fig_size=(12, 6)):
