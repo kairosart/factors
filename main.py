@@ -197,6 +197,7 @@ def showvalues():
         portf_value = fetchOnlineData(start_d, symbol, dt.date.today())
     else:
         return render_template('error.html',
+                                form='showvalues',
                                 error="Lookback date must be at least 30 days earlier today.")
 
 
@@ -305,7 +306,7 @@ def introStartValues():
     elif request.method == 'GET':
 
         return render_template('startValuesForm.html',
-                               form = form,
+                               form = 'form',
                                data=tickers)
 
 # Initial form to get values for price forecasting
@@ -355,6 +356,7 @@ def showforecastform():
                 # name of template
                 "error.html",
                 # now we pass in our variables into the template
+                form='showforecastform',
                 error="Error downloading data from Yahoo. Try again",
             )
 

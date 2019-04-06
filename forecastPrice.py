@@ -18,7 +18,7 @@ from indicators import plot_stock_prices_prediction, get_indicators, \
     plot_stock_prices_prediction_XGBoost
 from statsmodels.tsa.arima_model import ARIMA, ARIMAResults
 
-from util import slice_df, create_dataset
+from util import slice_df, create_dataset, model_report
 
 # TA Library (https://github.com/bukosabino/ta)
 from ta import *
@@ -163,7 +163,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # load model
         model = pickle.load(open("./xgboost.pkl", "rb"))
 
-        # Lookback data
+        # Setting dates and prices dataframe
         lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
         dates = pd.date_range(lookback_date, periods=forecast_lookback)
         #df_prices = slice_df(portf_value, dates)
@@ -218,48 +218,12 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Adding value to predictions dataframe for plotting
         lst.append([p, bussines_days.values[0]])
         df_predictions = pd.DataFrame(lst, columns=cols)
+        df_predictions.index  = df_predictions['date']
+        del df_predictions['date']
 
         # TODO Calculate metrics
-
-        # Daily return
-        # Get last row of df_prices
-        df_predictions.index  = df_predictions['date']
-        last_date = df_prices.loc[df_prices.index[-1]].name
-        last_date = last_date.strftime("%Y-%m-%d")
-        last_price = df_prices.loc[df_prices.index[-1]][0]
-
-        # Add last date and price to dataframe
-        df_predictions.loc[len(df_predictions)] = [last_price, last_date ]
-        df_predictions.set_index('date', inplace=True)
-        df_predictions.index = pd.to_datetime(df_predictions.index, format='%Y-%m-%d')
-        df_predictions.index = df_predictions.index.strftime("%Y-%m-%d")
-        df_predictions.sort_index(inplace=True)
-
-
-        # Daily Return Percentage change between the current and a prior element.
-        drp = df_predictions.pct_change(1)
-        # Rename price column to % variation
-        drp.rename(columns={'Price': '%\u25B3'}, inplace=True)
-
-        # Compute the price difference of two elements
-        diff = df_predictions.diff()
-        # Rename price column to $ variation
-        diff.rename(columns={'Price': '$\u25B3'}, inplace=True)
-
-        # Concat diff with drp
-        metric = pd.concat([diff, drp], axis=1)
-
-        # Concat forecast prices with metric
-        metric = pd.concat([df_predictions, diff, drp], axis=1)
-        metric.rename(columns={'Price': 'Forecast'}, inplace=True)
-
-        # Clean NaN
-        metric = metric.fillna(0)
-
-        # Set decimals to 2
-        metric['Forecast'] = metric['Forecast'].apply(lambda x: round(x, 2))
-        metric['%\u25B3'] = metric['%\u25B3'].apply(lambda x: round(x, 2))
-        metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 2))
+        # Create ARIMA Report
+        metric = model_report(df_predictions)
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df_predictions, symbol)
@@ -460,42 +424,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         # Create ARIMA Report
         df_predictions = df[['Price']].copy()
-        df_predictions['date'] = df_predictions.index
-        last_date = df_prices.loc[df_prices.index[-1]].name
-        last_date = last_date.strftime("%Y-%m-%d")
-        last_price = df_prices.loc[df_prices.index[-1]][0]
+        metric = model_report(df_predictions)
 
-        # Add last date and price to dataframe
-        df_predictions.loc[len(df_predictions)] = [last_price, last_date]
-        df_predictions.set_index('date', inplace=True)
-        df_predictions.index = pd.to_datetime(df_predictions.index, format='%Y-%m-%d')
-        df_predictions.index = df_predictions.index.strftime("%Y-%m-%d")
-        df_predictions.sort_index(inplace=True)
-
-        # Daily Return Percentage change between the current and a prior element.
-        drp = df_predictions.pct_change(1)
-        # Rename price column to % variation
-        drp.rename(columns={'Price': '%\u25B3'}, inplace=True)
-
-        # Compute the price difference of two elements
-        diff = df_predictions.diff()
-        # Rename price column to $ variation
-        diff.rename(columns={'Price': '$\u25B3'}, inplace=True)
-
-        # Concat diff with drp
-        #metric = pd.concat([diff, drp], axis=1)
-
-        # Concat forecast prices with metric
-        metric = pd.concat([df_predictions, diff, drp], axis=1)
-        metric.rename(columns={'Price': 'Forecast'}, inplace=True)
-
-        # Clean NaN
-        metric = metric.fillna(0)
-
-        # Set decimals to 2
-        metric['Forecast'] = metric['Forecast'].apply(lambda x: round(x, 2))
-        metric['%\u25B3'] = metric['%\u25B3'].apply(lambda x: round(x, 3))
-        metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 3))
 
 
         # TODO Accuracy metrics https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/

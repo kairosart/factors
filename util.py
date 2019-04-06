@@ -270,7 +270,35 @@ def create_dataset(dataset):
     return np.asarray(dataX), np.asarray(dataY)
 
 
+def model_report(df_predictions):
+    '''
 
+    :param df_predictions: Predictioons dataframe
+    :return: Metric dataframe
+    '''
+
+    # Daily Return Percentage change between the current and a prior element.
+    drp = df_predictions.pct_change(1)
+    # Rename price column to % variation
+    drp.rename(columns={'Price': '%\u25B3'}, inplace=True)
+
+    # Compute the price difference of two elements
+    diff = df_predictions.diff()
+    # Rename price column to $ variation
+    diff.rename(columns={'Price': '$\u25B3'}, inplace=True)
+
+    # Concat forecast prices with metric
+    metric = pd.concat([df_predictions, diff, drp], axis=1)
+    metric.rename(columns={'Price': 'Forecast'}, inplace=True)
+
+    # Clean NaN
+    metric = metric.fillna(0)
+
+    # Set decimals to 2
+    metric['Forecast'] = metric['Forecast'].apply(lambda x: round(x, 2))
+    metric['%\u25B3'] = metric['%\u25B3'].apply(lambda x: round(x, 3))
+    metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 3))
+    return metric
 
 if __name__=="__main__":
     get_nasdaq_tickers()
