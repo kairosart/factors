@@ -343,13 +343,13 @@ def showforecastform():
         # Get lookback date of data to train and test
         start_d = forecast_date - dt.timedelta(forecast_lookback)
         start_d = f"{start_d:%Y-%m-%d}"
-        yesterday = dt.date.today() - dt.timedelta(1)
+        #yesterday = dt.date.today() - dt.timedelta(1)
 
         # Import data from Yahoo
         if result['model_Selection'] == 'model1' or result['model_Selection'] == 'model2':
-            portf_value = fetchOnlineData(start_d, symbol, yesterday, del_cols=False)
+            portf_value = fetchOnlineData(start_d, symbol, forecast_date, del_cols=False)
         else:
-            portf_value = fetchOnlineData(start_d, symbol, yesterday)
+            portf_value = fetchOnlineData(start_d, symbol, forecast_date)
 
         if not isinstance(portf_value, pd.DataFrame):
             return render_template(
@@ -364,8 +364,8 @@ def showforecastform():
         # XGBoost model
         if result['model_Selection'] == 'model1':
 
-            symbol, start_d, yesterday,  plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
-                                                                                   forecast_time, start_d, yesterday,
+            symbol, start_d, forecast_date,  plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
+                                                                                   forecast_time, start_d, forecast_date,
                                                                                    forecast_lookback)
 
             final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
@@ -389,8 +389,8 @@ def showforecastform():
         # KNN model
         elif result['model_Selection'] == 'model2':
 
-            symbol, start_d, yesterday,  plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
-                                                                                   forecast_time, start_d, yesterday,
+            symbol, start_d, forecast_date,  plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
+                                                                                   forecast_time, start_d, forecast_date,
                                                                                    forecast_lookback)
 
             final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
@@ -413,7 +413,7 @@ def showforecastform():
 
         # ARIMA Model
         elif result['model_Selection'] == 'model3':
-            symbol, start_d, yesterday, plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value,
+            symbol, start_d, forecast_date, plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value,
                                                                                                  forecast_model,
                                                                                                  forecast_time, start_d,
                                                                                                  forecast_date,
@@ -437,8 +437,8 @@ def showforecastform():
             )
         # LSTM Model
         elif result['model_Selection'] == 'model4':
-            symbol, start_d, yesterday, plot_prices_pred = showforcastpricesvalues(symbol, portf_value, forecast_model,
-                                                                                   forecast_time, start_d, yesterday,
+            symbol, start_d, forecast_date, plot_prices_pred, daily_return_percentage = showforcastpricesvalues(symbol, portf_value, forecast_model,
+                                                                                   forecast_time, start_d, forecast_date,
                                                                                    forecast_lookback)
             final_forecast_day = dt.date.today() + dt.timedelta(forecast_time)
             final_forecast_day = f"{final_forecast_day:%Y-%m-%d}"
@@ -452,6 +452,7 @@ def showforecastform():
                 forecast_time=forecast_time,
                 forecast_lookback=forecast_lookback,
                 forecast_final_date=final_forecast_day,
+                daily_return_percentage=Markup(daily_return_percentage.to_html(classes="table-sm")),
                 div_placeholder_stock_prices_pred=Markup(plot_prices_pred),
                 titles=['na', 'Stock Prices '],
                 model='LSTM',

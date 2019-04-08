@@ -1222,7 +1222,7 @@ def plot_stock_prices_prediction_XGBoost(df_prices, df, title="Stock prices pred
                             dict(step='all')
                         ])
                 ),
-                range=[df_prices.values[0], df.values[1]]),
+                range=[df_prices.values[0], df.values]),
 
         yaxis = dict(
                 title=ylabel,

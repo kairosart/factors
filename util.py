@@ -58,7 +58,7 @@ def df_to_cvs(df, symbol):
 
 def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True):
     # Add a day to dt_end for Yahoo purpose
-    dt_end = dt.date.today() + dt.timedelta(1)
+    dt_end = dt_end + dt.timedelta(1)
 
     try:
         # Get data of trading days between the start and the end.

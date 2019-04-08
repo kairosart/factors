@@ -77,7 +77,6 @@ def prepare_data_for_metrics(portf_value, symbol):
 
     return X_train, X_test, y_train, y_test
 
-# TODO Change the way of predicting. Instead of X_test use forecast_time
 def model_fit_pred(model, X_train, y_train, X_test, y_test):
     '''Fit a model and get predictions and metrics'''
 
@@ -163,10 +162,11 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # load model
         model = pickle.load(open("./xgboost.pkl", "rb"))
 
-        # Setting dates and prices dataframe
-        lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
-        dates = pd.date_range(lookback_date, periods=forecast_lookback)
-        #df_prices = slice_df(portf_value, dates)
+        # Bussines days
+        start = forecast_date + dt.timedelta(1)
+        rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
+        bussines_days = rng.strftime('%Y-%m-%d')
+
         df_prices = portf_value[['Adj Close']].copy()
 
         # Create datafrane with all TA indicators
@@ -193,15 +193,12 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         features = df[['others_cr', 'trend_ema_fast', 'volatility_kcl']]
         dataset_scaled = scaler.fit_transform(features)
 
-        # Scale X_test (Adj_Close)
+        # Scale Adj_Close
         scaler1 = MinMaxScaler(feature_range=(0, 1))
         feature = df[['Adj_Close']]
         X_test_scaled = scaler1.fit_transform(feature)
 
-        # Next Bussines days
-        start = forecast_date.strftime("%Y-%m-%d")
-        rng = pd.date_range(pd.Timestamp(start), periods=1, freq='B')
-        bussines_days = rng.strftime('%Y-%m-%d')
+
 
         # Setting prediction dataframe cols and list for saving predictions
         cols = ['Price', 'date']
@@ -218,11 +215,17 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Adding value to predictions dataframe for plotting
         lst.append([p, bussines_days.values[0]])
         df_predictions = pd.DataFrame(lst, columns=cols)
-        df_predictions.index  = df_predictions['date']
-        del df_predictions['date']
 
-        # TODO Calculate metrics
-        # Create ARIMA Report
+        # Adding last price to predictions dataframe to calculate return
+        last_date = df_prices.loc[df_prices.index[-1]].name
+        last_date = last_date.strftime("%Y-%m-%d")
+        df_predictions.index  = df_predictions['date']
+        last_price = df_prices.loc[df_prices.index[-1]][0]
+        df_predictions.loc[len(df_predictions)] = [last_price, last_date]
+        df_predictions.set_index('date', inplace=True)
+        df_predictions.sort_index(inplace=True)
+
+        # Create Report
         metric = model_report(df_predictions)
 
         # Plot chart
@@ -240,10 +243,11 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # load model
         model = pickle.load(open("./knn.pkl", "rb"))
 
-        # Lookback data
-        lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
-        dates = pd.date_range(lookback_date, periods=forecast_lookback)
-        # df_prices = slice_df(portf_value, dates)
+        # Bussines days
+        start = forecast_date + dt.timedelta(1)
+        rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
+        bussines_days = rng.strftime('%Y-%m-%d')
+
         df_prices = portf_value[['Adj Close']].copy()
 
         # Create datafrane with all TA indicators
@@ -270,15 +274,10 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         features = df[['others_cr', 'trend_ema_fast', 'volatility_kcl']]
         dataset_scaled = scaler.fit_transform(features)
 
-        # Scale X_test (Adj_Close)
+        # Scale Adj_Close
         scaler1 = MinMaxScaler(feature_range=(0, 1))
         feature = df[['Adj_Close']]
         X_test_scaled = scaler1.fit_transform(feature)
-
-        # Next Bussines days
-        start = forecast_date.strftime("%Y-%m-%d")
-        rng = pd.date_range(pd.Timestamp(start), periods=1, freq='B')
-        bussines_days = rng.strftime('%Y-%m-%d')
 
         # Setting prediction dataframe cols and list for saving predictions
         cols = ['Price', 'date']
@@ -296,44 +295,17 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         lst.append([p, bussines_days.values[0]])
         df_predictions = pd.DataFrame(lst, columns=cols)
 
-        # Daily return
-        # Get last row of df_prices
-        df_predictions.index = df_predictions['date']
+        # Adding last price to predictions dataframe to calculate return
         last_date = df_prices.loc[df_prices.index[-1]].name
         last_date = last_date.strftime("%Y-%m-%d")
+        df_predictions.index = df_predictions['date']
         last_price = df_prices.loc[df_prices.index[-1]][0]
-
-        # Add last date and price to dataframe
         df_predictions.loc[len(df_predictions)] = [last_price, last_date]
         df_predictions.set_index('date', inplace=True)
-        df_predictions.index = pd.to_datetime(df_predictions.index, format='%Y-%m-%d')
-        df_predictions.index = df_predictions.index.strftime("%Y-%m-%d")
         df_predictions.sort_index(inplace=True)
 
-        # Daily Return Percentage change between the current and a prior element.
-        drp = df_predictions.pct_change(1)
-        # Rename price column to % variation
-        drp.rename(columns={'Price': '%\u25B3'}, inplace=True)
-
-        # Compute the price difference of two elements
-        diff = df_predictions.diff()
-        # Rename price column to $ variation
-        diff.rename(columns={'Price': '$\u25B3'}, inplace=True)
-
-        # Concat diff with drp
-        metric = pd.concat([diff, drp], axis=1)
-
-        # Concat forecast prices with metric
-        metric = pd.concat([df_predictions, diff, drp], axis=1)
-        metric.rename(columns={'Price': 'Forecast'}, inplace=True)
-
-        # Clean NaN
-        metric = metric.fillna(0)
-
-        # Set decimals to 2
-        metric['Forecast'] = metric['Forecast'].apply(lambda x: round(x, 2))
-        metric['%\u25B3'] = metric['%\u25B3'].apply(lambda x: round(x, 2))
-        metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 2))
+        # Create Report
+        metric = model_report(df_predictions)
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df_predictions, symbol)
@@ -444,15 +416,17 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         dates = pd.date_range(lookback_date, periods=forecast_lookback + 1)
         df_prices = slice_df(portf_value, dates)
 
+        #TODO Revise first dates
+
         # Bussines days
         # Check whether today is on portf_value
-        lvi =  pd.Timestamp.date(portf_value.last_valid_index())
+        lvi = pd.Timestamp.date(portf_value.last_valid_index())
         today = dt.date.today()
         if lvi == today:
             start = forecast_date + dt.timedelta(1)
         else:
             start = forecast_date
-        rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
+        rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d')
 
         # Setting prediction dataframe cols and list for adding rows to dataframe
@@ -493,16 +467,24 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
             # Adding value to predictions dataframe
             lst.append([prediction, i])
-            df = pd.DataFrame(lst, columns=cols)
+            df_predictions = pd.DataFrame(lst, columns=cols)
 
-        df.set_index('date', inplace=True)
+            # Adding last price to predictions dataframe to calculate return
+            last_date = df_prices.loc[df_prices.index[-1]].name
+            last_date = last_date.strftime("%Y-%m-%d")
+            df_predictions.index = df_predictions['date']
+            last_price = df_prices.loc[df_prices.index[-1]][0]
+            df_predictions.loc[len(df_predictions)] = [last_price, last_date]
+            df_predictions.set_index('date', inplace=True)
+            df_predictions.sort_index(inplace=True)
+
+            # Create Report
+            metric = model_report(df_predictions)
 
 
         # Plot chart
-        plot_prices_pred = plot_stock_prices_prediction_LSTM(df_prices, df, symbol)
-        return symbol, start_d, forecast_date, plot_prices_pred
-
-        #TODO Add results to chart page
+        plot_prices_pred = plot_stock_prices_prediction_LSTM(df_prices, df_predictions, symbol)
+        return symbol, start_d, forecast_date, plot_prices_pred, metric
 
 
 
