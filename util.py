@@ -94,7 +94,7 @@ def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True):
 
 # TODO Create function to get data from Alpha Vantage https://www.alphavantage.co
 # API key is: 477OAZQ4753FSGAI
-
+# Examples: https://github.com/RomelTorres/alpha_vantage
 
 
 def get_orders_data_file(basefilename):
@@ -304,8 +304,6 @@ def model_report(df_predictions, df_prices):
     # Clean NaN
     metric = metric.fillna(0)
 
-    # Create date column
-    metric['date'] = metric.index
 
     # Reset index
     metric.reset_index(inplace=True)
