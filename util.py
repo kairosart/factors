@@ -270,12 +270,22 @@ def create_dataset(dataset):
     return np.asarray(dataX), np.asarray(dataY)
 
 
-def model_report(df_predictions):
+def model_report(df_predictions, df_prices):
     '''
 
     :param df_predictions: Predictioons dataframe
+    :param df_prices: Prices dataframe
     :return: Metric dataframe
     '''
+
+    # Adding last price to predictions dataframe to calculate return
+    last_date = df_prices.loc[df_prices.index[-1]].name
+    last_date = last_date.strftime("%Y-%m-%d")
+    df_predictions.index = df_predictions['date']
+    last_price = df_prices.loc[df_prices.index[-1]][0]
+    df_predictions.loc[len(df_predictions)] = [last_price, last_date]
+    df_predictions.set_index('date', inplace=True)
+    df_predictions.sort_index(inplace=True)
 
     # Daily Return Percentage change between the current and a prior element.
     drp = df_predictions.pct_change(1)
@@ -293,6 +303,12 @@ def model_report(df_predictions):
 
     # Clean NaN
     metric = metric.fillna(0)
+
+    # Create date column
+    metric['date'] = metric.index
+
+    # Reset index
+    metric.reset_index(inplace=True)
 
     # Set decimals to 2
     metric['Forecast'] = metric['Forecast'].apply(lambda x: round(x, 2))

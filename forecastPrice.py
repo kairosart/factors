@@ -216,17 +216,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         lst.append([p, bussines_days.values[0]])
         df_predictions = pd.DataFrame(lst, columns=cols)
 
-        # Adding last price to predictions dataframe to calculate return
-        last_date = df_prices.loc[df_prices.index[-1]].name
-        last_date = last_date.strftime("%Y-%m-%d")
-        df_predictions.index  = df_predictions['date']
-        last_price = df_prices.loc[df_prices.index[-1]][0]
-        df_predictions.loc[len(df_predictions)] = [last_price, last_date]
-        df_predictions.set_index('date', inplace=True)
-        df_predictions.sort_index(inplace=True)
-
         # Create Report
-        metric = model_report(df_predictions)
+        metric = model_report(df_predictions, df_prices)
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df_predictions, symbol)
@@ -295,17 +286,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         lst.append([p, bussines_days.values[0]])
         df_predictions = pd.DataFrame(lst, columns=cols)
 
-        # Adding last price to predictions dataframe to calculate return
-        last_date = df_prices.loc[df_prices.index[-1]].name
-        last_date = last_date.strftime("%Y-%m-%d")
-        df_predictions.index = df_predictions['date']
-        last_price = df_prices.loc[df_prices.index[-1]][0]
-        df_predictions.loc[len(df_predictions)] = [last_price, last_date]
-        df_predictions.set_index('date', inplace=True)
-        df_predictions.sort_index(inplace=True)
-
         # Create Report
-        metric = model_report(df_predictions)
+        metric = model_report(df_predictions, df_prices)
 
         # Plot chart
         plot_prices_pred = plot_stock_prices_prediction_XGBoost(df_prices, df_predictions, symbol)
@@ -394,10 +376,11 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         df.set_index('date', inplace=True)
         df.rename(columns = {0:'Price'}, inplace=True)
 
-        # Create ARIMA Report
-        df_predictions = df[['Price']].copy()
-        metric = model_report(df_predictions)
 
+        df_predictions = df[['Price']].copy()
+
+        # Create Report
+        metric = model_report(df_predictions, df_prices)
 
 
         # TODO Accuracy metrics https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/
@@ -419,13 +402,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         #TODO Revise first dates
 
         # Bussines days
-        # Check whether today is on portf_value
-        lvi = pd.Timestamp.date(portf_value.last_valid_index())
-        today = dt.date.today()
-        if lvi == today:
-            start = forecast_date + dt.timedelta(1)
-        else:
-            start = forecast_date
+        start = forecast_date + dt.timedelta(1)
         rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d')
 
@@ -469,17 +446,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             lst.append([prediction, i])
             df_predictions = pd.DataFrame(lst, columns=cols)
 
-            # Adding last price to predictions dataframe to calculate return
-            last_date = df_prices.loc[df_prices.index[-1]].name
-            last_date = last_date.strftime("%Y-%m-%d")
-            df_predictions.index = df_predictions['date']
-            last_price = df_prices.loc[df_prices.index[-1]][0]
-            df_predictions.loc[len(df_predictions)] = [last_price, last_date]
-            df_predictions.set_index('date', inplace=True)
-            df_predictions.sort_index(inplace=True)
-
             # Create Report
-            metric = model_report(df_predictions)
+            metric = model_report(df_predictions, df_prices)
 
 
         # Plot chart
