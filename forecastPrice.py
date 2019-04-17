@@ -376,8 +376,12 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         df.set_index('date', inplace=True)
         df.rename(columns = {0:'Price'}, inplace=True)
 
-
+        # Prepare dataframe for metrics
         df_predictions = df[['Price']].copy()
+        df_predictions['date'] = df_predictions.index
+
+        # Reset index
+        df_predictions.reset_index(drop=True)
 
         # Create Report
         metric = model_report(df_predictions, df_prices)

@@ -306,7 +306,7 @@ def introStartValues():
     elif request.method == 'GET':
 
         return render_template('startValuesForm.html',
-                               form = 'form',
+                               form =form,
                                data=tickers)
 
 # Initial form to get values for price forecasting
