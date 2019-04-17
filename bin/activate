@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/emi/Envs/factors"
+VIRTUAL_ENV="/home/emi/PycharmProjects/factors"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
