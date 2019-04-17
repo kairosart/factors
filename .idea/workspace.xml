@@ -2,37 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/factors.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/factors.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KNN_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/KNN_forecasting_prices.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XGBoost.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/XGBoost.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/activate" beforeDir="false" afterPath="$PROJECT_DIR$/bin/activate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/activate.csh" beforeDir="false" afterPath="$PROJECT_DIR$/bin/activate.csh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/activate.fish" beforeDir="false" afterPath="$PROJECT_DIR$/bin/activate.fish" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/activate.ps1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/activate_this.py" beforeDir="false" afterPath="$PROJECT_DIR$/bin/activate_this.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/easy_install" beforeDir="false" afterPath="$PROJECT_DIR$/bin/easy_install" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/easy_install-3.6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/get_env_details" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/pip" beforeDir="false" afterPath="$PROJECT_DIR$/bin/pip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/pip3" beforeDir="false" afterPath="$PROJECT_DIR$/bin/pip3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/pip3.6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/postactivate" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/postdeactivate" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/preactivate" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/predeactivate" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/python" beforeDir="false" afterPath="$PROJECT_DIR$/bin/python" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/python-config" beforeDir="false" afterPath="$PROJECT_DIR$/bin/python-config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/python3" beforeDir="false" afterPath="$PROJECT_DIR$/bin/python3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/python3.6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/wheel" beforeDir="false" afterPath="$PROJECT_DIR$/bin/wheel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forecastPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/forecastPrice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/knn.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/knn.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xgboost.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/xgboost.pkl" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -294,7 +264,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -493,21 +463,7 @@
       <workItem from="1555265779553" duration="2448000" />
       <workItem from="1555270206644" duration="2570000" />
       <workItem from="1555443989519" duration="2765000" />
-      <workItem from="1555490002603" duration="6467000" />
-    </task>
-    <task id="LOCAL-00160" summary="Creating XGBoost model notebook.">
-      <created>1551041750036</created>
-      <option name="number" value="00160" />
-      <option name="presentableId" value="LOCAL-00160" />
-      <option name="project" value="LOCAL" />
-      <updated>1551041750036</updated>
-    </task>
-    <task id="LOCAL-00161" summary="Creating XGBoost model notebook.">
-      <created>1551042673383</created>
-      <option name="number" value="00161" />
-      <option name="presentableId" value="LOCAL-00161" />
-      <option name="project" value="LOCAL" />
-      <updated>1551042673383</updated>
+      <workItem from="1555490002603" duration="7477000" />
     </task>
     <task id="LOCAL-00162" summary="Creating XGBoost model notebook.">
       <created>1551043337915</created>
@@ -838,11 +794,25 @@
       <option name="project" value="LOCAL" />
       <updated>1554836443794</updated>
     </task>
-    <option name="localTasksCounter" value="209" />
+    <task id="LOCAL-00209" summary="Creating model_report() for showing numerical metrics.">
+      <created>1555528292521</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1555528292522</updated>
+    </task>
+    <task id="LOCAL-00210" summary="Creating model_report() for showing numerical metrics.">
+      <created>1555528559466</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL-00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1555528559467</updated>
+    </task>
+    <option name="localTasksCounter" value="211" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14250000" />
+    <option name="totallyTimeSpent" value="15260000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -861,13 +831,13 @@
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32520324" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20376523" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.20376523" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.40642303" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32752612" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.3255814" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" weight="0.2591362" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" visible="true" weight="0.2580288" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5050398" side_tool="true" weight="0.3821138" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32779622" />
       <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32963374" />
@@ -877,9 +847,9 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.5006954" side_tool="true" visible="true" weight="0.25080386" />
+      <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.50149256" side_tool="true" visible="true" weight="0.25080386" />
       <window_info anchor="right" id="Database" order="4" weight="0.329582" />
-      <window_info active="true" anchor="right" id="SciView" order="5" sideWeight="0.4993046" visible="true" weight="0.25080386" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.49850747" visible="true" weight="0.25080386" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.24403183" />
