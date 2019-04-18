@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KNN_forecasting_prices.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/KNN_forecasting_prices.ipynb" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="283" column="4" selection-start-line="283" selection-start-column="4" selection-end-line="283" selection-end-column="49" />
+            <state relative-caret-position="1216">
+              <caret line="64" column="16" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="16" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
               </folding>
@@ -110,10 +111,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-342" />
+            <state relative-caret-position="304">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -140,8 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>to_html</find>
-      <find>yesterday</find>
       <find>Markup</find>
       <find>progress</find>
       <find>submitButton1</find>
@@ -170,6 +171,8 @@
       <find>startva</find>
       <find />
       <find>mean_squared_error</find>
+      <find>pandas_datareader</find>
+      <find>pdr</find>
     </findStrings>
     <replaceStrings>
       <replace>symbol</replace>
@@ -482,28 +485,7 @@
       <workItem from="1555265779553" duration="2448000" />
       <workItem from="1555270206644" duration="2570000" />
       <workItem from="1555443989519" duration="2765000" />
-      <workItem from="1555490002603" duration="8477000" />
-    </task>
-    <task id="LOCAL-00163" summary="Creating XGBoost model backend.">
-      <created>1551128885753</created>
-      <option name="number" value="00163" />
-      <option name="presentableId" value="LOCAL-00163" />
-      <option name="project" value="LOCAL" />
-      <updated>1551128885754</updated>
-    </task>
-    <task id="LOCAL-00164" summary="Creating XGBoost model backend.">
-      <created>1551215751104</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1551215751104</updated>
-    </task>
-    <task id="LOCAL-00165" summary="Creating XGBoost model backend.">
-      <created>1551275637910</created>
-      <option name="number" value="00165" />
-      <option name="presentableId" value="LOCAL-00165" />
-      <option name="project" value="LOCAL" />
-      <updated>1551275637910</updated>
+      <workItem from="1555490002603" duration="10050000" />
     </task>
     <task id="LOCAL-00166" summary="Creating XGBoost model backend.">
       <created>1551380808934</created>
@@ -827,11 +809,32 @@
       <option name="project" value="LOCAL" />
       <updated>1555529225324</updated>
     </task>
-    <option name="localTasksCounter" value="212" />
+    <task id="LOCAL-00212" summary="requirements.txt">
+      <created>1555530242984</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1555530242985</updated>
+    </task>
+    <task id="LOCAL-00213" summary="requirements.txt">
+      <created>1555530436543</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1555530436543</updated>
+    </task>
+    <task id="LOCAL-00214" summary="requirements.txt">
+      <created>1555530530066</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL-00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1555530530066</updated>
+    </task>
+    <option name="localTasksCounter" value="215" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16260000" />
+    <option name="totallyTimeSpent" value="17833000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -846,6 +849,32 @@
     <frame x="0" y="-1" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4943609" weight="0.15487674" />
+      <window_info id="Structure" order="1" sideWeight="0.5056391" side_tool="true" weight="0.18461539" />
+      <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32520324" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.20376523" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.40642303" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32752612" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.3255814" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" weight="0.2580288" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5050398" side_tool="true" weight="0.3821138" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32779622" />
+      <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32963374" />
+      <window_info anchor="bottom" id="Messages" order="12" />
+      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.50149256" side_tool="true" weight="0.25080386" />
+      <window_info anchor="right" id="Database" order="4" weight="0.329582" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.49850747" weight="0.25080386" />
+    </layout>
+    <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.15487674" />
       <window_info id="Structure" order="1" sideWeight="0.5056391" side_tool="true" weight="0.18461539" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
@@ -870,27 +899,6 @@
       <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.50149256" side_tool="true" visible="true" weight="0.25080386" />
       <window_info anchor="right" id="Database" order="4" weight="0.329582" />
       <window_info anchor="right" id="SciView" order="5" sideWeight="0.49850747" visible="true" weight="0.25080386" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.24403183" />
-      <window_info id="Structure" order="1" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
-      <window_info id="Favorites" order="2" sideWeight="0.5041322" side_tool="true" weight="0.24403183" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32963374" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3437863" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867374" weight="0.37402886" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32868758" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.32752612" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32963374" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50132626" side_tool="true" weight="0.37402886" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32963374" />
-      <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32963374" />
-      <window_info anchor="bottom" id="Messages" order="12" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -941,7 +949,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="LSTM Model." />
     <MESSAGE value="LSTM Model front end." />
     <MESSAGE value="Creatind Decision Tree Regresion Jupyter Notebook." />
     <MESSAGE value="Fixing save data to csv file." />
@@ -966,7 +973,8 @@
     <MESSAGE value="Trading Agent. Validate lookback date." />
     <MESSAGE value="Trading Agent. Modifying strategy_learner_getting_online_data.ipnb for checking the testing results." />
     <MESSAGE value="Creating model_report() for showing numerical metrics." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating model_report() for showing numerical metrics." />
+    <MESSAGE value="requirements.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="requirements.txt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1302,16 +1310,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="283" column="4" selection-start-line="283" selection-start-column="4" selection-end-line="283" selection-end-column="49" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="379">
@@ -1334,7 +1332,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342" />
+        <state relative-caret-position="304">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1216">
+          <caret line="64" column="16" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="16" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
