@@ -403,8 +403,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         dates = pd.date_range(lookback_date, periods=forecast_lookback + 1)
         df_prices = slice_df(portf_value, dates)
 
-        #TODO Revise first dates
-
         # Bussines days
         start = forecast_date + dt.timedelta(1)
         rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
@@ -450,8 +448,8 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             lst.append([prediction, i])
             df_predictions = pd.DataFrame(lst, columns=cols)
 
-            # Create Report
-            metric = model_report(df_predictions, df_prices)
+        # Create Report
+        metric = model_report(df_predictions, df_prices)
 
 
         # Plot chart

@@ -343,13 +343,13 @@ def showforecastform():
         # Get lookback date of data to train and test
         start_d = forecast_date - dt.timedelta(forecast_lookback)
         start_d = f"{start_d:%Y-%m-%d}"
-        #yesterday = dt.date.today() - dt.timedelta(1)
+        yesterday = dt.date.today() - dt.timedelta(1)
 
         # Import data from Yahoo
         if result['model_Selection'] == 'model1' or result['model_Selection'] == 'model2':
-            portf_value = fetchOnlineData(start_d, symbol, forecast_date, del_cols=False)
+            portf_value = fetchOnlineData(start_d, symbol, yesterday, del_cols=False)
         else:
-            portf_value = fetchOnlineData(start_d, symbol, forecast_date)
+            portf_value = fetchOnlineData(start_d, symbol, yesterday)
 
         if not isinstance(portf_value, pd.DataFrame):
             return render_template(
