@@ -167,9 +167,10 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d')
 
-        df_prices = portf_value[['Adj Close']].copy()
+        df_prices = portf_value.copy()
 
         # Create datafrane with all TA indicators
+        # TODO Change to Alpha Vantage indicators?
         df = add_all_ta_features(portf_value, "Open", "High", "Low", "Close", "Volume", fillna=True)
 
         # Delete unuseful columns
@@ -185,8 +186,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # Rename column for correlation matrix. Can't have spaces.
         df.rename(columns={'Adj Close': 'Adj_Close'}, inplace=True)
 
-        # Reset index
-        df.reset_index(inplace=True)
 
         # Scale data for using reg:logistic as array
         scaler = MinMaxScaler(feature_range=(0, 1))
@@ -239,7 +238,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d')
 
-        df_prices = portf_value[['Adj Close']].copy()
+        df_prices = portf_value.copy()
 
         # Create datafrane with all TA indicators
         df = add_all_ta_features(portf_value, "Open", "High", "Low", "Close", "Volume", fillna=True)
@@ -256,9 +255,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
         # Rename column for correlation matrix. Can't have spaces.
         df.rename(columns={'Adj Close': 'Adj_Close'}, inplace=True)
-
-        # Reset index
-        df.reset_index(inplace=True)
 
         # Scale data for using reg:logistic as array
         scaler = MinMaxScaler(feature_range=(0, 1))
@@ -305,7 +301,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
 
         # Bussines days
-        # TODO Check start date
         start = forecast_date
         rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d')
@@ -390,11 +385,6 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         # load_model
         model = load_model('./lstm_model')
 
-        # Setting dates and prices dataframe
-        lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
-        dates = pd.date_range(lookback_date, periods=forecast_lookback + 1)
-        df_prices = slice_df(portf_value, dates)
-
         # Bussines days
         start = forecast_date + dt.timedelta(1)
         rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
@@ -435,17 +425,18 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
 
             # Adding last prediction to portf_value
             portf_value.loc[len(portf_value)] = [prediction, i]
+            portf_value.index = portf_value['date']
 
             # Adding value to predictions dataframe
             lst.append([prediction, i])
             df_predictions = pd.DataFrame(lst, columns=cols)
 
         # Create Report
-        metric = model_report(df_predictions, df_prices)
+        metric = model_report(df_predictions, portf_value)
 
 
         # Plot chart
-        plot_prices_pred = plot_stock_prices_prediction_LSTM(df_prices, df_predictions, symbol)
+        plot_prices_pred = plot_stock_prices_prediction_LSTM(portf_value, df_predictions, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, metric
 
 

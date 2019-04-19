@@ -343,7 +343,7 @@ def showforecastform():
         # Get lookback date of data to train and test
         start_d = forecast_date - dt.timedelta(forecast_lookback)
         start_d = f"{start_d:%Y-%m-%d}"
-        yesterday = dt.date.today() - dt.timedelta(1)
+        #yesterday = dt.date.today() - dt.timedelta(1)
         dates = pd.date_range(start_d, dt.date.today())
         # Import data from Yahoo
         if result['model_Selection'] == 'model1' or result['model_Selection'] == 'model2':
