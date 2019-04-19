@@ -9,7 +9,7 @@ import fix_yahoo_finance as yf
 yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_data, \
-    symbol_to_path, df_to_cvs
+    symbol_to_path, df_to_cvs, get_data_av
 from strategyLearner import strategyLearner
 from marketsim import market_simulator
 from indicators import get_momentum, get_sma, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
@@ -344,12 +344,14 @@ def showforecastform():
         start_d = forecast_date - dt.timedelta(forecast_lookback)
         start_d = f"{start_d:%Y-%m-%d}"
         yesterday = dt.date.today() - dt.timedelta(1)
-
+        dates = pd.date_range(start_d, dt.date.today())
         # Import data from Yahoo
         if result['model_Selection'] == 'model1' or result['model_Selection'] == 'model2':
-            portf_value = fetchOnlineData(start_d, symbol, yesterday, del_cols=False)
+            #portf_value = fetchOnlineData(start_d, symbol, yesterday, del_cols=False)
+            portf_value = get_data_av(symbol, dates, del_cols=False)
         else:
-            portf_value = fetchOnlineData(start_d, symbol, yesterday)
+            #portf_value = fetchOnlineData(start_d, symbol, yesterday)
+            portf_value = get_data_av(symbol, dates)
 
         if not isinstance(portf_value, pd.DataFrame):
             return render_template(

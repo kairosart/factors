@@ -303,21 +303,13 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         this model in practice as it would achieve the best performance.    
         '''
 
-        # Setting dates and prices dataframe
-        lookback_date = dt.date.today() - dt.timedelta(forecast_lookback)
-        dates = pd.date_range(lookback_date, periods=forecast_lookback + 1)
-        df_prices = slice_df(portf_value, dates)
 
         # Bussines days
-        # Check whether today is on portf_value
-        lvi =  pd.Timestamp.date(portf_value.last_valid_index())
-        today = dt.date.today()
-        if lvi == today:
-            start = forecast_date + dt.timedelta(1)
-        else:
-            start = forecast_date
-        rng = pd.date_range(pd.Timestamp(start),  periods=forecast_time, freq='B')
+        # TODO Check start date
+        start = forecast_date
+        rng = pd.date_range(pd.Timestamp(start), periods=forecast_time, freq='B')
         bussines_days = rng.strftime('%Y-%m-%d')
+
 
         # Setting prediction dataframe cols and list for adding rows to dataframe
         cols = ['Price', 'date', 'lower_band', 'upper_band', 'Std. Error']
@@ -357,7 +349,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             # Adding last prediction to portf_value
             prediction = futurePredict.item(0)
             portf_value.loc[len(portf_value)] = [prediction, i]
-
+            portf_value.index = portf_value['date']
             # Adding value to predictions dictionary
             lst.append([prediction, i, lower_band, upper_band, se])
 
@@ -384,13 +376,13 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         df_predictions.reset_index(drop=True)
 
         # Create Report
-        metric = model_report(df_predictions, df_prices)
+        metric = model_report(df_predictions, portf_value)
 
 
         # TODO Accuracy metrics https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/
 
         # Plot chart
-        plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)
+        plot_prices_pred = plot_stock_prices_prediction_ARIMA(portf_value, df, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, metric
 
     # LSTM

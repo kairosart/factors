@@ -40,7 +40,11 @@ def slice_df(df_to_slice, dates):
     # Slice the Data
     from_date = pd.to_datetime(dates.values[0])
     to_date = pd.to_datetime(dates.values[-1])
+    from_date = f"{from_date:%Y-%m-%d}"
+    to_date = f"{to_date:%Y-%m-%d}"
+
     df_slice = df_to_slice.loc[from_date:to_date, :]
+    print(df_slice)
     return df_slice
 
 
@@ -95,6 +99,49 @@ def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True):
 # TODO Create function to get data from Alpha Vantage https://www.alphavantage.co
 # API key is: 477OAZQ4753FSGAI
 # Examples: https://github.com/RomelTorres/alpha_vantage
+
+def get_data_av(symbol, dates, del_cols=True):
+    '''
+
+    :param symbol: Ticket symbol
+    :param dates: Dates for slicing
+    :param del_cols: Delete some columns
+    :return: Prices dataframe
+    '''
+
+    try:
+        from alpha_vantage.timeseries import TimeSeries
+        key = '477OAZQ4753FSGAI'
+        ts = TimeSeries(key=key)
+        ts = TimeSeries(key=key, retries='4')
+        ts = TimeSeries(key=key, output_format='pandas')
+
+        df, meta_data = ts.get_daily_adjusted(symbol=symbol, outputsize='full')
+
+        # Rename and Delete some columns
+        del df['7. dividend amount']
+        del df['8. split coefficient']
+        df.rename(columns={'1. open': 'Open'}, inplace=True)
+        df.rename(columns={'2. high': 'High'}, inplace=True)
+        df.rename(columns={'3. low': 'Low'}, inplace=True)
+        df.rename(columns={'4. close': 'Close'}, inplace=True)
+        df.rename(columns={'5. adjusted close': 'Adj Close'}, inplace=True)
+        df.rename(columns={'6. volume': 'Volume'}, inplace=True)
+
+        if len(df.index) > 0:
+            if del_cols == True:
+                del df['Open']
+                del df['High']
+                del df['Low']
+                del df['Close']
+                del df['Volume']
+
+
+            df = slice_df(df, dates)
+            return df
+    except:
+        return False
+
 
 
 def get_orders_data_file(basefilename):
@@ -280,7 +327,7 @@ def model_report(df_predictions, df_prices):
 
     # Adding last price to predictions dataframe to calculate return
     last_date = df_prices.loc[df_prices.index[-1]].name
-    last_date = last_date.strftime("%Y-%m-%d")
+    #last_date = last_date.strftime("%Y-%m-%d")
     df_predictions.index = df_predictions['date']
     last_price = df_prices.loc[df_prices.index[-1]][0]
     df_predictions.loc[len(df_predictions)] = [last_price, last_date]
