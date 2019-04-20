@@ -42,9 +42,7 @@ def slice_df(df_to_slice, dates):
     to_date = pd.to_datetime(dates.values[-1])
     from_date = f"{from_date:%Y-%m-%d}"
     to_date = f"{to_date:%Y-%m-%d}"
-
     df_slice = df_to_slice.loc[from_date:to_date, :]
-    print(df_slice)
     return df_slice
 
 

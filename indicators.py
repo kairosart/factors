@@ -137,11 +137,10 @@ def get_indicators(normed, symbol):
 
 
 
-def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel="Date", ylabel="Price", fig_size=(12, 6), output_type='py'):
+def plot_stock_prices(sym_price, symbol, title="Stock prices", xlabel="Date", ylabel="Price", fig_size=(12, 6), output_type='py'):
     """Plot Stock Prices.
 
     Parameters:
-    df_index: Date index
     sym_price: Price, typically adjusted close price, series of symbol
     title: Chart title
     xlabel: X axis title
@@ -153,15 +152,12 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
     Plot prices
     """
     trace_prices = go.Scatter(
-                x=df_index,
+                x=sym_price.index,
                 y=sym_price,
                 name = symbol,
                 line = dict(color = '#17BECF'),
                 fill='tonexty',
                 opacity = 0.8)
-
-
-
 
     data = [trace_prices]
 
@@ -193,7 +189,7 @@ def plot_stock_prices(df_index, sym_price, symbol, title="Stock prices", xlabel=
                             dict(step='all')
                         ])
                 ),
-                range = [df_index.values[0], df_index.values[1]]),
+                range = [sym_price.index[0], sym_price.index[-1]]),
 
         yaxis = dict(
                 title=ylabel,
@@ -270,7 +266,6 @@ def plot_momentum(df_index, sym_price, symbol, sym_mom, title="Momentum Indicato
     """Plot momentum and prices for a symbol.
 
     Parameters:
-    df_index: Date index
     sym_price: Price, typically adjusted close price, series of symbol
     sym_mom: Momentum of symbol
     fig_size: Width and height of the chart in inches

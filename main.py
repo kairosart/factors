@@ -1,5 +1,7 @@
 import os
 from flask import Flask, render_template, session, request, flash
+from ta import add_all_ta_features
+
 from forecastPrice import showforcastpricesvalues
 from form import StartValuesForm, get_tickers, pricesForecast
 import pandas as pd
@@ -206,40 +208,15 @@ def showvalues():
                                 error="Lookback date must be at least 30 days earlier today.")
 
 
-    # Save data to csv file
-    df_to_cvs(portf_value, symbol)
-
-    # ****Stock prices chart****
-    plot_prices = plot_stock_prices(portf_value.index, portf_value['Adj Close'], symbol)
-
-
-    # Normalize the prices Dataframe
-    normed = portf_value.copy()
-    normed = scaling_data(normed, 'Adj Close')
+    ###########################
+    # Create datafrane with all TA indicators
+    df = add_all_ta_features(portf_value, "Open", "High", "Low", "Close", "Volume", fillna=True)
 
 
 
-    # ****Momentum chart****
-    # Compute momentum
-    sym_mom = get_momentum(normed['Adj Close'], window=10)
+    ##########################
 
-    # ****Bollinger Bands****
-    # Compute rolling mean
-    rm_JPM = get_rolling_mean(portf_value['Adj Close'], window=10)
 
-    # Compute rolling standard deviation
-    rstd_JPM = get_rolling_std(portf_value['Adj Close'], window=10)
-
-    # Compute upper and lower bands
-    upper_band, lower_band = get_bollinger_bands(rm_JPM, rstd_JPM)
-
-    # ****Relative Strength Index (RSI)****
-    # Compute RSI
-    rsi_value = get_RSI(portf_value['Adj Close'])
-
-    # ****Simple moving average (SMA)****
-    # Compute SMA
-    sma, q = get_sma(normed['Adj Close'], window=10)
 
     # Session variables
     session['start_val'] = request.form['start_val']
@@ -251,25 +228,22 @@ def showvalues():
 
 
     # Price movements
+    adj_close = df['Adj Close']
+    plot_prices = plot_stock_prices(adj_close, symbol)
 
     # Create momentum chart
-    plot_mom = plot_momentum(portf_value.index, normed['Adj Close'], symbol, sym_mom, "Momentum Indicator", (12, 8))
+    sym_mom = df['momentum_ao']
+    plot_mom = plot_momentum(portf_value.index, df['Adj Close'], symbol, sym_mom, "Momentum Indicator", (12, 8))
 
 
     # Plot raw symbol values, rolling mean and Bollinger Bands
-    dates = pd.date_range(start_d, yesterday)
-    plot_boll = plot_bollinger(dates, portf_value.index, portf_value['Adj Close'], symbol, upper_band, lower_band,
-                               rm_JPM,
-                               num_std=1, title="Bollinger Indicator", fig_size=(12, 6))
+
 
     # Plot symbol values, SMA and SMA quality
-    plot_sma = plot_sma_indicator(dates, portf_value.index, normed['Adj Close'], symbol, sma, q,
-                                  "Simple Moving Average (SMA)")
 
 
     # Plot RSI
-    plot_rsi = plot_rsi_indicator(dates, portf_value.index, portf_value['Adj Close'], symbol, rsi_value, window=14,
-                                  title="RSI Indicator", fig_size=(12, 6))
+
     return render_template(
         # name of template
         "stockpriceschart.html",
@@ -285,9 +259,9 @@ def showvalues():
         titles = ['na', 'Stock Prices '],
         div_placeholder_stock_prices = Markup(plot_prices),
         div_placeholder_momentum = Markup(plot_mom),
-        div_placeholder_bollinger = Markup(plot_boll),
-        div_placeholder_sma = Markup(plot_sma),
-        div_placeholder_rsi = Markup(plot_rsi)
+        #div_placeholder_bollinger = Markup(plot_boll),
+        #div_placeholder_sma = Markup(plot_sma),
+        #div_placeholder_rsi = Markup(plot_rsi)
     )
 
 
