@@ -9,7 +9,7 @@ import fix_yahoo_finance as yf
 yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_data, \
-    symbol_to_path, df_to_cvs, get_data_av
+    symbol_to_path, df_to_cvs, get_data_av, scaling_data
 from strategyLearner import strategyLearner
 from marketsim import market_simulator
 from indicators import get_momentum, get_sma, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
@@ -193,8 +193,13 @@ def showvalues():
         lookback_date = dt.datetime.strptime(lookback_date, '%m/%d/%Y')
         start_d = f"{lookback_date:%Y-%m-%d}"
         yesterday = dt.date.today() - dt.timedelta(1)
+
+        # Import data from Alpha Vantage
+        dates = pd.date_range(start_d, dt.date.today())
+        portf_value = get_data_av(symbol, dates, del_cols=False)
+
         # Import data from Yahoo
-        portf_value = fetchOnlineData(start_d, symbol, dt.date.today())
+        #portf_value = fetchOnlineData(start_d, symbol, dt.date.today())
     else:
         return render_template('error.html',
                                 form='showvalues',
@@ -210,10 +215,9 @@ def showvalues():
 
     # Normalize the prices Dataframe
     normed = portf_value.copy()
-    #normed = scaling_data(normed, symbol)
+    normed = scaling_data(normed, 'Adj Close')
 
-    normed['date'] = portf_value.index
-    normed.set_index('date', inplace=True)
+
 
     # ****Momentum chart****
     # Compute momentum

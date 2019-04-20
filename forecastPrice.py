@@ -298,7 +298,7 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         This is the preferred method as it is how one would use             
         this model in practice as it would achieve the best performance.    
         '''
-
+        df_prices = portf_value.copy()
 
         # Bussines days
         start = forecast_date
@@ -371,19 +371,20 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
         df_predictions.reset_index(drop=True)
 
         # Create Report
-        metric = model_report(df_predictions, portf_value)
+        metric = model_report(df_predictions, df_prices)
 
 
         # TODO Accuracy metrics https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/
 
         # Plot chart
-        plot_prices_pred = plot_stock_prices_prediction_ARIMA(portf_value, df, symbol)
+        plot_prices_pred = plot_stock_prices_prediction_ARIMA(df_prices, df, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, metric
 
     # LSTM
     if forecast_model == 'model4':
         # load_model
         model = load_model('./lstm_model')
+        df_prices = portf_value.copy()
 
         # Bussines days
         start = forecast_date + dt.timedelta(1)
@@ -432,11 +433,11 @@ def showforcastpricesvalues(symbol, portf_value, forecast_model, forecast_time, 
             df_predictions = pd.DataFrame(lst, columns=cols)
 
         # Create Report
-        metric = model_report(df_predictions, portf_value)
+        metric = model_report(df_predictions, df_prices)
 
 
         # Plot chart
-        plot_prices_pred = plot_stock_prices_prediction_LSTM(portf_value, df_predictions, symbol)
+        plot_prices_pred = plot_stock_prices_prediction_LSTM(df_prices, df_predictions, symbol)
         return symbol, start_d, forecast_date, plot_prices_pred, metric
 
 
