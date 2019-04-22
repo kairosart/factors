@@ -7,21 +7,25 @@
 		<table class= "table table-sm">
             <tbody>
                 <tr>
-                    <td><p class="text-success">
-                        Symbol: <b>{{ symbol }}</b>
+                    <td>Symbol:
+                         <p class="text-success">
+                            <b>{{ symbol }}</b>
                         </p>
                     </td>
-                    <td><p class="text-success">
-                            Initial Capital: <b>{{ start_val }}</b>
+                    <td>Initial Capital:
+                        <p class="text-success">
+                            <b>{{ start_val }}</b>
                         </p>
                     </td>
-                    <td><p class="text-success">
-                            Commision: <b>{{ commission }}</b>
+                    <td>Commision:
+                        <p class="text-success">
+                             <b>{{ commission }}</b>
                         </p>
                     </td>
 
-                    <td><p class="text-success">
-                            Impact: <b>{{ impact }}</b>
+                    <td>Impact:
+                        <p class="text-success">
+                             <b>{{ impact }}</b>
                         </p>
                     </td>
                 </tr>
@@ -75,36 +79,8 @@
         </div>
     </div>
     {{ div_placeholder_stock_prices }}
-    <h2 id="Momentum"></h2>
-    <button class="btn btn-info" data-toggle="collapse" data-target="#moment">About Momentum</button>
-
-    <div id="moment" class="collapse">
-        <div class="card border-info mb-3" >
-            <div class="card-header">Info</div>
-                <div class="card-body">
-                    <h4 class="card-title">Momentum</h4>
-                    <p class="card-text">
-                    <strong>Type:</strong> It's a trend indicator.<br><br>
-
-                    <strong>Description:</strong> <br>
 
 
-                    <ul>It refers to the rate of change on price movements for a particular asset – that is, the speed at which the price is changing.</ul>
-                    <ul>If a trader wants to use a momentum-based strategy, he takes a long position in a stock or asset that has been trending up. If the stock is trending down, he takes a short position. Instead of the traditional philosophy of trading – buy low, sell high – momentum investing seeks to sell low and buy lower, or buy high and sell higher.</ul>
-                    <br><br>
-                    <span class="badge badge-success">BUY</span> If the trend line is up, the momentum investor should buy the stock.<br><br>
-
-                    <span class="badge badge-danger">SELL</span> If the trend line is down, the momentum investor should sell the stock.<br><br>
-                </p>
-                <a href="https://www.investopedia.com/articles/technical/081501.asp" target="_blank" class="alert-link">More info.</a>
-                <div align="right">
-                    <a href="#">Go to top</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{ div_placeholder_momentum }}
 
     <h2 id="Bollinger Bands"></h2>
     <button class="btn btn-info" data-toggle="collapse" data-target="#bollinger">About Bollinger</button>

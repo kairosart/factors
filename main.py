@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template, session, request, flash
+from sklearn.preprocessing import MinMaxScaler
 from ta import add_all_ta_features
 
 from forecastPrice import showforcastpricesvalues
@@ -11,7 +12,7 @@ import fix_yahoo_finance as yf
 yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_data, \
-    symbol_to_path, df_to_cvs, get_data_av, scaling_data
+    symbol_to_path, df_to_cvs, get_data_av, scaling_data, normalize_data
 from strategyLearner import strategyLearner
 from marketsim import market_simulator
 from indicators import get_momentum, get_sma, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
@@ -232,8 +233,7 @@ def showvalues():
     plot_prices = plot_stock_prices(adj_close, symbol)
 
     # Create momentum chart
-    sym_mom = df['momentum_ao']
-    plot_mom = plot_momentum(portf_value.index, df['Adj Close'], symbol, sym_mom, "Momentum Indicator", (12, 8))
+    plot_mom = plot_momentum(df, symbol, "Momentum Indicator")
 
 
     # Plot raw symbol values, rolling mean and Bollinger Bands

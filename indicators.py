@@ -5,6 +5,9 @@ import pandas as pd
 
 import copy
 import datetime as dt
+
+from sklearn.preprocessing import MinMaxScaler
+
 from util import get_exchange_days, normalize_data
 
 
@@ -261,30 +264,32 @@ def plot_cum_return(epoch, cum_return, title="Cumulative Return"):
     return chart
 
 
-def plot_momentum(df_index, sym_price, symbol, sym_mom, title="Momentum Indicator",
-                  fig_size=(12, 6), output_type='py'):
+def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
     """Plot momentum and prices for a symbol.
 
     Parameters:
-    sym_price: Price, typically adjusted close price, series of symbol
-    sym_mom: Momentum of symbol
-    fig_size: Width and height of the chart in inches
+    df: Dataframe with all values and indicators
     output_type: Type of output for plotting in python (py) or in notebook (nb)
 
 
     Returns:
     Plot momentum and prices on the sample plot with two scales
     """
+
+    # Scaling column
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    df[['Adj Close','momentum_ao']]  = scaler.fit_transform(df[['Adj Close','momentum_ao']])
+
     trace_symbol = go.Scatter(
-                x=df_index,
-                y=sym_price,
+                x=df.index,
+                y=df['Adj Close'],
                 name = symbol,
                 line = dict(color = '#17BECF'),
                 opacity = 0.8)
 
     trace_momentum = go.Scatter(
-                x=df_index,
-                y=sym_mom,
+                x=df.index,
+                y=df['momentum_ao'],
                 name = "Momentum",
                 yaxis='y2',
                 line = dict(color = '#FF8000'),
@@ -322,7 +327,7 @@ def plot_momentum(df_index, sym_price, symbol, sym_mom, title="Momentum Indicato
                             dict(step='all')
                         ])
                 ),
-                range = [df_index.values[0], df_index.values[1]]),
+                range = [df.index.values[0], df.index.values[1]]),
 
         yaxis = dict(
                 title='Adjusted Closed Price'
