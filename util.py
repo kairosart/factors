@@ -158,13 +158,25 @@ def normalize_data(df):
 
 
 def scaling_data(df, column):
-    # Scaling column
+    # Scaling dataframe column
     scaler = StandardScaler()
     df[column] = scaler.fit_transform(df[[column]])
     return df
 
-
-
+def scaling_series(series):
+    '''
+    :param series: Series to scale
+    :return: Scaling array
+    '''
+    # prepare data for normalization
+    values = series.values
+    values = values.reshape((len(values), 1))
+    # train the normalization
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    scaler = scaler.fit(values)
+    # normalize the dataset and print the first 5 rows
+    normalized = scaler.transform(values)
+    return normalized
 
 def compute_daily_returns(df):
     """Compute and return the daily return values"""

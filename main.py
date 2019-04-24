@@ -1,4 +1,7 @@
+import io
 import os
+
+from alpha_vantage.techindicators import TechIndicators
 from flask import Flask, render_template, session, request, flash
 from sklearn.preprocessing import MinMaxScaler
 from ta import add_all_ta_features
@@ -12,14 +15,17 @@ import fix_yahoo_finance as yf
 yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_data, \
-    symbol_to_path, df_to_cvs, get_data_av, scaling_data, normalize_data
+    symbol_to_path, df_to_cvs, get_data_av, scaling_data, normalize_data, scaling_series, slice_df
 from strategyLearner import strategyLearner
 from marketsim import market_simulator
 from indicators import get_momentum, get_sma, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
     get_RSI, plot_cum_return, plot_momentum, plot_sma_indicator, plot_rsi_indicator, \
     plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
 
-
+import codecs
+from contextlib import closing
+import csv
+import requests
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -209,13 +215,7 @@ def showvalues():
                                 error="Lookback date must be at least 30 days earlier today.")
 
 
-    ###########################
-    # Create datafrane with all TA indicators
-    df = add_all_ta_features(portf_value, "Open", "High", "Low", "Close", "Volume", fillna=True)
 
-
-
-    ##########################
 
 
 
@@ -227,17 +227,33 @@ def showvalues():
     session['commission'] = request.form['commission']
     session['impact'] = request.form['impact']
 
-
+    # **** Ploting indicators ****
     # Price movements
-    adj_close = df['Adj Close']
+    adj_close = portf_value['Adj Close']
     plot_prices = plot_stock_prices(adj_close, symbol)
 
-    # Create momentum chart
-    plot_mom = plot_momentum(df, symbol, "Momentum Indicator")
+    # TODO Alpha Advantage indicators
+
+    # Getting Momentum indicator data from Alpha Vantage
+    ti = TechIndicators(key='477OAZQ4753FSGAI', output_format='pandas')
+    mom_df, meta_data = ti.get_mom(symbol=symbol, interval='daily', time_period=60)
+
+    # Slice dataframe
+    mom_df = slice_df(mom_df, dates)
+
+    # Scalating adj_close Series
+    adj_close_scaled = scaling_series(adj_close)
+    mom_df['Adj Close'] = adj_close_scaled[:,0]
+    plot_mom = plot_momentum(mom_df, symbol)
 
 
     # Plot raw symbol values, rolling mean and Bollinger Bands
+    boll_df, meta_data = ti.get_bbands(symbol=symbol, interval='daily', time_period=60)
 
+    # Slice dataframe
+    boll_df = slice_df(boll_df, dates)
+    boll_df['Adj Close'] = adj_close
+    plot_boll = plot_bollinger(boll_df, symbol)
 
     # Plot symbol values, SMA and SMA quality
 
@@ -259,7 +275,7 @@ def showvalues():
         titles = ['na', 'Stock Prices '],
         div_placeholder_stock_prices = Markup(plot_prices),
         div_placeholder_momentum = Markup(plot_mom),
-        #div_placeholder_bollinger = Markup(plot_boll),
+        div_placeholder_bollinger = Markup(plot_boll),
         #div_placeholder_sma = Markup(plot_sma),
         #div_placeholder_rsi = Markup(plot_rsi)
     )

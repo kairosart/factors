@@ -268,17 +268,13 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
     """Plot momentum and prices for a symbol.
 
     Parameters:
-    df: Dataframe with all values and indicators
+    df: Dataframe with momentum valus
     output_type: Type of output for plotting in python (py) or in notebook (nb)
 
 
     Returns:
     Plot momentum and prices on the sample plot with two scales
     """
-
-    # Scaling column
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    df[['Adj Close','momentum_ao']]  = scaler.fit_transform(df[['Adj Close','momentum_ao']])
 
     trace_symbol = go.Scatter(
                 x=df.index,
@@ -289,7 +285,7 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
 
     trace_momentum = go.Scatter(
                 x=df.index,
-                y=df['momentum_ao'],
+                y=df['MOM'],
                 name = "Momentum",
                 yaxis='y2',
                 line = dict(color = '#FF8000'),
@@ -495,18 +491,12 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, bollinger_val,
-                   num_std=1, title="Bollinger Indicator", fig_size=(12, 6)):
+def plot_bollinger(df, symbol, num_std=1, title="Bollinger Indicator", fig_size=(12, 6)):
     """Plot Bollinger bands and value for a symbol.
 
     Parameters:
-    dates: Range of dates
-    df_index: Date index
-    sym_price: Price, typically adjusted close price, series of symbol
+    df: Dateframe with all values required
     symbol: Stock symbol
-    upper_band: Bollinger upper band
-    lower_band: Bollinger lower band
-    bollinger_val: The number of standard deviations a price is from the mean
     num_std: Number of standard deviations for the bands
     fig_size: Width and height of the chart in inches
 
@@ -514,29 +504,29 @@ def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, b
     Plot Bollinger bands and Bollinger value
     """
     trace_symbol = go.Scatter(
-                x=df_index,
-                y=sym_price,
+                x=df.index,
+                y=df['Adj Close'],
                 name = symbol,
                 line = dict(color = '#17BECF'),
                 opacity = 0.8)
 
     trace_upper = go.Scatter(
-                x=df_index,
-                y=upper_band,
+                x=df.index,
+                y=df['Real Upper Band'],
                 name = "Upper band",
                 line = dict(color = '#04B404'),
                 opacity = 0.8)
 
     trace_lower = go.Scatter(
-                x=df_index,
-                y=lower_band,
+                x=df.index,
+                y=df['Real Lower Band'],
                 name = "Lower band",
                 line = dict(color = '#FF0000'),
                 opacity = 0.8)
 
     trace_Rolling = go.Scatter(
-                x=df_index,
-                y=bollinger_val,
+                x=df.index,
+                y=df['Real Middle Band'],
                 name = "Rolling Mean",
                 line = dict(color = '#FF8000'),
                 opacity = 0.8)
@@ -571,7 +561,7 @@ def plot_bollinger(dates, df_index, sym_price, symbol, upper_band, lower_band, b
                             dict(step='all')
                         ])
                     ),
-                    range = [dates.values[0], dates.values[1]]),
+                    range = [df.index.values[0], df.index.values[1]]),
 
         yaxis = dict(
                     title='Price')
