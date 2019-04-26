@@ -321,14 +321,9 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
                 ),
                 range = [df.index[0], df.index[-1]]),
 
+
         yaxis = dict(
                 title='Adjusted Closed Price'
-                ),
-
-        yaxis2=dict(
-                title='M. Quantitative',
-                overlaying='y',
-                side='right'
                 )
     )
 

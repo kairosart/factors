@@ -5,8 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/indicators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/stockpriceschart.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stockpriceschart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,7 +15,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/factors$util.coverage" NAME="util Coverage Results" MODIFIED="1555788907211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/factors$main.coverage" NAME="main Coverage Results" MODIFIED="1556098356215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/factors$main.coverage" NAME="main Coverage Results" MODIFIED="1556308220044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -41,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="277" column="8" lean-forward="true" selection-start-line="277" selection-start-column="8" selection-end-line="277" selection-end-column="8" />
+            <state relative-caret-position="437">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#1177#6707#0" />
@@ -69,15 +67,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1510">
-              <caret line="563" column="57" selection-start-line="563" selection-start-column="57" selection-end-line="563" selection-end-column="57" />
+            <state relative-caret-position="117">
+              <caret line="20" column="34" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="34" />
               <folding>
                 <element signature="e#38#56#0" expanded="true" />
                 <element signature="e#4272#6187#0" />
                 <element signature="e#6260#7646#0" />
-                <element signature="e#7749#10017#0" />
-                <element signature="e#7792#8199#1" />
-                <element signature="e#10175#12381#0" />
+                <element signature="e#7749#7864#1" />
                 <element signature="e#12547#14281#0" />
               </folding>
             </state>
@@ -87,8 +83,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forecastPrice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="362" column="11" selection-start-line="362" selection-start-column="11" selection-end-line="362" selection-end-column="42" />
+            <state relative-caret-position="-227">
+              <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
               <folding>
                 <element signature="e#48#61#0" expanded="true" />
                 <element signature="e#2407#4627#0" />
@@ -209,8 +205,8 @@
         <option value="$PROJECT_DIR$/forecastPrice.py" />
         <option value="$PROJECT_DIR$/lib/python3.7/site-packages/matplotlib/tests/test_image.py" />
         <option value="$PROJECT_DIR$/util.py" />
-        <option value="$PROJECT_DIR$/indicators.py" />
         <option value="$PROJECT_DIR$/templates/stockpriceschart.html" />
+        <option value="$PROJECT_DIR$/indicators.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -467,21 +463,7 @@
       <workItem from="1555270206644" duration="2570000" />
       <workItem from="1555443989519" duration="2765000" />
       <workItem from="1555490002603" duration="26686000" />
-      <workItem from="1555677152263" duration="50737000" />
-    </task>
-    <task id="LOCAL-00174" summary="Change selection options in Forecasting prices form">
-      <created>1552163673889</created>
-      <option name="number" value="00174" />
-      <option name="presentableId" value="LOCAL-00174" />
-      <option name="project" value="LOCAL" />
-      <updated>1552163673890</updated>
-    </task>
-    <task id="LOCAL-00175" summary="Change ARIMA Model Notebook.">
-      <created>1552249848521</created>
-      <option name="number" value="00175" />
-      <option name="presentableId" value="LOCAL-00175" />
-      <option name="project" value="LOCAL" />
-      <updated>1552249848521</updated>
+      <workItem from="1555677152263" duration="60807000" />
     </task>
     <task id="LOCAL-00176" summary="Change ARIMA Model Notebook.">
       <created>1552298032509</created>
@@ -812,11 +794,25 @@
       <option name="project" value="LOCAL" />
       <updated>1555966102734</updated>
     </task>
-    <option name="localTasksCounter" value="223" />
+    <task id="LOCAL-00223" summary="Changing indicators with TA indicators.">
+      <created>1556098400869</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1556098400870</updated>
+    </task>
+    <task id="LOCAL-00224" summary="Changing indicators with TA indicators.">
+      <created>1556270362014</created>
+      <option name="number" value="00224" />
+      <option name="presentableId" value="LOCAL-00224" />
+      <option name="project" value="LOCAL" />
+      <updated>1556270362014</updated>
+    </task>
+    <option name="localTasksCounter" value="225" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85206000" />
+    <option name="totallyTimeSpent" value="95276000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -831,13 +827,13 @@
     <frame x="0" y="-1" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4923505" visible="true" weight="0.15702036" />
-      <window_info id="Structure" order="1" sideWeight="0.50764954" side_tool="true" visible="true" weight="0.15702036" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49268293" visible="true" weight="0.15702036" />
+      <window_info id="Structure" order="1" sideWeight="0.50731707" side_tool="true" visible="true" weight="0.15702036" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32447398" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20376523" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.31893688" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.20376523" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.31893688" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32668883" />
@@ -852,9 +848,9 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.2642559" side_tool="true" visible="true" weight="0.21221864" />
+      <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.26504064" side_tool="true" visible="true" weight="0.21221864" />
       <window_info anchor="right" id="Database" order="4" weight="0.329582" />
-      <window_info anchor="right" id="SciView" order="5" sideWeight="0.7357441" visible="true" weight="0.21221864" />
+      <window_info active="true" anchor="right" id="SciView" order="5" sideWeight="0.73495936" visible="true" weight="0.21221864" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.15487674" />
@@ -983,7 +979,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>55</line>
+          <line>51</line>
           <option name="timeStamp" value="709" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -993,13 +989,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>344</line>
+          <line>359</line>
           <option name="timeStamp" value="842" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/indicators.py</url>
+          <line>275</line>
+          <option name="timeStamp" value="906" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>255</line>
-          <option name="timeStamp" value="899" />
+          <line>246</line>
+          <option name="timeStamp" value="912" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>249</line>
+          <option name="timeStamp" value="913" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -1252,39 +1258,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="362" column="11" selection-start-line="362" selection-start-column="11" selection-end-line="362" selection-end-column="42" />
-          <folding>
-            <element signature="e#48#61#0" expanded="true" />
-            <element signature="e#2407#4627#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="38" column="32" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="32" />
           <folding>
             <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/indicators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1510">
-          <caret line="563" column="57" selection-start-line="563" selection-start-column="57" selection-end-line="563" selection-end-column="57" />
-          <folding>
-            <element signature="e#38#56#0" expanded="true" />
-            <element signature="e#4272#6187#0" />
-            <element signature="e#6260#7646#0" />
-            <element signature="e#7749#10017#0" />
-            <element signature="e#7792#8199#1" />
-            <element signature="e#10175#12381#0" />
-            <element signature="e#12547#14281#0" />
           </folding>
         </state>
       </provider>
@@ -1302,10 +1281,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/forecastPrice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-227">
+          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+          <folding>
+            <element signature="e#48#61#0" expanded="true" />
+            <element signature="e#2407#4627#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="20" column="34" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="34" />
+          <folding>
+            <element signature="e#38#56#0" expanded="true" />
+            <element signature="e#4272#6187#0" />
+            <element signature="e#6260#7646#0" />
+            <element signature="e#7749#7864#1" />
+            <element signature="e#12547#14281#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="277" column="8" lean-forward="true" selection-start-line="277" selection-start-column="8" selection-end-line="277" selection-end-column="8" />
+        <state relative-caret-position="437">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#1177#6707#0" />

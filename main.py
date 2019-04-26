@@ -22,10 +22,6 @@ from indicators import get_momentum, get_sma, get_rolling_mean, get_rolling_std,
     get_RSI, plot_cum_return, plot_momentum, plot_sma_indicator, plot_rsi_indicator, \
     plot_stock_prices, plot_bollinger, plot_norm_data_vertical_lines
 
-import codecs
-from contextlib import closing
-import csv
-import requests
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -237,14 +233,20 @@ def showvalues():
     # MOMENTUM
     # Getting Momentum indicator data from Alpha Vantage
     ti = TechIndicators(key='477OAZQ4753FSGAI', output_format='pandas')
-    mom_df, meta_data = ti.get_mom(symbol=symbol, interval='daily', time_period=60)
+    mom_df, meta_data = ti.get_mom(symbol=symbol, interval='daily', time_period=10)
 
-    # Slice dataframe
+    # Slice dataframe and Adj Close column (this one until yesterday because is the data he have of the indicator)
     mom_df = slice_df(mom_df, dates)
-
+    adj_close = portf_value['Adj Close']
+    adj_close = adj_close.iloc[0:-1]
     # Scalating adj_close Series
     adj_close_scaled = scaling_series(adj_close)
     mom_df['Adj Close'] = adj_close_scaled[:,0]
+
+    ####### Using my own function
+    mom_df['Momentum'] = get_momentum(portf_value['Adj Close'], window=10)
+    #######
+
     plot_mom = plot_momentum(mom_df, symbol)
 
 
