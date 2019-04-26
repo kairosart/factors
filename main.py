@@ -228,12 +228,13 @@ def showvalues():
     session['impact'] = request.form['impact']
 
     # **** Ploting indicators ****
-    # Price movements
+
+    # PRICE MOVEMENTS
     adj_close = portf_value['Adj Close']
     plot_prices = plot_stock_prices(adj_close, symbol)
 
     # TODO Alpha Advantage indicators
-
+    # MOMENTUM
     # Getting Momentum indicator data from Alpha Vantage
     ti = TechIndicators(key='477OAZQ4753FSGAI', output_format='pandas')
     mom_df, meta_data = ti.get_mom(symbol=symbol, interval='daily', time_period=60)
@@ -247,6 +248,7 @@ def showvalues():
     plot_mom = plot_momentum(mom_df, symbol)
 
 
+    # ROLLILNGER BANDS
     # Plot raw symbol values, rolling mean and Bollinger Bands
     boll_df, meta_data = ti.get_bbands(symbol=symbol, interval='daily', time_period=60)
 
@@ -255,10 +257,21 @@ def showvalues():
     boll_df['Adj Close'] = adj_close
     plot_boll = plot_bollinger(boll_df, symbol)
 
+    # SMA
     # Plot symbol values, SMA and SMA quality
+    sma_df, meta_data = ti.get_sma(symbol=symbol, interval='daily', time_period=60)
 
+    # Slice dataframe
+    sma_df = slice_df(sma_df, dates)
+    sma_df['Adj Close'] = adj_close
+    plot_sma = plot_sma_indicator(sma_df, symbol)
 
-    # Plot RSI
+    # RSI
+    rsi_df, meta_data = ti.get_rsi(symbol=symbol, interval='daily', time_period=60)
+    # Slice dataframe
+    rsi_df = slice_df(rsi_df, dates)
+    rsi_df['Adj Close'] = adj_close
+    plot_rsi = plot_rsi_indicator(rsi_df, symbol)
 
     return render_template(
         # name of template
@@ -276,8 +289,8 @@ def showvalues():
         div_placeholder_stock_prices = Markup(plot_prices),
         div_placeholder_momentum = Markup(plot_mom),
         div_placeholder_bollinger = Markup(plot_boll),
-        #div_placeholder_sma = Markup(plot_sma),
-        #div_placeholder_rsi = Markup(plot_rsi)
+        div_placeholder_sma = Markup(plot_sma),
+        div_placeholder_rsi = Markup(plot_rsi)
     )
 
 

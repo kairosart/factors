@@ -265,15 +265,12 @@ def plot_cum_return(epoch, cum_return, title="Cumulative Return"):
 
 
 def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
-    """Plot momentum and prices for a symbol.
-
-    Parameters:
-    df: Dataframe with momentum valus
-    output_type: Type of output for plotting in python (py) or in notebook (nb)
-
-
-    Returns:
-    Plot momentum and prices on the sample plot with two scales
+    """
+    :param df: Prices dataframe normalized
+    :param symbol: Symbol
+    :param title: Graph tittle
+    :param output_type: py for a html return or nb for Jupyter Notebooks
+    :return: Plot Momentum values
     """
 
     trace_symbol = go.Scatter(
@@ -289,7 +286,6 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
                 name = "Momentum",
                 yaxis='y2',
                 line = dict(color = '#FF8000'),
-                fill='tonexty',
                 opacity = 0.8)
 
 
@@ -323,7 +319,7 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
                             dict(step='all')
                         ])
                 ),
-                range = [df.index.values[0], df.index.values[1]]),
+                range = [df.index[0], df.index[-1]]),
 
         yaxis = dict(
                 title='Adjusted Closed Price'
@@ -346,45 +342,31 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
     else:
         return fig
 
-def plot_sma_indicator(dates, df_index, sym_price, symbol, sma_indicator, sma_quality,
-                       title="SMA Indicator", fig_size=(12, 6)):
-    """Plot SMA indicator, price and SMA quality for a symbol.
+def plot_sma_indicator(df, symbol, title="SMA Indicator"):
+    """
 
-    Parameters:
-    dates: Range of dates
-    df_index: Date index
-    sym_price: Price, typically adjusted close price, series of symbol
-    symbol: Stock symbol
-    sma_indicator: The simple moving average indicator
-    sma_quality: SMA quality
-    title: The chart title
-    fig_size: Width and height of the chart in inches
-
-    Returns:
-    Plot all the three series on the same plot
+    :param df: Prices and SMA dataframe
+    :param symbol: Stock Symbol
+    :param title: Graph title
+    :return: Plot SMA indicator
     """
     trace_symbol = go.Scatter(
-                x=df_index,
-                y=sym_price,
+                x=df.index,
+                y=df['Adj Close'],
                 name = symbol,
                 line = dict(color = '#17BECF'),
                 opacity = 0.8)
 
     trace_sma = go.Scatter(
-                x=df_index,
-                y=sma_indicator,
+                x=df.index,
+                y=df['SMA'],
                 name = "SMA",
                 line = dict(color = '#FF8000'),
                 opacity = 0.8)
 
-    trace_q = go.Scatter(
-                x=df_index,
-                y=sma_quality,
-                name = "SMA Quantity",
-                line = dict(color = '#04B404'),
-                opacity = 0.8)
 
-    data = [trace_symbol, trace_sma, trace_q]
+
+    data = [trace_symbol, trace_sma]
 
     layout = dict(
         title = title,
@@ -414,7 +396,7 @@ def plot_sma_indicator(dates, df_index, sym_price, symbol, sma_indicator, sma_qu
                             dict(step='all')
                         ])
                 ),
-                range = [dates.values[0], dates.values[1]]),
+                range=[df.index[0], df.index[-1]]),
 
         yaxis = dict(
                 title='Price')
@@ -491,16 +473,15 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_bollinger(df, symbol, num_std=1, title="Bollinger Indicator", fig_size=(12, 6)):
+def plot_bollinger(df, symbol, title="Bollinger Indicator"):
     """Plot Bollinger bands and value for a symbol.
 
     Parameters:
-    df: Dateframe with all values required
-    symbol: Stock symbol
-    num_std: Number of standard deviations for the bands
-    fig_size: Width and height of the chart in inches
+    :param df: Dateframe with all values required
+    :param symbol: Stock symbol
+    :param title: Chart title
 
-    Returns:
+    :return:
     Plot Bollinger bands and Bollinger value
     """
     trace_symbol = go.Scatter(
@@ -561,7 +542,7 @@ def plot_bollinger(df, symbol, num_std=1, title="Bollinger Indicator", fig_size=
                             dict(step='all')
                         ])
                     ),
-                    range = [df.index.values[0], df.index.values[1]]),
+                    range = [df.index[0], df.index[-1]]),
 
         yaxis = dict(
                     title='Price')
@@ -574,51 +555,46 @@ def plot_bollinger(df, symbol, num_std=1, title="Bollinger Indicator", fig_size=
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window=14, title="RSI Indicator", fig_size=(12, 6)):
-    """Plot Relative Strength Index (RSI) of given values, using specified window size."""
-    '''
-    Parameters:
-    dates: Range of dates
-    df_index: Date index
-    sym_price: Price series of symbol
-    symbol: Stock symbol
-    rsi_indicator: RSI indicator
-    window: Window size
-    title: The chart title
-    fig_size: Width and height of the chart in inches
+def plot_rsi_indicator(df,symbol, title="RSI Indicator"):
+    """Plot Relative Strength Index (RSI) of given values, using specified window size.
 
-    Returns:
+    Parameters:
+    :param df: Dateframe with all values required
+    :param symbol: Stock symbol
+    :param title: Chart title
+
+    :return:
     Plot price, RSI, Overbought line and Oversold line
-    '''
+    """
 
     # Price line
     trace_symbol = go.Scatter(
-                x=df_index,
-                y=sym_price,
+                x=df.index,
+                y=df['Adj Close'],
                 name = symbol,
                 line = dict(color = '#17BECF'),
                 opacity = 0.8)
 
     # RSI line
     trace_rsi = go.Scatter(
-                x=df_index,
-                y=rsi_indicator,
+                x=df.index,
+                y=df['RSI'],
                 name = "RSI",
                 line = dict(color = '#FF8000'),
                 opacity = 0.8)
 
     # Overbought line
     trace_ob = go.Scatter(
-                x=df_index,
-                y=np.repeat(70, len(df_index)),
+                x=df.index,
+                y=np.repeat(70, len(df.index)),
                 name = "Overbought",
                 line = dict(color = '#04B404',
                            dash = 'dash')
                 )
     # Oversold line
     trace_os = go.Scatter(
-                x=df_index,
-                y=np.repeat(30, len(df_index)),
+                x=df.index,
+                y=np.repeat(30, len(df.index)),
                 name = "Oversold",
                 line = dict(color = '#FF0000',
                            dash = 'dash')
@@ -626,8 +602,8 @@ def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window
 
     # Signal line
     trace_signal = go.Scatter(
-                x=df_index,
-                y=np.repeat(50, len(df_index)),
+                x=df.index,
+                y=np.repeat(50, len(df.index)),
                 name = "Signal line",
                 line = dict(color = '#000000',
                            dash = 'dot')
@@ -646,7 +622,7 @@ def plot_rsi_indicator(dates, df_index, sym_price, symbol, rsi_indicator, window
 
         xaxis = dict(
                     title='Dates',
-                    range = [dates.values[0], dates.values[1]]),
+                    range=[df.index[0], df.index[-1]]),
 
         yaxis = dict(
                     title='Price')
