@@ -114,7 +114,7 @@ def get_data_av(symbol, dates, del_cols=True):
         ts = TimeSeries(key=key, retries='4')
         ts = TimeSeries(key=key, output_format='pandas')
 
-        df, meta_data = ts.get_daily_adjusted(symbol=symbol, outputsize='full')
+        df, meta_data = ts.get_daily_adjusted(symbol=symbol, outputsize="full")
 
         # Rename and Delete some columns
         del df['7. dividend amount']

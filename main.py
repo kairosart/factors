@@ -201,7 +201,7 @@ def showvalues():
 
         # Import data from Alpha Vantage
         dates = pd.date_range(start_d, dt.date.today())
-        portf_value = get_data_av(symbol, dates, del_cols=False)
+        portf_value = get_data_av(symbol, dates, del_cols=True)
 
         # Import data from Yahoo
         #portf_value = fetchOnlineData(start_d, symbol, dt.date.today())
@@ -225,55 +225,57 @@ def showvalues():
 
     # **** Ploting indicators ****
 
-    # PRICE MOVEMENTS
+    ##### PRICE MOVEMENTS ####
     adj_close = portf_value['Adj Close']
     plot_prices = plot_stock_prices(adj_close, symbol)
 
-    # TODO Alpha Advantage indicators
-    # MOMENTUM
-    # Getting Momentum indicator data from Alpha Vantage
-    ti = TechIndicators(key='477OAZQ4753FSGAI', output_format='pandas')
-    mom_df, meta_data = ti.get_mom(symbol=symbol, interval='daily', time_period=10)
+    # TODO indicators
+    #### MOMENTUM ####
+    normed_df = portf_value.copy()
 
-    # Slice dataframe and Adj Close column (this one until yesterday because is the data he have of the indicator)
-    mom_df = slice_df(mom_df, dates)
-    adj_close = portf_value['Adj Close']
-    adj_close = adj_close.iloc[0:-1]
     # Scalating adj_close Series
-    adj_close_scaled = scaling_series(adj_close)
-    mom_df['Adj Close'] = adj_close_scaled[:,0]
+    adj_close_normalized = normalize_data(portf_value)
 
-    ####### Using my own function
-    mom_df['Momentum'] = get_momentum(portf_value['Adj Close'], window=10)
-    #######
+    # Compute Momentum
+    mom = get_momentum(adj_close_normalized['Adj Close'], window=10)
+    normed_df['Adj Close'] = adj_close_normalized
+    normed_df['Momentum'] = mom
 
-    plot_mom = plot_momentum(mom_df, symbol)
+    plot_mom = plot_momentum(normed_df, symbol)
+
+    #### ROLLILNGER BANDS ####
+    # Compute rolling mean
+    rm = get_rolling_mean(portf_value['Adj Close'], window=10)
+
+    # Compute rolling standard deviation
+    rstd = get_rolling_std(portf_value['Adj Close'], window=10)
+
+    # Compute upper and lower bands
+    upper_band, lower_band = get_bollinger_bands(rm, rstd)
+
+    # Create Dataframe for plotting
+    bollinger_df = portf_value.copy()
+    bollinger_df['upper_band'] = upper_band
+    bollinger_df['lower_band'] = lower_band
+    bollinger_df['middle_band'] = rm
+
+    plot_boll = plot_bollinger(bollinger_df, symbol)
 
 
-    # ROLLILNGER BANDS
-    # Plot raw symbol values, rolling mean and Bollinger Bands
-    boll_df, meta_data = ti.get_bbands(symbol=symbol, interval='daily', time_period=60)
+    ##### SMA ####
 
-    # Slice dataframe
-    boll_df = slice_df(boll_df, dates)
-    boll_df['Adj Close'] = adj_close
-    plot_boll = plot_bollinger(boll_df, symbol)
+    # Normalize Adj Close
+    adj_close_normalized = normalize_data(portf_value)
 
-    # SMA
-    # Plot symbol values, SMA and SMA quality
-    sma_df, meta_data = ti.get_sma(symbol=symbol, interval='daily', time_period=60)
+    # Compute SMA
+    sma, q = get_sma(adj_close_normalized['Adj Close'], window=10)
+    normed_df['SMA'] = sma
+    plot_sma = plot_sma_indicator(normed_df, symbol)
 
-    # Slice dataframe
-    sma_df = slice_df(sma_df, dates)
-    sma_df['Adj Close'] = adj_close
-    plot_sma = plot_sma_indicator(sma_df, symbol)
-
-    # RSI
-    rsi_df, meta_data = ti.get_rsi(symbol=symbol, interval='daily', time_period=60)
-    # Slice dataframe
-    rsi_df = slice_df(rsi_df, dates)
-    rsi_df['Adj Close'] = adj_close
-    plot_rsi = plot_rsi_indicator(rsi_df, symbol)
+    ##### RSI ####
+    rsi = get_RSI(portf_value['Adj Close'])
+    normed_df['RSI'] = rsi
+    plot_rsi = plot_rsi_indicator(normed_df, symbol)
 
     return render_template(
         # name of template

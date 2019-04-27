@@ -91,6 +91,12 @@ def compute_bollinger_value(price, rolling_mean, rolling_std):
 
 
 def get_RSI(prices, n=14):
+    """
+    Calculate RSI (Relative Strength Index)
+    :param prices: Stock prices
+    :param n: Periods to calculate
+    :return: RSI values
+    """
     deltas = np.diff(prices)
     seed = deltas[:n+1]
     up = seed[seed>=0].sum()/n
@@ -282,9 +288,8 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
 
     trace_momentum = go.Scatter(
                 x=df.index,
-                y=df['MOM'],
+                y=df['Momentum'],
                 name = "Momentum",
-                yaxis='y2',
                 line = dict(color = '#FF8000'),
                 opacity = 0.8)
 
@@ -468,7 +473,7 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_bollinger(df, symbol, title="Bollinger Indicator"):
+def plot_bollinger(df, symbol, title="Bollinger Indicator", num_std=1, fig_size=(12, 6)):
     """Plot Bollinger bands and value for a symbol.
 
     Parameters:
@@ -488,21 +493,21 @@ def plot_bollinger(df, symbol, title="Bollinger Indicator"):
 
     trace_upper = go.Scatter(
                 x=df.index,
-                y=df['Real Upper Band'],
+                y=df['upper_band'],
                 name = "Upper band",
                 line = dict(color = '#04B404'),
                 opacity = 0.8)
 
     trace_lower = go.Scatter(
                 x=df.index,
-                y=df['Real Lower Band'],
+                y=df['lower_band'],
                 name = "Lower band",
                 line = dict(color = '#FF0000'),
                 opacity = 0.8)
 
     trace_Rolling = go.Scatter(
                 x=df.index,
-                y=df['Real Middle Band'],
+                y=df['middle_band'],
                 name = "Rolling Mean",
                 line = dict(color = '#FF8000'),
                 opacity = 0.8)
