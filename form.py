@@ -15,7 +15,7 @@ def get_tickers(filename):
 # Trading agent
 class StartValuesForm(FlaskForm):
     d2 = dt.date.today() - dt.timedelta(days=365)
-    loookbakc_date = DateField('Lookback Date (mm/dd/yyyy)',
+    loookback_date = DateField('Lookback Date (mm/dd/yyyy)',
                              format='%m/%d/%Y',
                              default=d2,
                              validators=[validators.DataRequired()])

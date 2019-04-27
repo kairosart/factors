@@ -48,7 +48,7 @@ def overview():
 def training():
     # **** Training ***
     # Getting session variables
-
+    start_d = str(session.get('start_d', None))
     start_val = int(session.get('start_val', None))
     symbol = session.get('symbol', None)
     num_shares = int(session.get('num_shares', None))
@@ -57,9 +57,20 @@ def training():
 
 
     # Create a dataframe from csv file
-    df = get_data(symbol)
+    #df = get_data(symbol)
+    # Import data from Alpha Vantage
+    dates = pd.date_range(start_d, dt.date.today())
+    df = get_data_av(symbol, dates, del_cols=True)
 
+    # Rename column Adj Close
+    df.rename(columns={'Adj Close': symbol}, inplace=True)
 
+    if not isinstance(df, pd.DataFrame):
+        return render_template(
+            # name of template
+            "error.html",
+            # now we pass in our variables into the template
+            form='showvalues', error="Data source can't be reached at this moment. Try again.")
 
     # We'll get 80% data to train
     split_percentage = 0.8
@@ -187,7 +198,7 @@ def showvalues():
     symbol = request.form.get('ticker_select', type=str)
 
     # Get lookback date
-    lookback_date = request.form.get('loookbakc_date', type=str)
+    lookback_date = request.form.get('loookback_date', type=str)
 
     # Validate lookback date
     d1 = dt.datetime.strptime(lookback_date, '%m/%d/%Y')
@@ -223,13 +234,13 @@ def showvalues():
     session['commission'] = request.form['commission']
     session['impact'] = request.form['impact']
 
+
     # **** Ploting indicators ****
 
     ##### PRICE MOVEMENTS ####
     adj_close = portf_value['Adj Close']
     plot_prices = plot_stock_prices(adj_close, symbol)
 
-    # TODO indicators
     #### MOMENTUM ####
     normed_df = portf_value.copy()
 

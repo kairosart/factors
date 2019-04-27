@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/indicators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/form.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/startValuesForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/startValuesForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,7 +18,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/factors$util.coverage" NAME="util Coverage Results" MODIFIED="1555788907211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/factors$main.coverage" NAME="main Coverage Results" MODIFIED="1556308220044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/factors$main.coverage" NAME="main Coverage Results" MODIFIED="1556390089283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -39,11 +42,34 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="247">
+              <caret line="63" column="4" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#1177#6707#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/strategyLearner.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="176" column="37" lean-forward="true" selection-start-line="176" selection-start-column="37" selection-end-line="176" selection-end-column="37" />
+              <folding>
+                <element signature="e#80#98#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/marketsim.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="17" column="56" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="56" />
+              <folding>
+                <element signature="e#73#92#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,8 +78,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="112" column="105" selection-start-line="112" selection-start-column="105" selection-end-line="112" selection-end-column="105" />
+            <state relative-caret-position="261">
+              <caret line="139" column="4" selection-start-line="139" selection-start-column="4" selection-end-line="139" selection-end-column="4" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#div#3;n#!!top" />
@@ -67,13 +93,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="20" column="34" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="34" />
+            <state relative-caret-position="171">
+              <caret line="57" column="6" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
               <folding>
                 <element signature="e#38#56#0" expanded="true" />
                 <element signature="e#4272#6187#0" />
                 <element signature="e#6260#7646#0" />
-                <element signature="e#7749#7864#1" />
                 <element signature="e#12547#14281#0" />
               </folding>
             </state>
@@ -96,11 +121,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="38" column="32" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="32" />
+            <state relative-caret-position="254">
+              <caret line="102" column="37" selection-start-line="102" selection-start-column="37" selection-end-line="102" selection-end-column="37" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
+                <element signature="e#1570#2880#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -119,9 +154,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>reshape(-1,</find>
-      <find>submitButton2</find>
-      <find>concat</find>
       <find>df['date']</find>
       <find>col</find>
       <find>Forecast</find>
@@ -147,14 +179,18 @@
       <find>scaler</find>
       <find>alpha vantage</find>
       <find>add_all_ta_features</find>
+      <find>fill</find>
+      <find>fillna(method</find>
       <find>pd.to_date</find>
       <find>set_index</find>
+      <find>symbol</find>
     </findStrings>
     <replaceStrings>
       <replace>symbol</replace>
       <replace>pricesforcastform</replace>
       <replace>form</replace>
       <replace>model</replace>
+      <replace>column</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -169,7 +205,6 @@
         <option value="$PROJECT_DIR$/nasdaq.csv" />
         <option value="$PROJECT_DIR$/templates/.ipynb_checkpoints/tickers_list.html" />
         <option value="$PROJECT_DIR$/data/nasdaq_tickers_name.csv" />
-        <option value="$PROJECT_DIR$/marketsim.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/linRegLearner.py" />
         <option value="$PROJECT_DIR$/static/js/moment.js" />
@@ -180,7 +215,6 @@
         <option value="$PROJECT_DIR$/analysis.py" />
         <option value="$PROJECT_DIR$/runtime.txt" />
         <option value="$PROJECT_DIR$/Procfile" />
-        <option value="$PROJECT_DIR$/strategyLearner.py" />
         <option value="$PROJECT_DIR$/static/css/modal_spinner.css" />
         <option value="$PROJECT_DIR$/data/AABA.csv" />
         <option value="$PROJECT_DIR$/test.ipynb" />
@@ -195,18 +229,20 @@
         <option value="$PROJECT_DIR$/templates/training.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/static/js/my_jquery.js" />
-        <option value="$PROJECT_DIR$/form.py" />
         <option value="$PROJECT_DIR$/decision_tree_regression.ipynb" />
         <option value="$PROJECT_DIR$/templates/error.html" />
         <option value="$PROJECT_DIR$/ta.txt" />
-        <option value="$PROJECT_DIR$/templates/startValuesForm.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/templates/forecastPrices.html" />
         <option value="$PROJECT_DIR$/forecastPrice.py" />
         <option value="$PROJECT_DIR$/lib/python3.7/site-packages/matplotlib/tests/test_image.py" />
-        <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/templates/stockpriceschart.html" />
         <option value="$PROJECT_DIR$/indicators.py" />
+        <option value="$PROJECT_DIR$/util.py" />
+        <option value="$PROJECT_DIR$/form.py" />
+        <option value="$PROJECT_DIR$/templates/startValuesForm.html" />
+        <option value="$PROJECT_DIR$/marketsim.py" />
+        <option value="$PROJECT_DIR$/strategyLearner.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -263,7 +299,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -463,21 +499,7 @@
       <workItem from="1555270206644" duration="2570000" />
       <workItem from="1555443989519" duration="2765000" />
       <workItem from="1555490002603" duration="26686000" />
-      <workItem from="1555677152263" duration="60807000" />
-    </task>
-    <task id="LOCAL-00176" summary="Change ARIMA Model Notebook.">
-      <created>1552298032509</created>
-      <option name="number" value="00176" />
-      <option name="presentableId" value="LOCAL-00176" />
-      <option name="project" value="LOCAL" />
-      <updated>1552298032509</updated>
-    </task>
-    <task id="LOCAL-00177" summary="Change ARIMA Model Notebook.">
-      <created>1552331391959</created>
-      <option name="number" value="00177" />
-      <option name="presentableId" value="LOCAL-00177" />
-      <option name="project" value="LOCAL" />
-      <updated>1552331391960</updated>
+      <workItem from="1555677152263" duration="74366000" />
     </task>
     <task id="LOCAL-00178" summary="Change ARIMA Model Notebook.">
       <created>1552335323667</created>
@@ -808,11 +830,25 @@
       <option name="project" value="LOCAL" />
       <updated>1556270362014</updated>
     </task>
-    <option name="localTasksCounter" value="225" />
+    <task id="LOCAL-00225" summary="Changing indicators with TA indicators.">
+      <created>1556309413448</created>
+      <option name="number" value="00225" />
+      <option name="presentableId" value="LOCAL-00225" />
+      <option name="project" value="LOCAL" />
+      <updated>1556309413448</updated>
+    </task>
+    <task id="LOCAL-00226" summary="Using my indicators.">
+      <created>1556369572753</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1556369572754</updated>
+    </task>
+    <option name="localTasksCounter" value="227" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95276000" />
+    <option name="totallyTimeSpent" value="108835000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -833,7 +869,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32447398" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.20376523" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.31893688" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.31893688" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32668883" />
@@ -850,7 +886,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.26504064" side_tool="true" visible="true" weight="0.21221864" />
       <window_info anchor="right" id="Database" order="4" weight="0.329582" />
-      <window_info active="true" anchor="right" id="SciView" order="5" sideWeight="0.73495936" visible="true" weight="0.21221864" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.73495936" visible="true" weight="0.21221864" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.15487674" />
@@ -927,7 +963,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Creating Decision Tree model." />
     <MESSAGE value="Creating Decision Tree model metrics." />
     <MESSAGE value="Creating XGBoost model notebook." />
     <MESSAGE value="Creating XGBoost model backend." />
@@ -952,7 +987,8 @@
     <MESSAGE value="Fixing dates in Price forecasting." />
     <MESSAGE value="Changing the way of getting data. Alpha Vantage instead of Yahoo." />
     <MESSAGE value="Changing indicators with TA indicators." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changing indicators with TA indicators." />
+    <MESSAGE value="Using my indicators." />
+    <option name="LAST_COMMIT_MESSAGE" value="Using my indicators." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -978,34 +1014,29 @@
           <option name="timeStamp" value="494" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>51</line>
-          <option name="timeStamp" value="709" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/forecastPrice.py</url>
           <line>434</line>
           <option name="timeStamp" value="779" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>359</line>
+          <line>370</line>
           <option name="timeStamp" value="842" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/indicators.py</url>
-          <line>275</line>
-          <option name="timeStamp" value="906" />
+          <url>file://$PROJECT_DIR$/strategyLearner.py</url>
+          <line>195</line>
+          <option name="timeStamp" value="946" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/strategyLearner.py</url>
+          <line>196</line>
+          <option name="timeStamp" value="948" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>246</line>
-          <option name="timeStamp" value="912" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>249</line>
-          <option name="timeStamp" value="913" />
+          <line>65</line>
+          <option name="timeStamp" value="950" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -1035,6 +1066,16 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>mom</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>normed_df</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>weather</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -1062,18 +1103,7 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/AAPL.csv" />
     <entry file="file://$PROJECT_DIR$/data/AABA.csv" />
-    <entry file="file://$PROJECT_DIR$/marketsim.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="41" column="47" lean-forward="true" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="47" />
-          <folding>
-            <element signature="e#73#92#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.ipynb" />
     <entry file="file://$PROJECT_DIR$/pyvenv.cfg" />
     <entry file="file:///run/user/1000/jupyter/nbserver-27475-open.html" />
@@ -1190,13 +1220,6 @@
         <state relative-caret-position="-7068" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/python3.7/site-packages/ta/wrapper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -1215,16 +1238,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1248,39 +1261,6 @@
     <entry file="file://$PROJECT_DIR$/QLearner.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/strategyLearner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="13" column="12" lean-forward="true" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-          <folding>
-            <element signature="e#80#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="38" column="32" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="32" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="112" column="105" selection-start-line="112" selection-start-column="105" selection-end-line="112" selection-end-column="105" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#div#3;n#!!top" />
-            <element signature="e#5155#6314#0" />
-            <element signature="e#6498#8425#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-227">
@@ -1294,25 +1274,91 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/indicators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="34" />
+        <state relative-caret-position="171">
+          <caret line="57" column="6" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
             <element signature="e#4272#6187#0" />
             <element signature="e#6260#7646#0" />
-            <element signature="e#7749#7864#1" />
             <element signature="e#12547#14281#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="139" column="4" selection-start-line="139" selection-start-column="4" selection-end-line="139" selection-end-column="4" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#!!top" />
+            <element signature="e#5155#6314#0" />
+            <element signature="e#6498#8425#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/form.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="17" column="18" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/python3.7/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="1798" selection-start-line="1798" selection-end-line="1798" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="102" column="37" selection-start-line="102" selection-start-column="37" selection-end-line="102" selection-end-column="37" />
+          <folding>
+            <element signature="e#43#64#0" expanded="true" />
+            <element signature="e#1570#2880#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/marketsim.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="17" column="56" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="56" />
+          <folding>
+            <element signature="e#73#92#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strategyLearner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="176" column="37" lean-forward="true" selection-start-line="176" selection-start-column="37" selection-end-line="176" selection-end-column="37" />
+          <folding>
+            <element signature="e#80#98#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="247">
+          <caret line="63" column="4" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#1177#6707#0" />
           </folding>
         </state>
       </provider>

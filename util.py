@@ -58,7 +58,7 @@ def df_to_cvs(df, symbol):
 
 
 
-def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True):
+def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True, output_format='pandas'):
     # Add a day to dt_end for Yahoo purpose
     dt_end = dt_end + dt.timedelta(1)
 
@@ -98,13 +98,14 @@ def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True):
 # API key is: 477OAZQ4753FSGAI
 # Examples: https://github.com/RomelTorres/alpha_vantage
 
-def get_data_av(symbol, dates, del_cols=True):
+def get_data_av(symbol, dates, del_cols=True, output_format='pandas'):
     '''
-
+    Get stock data from Alpha Vantage
     :param symbol: Ticket symbol
     :param dates: Dates for slicing
     :param del_cols: Delete some columns
-    :return: Prices dataframe
+    :param output_format: Format of returned data
+    :return: Prices with chosen format
     '''
 
     try:
@@ -112,7 +113,7 @@ def get_data_av(symbol, dates, del_cols=True):
         key = '477OAZQ4753FSGAI'
         ts = TimeSeries(key=key)
         ts = TimeSeries(key=key, retries='4')
-        ts = TimeSeries(key=key, output_format='pandas')
+        ts = TimeSeries(key=key, output_format=output_format)
 
         df, meta_data = ts.get_daily_adjusted(symbol=symbol, outputsize="full")
 
