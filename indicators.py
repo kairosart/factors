@@ -146,7 +146,7 @@ def get_indicators(normed, symbol):
 
 
 
-def plot_stock_prices(sym_price, symbol, title="Stock prices", xlabel="Date", ylabel="Price", fig_size=(12, 6), output_type='py'):
+def plot_stock_prices(sym_price, symbol, title="Stock prices", xlabel="Date", ylabel="Price",  output_type='py'):
     """Plot Stock Prices.
 
     Parameters:
@@ -279,13 +279,6 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
     :return: Plot Momentum values
     """
 
-    trace_symbol = go.Scatter(
-                x=df.index,
-                y=df['Adj Close'],
-                name = symbol,
-                line = dict(color = '#17BECF'),
-                opacity = 0.8)
-
     trace_momentum = go.Scatter(
                 x=df.index,
                 y=df['Momentum'],
@@ -294,7 +287,7 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
                 opacity = 0.8)
 
 
-    data = [trace_symbol, trace_momentum]
+    data = [trace_momentum]
 
     layout = dict(
         title = title,
@@ -342,7 +335,7 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
     else:
         return fig
 
-def plot_sma_indicator(df, symbol, title="SMA Indicator"):
+def plot_sma_indicator(df, symbol, title="SMA Indicator", output_type='py'):
     """
 
     :param df: Prices and SMA dataframe
@@ -406,8 +399,11 @@ def plot_sma_indicator(df, symbol, title="SMA Indicator"):
 
 
     fig = dict(data=data, layout=layout)
-    chart = plot(fig, show_link=False, output_type='div')
-    return chart
+    if output_type == 'py':
+        chart = plot(fig, show_link=False, output_type='div')
+        return chart
+    else:
+        return fig
 
 def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momentum,
                        title="MOMENTUM/ SMA Indicator", fig_size=(12, 6)):
@@ -473,7 +469,7 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_bollinger(df, symbol, title="Bollinger Indicator", num_std=1, fig_size=(12, 6)):
+def plot_bollinger(df, symbol, title="Bollinger Indicator", output_type='py'):
     """Plot Bollinger bands and value for a symbol.
 
     Parameters:
@@ -552,10 +548,13 @@ def plot_bollinger(df, symbol, title="Bollinger Indicator", num_std=1, fig_size=
 
 
     fig = dict(data=data, layout=layout)
-    chart = plot(fig, show_link=False, output_type='div')
-    return chart
+    if output_type == 'py':
+        chart = plot(fig, show_link=False, output_type='div')
+        return chart
+    else:
+        return fig
 
-def plot_rsi_indicator(df,symbol, title="RSI Indicator"):
+def plot_rsi_indicator(df,symbol, title="RSI Indicator",  output_type='py'):
     """Plot Relative Strength Index (RSI) of given values, using specified window size.
 
     Parameters:
@@ -642,8 +641,11 @@ def plot_rsi_indicator(df,symbol, title="RSI Indicator"):
                             pad=4
                             ),
                         legend=dict(orientation="h"))
-    chart = plot(fig, show_link=False, output_type='div')
-    return chart
+    if output_type == 'py':
+        chart = plot(fig, show_link=False, output_type='div')
+        return chart
+    else:
+        return fig
 
 
 def plot_performance(perform_df, title="In-sample vs Out of sample performance",
