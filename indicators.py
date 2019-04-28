@@ -214,7 +214,7 @@ def plot_stock_prices(sym_price, symbol, title="Stock prices", xlabel="Date", yl
     else:
         return fig
 
-def plot_cum_return(epoch, cum_return, title="Cumulative Return"):
+def plot_cum_return(epoch, cum_return, title="Cumulative Return", output_type='py'):
     """Plot cumulative return.
 
     Parameters:
@@ -266,8 +266,11 @@ def plot_cum_return(epoch, cum_return, title="Cumulative Return"):
 
 
     fig = dict(data=data, layout=layout)
-    chart = plot(fig, show_link=False, output_type='div')
-    return chart
+    if output_type == 'py':
+        chart = plot(fig, show_link=False, output_type='div')
+        return chart
+    else:
+        return fig
 
 
 def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
