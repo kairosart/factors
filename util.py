@@ -141,7 +141,40 @@ def get_data_av(symbol, dates, del_cols=True, output_format='pandas'):
     except:
         return False
 
+def get_data_av_min(symbol, dates, del_cols=True, output_format='pandas'):
+    '''
+    Get stock data from Alpha Vantage with minute interval
+    :param symbol: Ticket symbol
+    :param dates: Dates for slicing
+    :param del_cols: Delete some columns
+    :param output_format: Format of returned data
+    :return: Close Prices with chosen format
+    '''
 
+    try:
+        from alpha_vantage.timeseries import TimeSeries
+        key = '477OAZQ4753FSGAI'
+        ts = TimeSeries(key=key)
+        ts = TimeSeries(key=key, retries='4')
+        ts = TimeSeries(key=key, output_format=output_format)
+
+        df, meta_data = ts.get_intraday(symbol=symbol, interval='1min', outputsize="full")
+
+        # Rename '4. close'
+        df.rename(columns={'4. close': 'Close'}, inplace=True)
+
+        if len(df.index) > 0:
+            if del_cols == True:
+                del df['1. open']
+                del df['2. high']
+                del df['3. low']
+                del df['5. volume']
+
+
+            df = slice_df(df, dates)
+            return df
+    except:
+        return False
 
 def get_orders_data_file(basefilename):
     return open(os.path.join(os.environ.get("ORDERS_DATA_DIR",'orders/'),basefilename))

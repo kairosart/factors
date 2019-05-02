@@ -15,7 +15,7 @@ import fix_yahoo_finance as yf
 yf.pdr_override()
 
 from util import create_df_benchmark, fetchOnlineData, get_data, \
-    symbol_to_path, df_to_cvs, get_data_av, scaling_data, normalize_data, scaling_series, slice_df
+    symbol_to_path, df_to_cvs, get_data_av, scaling_data, normalize_data, scaling_series, slice_df, get_data_av_min
 from strategyLearner import strategyLearner
 from marketsim import market_simulator
 from indicators import get_momentum, get_sma, get_rolling_mean, get_rolling_std, get_bollinger_bands, \
@@ -60,10 +60,10 @@ def training():
     #df = get_data(symbol)
     # Import data from Alpha Vantage
     dates = pd.date_range(start_d, dt.date.today())
-    df = get_data_av(symbol, dates, del_cols=True)
+    df = get_data_av_min(symbol, dates, del_cols=True)
 
     # Rename column Adj Close
-    df.rename(columns={'Adj Close': symbol}, inplace=True)
+    df.rename(columns={'Close': symbol}, inplace=True)
 
     if not isinstance(df, pd.DataFrame):
         return render_template(
@@ -207,7 +207,7 @@ def showvalues():
 
     if date_diff_ok:
         lookback_date = dt.datetime.strptime(lookback_date, '%m/%d/%Y')
-        start_d = f"{lookback_date:%Y-%m-%d}"
+        start_d = f"{lookback_date:%Y-%m-%d %H:%M:%S}"
         yesterday = dt.date.today() - dt.timedelta(1)
 
         # Import data from Alpha Vantage

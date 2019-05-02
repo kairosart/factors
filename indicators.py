@@ -755,7 +755,7 @@ def plot_performance(perform_df, title="In-sample vs Out of sample performance",
     chart = plot(fig, show_link=False, output_type='div')
     return chart
 
-def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=False, title="Title", xtitle="X title", ytitle="Y title"):
+def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=False, title="Title", xtitle="X title", ytitle="Y title",  output_type='py'):
     """Plots portvals and portvals_bm, showing vertical lines for buy and sell orders
 
     Parameters:
@@ -890,8 +890,11 @@ def plot_norm_data_vertical_lines(df_orders, portvals, portvals_bm, vert_lines=F
 
     fig = dict(data=data, layout=layout)
 
-    chart = plot(fig, show_link=False, output_type='div')
-    return chart
+    if output_type == 'py':
+        chart = plot(fig, show_link=False, output_type='div')
+        return chart
+    else:
+        return fig
 
 def plot_stock_prices_prediction(df_index, prices, prediction, title="Stock prices prediction", xlabel="Date", ylabel="Price"):
     """Plot Stock Prices.

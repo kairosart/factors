@@ -4,8 +4,9 @@
     <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/indicators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/strategy_learner_getting_online_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/strategy_learner_getting_online_data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/stockpriceschart.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stockpriceschart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,7 +17,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/factors$util.coverage" NAME="util Coverage Results" MODIFIED="1555788907211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/factors$main.coverage" NAME="main Coverage Results" MODIFIED="1556396435642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/factors$main.coverage" NAME="main Coverage Results" MODIFIED="1556826444046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -37,13 +38,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="281" column="66" lean-forward="true" selection-start-line="281" selection-start-column="66" selection-end-line="281" selection-end-column="66" />
+            <state relative-caret-position="222">
+              <caret line="62" column="14" lean-forward="true" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#7527#11138#0" />
               </folding>
             </state>
           </provider>
@@ -52,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/strategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-939">
-              <caret line="196" selection-start-line="196" selection-end-line="196" />
+            <state relative-caret-position="925">
+              <caret line="195" column="31" selection-start-line="195" selection-start-column="31" selection-end-line="195" selection-end-column="31" />
               <folding>
                 <element signature="e#80#98#0" expanded="true" />
               </folding>
@@ -61,23 +63,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="405" column="18" selection-start-line="405" selection-start-column="18" selection-end-line="405" selection-end-column="18" />
+            <state relative-caret-position="5156">
+              <caret line="896" column="18" selection-start-line="896" selection-start-column="18" selection-end-line="896" selection-end-column="18" />
               <folding>
                 <element signature="e#38#56#0" expanded="true" />
-                <element signature="e#6260#7646#0" />
-                <element signature="e#12547#14281#0" />
-                <element signature="e#14233#16784#0" />
-                <element signature="e#15838#18466#0" />
-                <element signature="e#18591#21192#0" />
-                <element signature="e#21336#25722#0" />
-                <element signature="e#25856#27709#0" />
-                <element signature="e#27834#30537#0" />
-                <element signature="e#30662#32585#0" />
-                <element signature="e#32712#34672#0" />
+                <element signature="e#18637#21238#0" />
+                <element signature="e#27880#30583#0" />
+                <element signature="e#30708#32631#0" />
+                <element signature="e#32758#34718#0" />
               </folding>
             </state>
           </provider>
@@ -86,11 +82,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="122" column="60" selection-start-line="122" selection-start-column="8" selection-end-line="122" selection-end-column="60" />
+            <state relative-caret-position="158">
+              <caret line="143" column="19" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="19" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
-                <element signature="e#1570#2880#0" />
               </folding>
             </state>
           </provider>
@@ -99,7 +94,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-196">
+            <state relative-caret-position="1140">
               <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
             </state>
           </provider>
@@ -201,14 +196,14 @@
         <option value="$PROJECT_DIR$/templates/forecastPrices.html" />
         <option value="$PROJECT_DIR$/forecastPrice.py" />
         <option value="$PROJECT_DIR$/lib/python3.7/site-packages/matplotlib/tests/test_image.py" />
-        <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/form.py" />
         <option value="$PROJECT_DIR$/templates/startValuesForm.html" />
         <option value="$PROJECT_DIR$/marketsim.py" />
         <option value="$PROJECT_DIR$/strategyLearner.py" />
         <option value="$PROJECT_DIR$/templates/stockpriceschart.html" />
-        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/indicators.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -224,6 +219,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,7 +252,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -465,14 +460,9 @@
       <workItem from="1555270206644" duration="2570000" />
       <workItem from="1555443989519" duration="2765000" />
       <workItem from="1555490002603" duration="26686000" />
-      <workItem from="1555677152263" duration="79997000" />
-    </task>
-    <task id="LOCAL-00179" summary="Calculating next n business days in ARIMA Model.">
-      <created>1552337150383</created>
-      <option name="number" value="00179" />
-      <option name="presentableId" value="LOCAL-00179" />
-      <option name="project" value="LOCAL" />
-      <updated>1552337150384</updated>
+      <workItem from="1555677152263" duration="82244000" />
+      <workItem from="1556821654453" duration="87000" />
+      <workItem from="1556821799875" duration="4618000" />
     </task>
     <task id="LOCAL-00180" summary="Calculating next n business days in ARIMA Model.">
       <created>1552424869684</created>
@@ -810,11 +800,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556390222325</updated>
     </task>
-    <option name="localTasksCounter" value="228" />
+    <task id="LOCAL-00228" summary="Modifying strategy_learner_getting_online_data.ipynb.">
+      <created>1556396521113</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1556396521114</updated>
+    </task>
+    <option name="localTasksCounter" value="229" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114466000" />
+    <option name="totallyTimeSpent" value="121418000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -829,8 +826,8 @@
     <frame x="0" y="-1" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.492562" visible="true" weight="0.15702036" />
-      <window_info id="Structure" order="1" sideWeight="0.507438" side_tool="true" visible="true" weight="0.15702036" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4892562" visible="true" weight="0.1613076" />
+      <window_info id="Structure" order="1" sideWeight="0.5107438" side_tool="true" visible="true" weight="0.1613076" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32447398" />
@@ -850,9 +847,9 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.2715054" side_tool="true" weight="0.14285715" />
+      <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.27272728" side_tool="true" visible="true" weight="0.18220793" />
       <window_info anchor="right" id="Database" order="4" sideWeight="0.49731183" weight="0.32949308" />
-      <window_info anchor="right" id="SciView" order="5" sideWeight="0.72849464" weight="0.14285715" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.72727275" visible="true" weight="0.18220793" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.15487674" />
@@ -929,7 +926,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Creating Decision Tree model metrics." />
     <MESSAGE value="Creating XGBoost model notebook." />
     <MESSAGE value="Creating XGBoost model backend." />
     <MESSAGE value="Creating KNN model notebook." />
@@ -954,7 +950,8 @@
     <MESSAGE value="Changing the way of getting data. Alpha Vantage instead of Yahoo." />
     <MESSAGE value="Changing indicators with TA indicators." />
     <MESSAGE value="Using my indicators." />
-    <option name="LAST_COMMIT_MESSAGE" value="Using my indicators." />
+    <MESSAGE value="Modifying strategy_learner_getting_online_data.ipynb." />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifying strategy_learner_getting_online_data.ipynb." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1064,7 +1061,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/AABA.csv" />
     <entry file="file://$PROJECT_DIR$/test.ipynb" />
     <entry file="file://$PROJECT_DIR$/pyvenv.cfg" />
     <entry file="file:///run/user/1000/jupyter/nbserver-27475-open.html" />
@@ -1260,24 +1256,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="122" column="60" selection-start-line="122" selection-start-column="8" selection-end-line="122" selection-end-column="60" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-            <element signature="e#1570#2880#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-196">
-          <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/stockpriceschart.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
@@ -1291,42 +1269,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/python3.7/site-packages/alpha_vantage/timeseries.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/strategyLearner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-939">
-          <caret line="196" selection-start-line="196" selection-end-line="196" />
+        <state relative-caret-position="925">
+          <caret line="195" column="31" selection-start-line="195" selection-start-column="31" selection-end-line="195" selection-end-column="31" />
           <folding>
             <element signature="e#80#98#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/indicators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="281" column="66" lean-forward="true" selection-start-line="281" selection-start-column="66" selection-end-line="281" selection-end-column="66" />
+        <state relative-caret-position="5156">
+          <caret line="896" column="18" selection-start-line="896" selection-start-column="18" selection-end-line="896" selection-end-column="18" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#38#56#0" expanded="true" />
+            <element signature="e#18637#21238#0" />
+            <element signature="e#27880#30583#0" />
+            <element signature="e#30708#32631#0" />
+            <element signature="e#32758#34718#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/indicators.py">
+    <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="405" column="18" selection-start-line="405" selection-start-column="18" selection-end-line="405" selection-end-column="18" />
+        <state relative-caret-position="158">
+          <caret line="143" column="19" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="19" />
           <folding>
-            <element signature="e#38#56#0" expanded="true" />
-            <element signature="e#6260#7646#0" />
-            <element signature="e#12547#14281#0" />
-            <element signature="e#14233#16784#0" />
-            <element signature="e#15838#18466#0" />
-            <element signature="e#18591#21192#0" />
-            <element signature="e#21336#25722#0" />
-            <element signature="e#25856#27709#0" />
-            <element signature="e#27834#30537#0" />
-            <element signature="e#30662#32585#0" />
-            <element signature="e#32712#34672#0" />
+            <element signature="e#43#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="62" column="14" lean-forward="true" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#7527#11138#0" />
           </folding>
         </state>
       </provider>
