@@ -22,6 +22,7 @@ def compute_portvals_single_symbol(df_orders, df, symbol, start_val=1000000,
     Parameters:
     df_orders: A dataframe with orders for buying or selling stocks. There is
     no value for cash (i.e. 0).
+    df: Prices dataframe
     symbol: The stock symbol whose portfolio values need to be computed
     start_val: The starting value of the portfolio (initial cash available)
     commission: The fixed amount in dollars charged for each transaction
@@ -36,30 +37,17 @@ def compute_portvals_single_symbol(df_orders, df, symbol, start_val=1000000,
     # Sort the orders dataframe by date
     df_orders.sort_index(ascending=True, inplace=True)
 
-    # Get the start and end dates
-    start_date = df_orders.index.min()
-    end_date = df_orders.index.max()
-    dates = pd.date_range(start_date, end_date)
-
-    # Create a dataframe with adjusted close prices for the symbol and for cash
-    df_prices = slice_df(df, dates)
-    #del df_prices["SPY"]
-    #df_prices["cash"] = 1.0
-    df_prices.loc[:, ("cash")] = 1.0
-    # Fill NAN values if any
-    df_prices.fillna(method="ffill", inplace=True)
-    df_prices.fillna(method="bfill", inplace=True)
-    df_prices.fillna(1.0, inplace=True)
+    df.loc[:, ("cash")] = 1.0
 
     # Create a dataframe that represents changes in the number of shares by day
-    df_trades = pd.DataFrame(np.zeros((df_prices.shape)), df_prices.index,
-                             df_prices.columns)
+    df_trades = pd.DataFrame(np.zeros((df.shape)), df.index,
+                             df.columns)
 
     for index, row in df_orders.iterrows():
         # Total value of shares purchased or sold
-        traded_share_value = df_prices.loc[index, symbol] * row["Shares"]
+        traded_share_value = df.loc[index, symbol] * row["Shares"]
         # Transaction cost
-        transaction_cost = commission + impact * df_prices.loc[index, symbol] \
+        transaction_cost = commission + impact * df.loc[index, symbol] \
                            * abs(row["Shares"])
 
         # Update the number of shares and cash based on the type of transaction
@@ -82,8 +70,8 @@ def compute_portvals_single_symbol(df_orders, df, symbol, start_val=1000000,
 
     # Create a dataframe that represents on each particular day how much of
     # each asset in the portfolio
-    df_holdings = pd.DataFrame(np.zeros((df_prices.shape)), df_prices.index,
-                               df_prices.columns)
+    df_holdings = pd.DataFrame(np.zeros((df.shape)), df.index,
+                               df.columns)
     for row_count in range(len(df_holdings)):
         # In the first row, the number shares are the same as in df_trades,
         # but start_val must be added to cash
@@ -97,7 +85,7 @@ def compute_portvals_single_symbol(df_orders, df, symbol, start_val=1000000,
         row_count += 1
 
     # Create a dataframe that represents the monetary value of each asset
-    df_value = df_prices * df_holdings
+    df_value = df * df_holdings
 
     # Create portvals dataframe
     portvals = pd.DataFrame(df_value.sum(axis=1), df_value.index, ["port_val"])
@@ -108,7 +96,7 @@ def market_simulator(df, df_orders, df_orders_benchmark, symbol, start_val=10000
     """
     This function takes in and executes trades from orders dataframes
     Parameters:
-    df: A dataframe from csv file
+    df: Price dataframe
     df_orders: A dataframe that contains portfolio orders
     df_orders_benchmark: A dataframe that contains benchmark orders
     start_val: The starting cash in dollars

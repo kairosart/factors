@@ -158,7 +158,7 @@ def get_data_av_min(symbol, dates, del_cols=True, output_format='pandas'):
         ts = TimeSeries(key=key, retries='4')
         ts = TimeSeries(key=key, output_format=output_format)
 
-        df, meta_data = ts.get_intraday(symbol=symbol, interval='1min', outputsize="full")
+        df, meta_data = ts.get_intraday(symbol=symbol, interval='60min', outputsize="full")
 
         # Rename '4. close'
         df.rename(columns={'4. close': 'Close'}, inplace=True)

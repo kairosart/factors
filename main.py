@@ -60,7 +60,7 @@ def training():
     #df = get_data(symbol)
     # Import data from Alpha Vantage
     dates = pd.date_range(start_d, dt.date.today())
-    df = get_data_av_min(symbol, dates, del_cols=True)
+    df = get_data_av(symbol, dates, del_cols=True)
 
     # Rename column Adj Close
     df.rename(columns={'Close': symbol}, inplace=True)
@@ -100,9 +100,14 @@ def training():
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
 
-    epochs, cum_returns = stl.add_evidence(df_training, symbol, start_val=start_val, start_date=start_date_training,
+    epochs, cum_returns = stl.add_evidence(df_training,
+                                           symbol,
+                                           start_val=start_val,
+                                           start_date=start_date_training,
                                            end_date=end_date_training)
-    df_trades = stl.test_policy(df_training, symbol, start_date=start_date_training,
+    df_trades = stl.test_policy(df_training,
+                                symbol,
+                                start_date=start_date_training,
                                 end_date=end_date_training)
 
     # cum_returns = map(lambda cum_returns: cum_returns * 100, cum_returns)

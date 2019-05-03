@@ -174,23 +174,20 @@ class strategyLearner(object):
         # If none of recent returns is greater than max_return, it has converged
         return True
 
-    def add_evidence(self, df, symbol, start_date=dt.datetime(2008, 1, 1),
+    def add_evidence(self, df_prices, symbol, start_date=dt.datetime(2008, 1, 1),
                      end_date=dt.datetime(2009, 12, 31), start_val=100000):
         """Create a QLearner, and train it for trading.
 
         Parameters:
+        df_prices: Prices dataframe
         symbol: The stock symbol to act on
         start_date: A datetime object that represents the start date
         end_date: A datetime object that represents the end date
         start_val: Start value of the portfolio which contains only the symbol
         """
-        dates = pd.date_range(start_date, end_date)
-        # Get adjusted close prices for symbol
-        df_prices = slice_df(df, dates)
-        # Fill NAN values if any
-        df_prices.fillna(method="ffill", inplace=True)
-        df_prices.fillna(method="bfill", inplace=True)
-        df_prices.fillna(1.0, inplace=True)
+
+        # Rename 'Adj Close' to symbol
+        df_prices.rename(columns={'Adj Close': symbol}, inplace=True)
 
         # Get features and thresholds
         df_features = self.get_features(df_prices[symbol])
@@ -229,7 +226,7 @@ class strategyLearner(object):
 
             df_trades = create_df_trades(orders, symbol, self.num_shares)
             portvals = compute_portvals_single_symbol(df_orders=df_trades,
-                                                      df=df,
+                                                      df=df_prices,
                                                       symbol=symbol,
                                                       start_val=start_val,
                                                       commission=self.commission,
@@ -241,12 +238,11 @@ class strategyLearner(object):
             if self.verbose:
                 print(epoch, cum_return)
 
-            #TODO change epoch to 10 or 20
 
             # Check for convergence after running for at least 10 epochs
             if epoch > 5:
-                # Stop if the cum_return doesn't improve for 10 epochs
-                if self.has_converged(cum_returns):
+                # Stop if the cum_return doesn't improve for n patience
+                if self.has_converged(cum_returns, patience=5):
                     break
         return epochs, cum_returns
 
@@ -268,6 +264,8 @@ class strategyLearner(object):
 
         # Get adjusted close prices for symbol
         df_prices = df
+        # Rename 'Adj Close' to symbol
+        df_prices.rename(columns={'Adj Close': symbol}, inplace=True)
         # Get features and thresholds
         df_features = self.get_features(df_prices[symbol])
         thresholds = self.get_thresholds(df_features, self.num_steps)
