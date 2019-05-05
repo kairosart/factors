@@ -94,10 +94,11 @@ def fetchOnlineData(dt_start, symbol, dt_end, del_cols=True, output_format='pand
     except:
         return False
 
-# TODO Create function to get data from Alpha Vantage https://www.alphavantage.co
+# Getting data from Alpha Vantage https://www.alphavantage.co
 # API key is: 477OAZQ4753FSGAI
 # Examples: https://github.com/RomelTorres/alpha_vantage
 
+# TODO Alpha Vantage doesn't give as many data as I need for a year or over.
 def get_data_av(symbol, dates, del_cols=True, output_format='pandas'):
     '''
     Get stock data from Alpha Vantage
@@ -136,8 +137,8 @@ def get_data_av(symbol, dates, del_cols=True, output_format='pandas'):
                 del df['Volume']
 
 
-            df = slice_df(df, dates)
-            return df
+            df1  = slice_df(df, dates)
+            return df1
     except:
         return False
 
