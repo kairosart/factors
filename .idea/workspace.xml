@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="">
+    <list default="true" id="fdbac10e-9f80-49da-b086-e6b628d3e4ae" name="Default Changelist" comment="Adding widgets to strategy_learner Notebook.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategyLearner.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategyLearner.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/strategy_learner_getting_online_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/strategy_learner_getting_online_data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
     </list>
     <list id="135ea3f9-aba0-4b5c-90c7-57e6dfca09b4" name="Unversioned Files" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,7 +15,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/factors$util.coverage" NAME="util Coverage Results" MODIFIED="1555788907211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/factors$main.coverage" NAME="main Coverage Results" MODIFIED="1557080104418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/factors$main.coverage" NAME="main Coverage Results" MODIFIED="1557172991835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -36,11 +36,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="61" column="51" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="51" />
+            <state relative-caret-position="231">
+              <caret line="252" column="35" selection-start-line="252" selection-start-column="27" selection-end-line="252" selection-end-column="41" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -51,7 +51,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/marketsim.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1862">
+            <state relative-caret-position="182">
               <caret line="98" column="23" selection-start-line="98" selection-start-column="23" selection-end-line="98" selection-end-column="23" />
               <folding>
                 <element signature="e#73#92#0" expanded="true" />
@@ -60,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/strategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="97" selection-start-line="97" selection-end-line="97" />
+            <state relative-caret-position="393">
+              <caret line="257" lean-forward="true" selection-start-line="257" selection-end-line="257" />
               <folding>
                 <element signature="e#80#98#0" expanded="true" />
               </folding>
@@ -73,16 +73,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/strategyLearner_new.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5156">
-              <caret line="896" column="18" selection-start-line="896" selection-start-column="18" selection-end-line="896" selection-end-column="18" />
+            <state relative-caret-position="184">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
               <folding>
                 <element signature="e#38#56#0" expanded="true" />
                 <element signature="e#18637#21238#0" />
-                <element signature="e#27880#30583#0" />
-                <element signature="e#30708#32631#0" />
-                <element signature="e#32758#34718#0" />
               </folding>
             </state>
           </provider>
@@ -91,10 +93,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="140" selection-start-line="140" selection-end-line="140" />
+            <state relative-caret-position="165">
+              <caret line="200" column="18" selection-start-line="200" selection-start-column="4" selection-end-line="200" selection-end-column="18" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
+                <element signature="e#1670#2980#0" />
               </folding>
             </state>
           </provider>
@@ -103,7 +106,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
+            <state relative-caret-position="510">
               <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
             </state>
           </provider>
@@ -123,8 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>df['date']</find>
-      <find>col</find>
       <find>Forecast</find>
       <find>yaxis2</find>
       <find>forecast_time</find>
@@ -153,6 +154,8 @@
       <find>pd.to_date</find>
       <find>symbol</find>
       <find>set_index</find>
+      <find>read_csv</find>
+      <find>normalize_data</find>
     </findStrings>
     <replaceStrings>
       <replace>symbol</replace>
@@ -211,8 +214,8 @@
         <option value="$PROJECT_DIR$/indicators.py" />
         <option value="$PROJECT_DIR$/marketsim.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/strategyLearner.py" />
         <option value="$PROJECT_DIR$/util.py" />
+        <option value="$PROJECT_DIR$/strategyLearner.py" />
       </list>
     </option>
   </component>
@@ -228,7 +231,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -261,10 +263,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -272,14 +276,15 @@
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/data" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/static/css" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$USER_HOME$/Jupyter/ML4T_2018Spring/data" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/data" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -471,21 +476,8 @@
       <workItem from="1555490002603" duration="26686000" />
       <workItem from="1555677152263" duration="82244000" />
       <workItem from="1556821654453" duration="87000" />
-      <workItem from="1556821799875" duration="13888000" />
-    </task>
-    <task id="LOCAL-00182" summary="ARIMA Model Plotting predictions.">
-      <created>1552511380854</created>
-      <option name="number" value="00182" />
-      <option name="presentableId" value="LOCAL-00182" />
-      <option name="project" value="LOCAL" />
-      <updated>1552511380854</updated>
-    </task>
-    <task id="LOCAL-00183" summary="ARIMA Model Notebook Plotting predictions.">
-      <created>1552598129096</created>
-      <option name="number" value="00183" />
-      <option name="presentableId" value="LOCAL-00183" />
-      <option name="project" value="LOCAL" />
-      <updated>1552598129097</updated>
+      <workItem from="1556821799875" duration="18472000" />
+      <workItem from="1557258724183" duration="3317000" />
     </task>
     <task id="LOCAL-00184" summary="ARIMA Model Notebook Plotting predictions.">
       <created>1552599012678</created>
@@ -816,11 +808,25 @@
       <option name="project" value="LOCAL" />
       <updated>1556914245354</updated>
     </task>
-    <option name="localTasksCounter" value="231" />
+    <task id="LOCAL-00231" summary="Adding widgets to strategy_learner Notebook.">
+      <created>1557087377199</created>
+      <option name="number" value="00231" />
+      <option name="presentableId" value="LOCAL-00231" />
+      <option name="project" value="LOCAL" />
+      <updated>1557087377199</updated>
+    </task>
+    <task id="LOCAL-00232" summary="Adding widgets to strategy_learner Notebook.">
+      <created>1557174462161</created>
+      <option name="number" value="00232" />
+      <option name="presentableId" value="LOCAL-00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1557174462161</updated>
+    </task>
+    <option name="localTasksCounter" value="233" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130688000" />
+    <option name="totallyTimeSpent" value="138589000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -833,19 +839,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1080" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49078947" visible="true" weight="0.1613076" />
-      <window_info id="Structure" order="1" sideWeight="0.5092105" side_tool="true" visible="true" weight="0.1613076" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48617887" visible="true" weight="0.16323297" />
+      <window_info id="Structure" order="1" sideWeight="0.5138211" side_tool="true" weight="0.16323297" />
       <window_info id="Favorites" order="2" sideWeight="0.50530034" side_tool="true" weight="0.2132626" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32447398" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.33001107" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" weight="0.31893688" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49496022" visible="true" weight="0.31893688" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32668883" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920425" weight="0.3255814" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" visible="true" weight="0.15836102" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49655172" weight="0.16057585" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5050398" side_tool="true" weight="0.3821138" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32733813" />
       <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32963374" />
@@ -855,9 +862,9 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.2736842" side_tool="true" visible="true" weight="0.18220793" />
+      <window_info anchor="right" x="0" y="0" width="430" height="880" id="Documentation" order="3" sideWeight="0.275" side_tool="true" visible="true" weight="0.18220793" />
       <window_info anchor="right" id="Database" order="4" sideWeight="0.49731183" weight="0.32949308" />
-      <window_info anchor="right" id="SciView" order="5" sideWeight="0.7263158" visible="true" weight="0.18220793" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.725" visible="true" weight="0.18220793" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4943609" visible="true" weight="0.15487674" />
@@ -934,7 +941,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Creating KNN model notebook." />
     <MESSAGE value="Change selection options in Forecasting prices form" />
     <MESSAGE value="Change ARIMA Model Notebook." />
     <MESSAGE value="Calculating next n business days in ARIMA Model." />
@@ -959,7 +965,8 @@
     <MESSAGE value="Modifying strategy_learner_getting_online_data.ipynb." />
     <MESSAGE value="Adding a get_data_av_min() function for getting data with a minute interval to calculate trading agent results." />
     <MESSAGE value="Modifying Strategy Learner." />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifying Strategy Learner." />
+    <MESSAGE value="Adding widgets to strategy_learner Notebook." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding widgets to strategy_learner Notebook." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1000,9 +1007,19 @@
           <option name="timeStamp" value="996" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>65</line>
-          <option name="timeStamp" value="1000" />
+          <url>file://$PROJECT_DIR$/strategyLearner.py</url>
+          <line>246</line>
+          <option name="timeStamp" value="1013" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/strategyLearner.py</url>
+          <line>192</line>
+          <option name="timeStamp" value="1025" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/strategyLearner.py</url>
+          <line>82</line>
+          <option name="timeStamp" value="1026" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -1074,7 +1091,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test.ipynb" />
     <entry file="file://$PROJECT_DIR$/pyvenv.cfg" />
     <entry file="file:///run/user/1000/jupyter/nbserver-27475-open.html" />
     <entry file="file://$PROJECT_DIR$/lib/python3.6/tokenize.py" />
@@ -1098,28 +1114,10 @@
         <state relative-caret-position="-916" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/XGBoost.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/LSTM2_forecasting_prices.ipynb" />
+    <entry file="file://$PROJECT_DIR$/XGBoost.ipynb" />
     <entry file="file://$USER_HOME$/.local/lib/python3.6/site-packages/sklearn/preprocessing/data.py" />
-    <entry file="file://$PROJECT_DIR$/KNN_forecasting_prices.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/KNN_forecasting_prices.ipynb" />
     <entry file="file://$PROJECT_DIR$/lib/python3.6/site-packages/pandas/core/indexes/base.py" />
     <entry file="file://$PROJECT_DIR$/LSTM_forecasting_prices.ipynb" />
     <entry file="file://$PROJECT_DIR$/arima_model.pkl">
@@ -1151,13 +1149,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/python3.6/site-packages/flask/app.py" />
     <entry file="file://$PROJECT_DIR$/temp-plot.html" />
-    <entry file="file://$PROJECT_DIR$/decision_tree_regression.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/decision_tree_regression.ipynb" />
     <entry file="file://$PROJECT_DIR$/templates/pricesForecastForm.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1577">
@@ -1211,24 +1203,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.ipynb_checkpoints/KNN_forecasting_prices-checkpoint.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.ipynb_checkpoints/LSTM2_forecasting_prices-checkpoint.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="29" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/.ipynb_checkpoints/KNN_forecasting_prices-checkpoint.ipynb" />
+    <entry file="file://$PROJECT_DIR$/.ipynb_checkpoints/LSTM2_forecasting_prices-checkpoint.ipynb" />
     <entry file="file://$PROJECT_DIR$/analysis.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/QLearner.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/forecastPrice.py">
@@ -1279,23 +1256,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strategyLearner_new.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QLearner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/indicators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5156">
-          <caret line="896" column="18" selection-start-line="896" selection-start-column="18" selection-end-line="896" selection-end-column="18" />
+        <state relative-caret-position="184">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
             <element signature="e#18637#21238#0" />
-            <element signature="e#27880#30583#0" />
-            <element signature="e#30708#32631#0" />
-            <element signature="e#32758#34718#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="252" column="35" selection-start-line="252" selection-start-column="27" selection-end-line="252" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/marketsim.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1862">
+        <state relative-caret-position="182">
           <caret line="98" column="23" selection-start-line="98" selection-start-column="23" selection-end-line="98" selection-end-column="23" />
           <folding>
             <element signature="e#73#92#0" expanded="true" />
@@ -1305,37 +1306,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="140" selection-start-line="140" selection-end-line="140" />
+        <state relative-caret-position="165">
+          <caret line="200" column="18" selection-start-line="200" selection-start-column="4" selection-end-line="200" selection-end-column="18" />
           <folding>
             <element signature="e#43#64#0" expanded="true" />
+            <element signature="e#1670#2980#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/strategyLearner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
+        <state relative-caret-position="393">
+          <caret line="257" lean-forward="true" selection-start-line="257" selection-end-line="257" />
           <folding>
             <element signature="e#80#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="61" column="51" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

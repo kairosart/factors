@@ -4,12 +4,12 @@ import numpy as np
 import datetime as dt
 import pandas as pd
 
-from util import create_df_benchmark, create_df_trades, fetchOnlineData, get_data, slice_df
+from util import create_df_benchmark, create_df_trades, fetchOnlineData, get_data, slice_df, scaling_series
 import QLearner as ql
 from indicators import get_momentum, get_sma_indicator, compute_bollinger_value, plot_cum_return, get_RSI
 from marketsim import compute_portvals_single_symbol, market_simulator
 from analysis import get_portfolio_stats
-
+from util import normalize_data
 
 class strategyLearner(object):
     # Constants for positions and order signals
@@ -46,7 +46,7 @@ class strategyLearner(object):
         into a Q-learner.
 
         Parameters:
-        prices: Adjusted close prices of the given symbol
+        prices: Adjusted close prices Dataframe of the given symbol
 
         Returns:
         df_features: A pandas dataframe of the technical indicators
@@ -74,7 +74,7 @@ class strategyLearner(object):
         # Convert RSI array to dataframe
         rsi_df = pd.DataFrame(prices)
         rsi_df.drop(rsi_df.columns[[0]], axis=1, inplace=True)
-        rsi_df['rsi'] = pd.Series(rsi_indicator, index=rsi_df.index)
+        rsi_df['rsi'] = scaling_series(pd.Series(rsi_indicator, index=rsi_df.index))
         df_features = pd.concat([df_features, rsi_df], axis=1)
         df_features.columns = ["ind{}".format(i)
                                for i in range(len(df_features.columns))]
@@ -244,7 +244,7 @@ class strategyLearner(object):
                 # Stop if the cum_return doesn't improve for n patience
                 if self.has_converged(cum_returns, patience=5):
                     break
-        return epochs, cum_returns
+        return epochs, cum_returns, df_trades, portvals, df_features, thresholds
 
     def test_policy(self, df, symbol, start_date=dt.datetime(2010, 1, 1),
                     end_date=dt.datetime(2011, 12, 31), start_val=10000):
