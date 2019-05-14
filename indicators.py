@@ -21,11 +21,11 @@ from plotly import tools
 def get_momentum(price, window=10):
     """Calculate momentum indicator:
     momentum[t] = (price[t]/price[t-window]) - 1
-    Parameters:
-    price: Price, typically adjusted close price, series of a symbol
-    window: Number of days to look back
 
-    Returns: Momentum, series of the same size as input data
+    :param price: Price, typically adjusted close price, series of a symbol
+    :param window: Number of days to look back
+
+    :returns: Momentum, series of the same size as input data
     """
     momentum = pd.Series(np.nan, index=price.index)
     momentum.iloc[window:] = (price.iloc[window:] / price.values[:-window]) - 1
@@ -344,6 +344,8 @@ def plot_sma_indicator(df, symbol, title="SMA Indicator", output_type='py'):
     :param df: Prices and SMA dataframe
     :param symbol: Stock Symbol
     :param title: Graph title
+    :param output_type: py for a html return or nb for Jupyter Notebooks
+
     :return: Plot SMA indicator
     """
     trace_symbol = go.Scatter(
@@ -408,33 +410,30 @@ def plot_sma_indicator(df, symbol, title="SMA Indicator", output_type='py'):
     else:
         return fig
 
-def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momentum,
-                       title="MOMENTUM/ SMA Indicator", fig_size=(12, 6)):
+def plot_momentum_sma_indicator(df, symbol, sma_indicator, momentum,
+                       title="MOMENTUM/ SMA Indicator", output_type='py'):
     """Plot Momentum/SMA cross indicator for a symbol.
 
-    Parameters:
-    dates: Range of dates
-    df_index: Date index
-    sym_price: Price, typically adjusted close price, series of symbol
-    sma_indicator: The simple moving average indicator
-    Momentum: Momentum
-    title: The chart title
-    fig_size: Width and height of the chart in inches
+    :param df: Prices Dateframe
+    :param sym_price: Price, typically adjusted close price, series of symbol
+    :param sma_indicator: The simple moving average indicator
+    :param Momentum: Momentum
+    :param title: The chart title
+    :param output_type: py for a html return or nb for Jupyter Notebooks
 
-    Returns:
-    Plot Momentum/SMA cross points
+    :return: Plot Momentum/SMA cross points
     """
 
 
     trace_sma = go.Scatter(
-                x=df_index,
+                x=df.index,
                 y=sma_indicator,
                 name = "SMA",
                 line = dict(color = '#FF8000'),
                 opacity = 0.8)
 
     trace_momentum = go.Scatter(
-                x=df_index,
+                x=df.index,
                 y=momentum,
                 name = "Momentum",
                 line = dict(color = '#04B404'),
@@ -443,7 +442,7 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
     data = [trace_sma, trace_momentum]
 
     layout = dict(
-        title = title,
+        title = title + ' ' + symbol,
         xaxis = dict(
                 title='Dates',
                 rangeselector=dict(
@@ -459,7 +458,7 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
                             dict(step='all')
                         ])
                 ),
-                range = [dates.values[0], dates.values[1]]),
+                range=[df.index[0], df.index[-1]]),
 
         yaxis = dict(
                 title='Price')
@@ -469,8 +468,11 @@ def plot_momentum_sma_indicator(dates, df_index, sym_price, sma_indicator, momen
 
 
     fig = dict(data=data, layout=layout)
-    chart = plot(fig, show_link=False, output_type='div')
-    return chart
+    if output_type == 'py':
+        chart = plot(fig, show_link=False, output_type='div')
+        return chart
+    else:
+        return fig
 
 def plot_bollinger(df, symbol, title="Bollinger Indicator", output_type='py'):
     """Plot Bollinger bands and value for a symbol.
