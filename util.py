@@ -188,8 +188,14 @@ def get_robot_world_file(basefilename):
 
 
 def normalize_data(df):
-    """Normalize stock prices using the first row of the dataframe"""
-    return df/df.iloc[0,:]
+    '''
+    Normalize dataframe: (values - values.mean()) / values.std()
+    :param df: Datagrame
+    :return: Normalized dataframe
+    '''
+
+    df_norm = (df - df.mean()) / (df.std())
+    return df_norm
 
 
 def scaling_data(df, column):

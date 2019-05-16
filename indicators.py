@@ -18,6 +18,7 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 from plotly import tools
 
+# TODO Check momentum calculation
 def get_momentum(price, window=10):
     """Calculate momentum indicator:
     momentum[t] = (price[t]/price[t-window]) - 1
@@ -32,6 +33,7 @@ def get_momentum(price, window=10):
     #print(momentum.iloc[window:])
     return momentum
 
+# TODO Check SMA calculation
 def get_sma_indicator(price, rolling_mean):
     """Calculate simple moving average indicator, i.e. price / rolling_mean.
     Parameters:
@@ -324,7 +326,7 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
 
 
         yaxis = dict(
-                title='Adjusted Closed Price'
+                title='Momentum'
                 )
     )
 
