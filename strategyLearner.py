@@ -6,7 +6,8 @@ import pandas as pd
 
 from util import create_df_benchmark, create_df_trades, fetchOnlineData, get_data, slice_df, scaling_series
 import QLearner as ql
-from indicators import get_momentum, get_sma_indicator, compute_bollinger_value, plot_cum_return, get_RSI
+from indicators import get_momentum, get_sma_indicator, compute_bollinger_value, plot_cum_return, get_RSI, \
+    get_rolling_mean, get_rolling_std, get_bollinger_bands
 from marketsim import compute_portvals_single_symbol, market_simulator
 from analysis import get_portfolio_stats
 from util import normalize_data
@@ -81,6 +82,70 @@ class strategyLearner(object):
         df_features.dropna(inplace=True)
 
         return df_features
+
+    def get_features1(self, prices, print=False):
+        '''
+        Compute technical indicators and use them as features to be fed
+        into a Q-learner.
+        :param: prices: Adj Close prices dataframe
+        :param: Whether adding data for printing to dataframe or not
+        :return: Normalize Features dataframe
+        '''
+
+        # Fill NAN values if any
+        prices.fillna(method="ffill", inplace=True)
+        prices.fillna(method="bfill", inplace=True)
+        prices.fillna(1.0, inplace=True)
+
+        # Price
+        adj_close = prices[prices.columns[0]]
+
+        # Compute Momentum
+        mom = get_momentum(adj_close, window=10)
+
+        # Compute RSI
+        rsi = get_RSI(adj_close)
+
+        # Compute rolling mean
+        rm = get_rolling_mean(adj_close, window=10)
+
+        # Compute rolling standard deviation
+        rstd = get_rolling_std(adj_close, window=10)
+
+        # Compute upper and lower bands
+        upper_band, lower_band = get_bollinger_bands(rm, rstd)
+
+
+
+        # Compute SMA
+        sma = get_sma_indicator(adj_close, rm)
+
+        df = prices.copy()
+        df['Momentum'] = mom
+        df['SMA'] = sma
+        df['middle_band'] = rm
+
+        # Delete 'Adj Close' column
+        del df[df.columns[0]]
+
+        # Normalize dataframe
+        df_norm = normalize_data(df)
+
+        # Add Adj Close, Bollinrt Bands and RSY if printing
+        if print:
+            df_norm['Adj Close'] = prices['Adj Close']
+            df_norm['upper_band'] = upper_band
+            df_norm['lower_band'] = lower_band
+            df_norm['middle_band'] = rm
+            df_norm['RSI'] = rsi
+
+        # Drop NaN
+        df_norm.dropna(inplace=True)
+
+        return df_norm
+
+
+
 
     def get_thresholds(self, df_features, num_steps):
         """Compute the thresholds to be used in the discretization of features.
@@ -190,7 +255,7 @@ class strategyLearner(object):
         df_prices.rename(columns={'Adj Close': symbol}, inplace=True)
 
         # Get features and thresholds
-        df_features = self.get_features(df_prices[symbol])
+        df_features = self.get_features(df_prices)
         thresholds = self.get_thresholds(df_features, self.num_steps)
         cum_returns = []
         epochs = []
@@ -267,7 +332,7 @@ class strategyLearner(object):
         # Rename 'Adj Close' to symbol
         df_prices.rename(columns={'Adj Close': symbol}, inplace=True)
         # Get features and thresholds
-        df_features = self.get_features(df_prices[symbol])
+        df_features = self.get_features(df_prices)
         thresholds = self.get_thresholds(df_features, self.num_steps)
         # Initial position is holding nothing
         position = self.CASH

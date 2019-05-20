@@ -100,7 +100,7 @@ def training():
                           commission=commission, verbose=True,
                           num_states=3000, num_actions=3)
 
-    epochs, cum_returns = stl.add_evidence(df_training,
+    epochs, cum_returns, trades, portvals, df_features, thresholds  = stl.add_evidence(df_training,
                                            symbol,
                                            start_val=start_val,
                                            start_date=start_date_training,
@@ -239,59 +239,27 @@ def showvalues():
     session['commission'] = request.form['commission']
     session['impact'] = request.form['impact']
 
+    # **** Calculating indicators ****
+    stl = strategyLearner()
+    df_norm = stl.get_features1(portf_value, print=True)
 
-    # **** Ploting indicators ****
+    # **** Plotting indicators ****
 
     ##### PRICE MOVEMENTS ####
-    adj_close = portf_value['Adj Close']
-    plot_prices = plot_stock_prices(adj_close, symbol)
+    plot_prices = plot_stock_prices(portf_value['Adj Close'], symbol)
 
     #### MOMENTUM ####
-    normed_df = portf_value.copy()
 
-    # Scalating adj_close Series
-    adj_close_normalized = normalize_data(portf_value)
-
-    # Compute Momentum
-    mom = get_momentum(adj_close_normalized['Adj Close'], window=10)
-    normed_df['Adj Close'] = adj_close_normalized
-    normed_df['Momentum'] = mom
-
-    plot_mom = plot_momentum(normed_df, symbol)
-
+    plot_mom = plot_momentum(df_norm, symbol)
     #### ROLLILNGER BANDS ####
-    # Compute rolling mean
-    rm = get_rolling_mean(portf_value['Adj Close'], window=10)
-
-    # Compute rolling standard deviation
-    rstd = get_rolling_std(portf_value['Adj Close'], window=10)
-
-    # Compute upper and lower bands
-    upper_band, lower_band = get_bollinger_bands(rm, rstd)
-
-    # Create Dataframe for plotting
-    bollinger_df = portf_value.copy()
-    bollinger_df['upper_band'] = upper_band
-    bollinger_df['lower_band'] = lower_band
-    bollinger_df['middle_band'] = rm
-
-    plot_boll = plot_bollinger(bollinger_df, symbol)
+    plot_boll = plot_bollinger(df_norm, symbol)
 
 
     ##### SMA ####
-
-    # Normalize Adj Close
-    adj_close_normalized = normalize_data(portf_value)
-
-    # Compute SMA
-    sma, q = get_sma(adj_close_normalized['Adj Close'], window=10)
-    normed_df['SMA'] = sma
-    plot_sma = plot_sma_indicator(normed_df, symbol)
+    plot_sma = plot_sma_indicator(df_norm, symbol)
 
     ##### RSI ####
-    rsi = get_RSI(portf_value['Adj Close'])
-    normed_df['RSI'] = rsi
-    plot_rsi = plot_rsi_indicator(normed_df, symbol)
+    plot_rsi = plot_rsi_indicator(df_norm, symbol)
 
     return render_template(
         # name of template
