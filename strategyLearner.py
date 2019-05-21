@@ -136,7 +136,7 @@ class strategyLearner(object):
 
         # Add Adj Close, Bollinrt Bands and RSY if printing
         if print:
-            df_norm['Adj Close'] = prices['Adj Close']
+            df_norm['Adj Close'] = prices[symbol]
             df_norm['upper_band'] = upper_band
             df_norm['lower_band'] = lower_band
             df_norm['middle_band'] = rm

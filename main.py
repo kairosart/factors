@@ -97,7 +97,7 @@ def showvalues():
     # **** Plotting indicators ****
 
     ##### PRICE MOVEMENTS ####
-    plot_prices = plot_stock_prices(portf_value['Adj Close'], symbol)
+    plot_prices = plot_stock_prices(portf_value[symbol], symbol)
 
     #### MOMENTUM ####
 

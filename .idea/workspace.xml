@@ -40,11 +40,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="240" lean-forward="true" selection-start-line="240" selection-end-line="240" />
+            <state relative-caret-position="182">
+              <caret line="124" column="19" selection-start-line="124" selection-start-column="19" selection-end-line="124" selection-end-column="19" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#1349#7676#0" />
+                <element signature="e#10546#11075#0" />
+                <element signature="e#11215#18820#0" />
               </folding>
             </state>
           </provider>
@@ -65,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/strategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
-              <caret line="144" selection-start-line="144" selection-end-line="144" />
+            <state relative-caret-position="377">
+              <caret line="138" column="48" selection-start-line="138" selection-start-column="48" selection-end-line="138" selection-end-column="48" />
               <folding>
                 <element signature="e#80#98#0" expanded="true" />
               </folding>
@@ -82,10 +83,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="491" selection-start-line="491" selection-end-line="491" />
+            <state relative-caret-position="277">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
               <folding>
                 <element signature="e#38#56#0" expanded="true" />
+                <element signature="e#13612#15945#0" />
+                <element signature="e#16028#18699#0" />
+                <element signature="e#18824#21425#0" />
+                <element signature="e#21588#26039#0" />
+                <element signature="e#26173#28026#0" />
+                <element signature="e#28151#30854#0" />
               </folding>
             </state>
           </provider>
@@ -94,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2546">
-              <caret line="168" column="33" selection-start-line="168" selection-start-column="16" selection-end-line="168" selection-end-column="33" />
+            <state relative-caret-position="125">
+              <caret line="189" column="18" selection-start-line="189" selection-start-column="4" selection-end-line="189" selection-end-column="18" />
               <folding>
                 <element signature="e#43#64#0" expanded="true" />
                 <element signature="e#1670#2980#0" />
@@ -216,15 +223,15 @@
         <option value="$PROJECT_DIR$/marketsim.py" />
         <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/indicators.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/strategyLearner.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="460" />
-    <option name="width" value="1346" />
-    <option name="height" value="746" />
+    <option name="y" value="2" />
+    <option name="width" value="960" />
+    <option name="height" value="559" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -479,20 +486,6 @@
       <workItem from="1556821654453" duration="87000" />
       <workItem from="1556821799875" duration="18472000" />
       <workItem from="1557258724183" duration="3317000" />
-    </task>
-    <task id="LOCAL-00187" summary="ARIMA Model Notebook predictions.">
-      <created>1552936553388</created>
-      <option name="number" value="00187" />
-      <option name="presentableId" value="LOCAL-00187" />
-      <option name="project" value="LOCAL" />
-      <updated>1552936553389</updated>
-    </task>
-    <task id="LOCAL-00188" summary="ARIMA Model Notebook predictions.">
-      <created>1552943979925</created>
-      <option name="number" value="00188" />
-      <option name="presentableId" value="LOCAL-00188" />
-      <option name="project" value="LOCAL" />
-      <updated>1552943979925</updated>
     </task>
     <task id="LOCAL-00189" summary="ARIMA Model Notebook predictions.">
       <created>1552944407379</created>
@@ -823,7 +816,21 @@
       <option name="project" value="LOCAL" />
       <updated>1558037280790</updated>
     </task>
-    <option name="localTasksCounter" value="236" />
+    <task id="LOCAL-00236" summary="Normalizing Indicators.">
+      <created>1558382220075</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1558382220076</updated>
+    </task>
+    <task id="LOCAL-00237" summary="Normalizing Indicators.">
+      <created>1558467680161</created>
+      <option name="number" value="00237" />
+      <option name="presentableId" value="LOCAL-00237" />
+      <option name="project" value="LOCAL" />
+      <updated>1558467680161</updated>
+    </task>
+    <option name="localTasksCounter" value="238" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -999,7 +1006,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>345</line>
+          <line>347</line>
           <option name="timeStamp" value="842" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1008,29 +1015,44 @@
           <option name="timeStamp" value="996" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/indicators.py</url>
+          <line>356</line>
+          <option name="timeStamp" value="1068" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategyLearner.py</url>
-          <line>83</line>
-          <option name="timeStamp" value="1026" />
+          <line>316</line>
+          <option name="timeStamp" value="1074" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>107</line>
-          <option name="timeStamp" value="1039" />
+          <line>202</line>
+          <option name="timeStamp" value="1077" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategyLearner.py</url>
-          <line>335</line>
-          <option name="timeStamp" value="1041" />
+          <line>339</line>
+          <option name="timeStamp" value="1079" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategyLearner.py</url>
-          <line>356</line>
-          <option name="timeStamp" value="1044" />
+          <line>340</line>
+          <option name="timeStamp" value="1080" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategyLearner.py</url>
-          <line>166</line>
-          <option name="timeStamp" value="1055" />
+          <line>149</line>
+          <option name="timeStamp" value="1083" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/strategyLearner.py</url>
+          <line>147</line>
+          <option name="timeStamp" value="1084" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/strategyLearner.py</url>
+          <line>131</line>
+          <option name="timeStamp" value="1092" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -1282,17 +1304,6 @@
     <entry file="file://$PROJECT_DIR$/strategyLearner_new.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2546">
-          <caret line="168" column="33" selection-start-line="168" selection-start-column="16" selection-end-line="168" selection-end-column="33" />
-          <folding>
-            <element signature="e#43#64#0" expanded="true" />
-            <element signature="e#1670#2980#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/startValuesForm.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1140">
@@ -1310,33 +1321,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/strategyLearner.py">
+    <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="144" selection-start-line="144" selection-end-line="144" />
+        <state relative-caret-position="125">
+          <caret line="189" column="18" selection-start-line="189" selection-start-column="4" selection-end-line="189" selection-end-column="18" />
           <folding>
-            <element signature="e#80#98#0" expanded="true" />
+            <element signature="e#43#64#0" expanded="true" />
+            <element signature="e#1670#2980#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/indicators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="491" selection-start-line="491" selection-end-line="491" />
+        <state relative-caret-position="277">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
+            <element signature="e#13612#15945#0" />
+            <element signature="e#16028#18699#0" />
+            <element signature="e#18824#21425#0" />
+            <element signature="e#21588#26039#0" />
+            <element signature="e#26173#28026#0" />
+            <element signature="e#28151#30854#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strategyLearner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="138" column="48" selection-start-line="138" selection-start-column="48" selection-end-line="138" selection-end-column="48" />
+          <folding>
+            <element signature="e#80#98#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="240" lean-forward="true" selection-start-line="240" selection-end-line="240" />
+        <state relative-caret-position="182">
+          <caret line="124" column="19" selection-start-line="124" selection-start-column="19" selection-end-line="124" selection-end-column="19" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#1349#7676#0" />
+            <element signature="e#10546#11075#0" />
+            <element signature="e#11215#18820#0" />
           </folding>
         </state>
       </provider>
