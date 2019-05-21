@@ -83,7 +83,7 @@ class strategyLearner(object):
 
         return df_features
 
-    def get_features1(self, prices, print=False):
+    def get_features1(self, prices, symbol, print=False):
         '''
         Compute technical indicators and use them as features to be fed
         into a Q-learner.
@@ -98,7 +98,7 @@ class strategyLearner(object):
         prices.fillna(1.0, inplace=True)
 
         # Price
-        adj_close = prices[prices.columns[0]]
+        adj_close = prices[symbol]
 
         # Compute Momentum
         mom = get_momentum(adj_close, window=10)
@@ -126,7 +126,10 @@ class strategyLearner(object):
         df['middle_band'] = rm
 
         # Delete 'Adj Close' column
-        del df[df.columns[0]]
+        del df[symbol]
+
+        if set(['cash']).issubset(df.columns):
+            del df['cash']
 
         # Normalize dataframe
         df_norm = normalize_data(df)
@@ -138,6 +141,8 @@ class strategyLearner(object):
             df_norm['lower_band'] = lower_band
             df_norm['middle_band'] = rm
             df_norm['RSI'] = rsi
+
+
 
         # Drop NaN
         df_norm.dropna(inplace=True)
@@ -255,7 +260,7 @@ class strategyLearner(object):
         df_prices.rename(columns={'Adj Close': symbol}, inplace=True)
 
         # Get features and thresholds
-        df_features = self.get_features(df_prices)
+        df_features = self.get_features1(df_prices, symbol)
         thresholds = self.get_thresholds(df_features, self.num_steps)
         cum_returns = []
         epochs = []
@@ -332,7 +337,7 @@ class strategyLearner(object):
         # Rename 'Adj Close' to symbol
         df_prices.rename(columns={'Adj Close': symbol}, inplace=True)
         # Get features and thresholds
-        df_features = self.get_features(df_prices)
+        df_features = self.get_features1(df_prices, symbol)
         thresholds = self.get_thresholds(df_features, self.num_steps)
         # Initial position is holding nothing
         position = self.CASH

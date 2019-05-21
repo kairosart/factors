@@ -43,6 +43,95 @@ def overview():
 
 
 
+
+# Show indicators values
+@app.route('/showvalues', methods=['POST', 'GET'])
+def showvalues():
+
+    # Get portfolio values from Yahoo
+    symbol = request.form.get('ticker_select', type=str)
+
+    # Get lookback date
+    lookback_date = request.form.get('loookback_date', type=str)
+
+    # Validate lookback date
+    d1 = dt.datetime.strptime(lookback_date, '%m/%d/%Y')
+    d2 = dt.datetime.today() - dt.timedelta(days=30)
+    date_diff_ok = d1 < d2
+
+    if date_diff_ok:
+        lookback_date = dt.datetime.strptime(lookback_date, '%m/%d/%Y')
+        start_d = f"{lookback_date:%Y-%m-%d %H:%M:%S}"
+        yesterday = dt.date.today() - dt.timedelta(1)
+
+        # Import data from Alpha Vantage
+        dates = pd.date_range(start_d, dt.date.today())
+        portf_value = get_data_av(symbol, dates, del_cols=True)
+
+        # Import data from Yahoo
+        #portf_value = fetchOnlineData(start_d, symbol, dt.date.today())
+    else:
+        return render_template('error.html',
+                                form='showvalues',
+                                error="Lookback date must be at least 30 days earlier today.")
+
+
+
+
+
+
+    # Session variables
+    session['start_val'] = request.form['start_val']
+    session['symbol'] = symbol
+    session['start_d'] = start_d
+    session['num_shares'] = request.form['num_shares']
+    session['commission'] = request.form['commission']
+    session['impact'] = request.form['impact']
+
+    # **** Calculating indicators ****
+    # Rename 'Adj Close' to symbol
+    portf_value.rename(columns={'Adj Close': symbol}, inplace=True)
+    stl = strategyLearner()
+    df_norm = stl.get_features1(portf_value, symbol, print=True)
+
+    # **** Plotting indicators ****
+
+    ##### PRICE MOVEMENTS ####
+    plot_prices = plot_stock_prices(portf_value['Adj Close'], symbol)
+
+    #### MOMENTUM ####
+
+    plot_mom = plot_momentum(df_norm, symbol)
+    #### ROLLILNGER BANDS ####
+    plot_boll = plot_bollinger(df_norm, symbol)
+
+
+    ##### SMA ####
+    plot_sma = plot_sma_indicator(df_norm, symbol)
+
+    ##### RSI ####
+    plot_rsi = plot_rsi_indicator(df_norm, symbol)
+
+    return render_template(
+        # name of template
+        "stockpriceschart.html",
+        # now we pass in our variables into the template
+        start_val = request.form['start_val'],
+        symbol = symbol,
+        commission = request.form['commission'],
+        impact = request.form['impact'],
+        num_shares = request.form['num_shares'],
+        start_date = start_d,
+        end_date = yesterday,
+        tables=[portf_value.to_html()],
+        titles = ['na', 'Stock Prices '],
+        div_placeholder_stock_prices = Markup(plot_prices),
+        div_placeholder_momentum = Markup(plot_mom),
+        div_placeholder_bollinger = Markup(plot_boll),
+        div_placeholder_sma = Markup(plot_sma),
+        div_placeholder_rsi = Markup(plot_rsi)
+    )
+
 # Training
 @app.route('/benchmark', methods=['POST', 'GET'])
 def training():
@@ -194,93 +283,6 @@ def training():
         final_value_b_testing=round(test_final_value_bm, 3)
 
     )
-
-# Show indicators values
-@app.route('/showvalues', methods=['POST', 'GET'])
-def showvalues():
-
-    # Get portfolio values from Yahoo
-    symbol = request.form.get('ticker_select', type=str)
-
-    # Get lookback date
-    lookback_date = request.form.get('loookback_date', type=str)
-
-    # Validate lookback date
-    d1 = dt.datetime.strptime(lookback_date, '%m/%d/%Y')
-    d2 = dt.datetime.today() - dt.timedelta(days=30)
-    date_diff_ok = d1 < d2
-
-    if date_diff_ok:
-        lookback_date = dt.datetime.strptime(lookback_date, '%m/%d/%Y')
-        start_d = f"{lookback_date:%Y-%m-%d %H:%M:%S}"
-        yesterday = dt.date.today() - dt.timedelta(1)
-
-        # Import data from Alpha Vantage
-        dates = pd.date_range(start_d, dt.date.today())
-        portf_value = get_data_av(symbol, dates, del_cols=True)
-
-        # Import data from Yahoo
-        #portf_value = fetchOnlineData(start_d, symbol, dt.date.today())
-    else:
-        return render_template('error.html',
-                                form='showvalues',
-                                error="Lookback date must be at least 30 days earlier today.")
-
-
-
-
-
-
-    # Session variables
-    session['start_val'] = request.form['start_val']
-    session['symbol'] = symbol
-    session['start_d'] = start_d
-    session['num_shares'] = request.form['num_shares']
-    session['commission'] = request.form['commission']
-    session['impact'] = request.form['impact']
-
-    # **** Calculating indicators ****
-    stl = strategyLearner()
-    df_norm = stl.get_features1(portf_value, print=True)
-
-    # **** Plotting indicators ****
-
-    ##### PRICE MOVEMENTS ####
-    plot_prices = plot_stock_prices(portf_value['Adj Close'], symbol)
-
-    #### MOMENTUM ####
-
-    plot_mom = plot_momentum(df_norm, symbol)
-    #### ROLLILNGER BANDS ####
-    plot_boll = plot_bollinger(df_norm, symbol)
-
-
-    ##### SMA ####
-    plot_sma = plot_sma_indicator(df_norm, symbol)
-
-    ##### RSI ####
-    plot_rsi = plot_rsi_indicator(df_norm, symbol)
-
-    return render_template(
-        # name of template
-        "stockpriceschart.html",
-        # now we pass in our variables into the template
-        start_val = request.form['start_val'],
-        symbol = symbol,
-        commission = request.form['commission'],
-        impact = request.form['impact'],
-        num_shares = request.form['num_shares'],
-        start_date = start_d,
-        end_date = yesterday,
-        tables=[portf_value.to_html()],
-        titles = ['na', 'Stock Prices '],
-        div_placeholder_stock_prices = Markup(plot_prices),
-        div_placeholder_momentum = Markup(plot_mom),
-        div_placeholder_bollinger = Markup(plot_boll),
-        div_placeholder_sma = Markup(plot_sma),
-        div_placeholder_rsi = Markup(plot_rsi)
-    )
-
 
 
 

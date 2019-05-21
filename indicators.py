@@ -350,6 +350,10 @@ def plot_sma_indicator(df, symbol, title="SMA Indicator", output_type='py'):
 
     :return: Plot SMA indicator
     """
+
+    # Normalize 'Adj Close'
+    df['Adj Close'] = normalize_data(df['Adj Close'])
+
     trace_symbol = go.Scatter(
                 x=df.index,
                 y=df['Adj Close'],
