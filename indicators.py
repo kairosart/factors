@@ -340,7 +340,7 @@ def plot_momentum(df, symbol, title="Momentum Indicator", output_type='py'):
     else:
         return fig
 
-def plot_sma_indicator(df, symbol, title="SMA Indicator", output_type='py'):
+def plot_sma_indicator(df, symbol, title="Adj. Close/SMA Indicator", output_type='py'):
     """
 
     :param df: Prices and SMA dataframe
@@ -348,29 +348,22 @@ def plot_sma_indicator(df, symbol, title="SMA Indicator", output_type='py'):
     :param title: Graph title
     :param output_type: py for a html return or nb for Jupyter Notebooks
 
-    :return: Plot SMA indicator
+    :return: Plot Adj. Close/SMA indicator
     """
 
-    # Normalize 'Adj Close'
-    df['Adj Close'] = normalize_data(df['Adj Close'])
 
     trace_symbol = go.Scatter(
                 x=df.index,
-                y=df['Adj Close'],
+                y=df['Adj. Close/SMA'],
                 name = symbol,
                 line = dict(color = '#17BECF'),
                 opacity = 0.8)
 
-    trace_sma = go.Scatter(
-                x=df.index,
-                y=df['SMA'],
-                name = "SMA",
-                line = dict(color = '#FF8000'),
-                opacity = 0.8)
 
 
 
-    data = [trace_symbol, trace_sma]
+
+    data = [trace_symbol]
 
     layout = dict(
         title = title,

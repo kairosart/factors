@@ -122,7 +122,7 @@ class strategyLearner(object):
 
         df = prices.copy()
         df['Momentum'] = mom
-        df['SMA'] = sma
+        df['Adj. Close/SMA'] = adj_close/sma
         df['middle_band'] = rm
 
         # Delete 'Adj Close' column

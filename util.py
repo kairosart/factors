@@ -12,6 +12,9 @@ import fix_yahoo_finance as yf
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 yf.pdr_override()
 
+# Plotly
+import plotly.graph_objs as go
+from plotly.offline import plot
 
 
 def symbol_to_path(symbol, base_dir=None):
@@ -411,6 +414,73 @@ def model_report(df_predictions, df_prices):
     metric['%\u25B3'] = metric['%\u25B3'].apply(lambda x: round(x, 3))
     metric['$\u25B3'] = metric['$\u25B3'].apply(lambda x: round(x, 3))
     return metric
+
+
+def equity_curve(df,  title='Equity Curve', output_type='py'):
+    """
+
+    :param df: Dataframe with portfolio in-sample and out-sample values
+    :param output_type: Type of output for plotting in python (py) or in notebook (nb)
+    :return: Plot an Equity Curve
+
+    """
+    trace_in_sample = go.Scatter(
+        x=df.index,
+        y=df['Portfolio'],
+        name="In-sample",
+        line=dict(color='#17BECF'),
+        opacity=0.8)
+
+    trace_out_sample = go.Scatter(
+        x=df.index,
+        y=df['Portfolio1'],
+        name="Out-sample",
+        line=dict(color='#FF8000'),
+        opacity=0.8)
+
+    data = [trace_in_sample, trace_out_sample]
+
+    layout = dict(
+        title=title,
+        showlegend=True,
+
+        margin=go.layout.Margin(
+            l=50,
+            r=50,
+            b=100,
+            t=100,
+            pad=4
+        ),
+        legend=dict(
+            orientation="h"),
+        xaxis=dict(
+            title='Dates',
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=1,
+                         label='1m',
+                         step='month',
+                         stepmode='backward'),
+                    dict(count=6,
+                         label='6m',
+                         step='month',
+                         stepmode='backward'),
+                    dict(step='all')
+                ])
+            ),
+            range=[df.index[0], df.index[-1]]),
+
+        yaxis=dict(
+            title='Price')
+
+    )
+
+    fig = dict(data=data, layout=layout)
+    if output_type == 'py':
+        chart = plot(fig, show_link=False, output_type='div')
+        return chart
+    else:
+        return fig
 
 if __name__=="__main__":
     get_nasdaq_tickers()
