@@ -187,7 +187,7 @@ def training():
     # Train a StrategyLearner
     stl = strategyLearner(num_shares=num_shares, impact=impact,
                           commission=commission, verbose=True,
-                          num_states=3000, num_actions=3)
+                          num_states=3000, num_actions=3, dyna=200)
 
     epochs, cum_returns, trades, portvals, df_features, thresholds  = stl.add_evidence(df_training,
                                            symbol,
