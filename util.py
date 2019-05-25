@@ -431,14 +431,9 @@ def equity_curve(df,  title='Equity Curve', output_type='py'):
         line=dict(color='#17BECF'),
         opacity=0.8)
 
-    trace_out_sample = go.Scatter(
-        x=df.index,
-        y=df['Portfolio1'],
-        name="Out-sample",
-        line=dict(color='#FF8000'),
-        opacity=0.8)
 
-    data = [trace_in_sample, trace_out_sample]
+
+    data = [trace_in_sample]
 
     layout = dict(
         title=title,

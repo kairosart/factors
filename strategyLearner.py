@@ -42,46 +42,7 @@ class strategyLearner(object):
         # Initialize a QLearner
         self.q_learner = ql.QLearner(**kwargs)
 
-    def get_features(self, prices):
-        """Compute technical indicators and use them as features to be fed
-        into a Q-learner.
 
-        Parameters:
-        prices: Adjusted close prices Dataframe of the given symbol
-
-        Returns:
-        df_features: A pandas dataframe of the technical indicators
-        """
-        # Fill NAN values if any
-        prices.fillna(method="ffill", inplace=True)
-        prices.fillna(method="bfill", inplace=True)
-        prices.fillna(1.0, inplace=True)
-
-        window = 10
-        # Compute rolling mean
-        rolling_mean = prices.rolling(window=window).mean()
-        # Compute_rolling_std
-        rolling_std = prices.rolling(window=window).std()
-        # Compute momentum
-        momentum = get_momentum(prices, window)
-        # Compute SMA indicator
-        sma_indicator = get_sma_indicator(prices, rolling_mean)
-        # Get RSI indicator
-        rsi_indicator = get_RSI(prices, window)
-        # Compute Bollinger value
-        bollinger_val = compute_bollinger_value(prices, rolling_mean, rolling_std)
-        # Create a dataframe with three features
-        df_features = pd.concat([momentum, sma_indicator], axis=1)
-        # Convert RSI array to dataframe
-        rsi_df = pd.DataFrame(prices)
-        rsi_df.drop(rsi_df.columns[[0]], axis=1, inplace=True)
-        rsi_df['rsi'] = scaling_series(pd.Series(rsi_indicator, index=rsi_df.index))
-        df_features = pd.concat([df_features, rsi_df], axis=1)
-        df_features.columns = ["ind{}".format(i)
-                               for i in range(len(df_features.columns))]
-        df_features.dropna(inplace=True)
-
-        return df_features
 
     def get_features1(self, prices, symbol, print=False):
         '''
