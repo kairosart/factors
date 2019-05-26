@@ -416,10 +416,12 @@ def model_report(df_predictions, df_prices):
     return metric
 
 
-def equity_curve(df,  title='Equity Curve', output_type='py'):
+
+def equity_curve(df, limit, title='Equity Curve', output_type='py'):
     """
 
     :param df: Dataframe with portfolio in-sample and out-sample values
+    :param limit: Where the out-sample starts
     :param output_type: Type of output for plotting in python (py) or in notebook (nb)
     :return: Plot an Equity Curve
 
@@ -431,43 +433,67 @@ def equity_curve(df,  title='Equity Curve', output_type='py'):
         line=dict(color='#17BECF'),
         opacity=0.8)
 
-
-
     data = [trace_in_sample]
 
-    layout = dict(
-        title=title,
-        showlegend=True,
+    shape = [{'fillcolor': '#d3d3d3',
+              'line': {'color': 'rgb(255,191,0)',
+                       'width': 2},
+              'opacity': 0.2,
+              'type': 'rect',
+              'x0': limit,
+              'x1': limit,
+              'xref': 'x',
+              'y0': 0,
+              'y1': 1,
+              'yref': 'paper'}]
+    annotation = [{'x': limit,
+                   'y': 0.05,
+                   'xref': 'x',
+                   'yref': 'paper',
+                   'showarrow': False,
+                   'xanchor': 'left',
+                   'text': 'Out-sample'
+                   }]
 
-        margin=go.layout.Margin(
-            l=50,
-            r=50,
-            b=100,
-            t=100,
-            pad=4
-        ),
-        legend=dict(
-            orientation="h"),
-        xaxis=dict(
-            title='Dates',
-            rangeselector=dict(
-                buttons=list([
-                    dict(count=1,
-                         label='1m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=6,
-                         label='6m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(step='all')
-                ])
+    layout = go.Layout(
+        dict(
+            title=title,
+            showlegend=True,
+
+            margin=go.layout.Margin(
+                l=50,
+                r=50,
+                b=100,
+                t=100,
+                pad=4
             ),
-            range=[df.index[0], df.index[-1]]),
+            legend=dict(
+                orientation="h"),
+            xaxis=dict(
+                title='Dates',
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=1,
+                             label='1m',
+                             step='month',
+                             stepmode='backward'),
+                        dict(count=6,
+                             label='6m',
+                             step='month',
+                             stepmode='backward'),
+                        dict(step='all')
+                    ])
+                ),
+                range=[df.index[0], df.index[-1]]),
 
-        yaxis=dict(
-            title='Price')
+            yaxis=dict(
+                title='Price'),
 
+            shapes=shape,
+
+            annotations=annotation
+
+        )
     )
 
     fig = dict(data=data, layout=layout)
