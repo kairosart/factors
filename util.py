@@ -458,7 +458,7 @@ def equity_curve(df, limit, title='Equity Curve', output_type='py'):
     layout = go.Layout(
         dict(
             title=title,
-            showlegend=True,
+            showlegend=False,
 
             margin=go.layout.Margin(
                 l=50,
@@ -491,7 +491,8 @@ def equity_curve(df, limit, title='Equity Curve', output_type='py'):
 
             shapes=shape,
 
-            annotations=annotation
+            annotations=annotation,
+
 
         )
     )
